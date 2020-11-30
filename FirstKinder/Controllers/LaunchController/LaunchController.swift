@@ -12,7 +12,7 @@ class LaunchController: UIViewController, XMLParserDelegate {
     var kinder = Kinder()
     var disposeBag = DisposeBag()
     var tagKind = TagKind.title
-    var cities = ["27140", "27230","27710","27140","27230","27290"]
+    var cities = ["27200","27710","27140","27230","27170","27260","27110","27290"]
     var isLastCity = false
     var titleImgView: UIImageView = {
         var imgView = UIImageView()
