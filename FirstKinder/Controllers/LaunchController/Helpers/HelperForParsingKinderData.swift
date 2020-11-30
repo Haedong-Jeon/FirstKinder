@@ -6,13 +6,14 @@
 //
 
 import Foundation
+import RxSwift
 
-extension LaunchController {
+extension LaunchController {    
     func getData() {
         let key = "b88e8eb18a894c84b9a20f1be9d079e8"
         let url = URL(string: "https://api.childcare.go.kr/mediate/rest/cpmsapi030/cpmsapi030/request?key=\(key)&arcode=11380&stcode=")
         guard let targetURL = url else { return }
-        var xmlParser = XMLParser(contentsOf: targetURL)
+        let xmlParser = XMLParser(contentsOf: targetURL)
         xmlParser?.delegate = self
         xmlParser?.parse()
     }
@@ -40,11 +41,15 @@ extension LaunchController {
         }
     }
     func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
-        if elementName == "item" {
-            kinderPublisher.onNext(self.kinder)
-        } else if elementName == "response" {
-            kinderPublisher.onCompleted()
-        }
+        makeKinderObservable(elementName)
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: {
+                kinders.append($0)
+                print($0)
+            },onCompleted: {
+                print("FINISH!")
+                self.navigationController?.pushViewController(MainController(), animated: true)
+            }).disposed(by: self.disposeBag)
     }
     func parser(_ parser: XMLParser, foundCharacters string: String) {
         switch tagKind {
@@ -72,5 +77,15 @@ extension LaunchController {
     }
     func parser(_ parser: XMLParser, parseErrorOccurred parseError: Error) {
         print("ERROR in parsing xml - \(parseError)")
+    }
+    func makeKinderObservable(_ tag: String) -> Observable<Kinder> {
+        return Observable.create { observer in
+            if tag == "item" {
+                observer.onNext(self.kinder)
+            } else if tag == "response" {
+                observer.onCompleted()
+            }
+            return Disposables.create()
+        }
     }
 }

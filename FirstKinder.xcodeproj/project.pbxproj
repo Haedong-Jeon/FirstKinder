@@ -131,8 +131,8 @@
 		E9F1438A2574834F002A284F /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				E9F1438B2574835F002A284F /* HelperForParsingKinderData.swift */,
 				E9F1438F257483A0002A284F /* HelperForLaunchBasicUI.swift */,
+				E9F1438B2574835F002A284F /* HelperForParsingKinderData.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
