@@ -13,7 +13,15 @@ extension LaunchController {
         view.backgroundColor = .white
         self.navigationController?.navigationBar.isHidden = true
         drawTitleImg()
+        drawTitleTextView()
         drawKinderTitle()
+    }
+    func drawTitleTextView() {
+        view.addSubview(titleTextView)
+        titleTextView.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor).isActive = true
+        titleTextView.bottomAnchor.constraint(equalTo: titleImgView.topAnchor).isActive = true
+        titleTextView.heightAnchor.constraint(equalToConstant: 100).isActive = true
+        titleTextView.text = "퍼스트 킨더"
     }
     func drawTitleImg() {
         view.addSubview(titleImgView)

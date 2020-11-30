@@ -14,6 +14,13 @@ class LaunchController: UIViewController, XMLParserDelegate {
     var tagKind = TagKind.title
     var cities = ["27200","27710","27140","27230","27170","27260","27110","27290"]
     var isLastCity = false
+    var titleTextView: UITextView = {
+        var textView = UITextView()
+        textView.translatesAutoresizingMaskIntoConstraints = false
+        textView.font = UIFont.init(name: "CookieRun", size: 65)
+        textView.textAlignment = .center
+        return textView
+    }()
     var titleImgView: UIImageView = {
         var imgView = UIImageView()
         imgView.translatesAutoresizingMaskIntoConstraints = false

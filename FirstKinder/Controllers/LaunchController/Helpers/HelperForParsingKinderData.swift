@@ -47,7 +47,7 @@ extension LaunchController {
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: {
                 kinders.append($0)
-                self.kinderTextView.text = "데이터 확인중..." + $0.title
+                self.kinderTextView.text = "데이터 확인..." + $0.title
             },onCompleted: {
                 let transition = CATransition()
                 transition.duration = 0.3
