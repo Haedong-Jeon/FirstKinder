@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftGifOrigin
 
 extension LaunchController {
     func configureUI() {
@@ -18,7 +19,7 @@ extension LaunchController {
         view.addSubview(titleImgView)
         titleImgView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
         titleImgView.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor, constant: -30).isActive = true
-        titleImgView.image = #imageLiteral(resourceName: "TitleImg")
+        titleImgView.loadGif(name: "loading")
     }
     func drawKinderTitle() {
         view.addSubview(kinderTextView)

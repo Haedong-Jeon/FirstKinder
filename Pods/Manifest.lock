@@ -5,22 +5,26 @@ PODS:
   - RxRelay (5.1.1):
     - RxSwift (~> 5)
   - RxSwift (5.1.1)
+  - SwiftGifOrigin (1.7.0)
 
 DEPENDENCIES:
   - RxCocoa
   - RxSwift
+  - SwiftGifOrigin
 
 SPEC REPOS:
   trunk:
     - RxCocoa
     - RxRelay
     - RxSwift
+    - SwiftGifOrigin
 
 SPEC CHECKSUMS:
   RxCocoa: 32065309a38d29b5b0db858819b5bf9ef038b601
   RxRelay: d77f7d771495f43c556cbc43eebd1bb54d01e8e9
   RxSwift: 81470a2074fa8780320ea5fe4102807cb7118178
+  SwiftGifOrigin: fbd6cf37afcfcf97a5c3db996ddc0492e5c5c145
 
-PODFILE CHECKSUM: ebbcf401243e7d182d0adc9081e865b0cbf1374b
+PODFILE CHECKSUM: a6aae4a26aaa62e720eea65cdcda69f758c6cbd3
 
 COCOAPODS: 1.9.3

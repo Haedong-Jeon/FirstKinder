@@ -49,7 +49,13 @@ extension LaunchController {
                 kinders.append($0)
                 self.kinderTextView.text = "데이터 확인중..." + $0.title
             },onCompleted: {
-                self.navigationController?.pushViewController(MainController(), animated: true)
+                let transition = CATransition()
+                transition.duration = 0.3
+                transition.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
+                transition.type = .fade
+                
+                self.navigationController?.view.layer.add(transition, forKey: nil)
+                self.navigationController?.pushViewController(MainController(), animated: false)
             }).disposed(by: self.disposeBag)
     }
     func parser(_ parser: XMLParser, foundCharacters string: String) {

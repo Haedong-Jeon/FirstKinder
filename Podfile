@@ -6,6 +6,7 @@ target 'FirstKinder' do
   use_frameworks!
   pod 'RxSwift'
   pod 'RxCocoa'
+  pod 'SwiftGifOrigin'
 
   # Pods for FirstKinder
 

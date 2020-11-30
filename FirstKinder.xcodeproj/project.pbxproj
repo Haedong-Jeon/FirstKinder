@@ -16,6 +16,7 @@
 		E908896C257471DD00223BAA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E908896A257471DD00223BAA /* LaunchScreen.storyboard */; };
 		E90889752574792300223BAA /* Kinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90889742574792300223BAA /* Kinder.swift */; };
 		E9D633822574915F00F6C3ED /* MainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D633812574915F00F6C3ED /* MainController.swift */; };
+		E9D633972574D95800F6C3ED /* loading.gif in Resources */ = {isa = PBXBuildFile; fileRef = E9D633962574D95800F6C3ED /* loading.gif */; };
 		E9F1438C2574835F002A284F /* HelperForParsingKinderData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F1438B2574835F002A284F /* HelperForParsingKinderData.swift */; };
 		E9F14390257483A0002A284F /* HelperForLaunchBasicUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F1438F257483A0002A284F /* HelperForLaunchBasicUI.swift */; };
 		E9F14394257483E0002A284F /* TagKind.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F14393257483E0002A284F /* TagKind.swift */; };
@@ -35,6 +36,7 @@
 		E908896D257471DD00223BAA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E90889742574792300223BAA /* Kinder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Kinder.swift; sourceTree = "<group>"; };
 		E9D633812574915F00F6C3ED /* MainController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainController.swift; sourceTree = "<group>"; };
+		E9D633962574D95800F6C3ED /* loading.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = loading.gif; sourceTree = "<group>"; };
 		E9F1438B2574835F002A284F /* HelperForParsingKinderData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelperForParsingKinderData.swift; sourceTree = "<group>"; };
 		E9F1438F257483A0002A284F /* HelperForLaunchBasicUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelperForLaunchBasicUI.swift; sourceTree = "<group>"; };
 		E9F14393257483E0002A284F /* TagKind.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagKind.swift; sourceTree = "<group>"; };
@@ -90,6 +92,7 @@
 		E908895E257471D800223BAA /* FirstKinder */ = {
 			isa = PBXGroup;
 			children = (
+				E9D6338D2574CB7E00F6C3ED /* Gifs */,
 				E9F14392257483D6002A284F /* Model */,
 				E9F143882574833C002A284F /* Controllers */,
 				E908895F257471D800223BAA /* AppDelegate.swift */,
@@ -108,6 +111,14 @@
 				E9D633812574915F00F6C3ED /* MainController.swift */,
 			);
 			path = MainController;
+			sourceTree = "<group>";
+		};
+		E9D6338D2574CB7E00F6C3ED /* Gifs */ = {
+			isa = PBXGroup;
+			children = (
+				E9D633962574D95800F6C3ED /* loading.gif */,
+			);
+			path = Gifs;
 			sourceTree = "<group>";
 		};
 		E9F143882574833C002A284F /* Controllers */ = {
@@ -206,6 +217,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E908896C257471DD00223BAA /* LaunchScreen.storyboard in Resources */,
+				E9D633972574D95800F6C3ED /* loading.gif in Resources */,
 				E9088969257471DD00223BAA /* Assets.xcassets in Resources */,
 				E9088967257471D800223BAA /* Main.storyboard in Resources */,
 			);
