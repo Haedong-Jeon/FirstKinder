@@ -12,12 +12,22 @@ class LaunchController: UIViewController, XMLParserDelegate {
     var kinder = Kinder()
     var disposeBag = DisposeBag()
     var tagKind = TagKind.title
+    var cities = ["27140", "27230","27710","27140","27230","27290"]
+    var isLastCity = false
     var titleImgView: UIImageView = {
         var imgView = UIImageView()
         imgView.translatesAutoresizingMaskIntoConstraints = false
         imgView.widthAnchor.constraint(equalToConstant: 300).isActive = true
         imgView.heightAnchor.constraint(equalToConstant: 300).isActive = true
         return imgView
+    }()
+    var kinderTextView: UITextView = {
+        var textView = UITextView()
+        textView.translatesAutoresizingMaskIntoConstraints = false
+        textView.backgroundColor = .white
+        textView.textColor = .black
+        textView.textAlignment = .center
+        return textView
     }()
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -4,18 +4,20 @@
 //
 //  Created by 전해동 on 2020/11/30.
 //
-
 import Foundation
 import RxSwift
 
 extension LaunchController {    
     func getData() {
-        let key = "b88e8eb18a894c84b9a20f1be9d079e8"
-        let url = URL(string: "https://api.childcare.go.kr/mediate/rest/cpmsapi030/cpmsapi030/request?key=\(key)&arcode=11380&stcode=")
-        guard let targetURL = url else { return }
-        let xmlParser = XMLParser(contentsOf: targetURL)
-        xmlParser?.delegate = self
-        xmlParser?.parse()
+        for city in cities {
+            if city == "27290" { self.isLastCity = true }
+            let key = "b88e8eb18a894c84b9a20f1be9d079e8"
+            let url = URL(string: "https://api.childcare.go.kr/mediate/rest/cpmsapi030/cpmsapi030/request?key=\(key)&arcode=\(city)&stcode=")
+            guard let targetURL = url else { return }
+            let xmlParser = XMLParser(contentsOf: targetURL)
+            xmlParser?.delegate = self
+            xmlParser?.parse()
+        }
     }
     func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String] = [:]) {
         if elementName == "crname" {
@@ -45,9 +47,8 @@ extension LaunchController {
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: {
                 kinders.append($0)
-                print($0)
+                self.kinderTextView.text = "데이터 확인중..." + $0.title
             },onCompleted: {
-                print("FINISH!")
                 self.navigationController?.pushViewController(MainController(), animated: true)
             }).disposed(by: self.disposeBag)
     }
@@ -82,7 +83,9 @@ extension LaunchController {
         return Observable.create { observer in
             if tag == "item" {
                 observer.onNext(self.kinder)
-            } else if tag == "response" {
+            } else if tag == "response" && !self.isLastCity {
+                print("구 변경!")
+            } else if tag == "response" && self.isLastCity {
                 observer.onCompleted()
             }
             return Disposables.create()
