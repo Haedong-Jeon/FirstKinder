@@ -41,7 +41,9 @@ extension LaunchController {
     }
     func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
         if elementName == "item" {
-            kinders.append(kinder)
+            kinderPublisher.onNext(self.kinder)
+        } else if elementName == "response" {
+            kinderPublisher.onCompleted()
         }
     }
     func parser(_ parser: XMLParser, foundCharacters string: String) {
@@ -69,6 +71,6 @@ extension LaunchController {
         }
     }
     func parser(_ parser: XMLParser, parseErrorOccurred parseError: Error) {
-        
+        print("ERROR in parsing xml - \(parseError)")
     }
 }

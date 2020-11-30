@@ -6,24 +6,40 @@
 //
 
 import UIKit
+import RxSwift
 
 class LaunchController: UIViewController, XMLParserDelegate {
     var kinder = Kinder()
+    var disposeBag = DisposeBag()
     var tagKind = TagKind.title
+    var kinderPublisher = PublishSubject<Kinder>()
+    var kinder$: Observable<Kinder> {
+        return kinderPublisher.asObservable()
+    }
+    var titleImgView: UIImageView = {
+        var imgView = UIImageView()
+        imgView.translatesAutoresizingMaskIntoConstraints = false
+        imgView.widthAnchor.constraint(equalToConstant: 300).isActive = true
+        imgView.heightAnchor.constraint(equalToConstant: 300).isActive = true
+        return imgView
+    }()
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
-        getData()
+        DispatchQueue.global(qos: .background).async {
+            self.getData()
+        }
+        kinder$
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: {
+            kinders.append($0)
+            print($0)
+        },onCompleted: {
+            print("FINISH!")
+            self.navigationController?.pushViewController(MainController(), animated: true)
+        }).disposed(by: self.disposeBag)
     }
     override func viewDidAppear(_ animated: Bool) {
-        kinders.forEach({
-            print("\($0.title), \($0.isOn)")
-            print("\($0.city), \($0.gu)")
-            print("\($0.tel)")
-            print("\($0.la), \($0.lo)")
-            print("\($0.craddr)")
-            print("----------------------")
-        })
     }
 }
 
