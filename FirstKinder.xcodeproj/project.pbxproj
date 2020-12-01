@@ -15,6 +15,9 @@
 		E9088969257471DD00223BAA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E9088968257471DD00223BAA /* Assets.xcassets */; };
 		E908896C257471DD00223BAA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E908896A257471DD00223BAA /* LaunchScreen.storyboard */; };
 		E90889752574792300223BAA /* Kinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90889742574792300223BAA /* Kinder.swift */; };
+		E93B75CD2576071B00D52A24 /* DetailHelpersForBasicUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93B75CC2576071B00D52A24 /* DetailHelpersForBasicUI.swift */; };
+		E93B75D12576075A00D52A24 /* DetailHelperForMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93B75D02576075A00D52A24 /* DetailHelperForMap.swift */; };
+		E960ACA82576087300985873 /* DetailSelectorForTel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E960ACA72576087300985873 /* DetailSelectorForTel.swift */; };
 		E9D633822574915F00F6C3ED /* MainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D633812574915F00F6C3ED /* MainController.swift */; };
 		E9D633972574D95800F6C3ED /* loading.gif in Resources */ = {isa = PBXBuildFile; fileRef = E9D633962574D95800F6C3ED /* loading.gif */; };
 		E9D6339C2574DB6900F6C3ED /* CookieRun Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E9D633992574DB6500F6C3ED /* CookieRun Black.ttf */; };
@@ -41,6 +44,9 @@
 		E908896B257471DD00223BAA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E908896D257471DD00223BAA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E90889742574792300223BAA /* Kinder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Kinder.swift; sourceTree = "<group>"; };
+		E93B75CC2576071B00D52A24 /* DetailHelpersForBasicUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailHelpersForBasicUI.swift; sourceTree = "<group>"; };
+		E93B75D02576075A00D52A24 /* DetailHelperForMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailHelperForMap.swift; sourceTree = "<group>"; };
+		E960ACA72576087300985873 /* DetailSelectorForTel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailSelectorForTel.swift; sourceTree = "<group>"; };
 		E9D633812574915F00F6C3ED /* MainController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainController.swift; sourceTree = "<group>"; };
 		E9D633962574D95800F6C3ED /* loading.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = loading.gif; sourceTree = "<group>"; };
 		E9D633992574DB6500F6C3ED /* CookieRun Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "CookieRun Black.ttf"; sourceTree = "<group>"; };
@@ -120,6 +126,23 @@
 			path = FirstKinder;
 			sourceTree = "<group>";
 		};
+		E93B75CB2576070F00D52A24 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				E93B75CC2576071B00D52A24 /* DetailHelpersForBasicUI.swift */,
+				E93B75D02576075A00D52A24 /* DetailHelperForMap.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		E960ACA62576086400985873 /* Selector */ = {
+			isa = PBXGroup;
+			children = (
+				E960ACA72576087300985873 /* DetailSelectorForTel.swift */,
+			);
+			path = Selector;
+			sourceTree = "<group>";
+		};
 		E9D633802574915200F6C3ED /* MainController */ = {
 			isa = PBXGroup;
 			children = (
@@ -149,6 +172,8 @@
 		E9D633AA2575DC5100F6C3ED /* DetailController */ = {
 			isa = PBXGroup;
 			children = (
+				E960ACA62576086400985873 /* Selector */,
+				E93B75CB2576070F00D52A24 /* Helpers */,
 				E9D633AB2575DC6300F6C3ED /* DetailController.swift */,
 			);
 			path = DetailController;
@@ -310,13 +335,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				E9D633822574915F00F6C3ED /* MainController.swift in Sources */,
+				E93B75CD2576071B00D52A24 /* DetailHelpersForBasicUI.swift in Sources */,
 				E9D633A42575C4AB00F6C3ED /* MainHelperForCollectionView.swift in Sources */,
 				E9D633AC2575DC6300F6C3ED /* DetailController.swift in Sources */,
 				E90889752574792300223BAA /* Kinder.swift in Sources */,
 				E9F14390257483A0002A284F /* HelperForLaunchBasicUI.swift in Sources */,
 				E9F14394257483E0002A284F /* TagKind.swift in Sources */,
+				E960ACA82576087300985873 /* DetailSelectorForTel.swift in Sources */,
 				E9088964257471D800223BAA /* LaunchController.swift in Sources */,
 				E9088960257471D800223BAA /* AppDelegate.swift in Sources */,
+				E93B75D12576075A00D52A24 /* DetailHelperForMap.swift in Sources */,
 				E9088962257471D800223BAA /* SceneDelegate.swift in Sources */,
 				E9D633A82575C60B00F6C3ED /* KinderCell.swift in Sources */,
 				E9F1438C2574835F002A284F /* HelperForParsingKinderData.swift in Sources */,
