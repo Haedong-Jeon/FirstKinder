@@ -6,9 +6,11 @@
 //
 
 import UIKit
+import GoogleMobileAds
 let cellReuseIdentifier = "reuseIdentifier"
 
 class MainController: UICollectionViewController, UICollectionViewDelegateFlowLayout, UISearchResultsUpdating {
+    var bannerView: GADBannerView!
     var nowShowingKinders = [Kinder]() {
         didSet {
             collectionView.reloadData()
@@ -30,20 +32,22 @@ class MainController: UICollectionViewController, UICollectionViewDelegateFlowLa
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.register(KinderCell.self, forCellWithReuseIdentifier: cellReuseIdentifier)
-    }
-    func configureUI() {
-        view.backgroundColor = .white
-        collectionView.backgroundColor = .white
-    }
-    func configureSearch() {
-        self.navigationController?.navigationBar.isHidden = false
         
-        searchController.searchResultsUpdater = self
-        searchController.obscuresBackgroundDuringPresentation = false
-        searchController.hidesNavigationBarDuringPresentation = false
-        searchController.searchBar.placeholder = "어린이집 이름, 혹은 지역 검색"
-        navigationItem.searchController = searchController
-        navigationItem.hidesBackButton = true
-        definesPresentationContext = false
+        bannerView = GADBannerView(adSize: kGADAdSizeBanner)
+        addBannerView(bannerView)
+        
+        drawCollectionView()
+    }
+    func addBannerView(_ bannerView: GADBannerView) {
+        
+        bannerView.adUnitID = "ca-app-pub-9114448172368235/7500496163"
+        bannerView.rootViewController = self
+        bannerView.load(GADRequest())
+        
+        bannerView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(bannerView)
+        bannerView.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor).isActive = true
+        bannerView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        bannerView.heightAnchor.constraint(equalToConstant: 50).isActive = true
     }
 }

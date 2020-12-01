@@ -7,9 +7,12 @@
 
 import UIKit
 import MapKit
+import GoogleMobileAds
 
 class DetailController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
     var kinder = Kinder()
+    var bannerView: GADBannerView!
+
     var mapView: MKMapView = {
         var mapView = MKMapView()
         mapView.translatesAutoresizingMaskIntoConstraints = false
@@ -61,6 +64,13 @@ class DetailController: UIViewController, CLLocationManagerDelegate, MKMapViewDe
     }()
     override func viewDidLoad() {
         configureUI()
+        
+        bannerView = GADBannerView(adSize: kGADAdSizeBanner)
+        addBannerView(bannerView)
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        UIView.setAnimationsEnabled(false)
     }
 }
 

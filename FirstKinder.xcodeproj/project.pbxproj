@@ -18,6 +18,7 @@
 		E93B75CD2576071B00D52A24 /* DetailHelpersForBasicUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93B75CC2576071B00D52A24 /* DetailHelpersForBasicUI.swift */; };
 		E93B75D12576075A00D52A24 /* DetailHelperForMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93B75D02576075A00D52A24 /* DetailHelperForMap.swift */; };
 		E960ACA82576087300985873 /* DetailSelectorForTel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E960ACA72576087300985873 /* DetailSelectorForTel.swift */; };
+		E960ACB825764FEC00985873 /* MainHelperForBasicUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E960ACB725764FEC00985873 /* MainHelperForBasicUI.swift */; };
 		E9D633822574915F00F6C3ED /* MainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D633812574915F00F6C3ED /* MainController.swift */; };
 		E9D633972574D95800F6C3ED /* loading.gif in Resources */ = {isa = PBXBuildFile; fileRef = E9D633962574D95800F6C3ED /* loading.gif */; };
 		E9D6339C2574DB6900F6C3ED /* CookieRun Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E9D633992574DB6500F6C3ED /* CookieRun Black.ttf */; };
@@ -47,6 +48,7 @@
 		E93B75CC2576071B00D52A24 /* DetailHelpersForBasicUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailHelpersForBasicUI.swift; sourceTree = "<group>"; };
 		E93B75D02576075A00D52A24 /* DetailHelperForMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailHelperForMap.swift; sourceTree = "<group>"; };
 		E960ACA72576087300985873 /* DetailSelectorForTel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailSelectorForTel.swift; sourceTree = "<group>"; };
+		E960ACB725764FEC00985873 /* MainHelperForBasicUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainHelperForBasicUI.swift; sourceTree = "<group>"; };
 		E9D633812574915F00F6C3ED /* MainController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainController.swift; sourceTree = "<group>"; };
 		E9D633962574D95800F6C3ED /* loading.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = loading.gif; sourceTree = "<group>"; };
 		E9D633992574DB6500F6C3ED /* CookieRun Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "CookieRun Black.ttf"; sourceTree = "<group>"; };
@@ -165,6 +167,7 @@
 			children = (
 				E9D633A32575C4AB00F6C3ED /* MainHelperForCollectionView.swift */,
 				E9D633A72575C60B00F6C3ED /* KinderCell.swift */,
+				E960ACB725764FEC00985873 /* MainHelperForBasicUI.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -334,6 +337,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E960ACB825764FEC00985873 /* MainHelperForBasicUI.swift in Sources */,
 				E9D633822574915F00F6C3ED /* MainController.swift in Sources */,
 				E93B75CD2576071B00D52A24 /* DetailHelpersForBasicUI.swift in Sources */,
 				E9D633A42575C4AB00F6C3ED /* MainHelperForCollectionView.swift in Sources */,

@@ -7,6 +7,7 @@ target 'FirstKinder' do
   pod 'RxSwift'
   pod 'RxCocoa'
   pod 'SwiftGifOrigin'
+  pod 'Google-Mobile-Ads-SDK'
 
   # Pods for FirstKinder
 

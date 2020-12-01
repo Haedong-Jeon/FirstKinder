@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import GoogleMobileAds
 
 extension DetailController {
     func configureUI() {
@@ -86,5 +87,17 @@ extension DetailController {
         sizeOfRoomLabel.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor).isActive = true
         sizeOfRoomLabel.heightAnchor.constraint(equalToConstant: 30).isActive = true
         sizeOfRoomLabel.text = "보육실 면적: " + kinder.sizeOfRoom + "m²"
+    }
+    func addBannerView(_ bannerView: GADBannerView) {
+        
+        bannerView.adUnitID = "ca-app-pub-9114448172368235/7500496163"
+        bannerView.rootViewController = self
+        bannerView.load(GADRequest())
+        
+        bannerView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(bannerView)
+        bannerView.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor).isActive = true
+        bannerView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        bannerView.heightAnchor.constraint(equalToConstant: 50).isActive = true
     }
 }

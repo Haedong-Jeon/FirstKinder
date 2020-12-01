@@ -4,7 +4,8 @@
 //
 //  Created by 전해동 on 2020/12/01.
 //
-
+//애드몹 앱 아이디: ca-app-pub-9114448172368235~8566165827
+//배너 광고 아이디: ca-app-pub-9114448172368235/7500496163
 import UIKit
 
 extension MainController {
@@ -23,7 +24,7 @@ extension MainController {
         } else if cell.kinderIsOnLabel.text == "휴지" {
             cell.kinderIsOnLabel.textColor = .systemYellow
         } else if cell.kinderIsOnLabel.text == "재개" {
-            cell.kinderIsOnLabel.textColor = .systemBlue
+            cell.kinderIsOnLabel.textColor = .systemGreen
         }
         guard let currentChildNum = Int(nowShowingKinders[indexPath.row].currentNumOfChild) else { return UICollectionViewCell() }
         if currentChildNum >= 50 {
