@@ -20,6 +20,8 @@
 		E9D6339C2574DB6900F6C3ED /* CookieRun Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E9D633992574DB6500F6C3ED /* CookieRun Black.ttf */; };
 		E9D6339E2574DB6D00F6C3ED /* CookieRun Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E9D6339A2574DB6500F6C3ED /* CookieRun Bold.ttf */; };
 		E9D633A02574DB7100F6C3ED /* CookieRun Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E9D6339B2574DB6500F6C3ED /* CookieRun Regular.ttf */; };
+		E9D633A42575C4AB00F6C3ED /* MainHelperForCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D633A32575C4AB00F6C3ED /* MainHelperForCollectionView.swift */; };
+		E9D633A82575C60B00F6C3ED /* KinderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D633A72575C60B00F6C3ED /* KinderCell.swift */; };
 		E9F1438C2574835F002A284F /* HelperForParsingKinderData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F1438B2574835F002A284F /* HelperForParsingKinderData.swift */; };
 		E9F14390257483A0002A284F /* HelperForLaunchBasicUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F1438F257483A0002A284F /* HelperForLaunchBasicUI.swift */; };
 		E9F14394257483E0002A284F /* TagKind.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F14393257483E0002A284F /* TagKind.swift */; };
@@ -43,6 +45,8 @@
 		E9D633992574DB6500F6C3ED /* CookieRun Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "CookieRun Black.ttf"; sourceTree = "<group>"; };
 		E9D6339A2574DB6500F6C3ED /* CookieRun Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "CookieRun Bold.ttf"; sourceTree = "<group>"; };
 		E9D6339B2574DB6500F6C3ED /* CookieRun Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "CookieRun Regular.ttf"; sourceTree = "<group>"; };
+		E9D633A32575C4AB00F6C3ED /* MainHelperForCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainHelperForCollectionView.swift; sourceTree = "<group>"; };
+		E9D633A72575C60B00F6C3ED /* KinderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KinderCell.swift; sourceTree = "<group>"; };
 		E9F1438B2574835F002A284F /* HelperForParsingKinderData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelperForParsingKinderData.swift; sourceTree = "<group>"; };
 		E9F1438F257483A0002A284F /* HelperForLaunchBasicUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelperForLaunchBasicUI.swift; sourceTree = "<group>"; };
 		E9F14393257483E0002A284F /* TagKind.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagKind.swift; sourceTree = "<group>"; };
@@ -117,6 +121,7 @@
 		E9D633802574915200F6C3ED /* MainController */ = {
 			isa = PBXGroup;
 			children = (
+				E9D633A22575C49500F6C3ED /* Helpers */,
 				E9D633812574915F00F6C3ED /* MainController.swift */,
 			);
 			path = MainController;
@@ -128,6 +133,15 @@
 				E9D633962574D95800F6C3ED /* loading.gif */,
 			);
 			path = Gifs;
+			sourceTree = "<group>";
+		};
+		E9D633A22575C49500F6C3ED /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				E9D633A32575C4AB00F6C3ED /* MainHelperForCollectionView.swift */,
+				E9D633A72575C60B00F6C3ED /* KinderCell.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 		E9F143882574833C002A284F /* Controllers */ = {
@@ -285,12 +299,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				E9D633822574915F00F6C3ED /* MainController.swift in Sources */,
+				E9D633A42575C4AB00F6C3ED /* MainHelperForCollectionView.swift in Sources */,
 				E90889752574792300223BAA /* Kinder.swift in Sources */,
 				E9F14390257483A0002A284F /* HelperForLaunchBasicUI.swift in Sources */,
 				E9F14394257483E0002A284F /* TagKind.swift in Sources */,
 				E9088964257471D800223BAA /* LaunchController.swift in Sources */,
 				E9088960257471D800223BAA /* AppDelegate.swift in Sources */,
 				E9088962257471D800223BAA /* SceneDelegate.swift in Sources */,
+				E9D633A82575C60B00F6C3ED /* KinderCell.swift in Sources */,
 				E9F1438C2574835F002A284F /* HelperForParsingKinderData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

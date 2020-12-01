@@ -6,9 +6,18 @@
 //
 
 import UIKit
+let cellReuseIdentifier = "reuseIdentifier"
 
-class MainController: UIViewController {
+class MainController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     override func viewDidLoad() {
-        view.backgroundColor = .blue
+        configureUI()
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        
+        collectionView.register(KinderCell.self, forCellWithReuseIdentifier: cellReuseIdentifier)
+    }
+    func configureUI() {
+        view.backgroundColor = .white
+        collectionView.backgroundColor = .white
     }
 }

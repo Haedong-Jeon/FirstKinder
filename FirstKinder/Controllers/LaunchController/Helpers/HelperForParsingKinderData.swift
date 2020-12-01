@@ -55,7 +55,7 @@ extension LaunchController {
                 transition.type = .fade
                 
                 self.navigationController?.view.layer.add(transition, forKey: nil)
-                self.navigationController?.pushViewController(MainController(), animated: false)
+                self.navigationController?.pushViewController(MainController(collectionViewLayout: UICollectionViewFlowLayout()), animated: false)
             }).disposed(by: self.disposeBag)
     }
     func parser(_ parser: XMLParser, foundCharacters string: String) {
