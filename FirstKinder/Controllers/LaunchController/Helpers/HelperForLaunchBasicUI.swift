@@ -18,11 +18,11 @@ extension LaunchController {
         drawProgressBar()
     }
     func drawTitleTextView() {
-        view.addSubview(titleTextView)
-        titleTextView.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor).isActive = true
-        titleTextView.bottomAnchor.constraint(equalTo: titleImgView.topAnchor).isActive = true
-        titleTextView.heightAnchor.constraint(equalToConstant: 100).isActive = true
-        titleTextView.text = "퍼스트 킨더"
+        view.addSubview(titleLabel)
+        titleLabel.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor).isActive = true
+        titleLabel.bottomAnchor.constraint(equalTo: titleImgView.topAnchor).isActive = true
+        titleLabel.heightAnchor.constraint(equalToConstant: 100).isActive = true
+        titleLabel.text = "퍼스트 킨더"
     }
     func drawTitleImg() {
         view.addSubview(titleImgView)
@@ -31,15 +31,15 @@ extension LaunchController {
         titleImgView.loadGif(name: "loading")
     }
     func drawKinderTitle() {
-        view.addSubview(kinderTextView)
-        kinderTextView.topAnchor.constraint(equalTo: titleImgView.bottomAnchor).isActive = true
-        kinderTextView.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor).isActive = true
-        kinderTextView.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        view.addSubview(kinderLabel)
+        kinderLabel.topAnchor.constraint(equalTo: titleImgView.bottomAnchor).isActive = true
+        kinderLabel.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor).isActive = true
+        kinderLabel.heightAnchor.constraint(equalToConstant: 30).isActive = true
     }
     func drawProgressBar() {
         progressBar.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(progressBar)
-        progressBar.topAnchor.constraint(equalTo: kinderTextView.bottomAnchor).isActive = true
+        progressBar.topAnchor.constraint(equalTo: kinderLabel.bottomAnchor).isActive = true
         progressBar.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor).isActive = true
         progressBar.heightAnchor.constraint(equalToConstant: 10).isActive = true
     }

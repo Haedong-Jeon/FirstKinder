@@ -19,12 +19,12 @@ class LaunchController: UIViewController, XMLParserDelegate {
     
     //서울 시군구 코드들
     var cities = ["11680", "11740", "11305", "11500", "11620", "11215", "11530", "11545", "11350", "11320", "11230", "11590", "11440", "11410", "11650", "11200", "11290", "11710", "11470", "11560", "11170", "11380", "11110", "11140", "11260"]
-    var titleTextView: UITextView = {
-        var textView = UITextView()
-        textView.translatesAutoresizingMaskIntoConstraints = false
-        textView.font = UIFont.init(name: "CookieRun", size: 65)
-        textView.textAlignment = .center
-        return textView
+    var titleLabel: UILabel = {
+        var label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont.init(name: "CookieRun", size: 65)
+        label.textAlignment = .center
+        return label
     }()
     var titleImgView: UIImageView = {
         var imgView = UIImageView()
@@ -33,13 +33,13 @@ class LaunchController: UIViewController, XMLParserDelegate {
         imgView.heightAnchor.constraint(equalToConstant: 300).isActive = true
         return imgView
     }()
-    var kinderTextView: UITextView = {
-        var textView = UITextView()
-        textView.translatesAutoresizingMaskIntoConstraints = false
-        textView.backgroundColor = .white
-        textView.textColor = .black
-        textView.textAlignment = .center
-        return textView
+    var kinderLabel: UILabel = {
+        var label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.backgroundColor = .white
+        label.textColor = .black
+        label.textAlignment = .center
+        return label
     }()
     override func viewDidLoad() {
         super.viewDidLoad()
