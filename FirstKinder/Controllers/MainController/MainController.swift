@@ -41,7 +41,7 @@ class MainController: UICollectionViewController, UICollectionViewDelegateFlowLa
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.hidesNavigationBarDuringPresentation = false
-        searchController.searchBar.placeholder = "어린이집 이름, 혹은 시군구 검색"
+        searchController.searchBar.placeholder = "어린이집 이름, 혹은 지역 검색"
         navigationItem.searchController = searchController
         navigationItem.hidesBackButton = true
         definesPresentationContext = false
