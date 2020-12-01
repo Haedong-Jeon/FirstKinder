@@ -41,6 +41,6 @@ extension LaunchController {
         view.addSubview(progressBar)
         progressBar.topAnchor.constraint(equalTo: kinderLabel.bottomAnchor).isActive = true
         progressBar.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor).isActive = true
-        progressBar.heightAnchor.constraint(equalToConstant: 10).isActive = true
+        progressBar.heightAnchor.constraint(equalToConstant: 5).isActive = true
     }
 }

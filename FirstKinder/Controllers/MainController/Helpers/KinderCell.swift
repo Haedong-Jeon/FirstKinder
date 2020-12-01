@@ -24,14 +24,13 @@ class KinderCell: UICollectionViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    var faceIconImgView: UIImageView = {
+    var medalForManyChildImgView: UIImageView = {
         var imgView = UIImageView()
         imgView.translatesAutoresizingMaskIntoConstraints = false
-        imgView.widthAnchor.constraint(equalToConstant: 50).isActive = true
+        imgView.widthAnchor.constraint(equalToConstant: 30).isActive = true
         imgView.heightAnchor.constraint(equalToConstant: 50).isActive = true
         imgView.layer.cornerRadius = 25
         imgView.clipsToBounds = true
-        imgView.backgroundColor = .link
         return imgView
     }()
     override init(frame: CGRect) {
@@ -67,8 +66,8 @@ class KinderCell: UICollectionViewCell {
         kinderIsOnLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
     }
     func drawFaceIcon() {
-        addSubview(faceIconImgView)
-        faceIconImgView.rightAnchor.constraint(equalTo: safeAreaLayoutGuide.rightAnchor,constant: -20).isActive = true
-        faceIconImgView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor).isActive = true
+        addSubview(medalForManyChildImgView)
+        medalForManyChildImgView.rightAnchor.constraint(equalTo: safeAreaLayoutGuide.rightAnchor,constant: -20).isActive = true
+        medalForManyChildImgView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor).isActive = true
     }
 }

@@ -57,9 +57,9 @@ extension LaunchController {
         makeKinderObservable(elementName)
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: {
-//                if $0.isOn != "폐지" {
+                if $0.isOn != "폐지" {
                     kinders.append($0)
-//                }
+                }
                 self.kinderLabel.text = "데이터 확인..." + $0.title
             },onCompleted: {
                 self.progressBar.progress = 1
@@ -118,7 +118,7 @@ extension LaunchController {
             } else if tag == "response" && !self.loadComplete {
                 DispatchQueue.main.async {
                     self.progressBar.progress += ( 1 / Float(self.cities.count - 1))
-                    if self.progressBar.progress == 1 {
+                    if self.progressBar.progress > 0.89 {
                         self.loadComplete = true
                     }
                 }

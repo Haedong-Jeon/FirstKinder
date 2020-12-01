@@ -18,19 +18,21 @@ extension MainController {
         
         if cell.kinderIsOnLabel.text == "정상" {
             cell.kinderIsOnLabel.textColor = .systemBlue
-            cell.faceIconImgView.image = #imageLiteral(resourceName: "smileFace")
         } else if cell.kinderIsOnLabel.text == "폐지" {
             cell.kinderIsOnLabel.textColor = .systemPink
-            cell.faceIconImgView.image = #imageLiteral(resourceName: "sadFace")
         } else if cell.kinderIsOnLabel.text == "휴지" {
             cell.kinderIsOnLabel.textColor = .systemYellow
-            cell.faceIconImgView.image = #imageLiteral(resourceName: "sadFace")
         } else if cell.kinderIsOnLabel.text == "재개" {
             cell.kinderIsOnLabel.textColor = .systemBlue
-            cell.faceIconImgView.image = #imageLiteral(resourceName: "smileFace")
         }
-        cell.layer.borderWidth = 1
-        cell.layer.borderColor = UIColor.gray.cgColor
+        guard let currentChildNum = Int(nowShowingKinders[indexPath.row].currentNumOfChild) else { return UICollectionViewCell() }
+        if currentChildNum >= 50 {
+            cell.medalForManyChildImgView.image = #imageLiteral(resourceName: "medal")
+        } else {
+            cell.medalForManyChildImgView.image = nil
+        }
+        cell.layer.borderWidth = 2
+        cell.layer.borderColor = #colorLiteral(red: 0.1889419258, green: 0.1871659458, blue: 0.2520412803, alpha: 1)
         return cell
     }
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -41,7 +43,14 @@ extension MainController {
         let detailViewController = DetailController()
         detailViewController.kinder = kinder
         
-        navigationController?.pushViewController(detailViewController, animated: true)
+        let transition = CATransition()
+        transition.duration = 0.3
+        transition.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
+        transition.type = .fade
+        
+        self.navigationController?.view.layer.add(transition, forKey: nil)
+
+        navigationController?.pushViewController(detailViewController, animated: false)
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: collectionView.frame.width, height: 95)
