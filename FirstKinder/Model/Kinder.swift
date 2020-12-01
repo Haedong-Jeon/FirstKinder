@@ -17,5 +17,11 @@ struct Kinder {
     var tel = ""
     var craddr = ""
     var zipcode = ""
+    var totalNumOfChild = ""//정원
+    var currentNumOfChild = ""//현원
+    var isCarAvailable = ""//통학 차량 운영 여부
+    var numOfTeachr = ""
+    var sizeOfRoom = ""
+    var numOfRoom = ""
 }
 var kinders = [Kinder]()

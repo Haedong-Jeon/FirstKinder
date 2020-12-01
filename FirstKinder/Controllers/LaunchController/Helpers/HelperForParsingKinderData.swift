@@ -38,6 +38,18 @@ extension LaunchController {
             tagKind = TagKind.la
         } else if elementName == "lo" {
             tagKind = TagKind.lo
+        } else if elementName == "crcapat" {
+            tagKind = TagKind.crcapat
+        } else if elementName == "crchcnt" {
+            tagKind = TagKind.crchcnt
+        } else if elementName == "crcargbname" {
+            tagKind = TagKind.crcargbname
+        } else if elementName == "chcrtescnt" {
+            tagKind = TagKind.chcrtescnt
+        } else if elementName == "nrtrroomcnt" {
+            tagKind = TagKind.nrtrroomcnt
+        } else if elementName == "nrtrroomsize" {
+            tagKind = TagKind.nrtrroomsize
         } else {
             tagKind = TagKind.others
         }
@@ -80,6 +92,18 @@ extension LaunchController {
             kinder.la = string
         case .lo:
             kinder.lo = string
+        case .crcapat:
+            kinder.totalNumOfChild = string
+        case .crchcnt:
+            kinder.currentNumOfChild = string
+        case .crcargbname:
+            kinder.isCarAvailable = string
+        case .chcrtescnt:
+            kinder.numOfTeachr = string
+        case .nrtrroomcnt:
+            kinder.numOfRoom = string
+        case .nrtrroomsize:
+            kinder.sizeOfRoom = string
         case .others:
             return
         }

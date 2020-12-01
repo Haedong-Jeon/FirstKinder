@@ -16,5 +16,11 @@ enum TagKind {
     case crtelno
     case la
     case lo
+    case crcapat
+    case crchcnt
+    case crcargbname
     case others
+    case chcrtescnt
+    case nrtrroomcnt
+    case nrtrroomsize
 }
