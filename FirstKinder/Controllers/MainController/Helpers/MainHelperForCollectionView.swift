@@ -12,9 +12,9 @@ extension MainController {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellReuseIdentifier, for: indexPath) as? KinderCell else {
             return UICollectionViewCell()
         }
-        cell.kinderTitleTextView.text = kinders[indexPath.row].title
-        cell.kinderPositionTextView.text = kinders[indexPath.row].craddr
-        cell.kinderIsOnTextview.text = kinders[indexPath.row].isOn
+        cell.kinderTitleTextView.text = nowShowingKinders[indexPath.row].title
+        cell.kinderPositionTextView.text = nowShowingKinders[indexPath.row].craddr
+        cell.kinderIsOnTextview.text = nowShowingKinders[indexPath.row].isOn
         
         if cell.kinderIsOnTextview.text == "정상" {
             cell.kinderIsOnTextview.textColor = .systemBlue
@@ -29,7 +29,7 @@ extension MainController {
         return cell
     }
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return kinders.count
+        return nowShowingKinders.count
     }
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
