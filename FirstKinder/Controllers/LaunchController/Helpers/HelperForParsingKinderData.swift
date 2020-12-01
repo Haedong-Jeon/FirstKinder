@@ -10,7 +10,7 @@ import RxSwift
 extension LaunchController {    
     func getData() {
         for city in cities {
-            if city == "27290" { self.isLastCity = true }
+            if city == "11260" { self.isLastCity = true }
             let key = "b88e8eb18a894c84b9a20f1be9d079e8"
             let url = URL(string: "https://api.childcare.go.kr/mediate/rest/cpmsapi030/cpmsapi030/request?key=\(key)&arcode=\(city)&stcode=")
             guard let targetURL = url else { return }

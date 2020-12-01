@@ -13,7 +13,10 @@ class LaunchController: UIViewController, XMLParserDelegate {
     var disposeBag = DisposeBag()
     var tagKind = TagKind.title
     //대구 광역시 시군구 코드들
-    var cities = ["27200","27710","27140","27230","27170","27260","27110","27290"]
+    //var cities = ["27200","27710","27140","27230","27170","27260","27110","27290"]
+    
+    //서울 시군구 코드들
+    var cities = ["11680", "11740", "11305", "11500", "11620", "11215", "11530", "11545", "11350", "11320", "11230", "11590", "11440", "11410", "11650", "11200", "11290", "11710", "11470", "11560", "11170", "11380", "11110", "11140", "11260"]
     var isLastCity = false
     var titleTextView: UITextView = {
         var textView = UITextView()
