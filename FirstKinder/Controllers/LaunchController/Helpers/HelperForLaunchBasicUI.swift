@@ -15,6 +15,7 @@ extension LaunchController {
         drawTitleImg()
         drawTitleTextView()
         drawKinderTitle()
+        drawProgressBar()
     }
     func drawTitleTextView() {
         view.addSubview(titleTextView)
@@ -34,5 +35,12 @@ extension LaunchController {
         kinderTextView.topAnchor.constraint(equalTo: titleImgView.bottomAnchor).isActive = true
         kinderTextView.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor).isActive = true
         kinderTextView.heightAnchor.constraint(equalToConstant: 30).isActive = true
+    }
+    func drawProgressBar() {
+        progressBar.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(progressBar)
+        progressBar.topAnchor.constraint(equalTo: kinderTextView.bottomAnchor).isActive = true
+        progressBar.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor).isActive = true
+        progressBar.heightAnchor.constraint(equalToConstant: 10).isActive = true
     }
 }

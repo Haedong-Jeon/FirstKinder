@@ -63,6 +63,7 @@ extension LaunchController {
                 }
                 self.kinderTextView.text = "데이터 확인..." + $0.title
             },onCompleted: {
+                self.progressBar.progress = 1
                 let transition = CATransition()
                 transition.duration = 0.3
                 transition.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
@@ -116,7 +117,9 @@ extension LaunchController {
             if tag == "item" {
                 observer.onNext(self.kinder)
             } else if tag == "response" && !self.isLastCity {
-                print("구 변경!")
+                DispatchQueue.main.async {
+                    self.progressBar.progress += ( 1 / Float(self.cities.count - 1))
+                }
             } else if tag == "response" && self.isLastCity {
                 observer.onCompleted()
             }
