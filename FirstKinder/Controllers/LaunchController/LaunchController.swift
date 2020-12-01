@@ -13,6 +13,7 @@ class LaunchController: UIViewController, XMLParserDelegate {
     var disposeBag = DisposeBag()
     var tagKind = TagKind.title
     var progressBar = UIProgressView()
+    var loadComplete = false
     //대구 광역시 시군구 코드들
     //var cities = ["27200","27710","27140","27230","27170","27260","27110","27290"]
     
