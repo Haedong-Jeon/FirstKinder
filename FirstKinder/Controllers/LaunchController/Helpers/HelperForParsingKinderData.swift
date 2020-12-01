@@ -46,7 +46,9 @@ extension LaunchController {
         makeKinderObservable(elementName)
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: {
-                kinders.append($0)
+                if $0.isOn != "폐지" {
+                    kinders.append($0)
+                }
                 self.kinderTextView.text = "데이터 확인..." + $0.title
             },onCompleted: {
                 let transition = CATransition()

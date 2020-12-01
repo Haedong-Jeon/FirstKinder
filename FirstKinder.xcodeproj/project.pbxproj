@@ -22,6 +22,7 @@
 		E9D633A02574DB7100F6C3ED /* CookieRun Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E9D6339B2574DB6500F6C3ED /* CookieRun Regular.ttf */; };
 		E9D633A42575C4AB00F6C3ED /* MainHelperForCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D633A32575C4AB00F6C3ED /* MainHelperForCollectionView.swift */; };
 		E9D633A82575C60B00F6C3ED /* KinderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D633A72575C60B00F6C3ED /* KinderCell.swift */; };
+		E9D633AC2575DC6300F6C3ED /* DetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D633AB2575DC6300F6C3ED /* DetailController.swift */; };
 		E9F1438C2574835F002A284F /* HelperForParsingKinderData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F1438B2574835F002A284F /* HelperForParsingKinderData.swift */; };
 		E9F14390257483A0002A284F /* HelperForLaunchBasicUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F1438F257483A0002A284F /* HelperForLaunchBasicUI.swift */; };
 		E9F14394257483E0002A284F /* TagKind.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F14393257483E0002A284F /* TagKind.swift */; };
@@ -47,6 +48,7 @@
 		E9D6339B2574DB6500F6C3ED /* CookieRun Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "CookieRun Regular.ttf"; sourceTree = "<group>"; };
 		E9D633A32575C4AB00F6C3ED /* MainHelperForCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainHelperForCollectionView.swift; sourceTree = "<group>"; };
 		E9D633A72575C60B00F6C3ED /* KinderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KinderCell.swift; sourceTree = "<group>"; };
+		E9D633AB2575DC6300F6C3ED /* DetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailController.swift; sourceTree = "<group>"; };
 		E9F1438B2574835F002A284F /* HelperForParsingKinderData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelperForParsingKinderData.swift; sourceTree = "<group>"; };
 		E9F1438F257483A0002A284F /* HelperForLaunchBasicUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelperForLaunchBasicUI.swift; sourceTree = "<group>"; };
 		E9F14393257483E0002A284F /* TagKind.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagKind.swift; sourceTree = "<group>"; };
@@ -144,9 +146,18 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
+		E9D633AA2575DC5100F6C3ED /* DetailController */ = {
+			isa = PBXGroup;
+			children = (
+				E9D633AB2575DC6300F6C3ED /* DetailController.swift */,
+			);
+			path = DetailController;
+			sourceTree = "<group>";
+		};
 		E9F143882574833C002A284F /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				E9D633AA2575DC5100F6C3ED /* DetailController */,
 				E9D633802574915200F6C3ED /* MainController */,
 				E9F1438925748344002A284F /* LaunchController */,
 			);
@@ -300,6 +311,7 @@
 			files = (
 				E9D633822574915F00F6C3ED /* MainController.swift in Sources */,
 				E9D633A42575C4AB00F6C3ED /* MainHelperForCollectionView.swift in Sources */,
+				E9D633AC2575DC6300F6C3ED /* DetailController.swift in Sources */,
 				E90889752574792300223BAA /* Kinder.swift in Sources */,
 				E9F14390257483A0002A284F /* HelperForLaunchBasicUI.swift in Sources */,
 				E9F14394257483E0002A284F /* TagKind.swift in Sources */,

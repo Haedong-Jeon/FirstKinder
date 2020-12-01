@@ -8,24 +8,21 @@
 import UIKit
 
 class KinderCell: UICollectionViewCell {
-    var kinderTitleTextView: UITextView = {
-        var textView = UITextView()
-        textView.translatesAutoresizingMaskIntoConstraints = false
-        textView.font = UIFont.init(name: "CookieRun", size: 20)
-        textView.isEditable = false
-        return textView
+    var kinderTitleLabel: UILabel = {
+        var label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont.init(name: "CookieRun", size: 20)
+        return label
     }()
-    var kinderPositionTextView: UITextView = {
-        var textView = UITextView()
-        textView.translatesAutoresizingMaskIntoConstraints = false
-        textView.isEditable = false
-        return textView
+    var kinderPositionLabel: UILabel = {
+        var label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
     }()
-    var kinderIsOnTextview: UITextView = {
-        var textView = UITextView()
-        textView.translatesAutoresizingMaskIntoConstraints = false
-        textView.isEditable = false
-        return textView
+    var kinderIsOnLabel: UILabel = {
+        var label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
     }()
     var faceIconImgView: UIImageView = {
         var imgView = UIImageView()
@@ -52,22 +49,22 @@ class KinderCell: UICollectionViewCell {
         drawFaceIcon()
     }
     func drawKinderTitle() {
-        addSubview(kinderTitleTextView)
-        kinderTitleTextView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor).isActive = true
-        kinderTitleTextView.widthAnchor.constraint(equalTo: safeAreaLayoutGuide.widthAnchor).isActive = true
-        kinderTitleTextView.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        addSubview(kinderTitleLabel)
+        kinderTitleLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor).isActive = true
+        kinderTitleLabel.widthAnchor.constraint(equalTo: safeAreaLayoutGuide.widthAnchor).isActive = true
+        kinderTitleLabel.heightAnchor.constraint(equalToConstant: 50).isActive = true
     }
     func drawKinderPosition() {
-        addSubview(kinderPositionTextView)
-        kinderPositionTextView.topAnchor.constraint(equalTo: kinderTitleTextView.bottomAnchor).isActive = true
-        kinderPositionTextView.widthAnchor.constraint(equalTo: safeAreaLayoutGuide.widthAnchor).isActive = true
-        kinderPositionTextView.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        addSubview(kinderPositionLabel)
+        kinderPositionLabel.topAnchor.constraint(equalTo: kinderTitleLabel.bottomAnchor).isActive = true
+        kinderPositionLabel.widthAnchor.constraint(equalTo: safeAreaLayoutGuide.widthAnchor).isActive = true
+        kinderPositionLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
     }
     func drawKinderIsOn() {
-        addSubview(kinderIsOnTextview)
-        kinderIsOnTextview.topAnchor.constraint(equalTo: kinderPositionTextView.bottomAnchor).isActive = true
-        kinderIsOnTextview.widthAnchor.constraint(equalTo: safeAreaLayoutGuide.widthAnchor).isActive = true
-        kinderIsOnTextview.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        addSubview(kinderIsOnLabel)
+        kinderIsOnLabel.topAnchor.constraint(equalTo: kinderPositionLabel.bottomAnchor).isActive = true
+        kinderIsOnLabel.widthAnchor.constraint(equalTo: safeAreaLayoutGuide.widthAnchor).isActive = true
+        kinderIsOnLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
     }
     func drawFaceIcon() {
         addSubview(faceIconImgView)
