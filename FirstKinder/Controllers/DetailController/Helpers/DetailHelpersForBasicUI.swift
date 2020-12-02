@@ -86,6 +86,7 @@ extension DetailController {
         sizeOfRoomLabel.topAnchor.constraint(equalTo: numOfRoomLabel.bottomAnchor).isActive = true
         sizeOfRoomLabel.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor).isActive = true
         sizeOfRoomLabel.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        sizeOfRoomLabel.bottomAnchor.constraint(equalTo: bannerView.topAnchor).isActive = true
         sizeOfRoomLabel.text = "보육실 면적: " + kinder.sizeOfRoom + "m²"
     }
     func addBannerView(_ bannerView: GADBannerView) {

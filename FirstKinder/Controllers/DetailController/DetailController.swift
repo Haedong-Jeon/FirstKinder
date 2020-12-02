@@ -63,10 +63,9 @@ class DetailController: UIViewController, CLLocationManagerDelegate, MKMapViewDe
         return textView
     }()
     override func viewDidLoad() {
-        configureUI()
-        
         bannerView = GADBannerView(adSize: kGADAdSizeBanner)
         addBannerView(bannerView)
+        configureUI()
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
