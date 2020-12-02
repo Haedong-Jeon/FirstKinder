@@ -64,7 +64,10 @@ class DetailController: UIViewController, CLLocationManagerDelegate, MKMapViewDe
     }()
     override func viewDidLoad() {
         bannerView = GADBannerView(adSize: kGADAdSizeBanner)
+        
+        //시뮬레이터에서 테스트 할 때만 살릴 것
         addBannerView(bannerView)
+        
         configureUI()
     }
     override func viewWillDisappear(_ animated: Bool) {

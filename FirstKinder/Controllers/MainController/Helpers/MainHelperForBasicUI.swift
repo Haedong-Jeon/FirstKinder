@@ -12,7 +12,12 @@ extension MainController {
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor).isActive = true
         collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+        
+        //시뮬레이터로 테스트 할 때
         collectionView.bottomAnchor.constraint(equalTo: bannerView.topAnchor).isActive = true
+        
+        //실제 아이폰으로 테스트 할 때
+        //collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
     }
     func configureUI() {
         view.backgroundColor = .white

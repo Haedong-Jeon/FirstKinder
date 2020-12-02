@@ -118,7 +118,7 @@ extension LaunchController {
             } else if tag == "response" && !self.loadComplete {
                 DispatchQueue.main.async {
                     self.progressBar.progress += ( 1 / Float(self.cities.count - 1))
-                    if self.progressBar.progress > 0.89 {
+                    if self.progressBar.progress > loadFinishProgress {
                         self.loadComplete = true
                     }
                 }

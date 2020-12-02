@@ -41,6 +41,8 @@ extension DetailController {
         numOfChildLabel.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor).isActive = true
         numOfChildLabel.heightAnchor.constraint(equalToConstant: 30).isActive = true
         numOfChildLabel.text = "정원 : \(kinder.currentNumOfChild) / \(kinder.totalNumOfChild)"
+        
+        changeChildNumLabelColorByPercentage()
     }
     func drawNumOfTeacher() {
         view.addSubview(numOfTeacherLabel)
@@ -86,7 +88,12 @@ extension DetailController {
         sizeOfRoomLabel.topAnchor.constraint(equalTo: numOfRoomLabel.bottomAnchor).isActive = true
         sizeOfRoomLabel.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor).isActive = true
         sizeOfRoomLabel.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        
+        //시뮬레이터에서 테스트 할 때
         sizeOfRoomLabel.bottomAnchor.constraint(equalTo: bannerView.topAnchor).isActive = true
+        
+        //실제 기기에서 테스트 할 때
+        //sizeOfRoomLabel.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
         sizeOfRoomLabel.text = "보육실 면적: " + kinder.sizeOfRoom + "m²"
     }
     func addBannerView(_ bannerView: GADBannerView) {
@@ -100,5 +107,21 @@ extension DetailController {
         bannerView.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor).isActive = true
         bannerView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
         bannerView.heightAnchor.constraint(equalToConstant: 50).isActive = true
+    }
+    //총 수용 인원 중 현재 인원의 비율
+    func changeChildNumLabelColorByPercentage() {
+        
+        guard let currentChildNum = Double(kinder.currentNumOfChild) else { return }
+        guard let totalChildNum = Double(kinder.totalNumOfChild) else { return }
+        
+        let percentage = (currentChildNum / totalChildNum) * 100
+        
+        if percentage <= 45 {
+            numOfChildLabel.textColor = .systemGreen
+        } else if percentage <= 75 {
+            numOfChildLabel.textColor = .systemYellow
+        } else {
+            numOfChildLabel.textColor = .systemRed
+        }
     }
 }
