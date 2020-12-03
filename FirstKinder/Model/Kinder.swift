@@ -7,7 +7,7 @@
 
 import UIKit
 
-struct Kinder {
+struct Kinder: Codable {
     var isOn = "운영"
     var title = ""
     var city = ""
@@ -25,3 +25,4 @@ struct Kinder {
     var numOfRoom = ""
 }
 var kinders = [Kinder]()
+var myKinders = [Kinder]()

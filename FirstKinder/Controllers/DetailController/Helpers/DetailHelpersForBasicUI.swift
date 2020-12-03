@@ -12,6 +12,7 @@ import GoogleMobileAds
 extension DetailController: ChartViewDelegate {
     func configureUI() {
         view.backgroundColor = .white
+        addPlusButtonOnNavBar()
         drawMap()
         setAnnotaion()
         drawKinderTitle()
@@ -128,6 +129,9 @@ extension DetailController: ChartViewDelegate {
         data.setDrawValues(false)
         data.barWidth = 0.3
         barChart.data = data
+    }
+    func addPlusButtonOnNavBar() {
+        self.navigationController?.navigationBar.topItem?.rightBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: .add, target: self, action: #selector(handlePlusButtonTapped))
     }
     func addBannerView(_ bannerView: GADBannerView) {
         
