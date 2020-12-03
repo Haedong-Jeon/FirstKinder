@@ -7,7 +7,7 @@
 
 import UIKit
 
-extension MainController {
+extension ListController {
     func drawCollectionView() {
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor).isActive = true

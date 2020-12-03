@@ -9,7 +9,7 @@ import UIKit
 import GoogleMobileAds
 let cellReuseIdentifier = "reuseIdentifier"
 
-class MainController: UICollectionViewController, UICollectionViewDelegateFlowLayout, UISearchResultsUpdating {
+class ListController: UICollectionViewController, UICollectionViewDelegateFlowLayout, UISearchResultsUpdating {
     var bannerView: GADBannerView!
     var nowShowingKinders = [Kinder]() {
         didSet {

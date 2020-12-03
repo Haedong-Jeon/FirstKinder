@@ -6,7 +6,7 @@
 //
 import UIKit
 
-extension MainController {
+extension ListController {
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellReuseIdentifier, for: indexPath) as? KinderCell else {
             return UICollectionViewCell()
