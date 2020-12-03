@@ -24,7 +24,7 @@ class MainController: UITabBarController, UITabBarControllerDelegate {
         nearKinderController.tabBarItem.image = UIImage(systemName: "map.fill")
         nearKinderController.tabBarItem.title = "근처 어린이집"
         
-        let myKindersController = MyKindersController()
+        let myKindersController = MyKindersController(collectionViewLayout: UICollectionViewFlowLayout())
         myKindersController.tabBarItem.image = UIImage(systemName: "heart.fill")
         myKindersController.tabBarItem.title = "관심 어린이집"
         

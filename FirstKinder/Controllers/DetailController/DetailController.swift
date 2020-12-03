@@ -13,7 +13,7 @@ import Charts
 class DetailController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
     var kinder = Kinder()
     var bannerView: GADBannerView!
-
+    var isFromMyKinder = false
     lazy var barChart: BarChartView = {
         let chartView = BarChartView()
         return chartView
@@ -68,6 +68,13 @@ class DetailController: UIViewController, CLLocationManagerDelegate, MKMapViewDe
         return textView
     }()
     override func viewDidLoad() {
+        
+        myKinders.forEach({
+            if $0.title == self.kinder.title && $0.craddr == self.kinder.craddr && $0.tel == self.kinder.tel {
+                isFromMyKinder = true
+            }
+        })
+        
         bannerView = GADBannerView(adSize: kGADAdSizeBanner)
         
         //시뮬레이터에서 테스트 할 때만 살릴 것

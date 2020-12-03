@@ -42,6 +42,9 @@ class LaunchController: UIViewController, XMLParserDelegate {
     }()
     override func viewDidLoad() {
         super.viewDidLoad()
+        if let data = UserDefaults.standard.value(forKey:"myKinders") as? Data {
+            myKinders = try! PropertyListDecoder().decode(Array<Kinder>.self, from: data)
+        }
         configureUI()
         DispatchQueue.global(qos: .background).async {
             self.getData()

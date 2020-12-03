@@ -131,7 +131,9 @@ extension DetailController: ChartViewDelegate {
         barChart.data = data
     }
     func addPlusButtonOnNavBar() {
-        self.navigationController?.navigationBar.topItem?.rightBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: .add, target: self, action: #selector(handlePlusButtonTapped))
+        if !isFromMyKinder {
+            self.navigationController?.navigationBar.topItem?.rightBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: .add, target: self, action: #selector(handlePlusButtonTapped))
+        }
     }
     func addBannerView(_ bannerView: GADBannerView) {
         
