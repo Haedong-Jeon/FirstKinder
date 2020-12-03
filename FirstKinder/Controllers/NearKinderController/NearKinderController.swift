@@ -84,14 +84,15 @@ class NearKinderController: UIViewController, MKMapViewDelegate {
         let centerCoordinate = CLLocationCoordinate2D(latitude: la, longitude: lo)
         annotation.coordinate = centerCoordinate
         annotation.title = kinder.title
+        annotation.subtitle = kinder.craddr
         mapView.addAnnotation(annotation)
         mapView.setRegion(MKCoordinateRegion(center: centerCoordinate, span: MKCoordinateSpan(latitudeDelta: 0.001, longitudeDelta: 0.001)), animated: false)
     }
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         var selectedKinder: Kinder?
-        if let annotationTitle = view.annotation?.title {
+        if let annotationTitle = view.annotation?.title, let annotationSubtitle = view.annotation?.subtitle {
             kinders.forEach({
-                if $0.title == annotationTitle {
+                if $0.title == annotationTitle && $0.craddr == annotationSubtitle {
                     selectedKinder = $0
                 }
             })
