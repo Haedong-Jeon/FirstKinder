@@ -17,21 +17,21 @@ class MyKindersController: UICollectionViewController, UICollectionViewDelegateF
         }
     }
     override func viewDidLoad() {
-        configureUI()
         
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.register(KinderCell.self, forCellWithReuseIdentifier: cellReuseIdentifierInMyKinder)
         
         //시뮬레이터로 테스트할 때만 살릴 것
-        bannerView = GADBannerView(adSize: kGADAdSizeBanner)
-        addBannerView(bannerView)
+        //bannerView = GADBannerView(adSize: kGADAdSizeBanner)
+        //addBannerView(bannerView)
         
-        drawCollectionView()
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.kinders = myKinders
+        configureUI()
+        drawCollectionView()
     }
     func configureUI() {
         self.navigationController?.navigationBar.topItem?.title = "관심 어린이집"

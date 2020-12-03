@@ -34,8 +34,8 @@ class ListController: UICollectionViewController, UICollectionViewDelegateFlowLa
         collectionView.register(KinderCell.self, forCellWithReuseIdentifier: cellReuseIdentifier)
         
         //시뮬레이터에서 테스트 할 때만 살릴 것
-        bannerView = GADBannerView(adSize: kGADAdSizeBanner)
-        addBannerView(bannerView)
+        //bannerView = GADBannerView(adSize: kGADAdSizeBanner)
+        //addBannerView(bannerView)
         
         drawCollectionView()
     }
