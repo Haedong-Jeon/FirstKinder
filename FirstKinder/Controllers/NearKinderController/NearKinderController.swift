@@ -87,6 +87,26 @@ class NearKinderController: UIViewController, MKMapViewDelegate {
         mapView.addAnnotation(annotation)
         mapView.setRegion(MKCoordinateRegion(center: centerCoordinate, span: MKCoordinateSpan(latitudeDelta: 0.001, longitudeDelta: 0.001)), animated: false)
     }
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        if let annotationTitle = view.annotation?.title {
+            kinders.forEach({
+                if $0.title == annotationTitle {
+                    let detailController = DetailController()
+                    detailController.kinder = $0
+                    
+                    let transition = CATransition()
+                    transition.duration = 0.3
+                    transition.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
+                    transition.type = .fade
+
+                    self.navigationController?.view.layer.add(transition, forKey: nil)
+
+                    self.navigationController?.pushViewController(detailController, animated: false)
+                    return
+                }
+            })
+        }
+    }
 }
 
 extension NearKinderController: CLLocationManagerDelegate {
