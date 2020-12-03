@@ -8,11 +8,16 @@
 import UIKit
 import MapKit
 import GoogleMobileAds
+import Charts
 
 class DetailController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
     var kinder = Kinder()
     var bannerView: GADBannerView!
 
+    lazy var barChart: BarChartView = {
+        let chartView = BarChartView()
+        return chartView
+    }()
     var mapView: MKMapView = {
         var mapView = MKMapView()
         mapView.translatesAutoresizingMaskIntoConstraints = false
@@ -67,7 +72,6 @@ class DetailController: UIViewController, CLLocationManagerDelegate, MKMapViewDe
         
         //시뮬레이터에서 테스트 할 때만 살릴 것
         addBannerView(bannerView)
-        
         configureUI()
     }
     override func viewWillDisappear(_ animated: Bool) {

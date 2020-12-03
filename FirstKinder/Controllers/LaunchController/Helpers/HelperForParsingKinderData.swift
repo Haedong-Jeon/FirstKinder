@@ -115,15 +115,14 @@ extension LaunchController {
         return Observable.create { observer in
             if tag == "item" {
                 observer.onNext(self.kinder)
-            } else if tag == "response" && !self.loadComplete {
+            } else if tag == "response" {
                 DispatchQueue.main.async {
-                    self.progressBar.progress += ( 1 / Float(self.cities.count - 1))
-                    if self.progressBar.progress > loadFinishProgress {
-                        self.loadComplete = true
+                    self.progressBar.progress += Float(1) / Float(self.cities.count - 1)
+                    
+                    if self.progressBar.progress >= 1 {
+                        observer.onCompleted()
                     }
                 }
-            } else if tag == "response" && self.loadComplete {
-                observer.onCompleted()
             }
             return Disposables.create()
         }

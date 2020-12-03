@@ -1,4 +1,7 @@
 PODS:
+  - Charts (3.6.0):
+    - Charts/Core (= 3.6.0)
+  - Charts/Core (3.6.0)
   - Google-Mobile-Ads-SDK (7.62.0):
     - GoogleAppMeasurement (~> 6.0)
   - GoogleAppMeasurement (6.6.2):
@@ -39,6 +42,7 @@ PODS:
   - SwiftGifOrigin (1.7.0)
 
 DEPENDENCIES:
+  - Charts
   - Google-Mobile-Ads-SDK
   - RxCocoa
   - RxSwift
@@ -46,6 +50,7 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
+    - Charts
     - Google-Mobile-Ads-SDK
     - GoogleAppMeasurement
     - GoogleUtilities
@@ -57,6 +62,7 @@ SPEC REPOS:
     - SwiftGifOrigin
 
 SPEC CHECKSUMS:
+  Charts: b1e3a1f5a1c9ba5394438ca3b91bd8c9076310af
   Google-Mobile-Ads-SDK: c92c27666fbf684c964259785a6b3cdd3068e06f
   GoogleAppMeasurement: 8cd1f289d60e629cf16ab03363b9e89c776b9651
   GoogleUtilities: e121a3867449ce16b0e35ddf1797ea7a389ffdf2
@@ -67,6 +73,6 @@ SPEC CHECKSUMS:
   RxSwift: 81470a2074fa8780320ea5fe4102807cb7118178
   SwiftGifOrigin: fbd6cf37afcfcf97a5c3db996ddc0492e5c5c145
 
-PODFILE CHECKSUM: d06ee3100e05597a41c23f1c2a915716d6fc4d44
+PODFILE CHECKSUM: 5305253daa195a5696bafd3774a4b6193b0271d3
 
 COCOAPODS: 1.9.3

@@ -6,9 +6,10 @@
 //
 
 import UIKit
+import Charts
 import GoogleMobileAds
 
-extension DetailController {
+extension DetailController: ChartViewDelegate {
     func configureUI() {
         view.backgroundColor = .white
         drawMap()
@@ -21,6 +22,9 @@ extension DetailController {
         drawTel()
         drawRoomCount()
         drawRoomSize()
+        drawChart()
+        
+        setDataToChart()
     }
     func drawMap() {
         view.addSubview(mapView)
@@ -42,7 +46,7 @@ extension DetailController {
         numOfChildLabel.heightAnchor.constraint(equalToConstant: 30).isActive = true
         numOfChildLabel.text = "정원 : \(kinder.currentNumOfChild) / \(kinder.totalNumOfChild)"
         
-        changeChildNumLabelColorByPercentage()
+        setChildNumLabelColor()
     }
     func drawNumOfTeacher() {
         view.addSubview(numOfTeacherLabel)
@@ -91,10 +95,39 @@ extension DetailController {
         
         //시뮬레이터에서 테스트 할 때
         sizeOfRoomLabel.bottomAnchor.constraint(equalTo: bannerView.topAnchor).isActive = true
-        
         //실제 기기에서 테스트 할 때
         //sizeOfRoomLabel.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
         sizeOfRoomLabel.text = "보육실 면적: " + kinder.sizeOfRoom + "m²"
+    }
+    func drawChart() {
+        barChart.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(barChart)
+        barChart.widthAnchor.constraint(equalToConstant: 200).isActive = true
+        barChart.heightAnchor.constraint(equalToConstant: 150).isActive = true
+        barChart.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor).isActive = true
+        barChart.topAnchor.constraint(equalTo: detailAddressTextView.bottomAnchor).isActive = true
+        
+        barChart.xAxis.drawGridLinesEnabled = false
+        barChart.leftAxis.drawGridLinesEnabled = false
+        barChart.xAxis.labelPosition = .bottom
+        barChart.xAxis.drawLabelsEnabled = false
+        barChart.rightAxis.enabled = false
+        barChart.isUserInteractionEnabled = false
+    }
+    func setDataToChart() {
+        let childDataSet = BarChartDataEntry(x: 0, y: Double(kinder.currentNumOfChild)!)
+        let teacherDataSet = BarChartDataEntry(x: 0.6, y: Double(kinder.numOfTeachr)!)
+        var dataSets = [BarChartDataEntry]()
+        
+        dataSets.append(childDataSet)
+        dataSets.append(teacherDataSet)
+        
+        let set = BarChartDataSet(entries: dataSets, label: "아동 수 대 선생님 수")
+        set.colors = [.link, .systemPink]
+        let data = BarChartData(dataSet: set)
+        data.setDrawValues(false)
+        data.barWidth = 0.3
+        barChart.data = data
     }
     func addBannerView(_ bannerView: GADBannerView) {
         
@@ -109,16 +142,16 @@ extension DetailController {
         bannerView.heightAnchor.constraint(equalToConstant: 50).isActive = true
     }
     //총 수용 인원 중 현재 인원의 비율
-    func changeChildNumLabelColorByPercentage() {
+    func setChildNumLabelColor() {
         
         guard let currentChildNum = Double(kinder.currentNumOfChild) else { return }
         guard let totalChildNum = Double(kinder.totalNumOfChild) else { return }
         
-        let percentage = (currentChildNum / totalChildNum) * 100
+        let capacityPercentage = (currentChildNum / totalChildNum) * 100
         
-        if percentage <= 45 {
+        if capacityPercentage <= 45 {
             numOfChildLabel.textColor = .systemGreen
-        } else if percentage <= 75 {
+        } else if capacityPercentage <= 75 {
             numOfChildLabel.textColor = .systemYellow
         } else {
             numOfChildLabel.textColor = .systemRed
