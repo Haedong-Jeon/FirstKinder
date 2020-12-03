@@ -20,11 +20,15 @@ class MainController: UITabBarController, UITabBarControllerDelegate {
         kinderListController.tabBarItem.image = UIImage(systemName: "list.dash")
         kinderListController.tabBarItem.title = "어린이집 목록"
         
+        let nearKinderController = NearKinderController()
+        nearKinderController.tabBarItem.image = UIImage(systemName: "map.fill")
+        nearKinderController.tabBarItem.title = "근처 어린이집"
+        
         let myKindersController = MyKindersController()
         myKindersController.tabBarItem.image = UIImage(systemName: "heart.fill")
         myKindersController.tabBarItem.title = "관심 어린이집"
         
-        let controllers = [kinderListController, myKindersController]
+        let controllers = [kinderListController, nearKinderController, myKindersController]
         viewControllers = controllers.map({UINavigationController(rootViewController: $0)})//탭안의 뷰컨트롤러들에게 네비 바 붙이기.
     }
 }
