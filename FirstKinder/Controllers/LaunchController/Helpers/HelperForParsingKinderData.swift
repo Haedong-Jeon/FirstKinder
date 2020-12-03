@@ -67,9 +67,10 @@ extension LaunchController {
                 transition.duration = 0.3
                 transition.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
                 transition.type = .fade
-                
+
                 self.navigationController?.view.layer.add(transition, forKey: nil)
-                self.navigationController?.pushViewController(ListController(collectionViewLayout: UICollectionViewFlowLayout()), animated: false)
+                self.navigationController?.pushViewController(MainController(), animated: false)
+
             }).disposed(by: self.disposeBag)
     }
     func parser(_ parser: XMLParser, foundCharacters string: String) {
