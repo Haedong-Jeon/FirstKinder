@@ -23,7 +23,7 @@
 		E960ACDA257883A100985873 /* MainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E960ACD9257883A100985873 /* MainController.swift */; };
 		E960ACE02578846800985873 /* MyKindersController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E960ACDF2578846800985873 /* MyKindersController.swift */; };
 		E960ACE725788DDB00985873 /* NearKinderController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E960ACE625788DDB00985873 /* NearKinderController.swift */; };
-		E960ACEC257891D500985873 /* DetailHelperForSaveMyKinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E960ACEB257891D500985873 /* DetailHelperForSaveMyKinder.swift */; };
+		E960ACEC257891D500985873 /* DetailHelperForMyKinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E960ACEB257891D500985873 /* DetailHelperForMyKinder.swift */; };
 		E960ACEF2578965700985873 /* MyKinderHelpersForCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E960ACEE2578965700985873 /* MyKinderHelpersForCollectionView.swift */; };
 		E960ACF22578978E00985873 /* MyKindersForBasicUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E960ACF12578978E00985873 /* MyKindersForBasicUI.swift */; };
 		E9D633822574915F00F6C3ED /* ListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D633812574915F00F6C3ED /* ListController.swift */; };
@@ -60,7 +60,7 @@
 		E960ACD9257883A100985873 /* MainController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainController.swift; sourceTree = "<group>"; };
 		E960ACDF2578846800985873 /* MyKindersController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyKindersController.swift; sourceTree = "<group>"; };
 		E960ACE625788DDB00985873 /* NearKinderController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearKinderController.swift; sourceTree = "<group>"; };
-		E960ACEB257891D500985873 /* DetailHelperForSaveMyKinder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailHelperForSaveMyKinder.swift; sourceTree = "<group>"; };
+		E960ACEB257891D500985873 /* DetailHelperForMyKinder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailHelperForMyKinder.swift; sourceTree = "<group>"; };
 		E960ACEE2578965700985873 /* MyKinderHelpersForCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyKinderHelpersForCollectionView.swift; sourceTree = "<group>"; };
 		E960ACF12578978E00985873 /* MyKindersForBasicUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyKindersForBasicUI.swift; sourceTree = "<group>"; };
 		E9D633812574915F00F6C3ED /* ListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListController.swift; sourceTree = "<group>"; };
@@ -148,7 +148,7 @@
 			children = (
 				E93B75CC2576071B00D52A24 /* DetailHelpersForBasicUI.swift */,
 				E93B75D02576075A00D52A24 /* DetailHelperForMap.swift */,
-				E960ACEB257891D500985873 /* DetailHelperForSaveMyKinder.swift */,
+				E960ACEB257891D500985873 /* DetailHelperForMyKinder.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -414,7 +414,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E960ACEC257891D500985873 /* DetailHelperForSaveMyKinder.swift in Sources */,
+				E960ACEC257891D500985873 /* DetailHelperForMyKinder.swift in Sources */,
 				E960ACB825764FEC00985873 /* ListHelperForBasicUI.swift in Sources */,
 				E9D633822574915F00F6C3ED /* ListController.swift in Sources */,
 				E93B75CD2576071B00D52A24 /* DetailHelpersForBasicUI.swift in Sources */,
