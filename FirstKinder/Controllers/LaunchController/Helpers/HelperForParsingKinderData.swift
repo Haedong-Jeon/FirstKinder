@@ -62,7 +62,6 @@ extension LaunchController {
                 }
                 self.kinderLabel.text = "데이터 확인..." + $0.title
             },onCompleted: {
-                self.progressBar.progress = 1
                 let transition = CATransition()
                 transition.duration = 0.3
                 transition.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
@@ -121,7 +120,10 @@ extension LaunchController {
                     self.progressBar.progress += Float(1) / Float(self.cities.count - 1)
                     
                     if self.progressBar.progress >= 1 {
-                        observer.onCompleted()
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                            //로딩 바가 꽉찬걸 보여줄려고 일부러 1초 뒤에 화면 전환.
+                            observer.onCompleted()
+                        }
                     }
                 }
             }

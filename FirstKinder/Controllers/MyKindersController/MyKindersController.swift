@@ -23,8 +23,8 @@ class MyKindersController: UICollectionViewController, UICollectionViewDelegateF
         collectionView.register(KinderCell.self, forCellWithReuseIdentifier: cellReuseIdentifierInMyKinder)
         
         //시뮬레이터로 테스트할 때만 살릴 것
-        //bannerView = GADBannerView(adSize: kGADAdSizeBanner)
-        //addBannerView(bannerView)
+        bannerView = GADBannerView(adSize: kGADAdSizeBanner)
+        addBannerView(bannerView)
         
     }
     override func viewDidAppear(_ animated: Bool) {
