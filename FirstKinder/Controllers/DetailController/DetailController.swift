@@ -44,11 +44,13 @@ class DetailController: UIViewController, CLLocationManagerDelegate, MKMapViewDe
     var numOfChildLabel: UILabel = {
         var label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.textAlignment = .center
         return label
     }()
     var carAvailableLabel: UILabel = {
         var label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.textAlignment = .center
         return label
     }()
     var telLabel: UILabel = {
@@ -60,6 +62,7 @@ class DetailController: UIViewController, CLLocationManagerDelegate, MKMapViewDe
     var numOfTeacherLabel: UILabel = {
         var label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.textAlignment = .center
         return label
     }()
     var numOfRoomLabel: UILabel = {
@@ -77,6 +80,24 @@ class DetailController: UIViewController, CLLocationManagerDelegate, MKMapViewDe
         textView.translatesAutoresizingMaskIntoConstraints = false
         textView.isEditable = false
         return textView
+    }()
+    var childNumBoxView: UIView = {
+        var view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+
+        return view
+    }()
+    var teacherNumBoxView: UIView = {
+        var view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+
+        return view
+    }()
+    var busBoxView: UIView = {
+        var view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+
+        return view
     }()
     override func viewDidLoad() {
         

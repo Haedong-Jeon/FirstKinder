@@ -57,27 +57,70 @@ extension DetailController: ChartViewDelegate {
         kinderTitleLabel.text = kinder.title
     }
     func drawNumOfChild() {
-        containerView.addSubview(numOfChildLabel)
-        numOfChildLabel.topAnchor.constraint(equalTo: barChart.bottomAnchor).isActive = true
-        numOfChildLabel.widthAnchor.constraint(equalTo: containerView.safeAreaLayoutGuide.widthAnchor).isActive = true
-        numOfChildLabel.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        containerView.addSubview(childNumBoxView)
+        childNumBoxView.widthAnchor.constraint(equalToConstant: view.frame.width / 3).isActive = true
+        childNumBoxView.heightAnchor.constraint(equalToConstant: 100).isActive = true
+        childNumBoxView.topAnchor.constraint(equalTo: barChart.bottomAnchor).isActive = true
+        childNumBoxView.leftAnchor.constraint(equalTo: containerView.leftAnchor).isActive = true
+        
+        childNumBoxView.addSubview(numOfChildLabel)
+        numOfChildLabel.bottomAnchor.constraint(equalTo: childNumBoxView.bottomAnchor).isActive = true
+        numOfChildLabel.widthAnchor.constraint(equalTo: childNumBoxView.widthAnchor).isActive = true
+        numOfChildLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
         numOfChildLabel.text = "정원 : \(kinder.currentNumOfChild) / \(kinder.totalNumOfChild)"
         
         setChildNumLabelColor()
     }
     func drawNumOfTeacher() {
-        containerView.addSubview(numOfTeacherLabel)
-        numOfTeacherLabel.topAnchor.constraint(equalTo: numOfChildLabel.bottomAnchor).isActive = true
-        numOfTeacherLabel.widthAnchor.constraint(equalTo: containerView.safeAreaLayoutGuide.widthAnchor).isActive = true
-        numOfTeacherLabel.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        containerView.addSubview(teacherNumBoxView)
+        teacherNumBoxView.widthAnchor.constraint(equalToConstant: view.frame.width / 3).isActive = true
+        teacherNumBoxView.heightAnchor.constraint(equalToConstant: 100).isActive = true
+        teacherNumBoxView.topAnchor.constraint(equalTo: barChart.bottomAnchor).isActive = true
+        teacherNumBoxView.leftAnchor.constraint(equalTo: childNumBoxView.rightAnchor).isActive = true
+        
+        let imgView = UIImageView()
+        imgView.translatesAutoresizingMaskIntoConstraints = false
+        imgView.loadGif(name: "teacher")
+        imgView.widthAnchor.constraint(equalToConstant: 75).isActive = true
+        imgView.heightAnchor.constraint(equalToConstant: 75).isActive = true
+        teacherNumBoxView.addSubview(imgView)
+        imgView.centerXAnchor.constraint(equalTo: teacherNumBoxView.centerXAnchor).isActive = true
+        imgView.centerYAnchor.constraint(equalTo: teacherNumBoxView.centerYAnchor).isActive = true
+        imgView.contentMode = .scaleAspectFit
+        
+        teacherNumBoxView.addSubview(numOfTeacherLabel)
+        numOfTeacherLabel.bottomAnchor.constraint(equalTo: teacherNumBoxView.bottomAnchor).isActive = true
+        numOfTeacherLabel.widthAnchor.constraint(equalTo: teacherNumBoxView.widthAnchor).isActive = true
+        numOfTeacherLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
         numOfTeacherLabel.text = "선생님: " + kinder.numOfTeachr + "명"
     }
     func drawCarAvailableLabel() {
-        containerView.addSubview(carAvailableLabel)
-        carAvailableLabel.topAnchor.constraint(equalTo: numOfTeacherLabel.bottomAnchor).isActive = true
-        carAvailableLabel.widthAnchor.constraint(equalTo: containerView.safeAreaLayoutGuide.widthAnchor).isActive = true
-        carAvailableLabel.heightAnchor.constraint(equalToConstant: 30).isActive = true
-        carAvailableLabel.text = "🚌 " + kinder.isCarAvailable
+        containerView.addSubview(busBoxView)
+        busBoxView.widthAnchor.constraint(equalToConstant: view.frame.width / 3).isActive = true
+        busBoxView.heightAnchor.constraint(equalToConstant: 100).isActive = true
+        busBoxView.topAnchor.constraint(equalTo: barChart.bottomAnchor).isActive = true
+        busBoxView.leftAnchor.constraint(equalTo: teacherNumBoxView.rightAnchor).isActive = true
+        
+        let imgView = UIImageView()
+        imgView.translatesAutoresizingMaskIntoConstraints = false
+        imgView.widthAnchor.constraint(equalToConstant: 75).isActive = true
+        imgView.heightAnchor.constraint(equalToConstant: 75).isActive = true
+        busBoxView.addSubview(imgView)
+        imgView.centerXAnchor.constraint(equalTo: busBoxView.centerXAnchor).isActive = true
+        imgView.centerYAnchor.constraint(equalTo: busBoxView.centerYAnchor).isActive = true
+        imgView.contentMode = .scaleAspectFit
+        
+        if kinder.isCarAvailable == "운영" {
+            imgView.loadGif(name: "bus")
+        } else {
+            imgView.loadGif(name: "nobus")
+        }
+
+        busBoxView.addSubview(carAvailableLabel)
+        carAvailableLabel.bottomAnchor.constraint(equalTo: busBoxView.bottomAnchor).isActive = true
+        carAvailableLabel.widthAnchor.constraint(equalTo: busBoxView.widthAnchor).isActive = true
+        carAvailableLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        carAvailableLabel.text = kinder.isCarAvailable
     }
     func drawAddress() {
         containerView.addSubview(detailAddressTextView)
