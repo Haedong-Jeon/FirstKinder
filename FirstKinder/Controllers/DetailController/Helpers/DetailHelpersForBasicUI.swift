@@ -12,10 +12,10 @@ import GoogleMobileAds
 extension DetailController: ChartViewDelegate {
     func configureUI() {
         view.backgroundColor = .white
-        drawMap()
         setScrollView()
         drawKinderTitle()
         drawAddress()
+        drawMap()
         drawChart()
         addPlusButtonOnNavBar()
         setAnnotaion()
@@ -30,20 +30,20 @@ extension DetailController: ChartViewDelegate {
     }
     func setScrollView() {
         view.addSubview(scrollView)
-        scrollView.topAnchor.constraint(equalTo: mapView.bottomAnchor).isActive = true
+        scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
         scrollView.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor).isActive = true
         scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
-        scrollView.contentSize = CGSize(width: self.view.frame.width, height: self.view.frame.height - 300)
+        scrollView.contentSize = CGSize(width: self.view.frame.width, height: self.view.frame.height)
         scrollView.addSubview(containerView)
         containerView.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true
         containerView.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
-        containerView.heightAnchor.constraint(equalToConstant: self.view.frame.height - 300).isActive = true
+        containerView.heightAnchor.constraint(equalToConstant: self.view.frame.height).isActive = true
         
     }
     func drawMap() {
-        view.addSubview(mapView)
-        mapView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
-        mapView.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor).isActive = true
+        containerView.addSubview(mapView)
+        mapView.topAnchor.constraint(equalTo: detailAddressTextView.bottomAnchor).isActive = true
+        mapView.widthAnchor.constraint(equalTo: containerView.widthAnchor).isActive = true
         mapView.heightAnchor.constraint(equalToConstant: 300).isActive = true
         mapView.layer.borderWidth = 2
         mapView.layer.borderColor = #colorLiteral(red: 0.1889419258, green: 0.1871659458, blue: 0.2520412803, alpha: 1)
@@ -117,7 +117,7 @@ extension DetailController: ChartViewDelegate {
         containerView.addSubview(barChart)
         barChart.widthAnchor.constraint(equalTo: containerView.widthAnchor).isActive = true
         barChart.heightAnchor.constraint(equalToConstant: 150).isActive = true
-        barChart.topAnchor.constraint(equalTo: detailAddressTextView.bottomAnchor).isActive = true
+        barChart.topAnchor.constraint(equalTo: mapView.bottomAnchor).isActive = true
         
         barChart.xAxis.drawGridLinesEnabled = false
         barChart.leftAxis.drawGridLinesEnabled = false
