@@ -7,12 +7,10 @@
 
 import UIKit
 import MapKit
-import GoogleMobileAds
 import Charts
 
 class DetailController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
     var kinder = Kinder()
-    var bannerView: GADBannerView!
     var isFromMyKinder = false
     lazy var barChart: BarChartView = {
         let chartView = BarChartView()
@@ -74,11 +72,6 @@ class DetailController: UIViewController, CLLocationManagerDelegate, MKMapViewDe
                 isFromMyKinder = true
             }
         })
-        
-        bannerView = GADBannerView(adSize: kGADAdSizeBanner)
-        
-        //시뮬레이터에서 테스트 할 때만 살릴 것
-        addBannerView(bannerView)
         configureUI()
     }
     override func viewWillDisappear(_ animated: Bool) {

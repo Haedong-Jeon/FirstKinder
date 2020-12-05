@@ -32,6 +32,7 @@ extension ListController {
         }
         cell.layer.borderWidth = 2
         cell.layer.borderColor = #colorLiteral(red: 0.1889419258, green: 0.1871659458, blue: 0.2520412803, alpha: 1)
+        cell.layer.cornerRadius = 10
         return cell
     }
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -52,6 +53,6 @@ extension ListController {
         navigationController?.pushViewController(detailViewController, animated: false)
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.frame.width, height: 95)
+        return CGSize(width: collectionView.frame.width - 10, height: 95)
     }
 }

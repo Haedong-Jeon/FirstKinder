@@ -94,10 +94,7 @@ extension DetailController: ChartViewDelegate {
         sizeOfRoomLabel.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor).isActive = true
         sizeOfRoomLabel.heightAnchor.constraint(equalToConstant: 30).isActive = true
         
-        //시뮬레이터에서 테스트 할 때
-        sizeOfRoomLabel.bottomAnchor.constraint(equalTo: bannerView.topAnchor).isActive = true
-        //실제 기기에서 테스트 할 때
-        //sizeOfRoomLabel.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        sizeOfRoomLabel.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
         sizeOfRoomLabel.text = "보육실 면적: " + kinder.sizeOfRoom + "m²"
     }
     func drawChart() {
