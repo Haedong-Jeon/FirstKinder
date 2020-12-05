@@ -32,17 +32,21 @@ extension DetailController: ChartViewDelegate {
         view.addSubview(scrollView)
         scrollView.topAnchor.constraint(equalTo: mapView.bottomAnchor).isActive = true
         scrollView.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor).isActive = true
-        scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 400).isActive = true
-        scrollView.contentSize = CGSize(width: self.view.frame.width, height: self.view.frame.height + 400)
+        scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        scrollView.contentSize = CGSize(width: self.view.frame.width, height: self.view.frame.height - 300)
         scrollView.addSubview(containerView)
         containerView.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true
-        containerView.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true        
+        containerView.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
+        containerView.heightAnchor.constraint(equalToConstant: self.view.frame.height - 300).isActive = true
+        
     }
     func drawMap() {
         view.addSubview(mapView)
         mapView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
         mapView.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor).isActive = true
         mapView.heightAnchor.constraint(equalToConstant: 300).isActive = true
+        mapView.layer.borderWidth = 2
+        mapView.layer.borderColor = #colorLiteral(red: 0.1889419258, green: 0.1871659458, blue: 0.2520412803, alpha: 1)
     }
     func drawKinderTitle() {
         containerView.addSubview(kinderTitleLabel)
@@ -105,7 +109,7 @@ extension DetailController: ChartViewDelegate {
         sizeOfRoomLabel.widthAnchor.constraint(equalTo: containerView.safeAreaLayoutGuide.widthAnchor).isActive = true
         sizeOfRoomLabel.heightAnchor.constraint(equalToConstant: 30).isActive = true
         
-        sizeOfRoomLabel.bottomAnchor.constraint(equalTo: containerView.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        sizeOfRoomLabel.bottomAnchor.constraint(equalTo: containerView.bottomAnchor).isActive = true
         sizeOfRoomLabel.text = "보육실 면적: " + kinder.sizeOfRoom + "m²"
     }
     func drawChart() {
