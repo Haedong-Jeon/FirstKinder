@@ -26,7 +26,7 @@ extension DetailController: ChartViewDelegate {
         drawRoomCount()
         drawRoomSize()
         
-        setDataToChart()
+        //setDataToBarChart()
     }
     func setScrollView() {
         view.addSubview(scrollView)
@@ -58,25 +58,39 @@ extension DetailController: ChartViewDelegate {
     }
     func drawNumOfChild() {
         containerView.addSubview(childNumBoxView)
-        childNumBoxView.widthAnchor.constraint(equalToConstant: view.frame.width / 3).isActive = true
+        childNumBoxView.widthAnchor.constraint(equalToConstant: view.frame.width / 3 - 10).isActive = true
         childNumBoxView.heightAnchor.constraint(equalToConstant: 100).isActive = true
-        childNumBoxView.topAnchor.constraint(equalTo: barChart.bottomAnchor).isActive = true
-        childNumBoxView.leftAnchor.constraint(equalTo: containerView.leftAnchor).isActive = true
+        childNumBoxView.topAnchor.constraint(equalTo: chart.bottomAnchor).isActive = true
+        childNumBoxView.leftAnchor.constraint(equalTo: containerView.leftAnchor, constant: 10).isActive = true
+        
+        
+        let imgView = UIImageView()
+        imgView.translatesAutoresizingMaskIntoConstraints = false
+        imgView.widthAnchor.constraint(equalToConstant: 75).isActive = true
+        imgView.heightAnchor.constraint(equalToConstant: 75).isActive = true
+        imgView.contentMode = .center
+        childNumBoxView.addSubview(imgView)
+        imgView.centerXAnchor.constraint(equalTo: childNumBoxView.centerXAnchor).isActive = true
+        imgView.centerYAnchor.constraint(equalTo: childNumBoxView.centerYAnchor).isActive = true
+        imgView.contentMode = .scaleAspectFit
+        
+        setChildBoxByCurrentChildNum(imgView)
         
         childNumBoxView.addSubview(numOfChildLabel)
-        numOfChildLabel.bottomAnchor.constraint(equalTo: childNumBoxView.bottomAnchor).isActive = true
+        numOfChildLabel.topAnchor.constraint(equalTo: imgView.bottomAnchor).isActive = true
+        numOfChildLabel.bottomAnchor.constraint(equalTo: childNumBoxView.bottomAnchor, constant: -5).isActive = true
         numOfChildLabel.widthAnchor.constraint(equalTo: childNumBoxView.widthAnchor).isActive = true
         numOfChildLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
         numOfChildLabel.text = "정원 : \(kinder.currentNumOfChild) / \(kinder.totalNumOfChild)"
         
-        setChildNumLabelColor()
+        
     }
     func drawNumOfTeacher() {
         containerView.addSubview(teacherNumBoxView)
-        teacherNumBoxView.widthAnchor.constraint(equalToConstant: view.frame.width / 3).isActive = true
+        teacherNumBoxView.widthAnchor.constraint(equalToConstant: view.frame.width / 3 - 10).isActive = true
         teacherNumBoxView.heightAnchor.constraint(equalToConstant: 100).isActive = true
-        teacherNumBoxView.topAnchor.constraint(equalTo: barChart.bottomAnchor).isActive = true
-        teacherNumBoxView.leftAnchor.constraint(equalTo: childNumBoxView.rightAnchor).isActive = true
+        teacherNumBoxView.topAnchor.constraint(equalTo: chart.bottomAnchor).isActive = true
+        teacherNumBoxView.leftAnchor.constraint(equalTo: childNumBoxView.rightAnchor, constant: 10).isActive = true
         
         let imgView = UIImageView()
         imgView.translatesAutoresizingMaskIntoConstraints = false
@@ -89,17 +103,19 @@ extension DetailController: ChartViewDelegate {
         imgView.contentMode = .scaleAspectFit
         
         teacherNumBoxView.addSubview(numOfTeacherLabel)
-        numOfTeacherLabel.bottomAnchor.constraint(equalTo: teacherNumBoxView.bottomAnchor).isActive = true
+        numOfTeacherLabel.topAnchor.constraint(equalTo: imgView.bottomAnchor).isActive = true
+        numOfTeacherLabel.bottomAnchor.constraint(equalTo: teacherNumBoxView.bottomAnchor, constant: -5).isActive = true
         numOfTeacherLabel.widthAnchor.constraint(equalTo: teacherNumBoxView.widthAnchor).isActive = true
         numOfTeacherLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
         numOfTeacherLabel.text = "선생님: " + kinder.numOfTeachr + "명"
     }
     func drawCarAvailableLabel() {
         containerView.addSubview(busBoxView)
-        busBoxView.widthAnchor.constraint(equalToConstant: view.frame.width / 3).isActive = true
+        busBoxView.widthAnchor.constraint(equalToConstant: view.frame.width / 3 - 10).isActive = true
         busBoxView.heightAnchor.constraint(equalToConstant: 100).isActive = true
-        busBoxView.topAnchor.constraint(equalTo: barChart.bottomAnchor).isActive = true
-        busBoxView.leftAnchor.constraint(equalTo: teacherNumBoxView.rightAnchor).isActive = true
+        busBoxView.topAnchor.constraint(equalTo: chart.bottomAnchor).isActive = true
+        busBoxView.leftAnchor.constraint(equalTo: teacherNumBoxView.rightAnchor, constant: 10).isActive = true
+        busBoxView.rightAnchor.constraint(equalTo: containerView.rightAnchor, constant: -10).isActive = true
         
         let imgView = UIImageView()
         imgView.translatesAutoresizingMaskIntoConstraints = false
@@ -110,17 +126,20 @@ extension DetailController: ChartViewDelegate {
         imgView.centerYAnchor.constraint(equalTo: busBoxView.centerYAnchor).isActive = true
         imgView.contentMode = .scaleAspectFit
         
-        if kinder.isCarAvailable == "운영" {
-            imgView.loadGif(name: "bus")
-        } else {
-            imgView.loadGif(name: "nobus")
-        }
 
         busBoxView.addSubview(carAvailableLabel)
-        carAvailableLabel.bottomAnchor.constraint(equalTo: busBoxView.bottomAnchor).isActive = true
+        carAvailableLabel.topAnchor.constraint(equalTo: imgView.bottomAnchor).isActive = true
+        carAvailableLabel.bottomAnchor.constraint(equalTo: busBoxView.bottomAnchor, constant: -5).isActive = true
         carAvailableLabel.widthAnchor.constraint(equalTo: busBoxView.widthAnchor).isActive = true
         carAvailableLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
         carAvailableLabel.text = kinder.isCarAvailable
+        if kinder.isCarAvailable == "운영" {
+            imgView.loadGif(name: "bus")
+            carAvailableLabel.textColor = .systemGreen
+        } else {
+            imgView.loadGif(name: "nobus")
+            carAvailableLabel.textColor = .systemRed
+        }
     }
     func drawAddress() {
         containerView.addSubview(detailAddressTextView)
@@ -157,33 +176,50 @@ extension DetailController: ChartViewDelegate {
         sizeOfRoomLabel.text = "보육실 면적: " + kinder.sizeOfRoom + "m²"
     }
     func drawChart() {
-        barChart.translatesAutoresizingMaskIntoConstraints = false
-        containerView.addSubview(barChart)
-        barChart.widthAnchor.constraint(equalTo: containerView.widthAnchor).isActive = true
-        barChart.heightAnchor.constraint(equalToConstant: 150).isActive = true
-        barChart.topAnchor.constraint(equalTo: mapView.bottomAnchor).isActive = true
-        
-        barChart.xAxis.drawGridLinesEnabled = false
-        barChart.leftAxis.drawGridLinesEnabled = false
-        barChart.xAxis.labelPosition = .bottom
-        barChart.xAxis.drawLabelsEnabled = false
-        barChart.rightAxis.enabled = false
-        barChart.isUserInteractionEnabled = false
+        chart.translatesAutoresizingMaskIntoConstraints = false
+        containerView.addSubview(chart)
+        chart.widthAnchor.constraint(equalTo: containerView.widthAnchor).isActive = true
+        chart.heightAnchor.constraint(equalToConstant: 250).isActive = true
+        chart.topAnchor.constraint(equalTo: mapView.bottomAnchor).isActive = true
+        setDataToPieChart(chart)
+//        chart.xAxis.drawGridLinesEnabled = false
+//        barChart.leftAxis.drawGridLinesEnabled = false
+//        chart.xAxis.labelPosition = .bottom
+//        chart.xAxis.drawLabelsEnabled = false
+//        barChart.rightAxis.enabled = false
+//        chart.isUserInteractionEnabled = false
     }
-    func setDataToChart() {
-        let childDataSet = BarChartDataEntry(x: 0, y: Double(kinder.currentNumOfChild)!)
-        let teacherDataSet = BarChartDataEntry(x: 0.6, y: Double(kinder.numOfTeachr)!)
-        var dataSets = [BarChartDataEntry]()
+//    func setDataToBarChart() {
+//        let childDataSet = BarChartDataEntry(x: 0, y: Double(kinder.currentNumOfChild)!)
+//        let teacherDataSet = BarChartDataEntry(x: 0.6, y: Double(kinder.numOfTeachr)!)
+//        var dataSets = [BarChartDataEntry]()
+//
+//        dataSets.append(childDataSet)
+//        dataSets.append(teacherDataSet)
+//
+//        let set = BarChartDataSet(entries: dataSets, label: "아동 수 대 선생님 수")
+//        set.colors = [.link, .systemPink]
+//        let data = BarChartData(dataSet: set)
+//        data.setDrawValues(false)
+//        data.barWidth = 0.3
+//        chart.data = data
+//    }
+    func setDataToPieChart(_ pieChart: PieChartView) {
+        guard let currentChildNum = Double(kinder.currentNumOfChild) else { return }
+        guard let teacherNum = Double(kinder.numOfTeachr) else { return }
+        let currentChildDataSet = PieChartDataEntry(value: currentChildNum, label: "아동 수")
+        let totalChildDataSet = PieChartDataEntry(value: teacherNum, label: "선생님 수")
         
-        dataSets.append(childDataSet)
-        dataSets.append(teacherDataSet)
+        var dataSets = [PieChartDataEntry]()
         
-        let set = BarChartDataSet(entries: dataSets, label: "아동 수 대 선생님 수")
-        set.colors = [.link, .systemPink]
-        let data = BarChartData(dataSet: set)
+        dataSets.append(currentChildDataSet)
+        dataSets.append(totalChildDataSet)
+        
+        let set = PieChartDataSet(entries: dataSets, label: "")
+        set.colors = [.systemBlue, .systemPink]
+        let data = PieChartData(dataSet: set)
         data.setDrawValues(false)
-        data.barWidth = 0.3
-        barChart.data = data
+        pieChart.data = data
     }
     func addPlusButtonOnNavBar() {
         if !isFromMyKinder {
@@ -194,7 +230,7 @@ extension DetailController: ChartViewDelegate {
         }
     }
     //총 수용 인원 중 현재 인원의 비율
-    func setChildNumLabelColor() {
+    func setChildBoxByCurrentChildNum(_ imgView: UIImageView) {
         
         guard let currentChildNum = Double(kinder.currentNumOfChild) else { return }
         guard let totalChildNum = Double(kinder.totalNumOfChild) else { return }
@@ -203,10 +239,16 @@ extension DetailController: ChartViewDelegate {
         
         if capacityPercentage <= 45 {
             numOfChildLabel.textColor = .systemGreen
+            imgView.image = #imageLiteral(resourceName: "392001870_SMILING_FACE_WITH_HEARTS_STICKER_400")
+            
         } else if capacityPercentage <= 75 {
             numOfChildLabel.textColor = .systemYellow
+            imgView.loadGif(name: "thinkingFace")
+
         } else {
             numOfChildLabel.textColor = .systemRed
+            imgView.loadGif(name: "thinkingFace")
+
         }
     }
 }

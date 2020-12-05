@@ -12,8 +12,8 @@ import Charts
 class DetailController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
     var kinder = Kinder()
     var isFromMyKinder = false
-    lazy var barChart: BarChartView = {
-        let chartView = BarChartView()
+    lazy var chart: PieChartView = {
+        let chartView = PieChartView()
         return chartView
     }()
     lazy var containerView: UIView = {
@@ -84,23 +84,31 @@ class DetailController: UIViewController, CLLocationManagerDelegate, MKMapViewDe
     var childNumBoxView: UIView = {
         var view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
+        view.layer.borderWidth = 2
+        view.layer.borderColor = UIColor.lightGray.cgColor
+        view.layer.cornerRadius = 5
 
         return view
     }()
     var teacherNumBoxView: UIView = {
         var view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
+        view.layer.borderWidth = 2
+        view.layer.borderColor = UIColor.lightGray.cgColor
+        view.layer.cornerRadius = 5
 
         return view
     }()
     var busBoxView: UIView = {
         var view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
+        view.layer.borderWidth = 2
+        view.layer.borderColor = UIColor.lightGray.cgColor
+        view.layer.cornerRadius = 5
 
         return view
     }()
     override func viewDidLoad() {
-        
         myKinders.forEach({
             if $0.title == self.kinder.title && $0.craddr == self.kinder.craddr && $0.tel == self.kinder.tel {
                 isFromMyKinder = true

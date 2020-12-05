@@ -29,6 +29,7 @@
 		E97D9AB5257B8468004B5EC4 /* teacher.gif in Resources */ = {isa = PBXBuildFile; fileRef = E97D9AB4257B8467004B5EC4 /* teacher.gif */; };
 		E97D9AB8257B8A23004B5EC4 /* loading.gif in Resources */ = {isa = PBXBuildFile; fileRef = E97D9AB7257B8A23004B5EC4 /* loading.gif */; };
 		E97D9ABB257B8EA5004B5EC4 /* nobus.gif in Resources */ = {isa = PBXBuildFile; fileRef = E97D9ABA257B8EA5004B5EC4 /* nobus.gif */; };
+		E97D9ABE257B9909004B5EC4 /* thinkingFace.gif in Resources */ = {isa = PBXBuildFile; fileRef = E97D9ABD257B9909004B5EC4 /* thinkingFace.gif */; };
 		E9D633822574915F00F6C3ED /* ListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D633812574915F00F6C3ED /* ListController.swift */; };
 		E9D633972574D95800F6C3ED /* bus.gif in Resources */ = {isa = PBXBuildFile; fileRef = E9D633962574D95800F6C3ED /* bus.gif */; };
 		E9D6339C2574DB6900F6C3ED /* CookieRun Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E9D633992574DB6500F6C3ED /* CookieRun Black.ttf */; };
@@ -69,6 +70,7 @@
 		E97D9AB4257B8467004B5EC4 /* teacher.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = teacher.gif; sourceTree = "<group>"; };
 		E97D9AB7257B8A23004B5EC4 /* loading.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = loading.gif; sourceTree = "<group>"; };
 		E97D9ABA257B8EA5004B5EC4 /* nobus.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = nobus.gif; sourceTree = "<group>"; };
+		E97D9ABD257B9909004B5EC4 /* thinkingFace.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = thinkingFace.gif; sourceTree = "<group>"; };
 		E9D633812574915F00F6C3ED /* ListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListController.swift; sourceTree = "<group>"; };
 		E9D633962574D95800F6C3ED /* bus.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = bus.gif; sourceTree = "<group>"; };
 		E9D633992574DB6500F6C3ED /* CookieRun Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "CookieRun Black.ttf"; sourceTree = "<group>"; };
@@ -237,6 +239,7 @@
 		E9D6338D2574CB7E00F6C3ED /* Gifs */ = {
 			isa = PBXGroup;
 			children = (
+				E97D9ABD257B9909004B5EC4 /* thinkingFace.gif */,
 				E9D633962574D95800F6C3ED /* bus.gif */,
 				E97D9ABA257B8EA5004B5EC4 /* nobus.gif */,
 				E97D9AB7257B8A23004B5EC4 /* loading.gif */,
@@ -365,6 +368,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E9D6339E2574DB6D00F6C3ED /* CookieRun Bold.ttf in Resources */,
+				E97D9ABE257B9909004B5EC4 /* thinkingFace.gif in Resources */,
 				E9D6339C2574DB6900F6C3ED /* CookieRun Black.ttf in Resources */,
 				E908896C257471DD00223BAA /* LaunchScreen.storyboard in Resources */,
 				E97D9AB5257B8468004B5EC4 /* teacher.gif in Resources */,
