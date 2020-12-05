@@ -32,14 +32,12 @@ extension DetailController: ChartViewDelegate {
         view.addSubview(scrollView)
         scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
         scrollView.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor).isActive = true
-        scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
-        scrollView.contentSize = CGSize(width: self.view.frame.width, height: self.view.frame.height)
+        scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 100).isActive = true
+        scrollView.contentSize = CGSize(width: self.view.frame.width, height: self.view.frame.height + 100)
         scrollView.addSubview(containerView)
         containerView.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true
         containerView.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
         containerView.heightAnchor.constraint(equalToConstant: self.view.frame.height).isActive = true
-
-        
     }
     func drawMap() {
         containerView.addSubview(mapView)
