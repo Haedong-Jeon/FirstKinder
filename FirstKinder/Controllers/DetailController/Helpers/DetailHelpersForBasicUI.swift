@@ -38,13 +38,14 @@ extension DetailController: ChartViewDelegate {
         containerView.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true
         containerView.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
         containerView.heightAnchor.constraint(equalToConstant: self.view.frame.height).isActive = true
+
         
     }
     func drawMap() {
         containerView.addSubview(mapView)
         mapView.topAnchor.constraint(equalTo: detailAddressTextView.bottomAnchor).isActive = true
         mapView.widthAnchor.constraint(equalTo: containerView.widthAnchor).isActive = true
-        mapView.heightAnchor.constraint(equalToConstant: 300).isActive = true
+        mapView.heightAnchor.constraint(equalToConstant: 200).isActive = true
         mapView.layer.borderWidth = 2
         mapView.layer.borderColor = #colorLiteral(red: 0.1889419258, green: 0.1871659458, blue: 0.2520412803, alpha: 1)
     }
@@ -109,7 +110,7 @@ extension DetailController: ChartViewDelegate {
         sizeOfRoomLabel.widthAnchor.constraint(equalTo: containerView.safeAreaLayoutGuide.widthAnchor).isActive = true
         sizeOfRoomLabel.heightAnchor.constraint(equalToConstant: 30).isActive = true
         
-        sizeOfRoomLabel.bottomAnchor.constraint(equalTo: containerView.bottomAnchor).isActive = true
+        //sizeOfRoomLabel.bottomAnchor.constraint(equalTo: containerView.bottomAnchor).isActive = true
         sizeOfRoomLabel.text = "보육실 면적: " + kinder.sizeOfRoom + "m²"
     }
     func drawChart() {
