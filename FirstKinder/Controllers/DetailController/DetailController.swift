@@ -16,6 +16,19 @@ class DetailController: UIViewController, CLLocationManagerDelegate, MKMapViewDe
         let chartView = BarChartView()
         return chartView
     }()
+    lazy var containerView: UIView = {
+        var view = UIView()
+        view.backgroundColor = .white
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    lazy var scrollView: UIScrollView = {
+        var scrollView = UIScrollView(frame: .zero)
+        scrollView.backgroundColor = .white
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.isPagingEnabled = true
+        return scrollView
+    }()
     var mapView: MKMapView = {
         var mapView = MKMapView()
         mapView.translatesAutoresizingMaskIntoConstraints = false
