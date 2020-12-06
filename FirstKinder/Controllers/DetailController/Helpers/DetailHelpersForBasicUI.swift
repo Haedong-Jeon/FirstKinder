@@ -23,6 +23,7 @@ extension DetailController: ChartViewDelegate {
         drawNumOfTeacher()
         drawCarAvailableLabel()
         drawTel()
+        drawWeb()
         drawRoomCount()
         drawRoomSize()
         
@@ -33,7 +34,7 @@ extension DetailController: ChartViewDelegate {
         scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
         scrollView.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor).isActive = true
         scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
-        scrollView.contentSize = CGSize(width: self.view.frame.width, height: self.view.frame.height + 100)
+        scrollView.contentSize = CGSize(width: self.view.frame.width, height: self.view.frame.height + 150)
         scrollView.addSubview(containerView)
         containerView.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true
         containerView.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
@@ -162,7 +163,7 @@ extension DetailController: ChartViewDelegate {
         telBoxView.heightAnchor.constraint(equalToConstant: 50).isActive = true
         telBoxView.leftAnchor.constraint(equalTo: containerView.leftAnchor, constant: 10).isActive = true
         telBoxView.rightAnchor.constraint(equalTo: containerView.rightAnchor, constant: -10).isActive = true
-        telBoxView.topAnchor.constraint(equalTo: teacherNumBoxView.bottomAnchor, constant: 5).isActive = true
+        telBoxView.topAnchor.constraint(equalTo: teacherNumBoxView.bottomAnchor, constant: 10).isActive = true
         
         telBoxView.addSubview(telLabel)
         telLabel.centerXAnchor.constraint(equalTo: telBoxView.centerXAnchor).isActive = true
@@ -171,12 +172,33 @@ extension DetailController: ChartViewDelegate {
         telLabel.textColor = .link
         telLabel.text = "📞 " + kinder.tel
         
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTelTap))
-        telBoxView.addGestureRecognizer(tapGesture)
+        let telTapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTelTap))
+        telBoxView.addGestureRecognizer(telTapGesture)
+    }
+    func drawWeb() {
+        containerView.addSubview(webBoxView)
+        webBoxView.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        webBoxView.leftAnchor.constraint(equalTo: containerView.leftAnchor, constant: 10).isActive = true
+        webBoxView.rightAnchor.constraint(equalTo: containerView.rightAnchor, constant: -10).isActive = true
+        webBoxView.topAnchor.constraint(equalTo: telBoxView.bottomAnchor, constant: 10).isActive = true
+        
+        webBoxView.addSubview(webLabel)
+        webLabel.centerXAnchor.constraint(equalTo: webBoxView.centerXAnchor).isActive = true
+        webLabel.centerYAnchor.constraint(equalTo: webBoxView.centerYAnchor).isActive = true
+        webLabel.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        if kinder.web == "" {
+            webLabel.textColor = .gray
+        } else {
+            webLabel.textColor = .link
+        }
+        webLabel.text = "🌐 " + "홈페이지 방문"
+        
+        let webTapGesture = UITapGestureRecognizer(target: self, action: #selector(handleWebTap))
+        webBoxView.addGestureRecognizer(webTapGesture)
     }
     func drawRoomCount() {
         containerView.addSubview(numOfRoomLabel)
-        numOfRoomLabel.topAnchor.constraint(equalTo: telBoxView.bottomAnchor, constant: 5).isActive = true
+        numOfRoomLabel.topAnchor.constraint(equalTo: webBoxView.bottomAnchor, constant: 5).isActive = true
         numOfRoomLabel.widthAnchor.constraint(equalTo: containerView.safeAreaLayoutGuide.widthAnchor).isActive = true
         numOfRoomLabel.heightAnchor.constraint(equalToConstant: 30).isActive = true
         numOfRoomLabel.text = "보육실 수: " + kinder.numOfRoom

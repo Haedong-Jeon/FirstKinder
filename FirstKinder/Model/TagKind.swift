@@ -23,4 +23,5 @@ enum TagKind {
     case chcrtescnt
     case nrtrroomcnt
     case nrtrroomsize
+    case crhome
 }

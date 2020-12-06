@@ -13,6 +13,11 @@ extension DetailController {
         guard let numberURL = URL(string: urlString) else { return }
         UIApplication.shared.open(numberURL, options: [:], completionHandler: nil)
     }
+    @objc func handleWebTap() {
+        let urlString = kinder.web
+        guard let webURL = URL(string: urlString) else { return }
+        UIApplication.shared.open(webURL, options: [:], completionHandler: nil)
+    }
     @objc func handlePlusButtonTap() {
         let askAddMyKinderAlert = UIAlertController(title: "관심 어린이집", message: "관심 어린이집에 추가하시겠습니까?", preferredStyle: .alert)
         let okbutton = UIAlertAction(title: "네", style: .default) { ACTION in

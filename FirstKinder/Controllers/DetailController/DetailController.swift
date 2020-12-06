@@ -113,8 +113,20 @@ class DetailController: UIViewController, CLLocationManagerDelegate, MKMapViewDe
         view.layer.borderWidth = 2
         view.layer.borderColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
         view.layer.cornerRadius = 5
-
         return view
+    }()
+    var webBoxView: UIView = {
+        var view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.layer.borderWidth = 2
+        view.layer.borderColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+        view.layer.cornerRadius = 5
+        return view
+    }()
+    var webLabel: UILabel = {
+        var label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
     }()
     override func viewDidLoad() {
         myKinders.forEach({

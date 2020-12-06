@@ -49,6 +49,8 @@ extension LaunchController {
             tagKind = TagKind.nrtrroomcnt
         } else if elementName == "nrtrroomsize" {
             tagKind = TagKind.nrtrroomsize
+        } else if elementName == "crhome" {
+            tagKind = TagKind.crhome
         } else {
             tagKind = TagKind.others
         }
@@ -104,6 +106,8 @@ extension LaunchController {
             kinder.numOfRoom = string
         case .nrtrroomsize:
             kinder.sizeOfRoom = string
+        case .crhome:
+            kinder.web = string
         case .others:
             return
         }

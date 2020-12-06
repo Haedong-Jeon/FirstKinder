@@ -23,6 +23,7 @@ struct Kinder: Codable {
     var numOfTeachr = ""
     var sizeOfRoom = ""
     var numOfRoom = ""
+    var web = ""
 }
 var kinders = [Kinder]()
 var myKinders = [Kinder]()
