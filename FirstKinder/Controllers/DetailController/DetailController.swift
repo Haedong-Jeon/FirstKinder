@@ -123,10 +123,10 @@ class DetailController: UIViewController, CLLocationManagerDelegate, MKMapViewDe
         view.layer.cornerRadius = 5
         return view
     }()
-    var webLabel: UILabel = {
-        var label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
+    var webButton: UIButton = {
+        var button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
     }()
     override func viewDidLoad() {
         myKinders.forEach({

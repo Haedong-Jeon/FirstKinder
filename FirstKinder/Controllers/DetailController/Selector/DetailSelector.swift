@@ -16,7 +16,14 @@ extension DetailController {
     @objc func handleWebTap() {
         let urlString = kinder.web
         guard let webURL = URL(string: urlString) else { return }
-        UIApplication.shared.open(webURL, options: [:], completionHandler: nil)
+        if UIApplication.shared.canOpenURL(webURL) {
+            UIApplication.shared.open(webURL, options: [:], completionHandler: nil)
+        } else {
+            let cantOpenUrlAlert = UIAlertController(title: "홈페이지 오류", message: "접속할 수 없는 홈페이지 입니다.", preferredStyle: .alert)
+            let okButton = UIAlertAction(title: "확인", style: .default, handler: nil)
+            cantOpenUrlAlert.addAction(okButton)
+            self.present(cantOpenUrlAlert, animated: false, completion: nil)
+        }
     }
     @objc func handlePlusButtonTap() {
         let askAddMyKinderAlert = UIAlertController(title: "관심 어린이집", message: "관심 어린이집에 추가하시겠습니까?", preferredStyle: .alert)

@@ -159,6 +159,9 @@ extension DetailController: ChartViewDelegate {
         detailAddressTextView.text = kinder.craddr
     }
     func drawTel() {
+        let telTapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTelTap))
+        telBoxView.addGestureRecognizer(telTapGesture)
+        
         containerView.addSubview(telBoxView)
         telBoxView.heightAnchor.constraint(equalToConstant: 50).isActive = true
         telBoxView.leftAnchor.constraint(equalTo: containerView.leftAnchor, constant: 10).isActive = true
@@ -171,30 +174,29 @@ extension DetailController: ChartViewDelegate {
         telLabel.heightAnchor.constraint(equalToConstant: 30).isActive = true
         telLabel.textColor = .link
         telLabel.text = "📞 " + kinder.tel
-        
-        let telTapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTelTap))
-        telBoxView.addGestureRecognizer(telTapGesture)
     }
     func drawWeb() {
+        
         containerView.addSubview(webBoxView)
         webBoxView.heightAnchor.constraint(equalToConstant: 50).isActive = true
         webBoxView.leftAnchor.constraint(equalTo: containerView.leftAnchor, constant: 10).isActive = true
         webBoxView.rightAnchor.constraint(equalTo: containerView.rightAnchor, constant: -10).isActive = true
         webBoxView.topAnchor.constraint(equalTo: telBoxView.bottomAnchor, constant: 10).isActive = true
         
-        webBoxView.addSubview(webLabel)
-        webLabel.centerXAnchor.constraint(equalTo: webBoxView.centerXAnchor).isActive = true
-        webLabel.centerYAnchor.constraint(equalTo: webBoxView.centerYAnchor).isActive = true
-        webLabel.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        webBoxView.addSubview(webButton)
+        webButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        webButton.widthAnchor.constraint(equalTo: webBoxView.widthAnchor).isActive = true
+        webButton.centerXAnchor.constraint(equalTo: webBoxView.centerXAnchor).isActive = true
+        webButton.centerYAnchor.constraint(equalTo: webBoxView.centerYAnchor).isActive = true
         if kinder.web == "" {
-            webLabel.textColor = .gray
+            webButton.isUserInteractionEnabled = false
+            webButton.setTitleColor(.gray, for: .normal)
         } else {
-            webLabel.textColor = .link
+            webButton.isUserInteractionEnabled = true
+            webButton.setTitleColor(.link, for: .normal)
         }
-        webLabel.text = "🌐 " + "홈페이지 방문"
-        
-        let webTapGesture = UITapGestureRecognizer(target: self, action: #selector(handleWebTap))
-        webBoxView.addGestureRecognizer(webTapGesture)
+        webButton.setTitle("홈페이지 방문", for: .normal)
+        webButton.addTarget(self, action: #selector(handleWebTap), for: .touchUpInside)
     }
     func drawRoomCount() {
         containerView.addSubview(numOfRoomLabel)
