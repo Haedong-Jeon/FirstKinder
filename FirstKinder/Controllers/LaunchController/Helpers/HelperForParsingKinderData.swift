@@ -10,6 +10,12 @@ import RxSwift
 extension LaunchController {    
     func getData() {
         for city in cities {
+            if isParseStopSignOn {
+                DispatchQueue.main.async {
+                    self.kinderLabel.text = "초기화 에러: 최신 버전으로 재설치 해주세요."                    
+                }
+                return
+            }
             let key = "b88e8eb18a894c84b9a20f1be9d079e8"
             let url = URL(string: "https://api.childcare.go.kr/mediate/rest/cpmsapi030/cpmsapi030/request?key=\(key)&arcode=\(city)&stcode=")
             guard let targetURL = url else { return }
