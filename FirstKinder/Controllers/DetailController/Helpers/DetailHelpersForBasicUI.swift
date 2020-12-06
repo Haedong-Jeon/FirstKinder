@@ -22,10 +22,10 @@ extension DetailController: ChartViewDelegate {
         drawNumOfChild()
         drawNumOfTeacher()
         drawCarAvailableLabel()
-        drawTel()
-        drawWeb()
         drawRoomCount()
         drawRoomSize()
+        drawTel()
+        drawWeb()
     }
     func setScrollView() {
         view.addSubview(scrollView)
@@ -167,7 +167,7 @@ extension DetailController: ChartViewDelegate {
         telBoxView.heightAnchor.constraint(equalToConstant: 50).isActive = true
         telBoxView.leftAnchor.constraint(equalTo: containerView.leftAnchor, constant: 10).isActive = true
         telBoxView.rightAnchor.constraint(equalTo: containerView.rightAnchor, constant: -10).isActive = true
-        telBoxView.topAnchor.constraint(equalTo: teacherNumBoxView.bottomAnchor, constant: 10).isActive = true
+        telBoxView.topAnchor.constraint(equalTo: roomSizeBoxView.bottomAnchor, constant: 10).isActive = true
         
         telBoxView.addSubview(telLabel)
         telLabel.centerXAnchor.constraint(equalTo: telBoxView.centerXAnchor).isActive = true
@@ -198,21 +198,78 @@ extension DetailController: ChartViewDelegate {
         }
         webButton.setTitle("홈페이지 방문", for: .normal)
         webButton.addTarget(self, action: #selector(handleWebTap), for: .touchUpInside)
+        webBoxView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor).isActive = true
     }
     func drawRoomCount() {
-        containerView.addSubview(numOfRoomLabel)
-        numOfRoomLabel.topAnchor.constraint(equalTo: webBoxView.bottomAnchor, constant: 5).isActive = true
-        numOfRoomLabel.widthAnchor.constraint(equalTo: containerView.safeAreaLayoutGuide.widthAnchor).isActive = true
+        containerView.addSubview(roomCountBoxView)
+        roomCountBoxView.widthAnchor.constraint(equalToConstant: view.frame.width / 2 - 10).isActive = true
+        roomCountBoxView.heightAnchor.constraint(equalToConstant: 100).isActive = true
+        roomCountBoxView.topAnchor.constraint(equalTo: childNumBoxView.bottomAnchor, constant: 10).isActive = true
+        roomCountBoxView.leftAnchor.constraint(equalTo: containerView.leftAnchor, constant: 10).isActive = true
+        
+        let imgView = UIImageView()
+        imgView.translatesAutoresizingMaskIntoConstraints = false
+        imgView.widthAnchor.constraint(equalToConstant: 75).isActive = true
+        imgView.heightAnchor.constraint(equalToConstant: 75).isActive = true
+        roomCountBoxView.addSubview(imgView)
+        imgView.centerXAnchor.constraint(equalTo: roomCountBoxView.centerXAnchor).isActive = true
+        imgView.centerYAnchor.constraint(equalTo: roomCountBoxView.centerYAnchor).isActive = true
+        imgView.contentMode = .scaleAspectFit
+        imgView.image = UIImage(systemName: "house")
+        imgView.tintColor = .black
+        
+        let roomNumLabel = UILabel()
+        roomNumLabel.translatesAutoresizingMaskIntoConstraints = false
+        roomNumLabel.font = UIFont.init(name: "CookieRun", size: 30)
+        roomNumLabel.text = kinder.numOfRoom
+        
+        roomCountBoxView.addSubview(roomNumLabel)
+        roomNumLabel.leftAnchor.constraint(equalTo: imgView.rightAnchor).isActive = true
+        roomNumLabel.topAnchor.constraint(equalTo: imgView.topAnchor).isActive = true
+        roomNumLabel.widthAnchor.constraint(equalToConstant: 45).isActive = true
+        
+        roomCountBoxView.addSubview(numOfRoomLabel)
+        numOfRoomLabel.topAnchor.constraint(equalTo: imgView.bottomAnchor).isActive = true
+        numOfRoomLabel.bottomAnchor.constraint(equalTo: roomCountBoxView.bottomAnchor).isActive = true
+        numOfRoomLabel.widthAnchor.constraint(equalTo: roomCountBoxView.widthAnchor).isActive = true
+        numOfRoomLabel.textAlignment = .center
         numOfRoomLabel.heightAnchor.constraint(equalToConstant: 30).isActive = true
         numOfRoomLabel.text = "보육실 수: " + kinder.numOfRoom
     }
     func drawRoomSize() {
-        containerView.addSubview(sizeOfRoomLabel)
-        sizeOfRoomLabel.topAnchor.constraint(equalTo: numOfRoomLabel.bottomAnchor).isActive = true
-        sizeOfRoomLabel.widthAnchor.constraint(equalTo: containerView.safeAreaLayoutGuide.widthAnchor).isActive = true
-        sizeOfRoomLabel.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        containerView.addSubview(roomSizeBoxView)
+        roomSizeBoxView.widthAnchor.constraint(equalToConstant: view.frame.width / 2 - 10).isActive = true
+        roomSizeBoxView.heightAnchor.constraint(equalToConstant: 100).isActive = true
+        roomSizeBoxView.topAnchor.constraint(equalTo: childNumBoxView.bottomAnchor, constant: 10).isActive = true
+        roomSizeBoxView.leftAnchor.constraint(equalTo: roomCountBoxView.rightAnchor, constant: 10).isActive = true
+        roomSizeBoxView.rightAnchor.constraint(equalTo: containerView.rightAnchor, constant:  -10).isActive = true
         
-        sizeOfRoomLabel.bottomAnchor.constraint(equalTo: containerView.bottomAnchor).isActive = true
+        let imgView = UIImageView()
+        imgView.translatesAutoresizingMaskIntoConstraints = false
+        imgView.widthAnchor.constraint(equalToConstant: 65).isActive = true
+        imgView.heightAnchor.constraint(equalToConstant: 75).isActive = true
+        roomSizeBoxView.addSubview(imgView)
+        imgView.centerXAnchor.constraint(equalTo: roomSizeBoxView.centerXAnchor).isActive = true
+        imgView.centerYAnchor.constraint(equalTo: roomSizeBoxView.centerYAnchor).isActive = true
+        imgView.contentMode = .scaleAspectFit
+        imgView.image = UIImage(systemName: "aspectratio")
+        imgView.tintColor = .black
+        
+        let roomSizeLabel = UILabel()
+        roomSizeLabel.translatesAutoresizingMaskIntoConstraints = false
+        roomSizeLabel.font = UIFont.init(name: "CookieRun", size: 20)
+        roomSizeLabel.text = kinder.sizeOfRoom
+        
+        roomCountBoxView.addSubview(roomSizeLabel)
+        roomSizeLabel.leftAnchor.constraint(equalTo: imgView.rightAnchor).isActive = true
+        roomSizeLabel.topAnchor.constraint(equalTo: imgView.topAnchor).isActive = true
+        roomSizeLabel.widthAnchor.constraint(equalToConstant: 45).isActive = true
+        
+        roomSizeBoxView.addSubview(sizeOfRoomLabel)
+        sizeOfRoomLabel.bottomAnchor.constraint(equalTo: roomSizeBoxView.bottomAnchor).isActive = true
+        sizeOfRoomLabel.widthAnchor.constraint(equalTo: roomSizeBoxView.widthAnchor).isActive = true
+        sizeOfRoomLabel.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        sizeOfRoomLabel.textAlignment = .center
         sizeOfRoomLabel.text = "보육실 면적: " + kinder.sizeOfRoom + "m²"
     }
     func drawChart() {
