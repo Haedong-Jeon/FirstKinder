@@ -105,7 +105,6 @@ class NearKinderController: UIViewController, MKMapViewDelegate {
             transition.type = .fade
             
             self.navigationController?.view.layer.add(transition, forKey: nil)
-            
             self.navigationController?.pushViewController(detailController, animated: false)
             return
         }

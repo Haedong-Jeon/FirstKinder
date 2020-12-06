@@ -43,7 +43,14 @@ class LaunchController: UIViewController, XMLParserDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         if let data = UserDefaults.standard.value(forKey:"myKinders") as? Data {
-            myKinders = try! PropertyListDecoder().decode(Array<Kinder>.self, from: data)
+            do {
+                myKinders = try PropertyListDecoder().decode(Array<Kinder>.self, from: data)
+            } catch {
+                let showErrorAlert = UIAlertController(title: "초기화 에러", message: "호환성에 문제가 발생했습니다. 앱을 삭제 후 최신 버전을 설치 해주세요.", preferredStyle: .alert)
+                let okButton = UIAlertAction(title: "확인", style: .default, handler: nil)
+                showErrorAlert.addAction(okButton)
+                self.present(showErrorAlert, animated: false, completion: nil)
+            }
         }
         configureUI()
         DispatchQueue.global(qos: .background).async {
