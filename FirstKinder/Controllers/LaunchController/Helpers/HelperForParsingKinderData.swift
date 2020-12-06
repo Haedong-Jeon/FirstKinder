@@ -117,7 +117,7 @@ extension LaunchController {
                 observer.onNext(self.kinder)
             } else if tag == "response" {
                 DispatchQueue.main.async {
-                    self.progressBar.progress += Float(1) / Float(self.cities.count)
+                    self.progressBar.progress += Float(1) / Float(self.cities.count - 1)
                     
                     if self.progressBar.progress >= 1 {
                         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {

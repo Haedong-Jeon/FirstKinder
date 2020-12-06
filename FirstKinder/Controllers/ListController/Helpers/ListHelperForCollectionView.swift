@@ -31,7 +31,7 @@ extension ListController {
             cell.medalForManyChildImgView.image = nil
         }
         cell.layer.borderWidth = 2
-        cell.layer.borderColor = #colorLiteral(red: 0.1889419258, green: 0.1871659458, blue: 0.2520412803, alpha: 1)
+        cell.layer.borderColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
         cell.layer.cornerRadius = 10
         return cell
     }

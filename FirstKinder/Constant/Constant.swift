@@ -7,4 +7,4 @@
 
 import Foundation
 
-let loadFinishProgress: Float = 0.89
+let loadFinishProgress: Float = 0.95
