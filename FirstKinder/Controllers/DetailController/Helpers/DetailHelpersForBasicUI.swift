@@ -26,19 +26,20 @@ extension DetailController: ChartViewDelegate {
         drawWeb()
         drawRoomCount()
         drawRoomSize()
-        
-        //setDataToBarChart()
     }
     func setScrollView() {
         view.addSubview(scrollView)
         scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
         scrollView.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor).isActive = true
         scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
-        scrollView.contentSize = CGSize(width: self.view.frame.width, height: self.view.frame.height + 150)
+        scrollView.contentSize = CGSize(width: view.frame.width, height: view.frame.height)
+        
         scrollView.addSubview(containerView)
         containerView.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true
         containerView.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
-        containerView.heightAnchor.constraint(equalToConstant: self.view.frame.height).isActive = true
+        containerView.heightAnchor.constraint(equalToConstant: view.frame.height + 200).isActive = true
+        containerView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true
+        
     }
     func drawMap() {
         containerView.addSubview(mapView)
@@ -211,7 +212,7 @@ extension DetailController: ChartViewDelegate {
         sizeOfRoomLabel.widthAnchor.constraint(equalTo: containerView.safeAreaLayoutGuide.widthAnchor).isActive = true
         sizeOfRoomLabel.heightAnchor.constraint(equalToConstant: 30).isActive = true
         
-        //sizeOfRoomLabel.bottomAnchor.constraint(equalTo: containerView.bottomAnchor).isActive = true
+        sizeOfRoomLabel.bottomAnchor.constraint(equalTo: containerView.bottomAnchor).isActive = true
         sizeOfRoomLabel.text = "보육실 면적: " + kinder.sizeOfRoom + "m²"
     }
     func drawChart() {
@@ -221,14 +222,13 @@ extension DetailController: ChartViewDelegate {
         chart.heightAnchor.constraint(equalToConstant: 250).isActive = true
         chart.topAnchor.constraint(equalTo: mapView.bottomAnchor).isActive = true
         setDataToPieChart(chart)
-
     }
 
     func setDataToPieChart(_ pieChart: PieChartView) {
         guard let currentChildNum = Double(kinder.currentNumOfChild) else { return }
         guard let teacherNum = Double(kinder.numOfTeachr) else { return }
-        let currentChildDataSet = PieChartDataEntry(value: currentChildNum, label: "아동 수")
-        let totalChildDataSet = PieChartDataEntry(value: teacherNum, label: "선생님 수")
+        let currentChildDataSet = PieChartDataEntry(value: currentChildNum, label: "아동 수: \(Int(currentChildNum))")
+        let totalChildDataSet = PieChartDataEntry(value: teacherNum, label: "선생님 수: \(Int(teacherNum))")
         
         var dataSets = [PieChartDataEntry]()
         
