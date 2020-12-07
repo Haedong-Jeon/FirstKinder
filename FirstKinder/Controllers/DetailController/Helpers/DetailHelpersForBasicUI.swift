@@ -39,7 +39,6 @@ extension DetailController: ChartViewDelegate {
         containerView.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
         containerView.heightAnchor.constraint(equalToConstant: view.frame.height + 200).isActive = true
         containerView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true
-        
     }
     func drawMap() {
         containerView.addSubview(mapView)
@@ -51,7 +50,7 @@ extension DetailController: ChartViewDelegate {
     }
     func drawKinderTitle() {
         containerView.addSubview(kinderTitleLabel)
-        kinderTitleLabel.topAnchor.constraint(equalTo: containerView.topAnchor).isActive = true
+        kinderTitleLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 20).isActive = true
         kinderTitleLabel.widthAnchor.constraint(equalTo: containerView.safeAreaLayoutGuide.widthAnchor).isActive = true
         kinderTitleLabel.heightAnchor.constraint(equalToConstant: 25).isActive = true
         kinderTitleLabel.text = kinder.title
@@ -74,8 +73,19 @@ extension DetailController: ChartViewDelegate {
         imgView.centerYAnchor.constraint(equalTo: childNumBoxView.centerYAnchor).isActive = true
         imgView.contentMode = .scaleAspectFit
         
+        let childLabel = UILabel()
+        childLabel.translatesAutoresizingMaskIntoConstraints = false
+        childLabel.font = UIFont.init(name: "CookieRun", size: 20)
+        childLabel.text = kinder.currentNumOfChild
+        
+        childNumBoxView.addSubview(childLabel)
+        childLabel.leftAnchor.constraint(equalTo: imgView.rightAnchor).isActive = true
+        childLabel.topAnchor.constraint(equalTo: imgView.topAnchor).isActive = true
+        childLabel.rightAnchor.constraint(equalTo: childNumBoxView.rightAnchor, constant: 5).isActive = true
+        childLabel.widthAnchor.constraint(equalToConstant: 45).isActive = true
 
-        setChildBoxByCurrentChildNum(imgView)
+
+        setChildBoxByCurrentChildNum(imgView, childLabel)
         
         childNumBoxView.addSubview(numOfChildLabel)
         numOfChildLabel.topAnchor.constraint(equalTo: imgView.bottomAnchor).isActive = true
@@ -95,16 +105,19 @@ extension DetailController: ChartViewDelegate {
         
         let imgView = UIImageView()
         imgView.translatesAutoresizingMaskIntoConstraints = false
-        imgView.loadGif(name: "teacher")
-        imgView.widthAnchor.constraint(equalToConstant: 50).isActive = true
-        imgView.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        imgView.image = UIImage(systemName: "person.3.fill")
+        imgView.widthAnchor.constraint(equalToConstant: 75).isActive = true
+        imgView.heightAnchor.constraint(equalToConstant: 75).isActive = true
+        imgView.contentMode = .scaleAspectFit
+        imgView.tintColor = .black
+        
         teacherNumBoxView.addSubview(imgView)
         imgView.centerXAnchor.constraint(equalTo: teacherNumBoxView.centerXAnchor).isActive = true
         imgView.centerYAnchor.constraint(equalTo: teacherNumBoxView.centerYAnchor).isActive = true
         
         let teacherNumLabel = UILabel()
         teacherNumLabel.translatesAutoresizingMaskIntoConstraints = false
-        teacherNumLabel.font = UIFont.init(name: "CookieRun", size: 30)
+        teacherNumLabel.font = UIFont.init(name: "CookieRun", size: 20)
         teacherNumLabel.text = kinder.numOfTeachr
         
         teacherNumBoxView.addSubview(teacherNumLabel)
@@ -132,12 +145,24 @@ extension DetailController: ChartViewDelegate {
         imgView.translatesAutoresizingMaskIntoConstraints = false
         imgView.widthAnchor.constraint(equalToConstant: 75).isActive = true
         imgView.heightAnchor.constraint(equalToConstant: 75).isActive = true
+        imgView.contentMode = .scaleAspectFit
+        
         busBoxView.addSubview(imgView)
         imgView.centerXAnchor.constraint(equalTo: busBoxView.centerXAnchor).isActive = true
         imgView.centerYAnchor.constraint(equalTo: busBoxView.centerYAnchor).isActive = true
-        imgView.contentMode = .scaleAspectFit
+        imgView.backgroundColor = #colorLiteral(red: 0.9098039216, green: 0.8980392157, blue: 0.9607843137, alpha: 1)
         
+        let carLabel = UILabel()
+        carLabel.translatesAutoresizingMaskIntoConstraints = false
+        carLabel.font = UIFont.init(name: "CookieRun", size: 20)
+        
+        busBoxView.addSubview(carLabel)
+        carLabel.leftAnchor.constraint(equalTo: imgView.rightAnchor).isActive = true
+        carLabel.topAnchor.constraint(equalTo: imgView.topAnchor).isActive = true
+        carLabel.rightAnchor.constraint(equalTo: busBoxView.rightAnchor, constant: 5).isActive = true
+        carLabel.widthAnchor.constraint(equalToConstant: 45).isActive = true
 
+        
         busBoxView.addSubview(carAvailableLabel)
         carAvailableLabel.topAnchor.constraint(equalTo: imgView.bottomAnchor).isActive = true
         carAvailableLabel.bottomAnchor.constraint(equalTo: busBoxView.bottomAnchor, constant: -5).isActive = true
@@ -145,11 +170,17 @@ extension DetailController: ChartViewDelegate {
         carAvailableLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
         carAvailableLabel.text = kinder.isCarAvailable
         if kinder.isCarAvailable == "운영" {
-            imgView.loadGif(name: "bus")
+            imgView.image = UIImage(systemName: "car")
+            imgView.tintColor = .black
             carAvailableLabel.textColor = .systemGreen
+            carLabel.text = "YES"
+            carLabel.textColor = .systemGreen
         } else {
-            imgView.loadGif(name: "nobus")
+            imgView.image = UIImage(systemName: "car")
+            imgView.tintColor = .lightGray
             carAvailableLabel.textColor = .systemRed
+            carLabel.text = "NO"
+            carLabel.textColor = .systemRed
         }
     }
     func drawAddress() {
@@ -198,7 +229,7 @@ extension DetailController: ChartViewDelegate {
         }
         webButton.setTitle("홈페이지 방문", for: .normal)
         webButton.addTarget(self, action: #selector(handleWebTap), for: .touchUpInside)
-        webBoxView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor).isActive = true
+        webBoxView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -20).isActive = true
     }
     func drawRoomCount() {
         containerView.addSubview(roomCountBoxView)
@@ -209,8 +240,8 @@ extension DetailController: ChartViewDelegate {
         
         let imgView = UIImageView()
         imgView.translatesAutoresizingMaskIntoConstraints = false
-        imgView.widthAnchor.constraint(equalToConstant: 75).isActive = true
-        imgView.heightAnchor.constraint(equalToConstant: 75).isActive = true
+        imgView.widthAnchor.constraint(equalToConstant: 55).isActive = true
+        imgView.heightAnchor.constraint(equalToConstant: 55).isActive = true
         roomCountBoxView.addSubview(imgView)
         imgView.centerXAnchor.constraint(equalTo: roomCountBoxView.centerXAnchor).isActive = true
         imgView.centerYAnchor.constraint(equalTo: roomCountBoxView.centerYAnchor).isActive = true
@@ -220,7 +251,7 @@ extension DetailController: ChartViewDelegate {
         
         let roomNumLabel = UILabel()
         roomNumLabel.translatesAutoresizingMaskIntoConstraints = false
-        roomNumLabel.font = UIFont.init(name: "CookieRun", size: 30)
+        roomNumLabel.font = UIFont.init(name: "CookieRun", size: 20)
         roomNumLabel.text = kinder.numOfRoom
         
         roomCountBoxView.addSubview(roomNumLabel)
@@ -246,8 +277,8 @@ extension DetailController: ChartViewDelegate {
         
         let imgView = UIImageView()
         imgView.translatesAutoresizingMaskIntoConstraints = false
-        imgView.widthAnchor.constraint(equalToConstant: 65).isActive = true
-        imgView.heightAnchor.constraint(equalToConstant: 75).isActive = true
+        imgView.widthAnchor.constraint(equalToConstant: 55).isActive = true
+        imgView.heightAnchor.constraint(equalToConstant: 55).isActive = true
         roomSizeBoxView.addSubview(imgView)
         imgView.centerXAnchor.constraint(equalTo: roomSizeBoxView.centerXAnchor).isActive = true
         imgView.centerYAnchor.constraint(equalTo: roomSizeBoxView.centerYAnchor).isActive = true
@@ -260,7 +291,7 @@ extension DetailController: ChartViewDelegate {
         roomSizeLabel.font = UIFont.init(name: "CookieRun", size: 20)
         roomSizeLabel.text = kinder.sizeOfRoom
         
-        roomCountBoxView.addSubview(roomSizeLabel)
+        roomSizeBoxView.addSubview(roomSizeLabel)
         roomSizeLabel.leftAnchor.constraint(equalTo: imgView.rightAnchor).isActive = true
         roomSizeLabel.topAnchor.constraint(equalTo: imgView.topAnchor).isActive = true
         roomSizeLabel.widthAnchor.constraint(equalToConstant: 45).isActive = true
@@ -307,9 +338,9 @@ extension DetailController: ChartViewDelegate {
         }
     }
     //총 수용 인원 중 현재 인원의 비율
-    func setChildBoxByCurrentChildNum(_ imgView: UIImageView) {
+    func setChildBoxByCurrentChildNum(_ imgView: UIImageView, _ label: UILabel) {
         
-        imgView.image = UIImage(systemName: "person.3.fill")
+        imgView.image = UIImage(systemName: "smiley")
         guard let currentChildNum = Double(kinder.currentNumOfChild) else { return }
         guard let totalChildNum = Double(kinder.totalNumOfChild) else { return }
         
@@ -318,14 +349,16 @@ extension DetailController: ChartViewDelegate {
         if capacityPercentage <= 45 {
             numOfChildLabel.textColor = .systemGreen
             imgView.tintColor = .systemGreen
+            label.textColor = .systemGreen
             
         } else if capacityPercentage <= 75 {
             numOfChildLabel.textColor = .systemYellow
             imgView.tintColor = .systemYellow
-
+            label.textColor = .systemYellow
         } else {
             numOfChildLabel.textColor = .systemRed
             imgView.tintColor = .systemRed
+            label.textColor = .systemRed
         }
     }
 }

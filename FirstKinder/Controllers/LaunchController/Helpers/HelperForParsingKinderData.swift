@@ -22,6 +22,13 @@ extension LaunchController {
             let xmlParser = XMLParser(contentsOf: targetURL)
             xmlParser?.delegate = self
             xmlParser?.parse()
+            if xmlParser?.parserError != nil {
+                DispatchQueue.global(qos: .background).async {
+                    //중간에 받아 오지 못하는 데이터가 있더라도 자연스럽게 넘어간다.
+                    //오류가 났을 때 loadCount를 1 올리지 않으면, 런치 스크린에서 다음 화면으로 넘어가지 않게 된다.
+                    self.loadCount += 1
+                }
+            }
         }
     }
     func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String] = [:]) {
@@ -74,10 +81,10 @@ extension LaunchController {
                 transition.duration = 0.3
                 transition.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
                 transition.type = .fade
-
+                
                 self.navigationController?.view.layer.add(transition, forKey: nil)
                 self.navigationController?.pushViewController(MainController(), animated: false)
-
+                
             }).disposed(by: self.disposeBag)
     }
     func parser(_ parser: XMLParser, foundCharacters string: String) {
@@ -125,11 +132,16 @@ extension LaunchController {
         return Observable.create { observer in
             if tag == "item" {
                 observer.onNext(self.kinder)
+                DispatchQueue.main.async {
+                    self.progressBar.progress += 0.0001
+                }
             } else if tag == "response" {
                 DispatchQueue.main.async {
-                    self.progressBar.progress += Float(1) / Float(self.cities.count - 1)
-                    
-                    if self.progressBar.progress >= 1 {
+                    //한 지역의 데이터를 전부 받을 때마다 loadCount를 1 올린다.
+                    self.loadCount += 1
+                    if self.loadCount >= self.cities.count {
+                        //전체 지역 수와 loadCount 수가 같아지면 로딩 완료.
+                        self.progressBar.progress = 1
                         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                             //로딩 바가 꽉찬걸 보여줄려고 일부러 1초 뒤에 화면 전환.
                             observer.onCompleted()

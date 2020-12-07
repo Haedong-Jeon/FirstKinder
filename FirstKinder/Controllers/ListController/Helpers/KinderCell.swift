@@ -41,7 +41,7 @@ class KinderCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     func configureUI() {
-        backgroundColor = .white
+        backgroundColor = #colorLiteral(red: 0.9098039216, green: 0.8980392157, blue: 0.9607843137, alpha: 1)
         drawKinderTitle()
         drawKinderPosition()
         drawKinderIsOn()

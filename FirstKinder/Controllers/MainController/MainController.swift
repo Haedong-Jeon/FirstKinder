@@ -12,6 +12,9 @@ class MainController: UITabBarController, UITabBarControllerDelegate {
         configureUI()
         setTabs()
     }
+    override func viewDidAppear(_ animated: Bool) {
+        navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+    }
     func configureUI() {
         view.backgroundColor = .white
     }
