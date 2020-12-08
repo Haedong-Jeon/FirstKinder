@@ -36,6 +36,8 @@ extension ChatController {
             if $0 == nowChats[indexPath.row].uid {
                 cell.cellDeleteButton.isUserInteractionEnabled = true
                 cell.cellDeleteButton.isHidden = false
+                cell.thisIdx = indexPath.row
+                cell.chatController = self
             }
         })
         return cell
