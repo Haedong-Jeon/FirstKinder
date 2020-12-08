@@ -7,7 +7,6 @@
 
 import UIKit
 import Charts
-import GoogleMobileAds
 
 extension DetailController: ChartViewDelegate {
     func configureUI() {
@@ -331,10 +330,10 @@ extension DetailController: ChartViewDelegate {
     }
     func addPlusButtonOnNavBar() {
         if !isFromMyKinder {
-            self.navigationController?.navigationBar.topItem?.rightBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: .add, target: self, action: #selector(handlePlusButtonTap))
+            let heartButton = UIBarButtonItem(image: UIImage(systemName: "suit.heart"), style: .plain, target: self, action: #selector(handleHeartButtonTap))
+            self.navigationController?.navigationBar.topItem?.rightBarButtonItem = heartButton
         } else {
             self.navigationController?.navigationBar.topItem?.rightBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: .trash, target: self, action: #selector(handleTrashButtonTap))
-
         }
     }
     //총 수용 인원 중 현재 인원의 비율

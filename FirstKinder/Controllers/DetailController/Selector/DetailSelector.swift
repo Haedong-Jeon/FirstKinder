@@ -25,7 +25,7 @@ extension DetailController {
             self.present(cantOpenUrlAlert, animated: false, completion: nil)
         }
     }
-    @objc func handlePlusButtonTap() {
+    @objc func handleHeartButtonTap() {
         let askAddMyKinderAlert = UIAlertController(title: "관심 어린이집", message: "관심 어린이집에 추가하시겠습니까?", preferredStyle: .alert)
         let okbutton = UIAlertAction(title: "네", style: .default) { ACTION in
             self.saveMyKinder() {

@@ -52,7 +52,7 @@ extension LaunchController {
         dataSourceLabel.topAnchor.constraint(equalTo: progressBar.bottomAnchor).isActive = true
         dataSourceLabel.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor).isActive = true
         dataSourceLabel.heightAnchor.constraint(equalToConstant: 30).isActive = true
-        dataSourceLabel.text = "자료의 출처는 ⟪보육정보공개 API⟫입니다."
+        dataSourceLabel.text = "데이터 출처는 ⟪보육정보공개 API⟫입니다."
     }
     func drawHearts() {
         view.addSubview(heartImgView)

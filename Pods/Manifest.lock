@@ -2,37 +2,7 @@ PODS:
   - Charts (3.6.0):
     - Charts/Core (= 3.6.0)
   - Charts/Core (3.6.0)
-  - Google-Mobile-Ads-SDK (7.62.0):
-    - GoogleAppMeasurement (~> 6.0)
-  - GoogleAppMeasurement (6.6.2):
-    - GoogleUtilities/AppDelegateSwizzler (~> 6.0)
-    - GoogleUtilities/MethodSwizzler (~> 6.0)
-    - GoogleUtilities/Network (~> 6.0)
-    - "GoogleUtilities/NSData+zlib (~> 6.0)"
-    - nanopb (~> 1.30905.0)
-  - GoogleUtilities/AppDelegateSwizzler (6.7.1):
-    - GoogleUtilities/Environment
-    - GoogleUtilities/Logger
-    - GoogleUtilities/Network
-  - GoogleUtilities/Environment (6.7.1):
-    - PromisesObjC (~> 1.2)
-  - GoogleUtilities/Logger (6.7.1):
-    - GoogleUtilities/Environment
-  - GoogleUtilities/MethodSwizzler (6.7.1):
-    - GoogleUtilities/Logger
-  - GoogleUtilities/Network (6.7.1):
-    - GoogleUtilities/Logger
-    - "GoogleUtilities/NSData+zlib"
-    - GoogleUtilities/Reachability
-  - "GoogleUtilities/NSData+zlib (6.7.1)"
-  - GoogleUtilities/Reachability (6.7.1):
-    - GoogleUtilities/Logger
-  - nanopb (1.30905.0):
-    - nanopb/decode (= 1.30905.0)
-    - nanopb/encode (= 1.30905.0)
-  - nanopb/decode (1.30905.0)
-  - nanopb/encode (1.30905.0)
-  - PromisesObjC (1.2.9)
+  - IQKeyboardManager (6.5.6)
   - RxCocoa (5.1.1):
     - RxRelay (~> 5)
     - RxSwift (~> 5)
@@ -43,7 +13,7 @@ PODS:
 
 DEPENDENCIES:
   - Charts
-  - Google-Mobile-Ads-SDK
+  - IQKeyboardManager
   - RxCocoa
   - RxSwift
   - SwiftGifOrigin
@@ -51,11 +21,7 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - Charts
-    - Google-Mobile-Ads-SDK
-    - GoogleAppMeasurement
-    - GoogleUtilities
-    - nanopb
-    - PromisesObjC
+    - IQKeyboardManager
     - RxCocoa
     - RxRelay
     - RxSwift
@@ -63,16 +29,12 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   Charts: b1e3a1f5a1c9ba5394438ca3b91bd8c9076310af
-  Google-Mobile-Ads-SDK: c92c27666fbf684c964259785a6b3cdd3068e06f
-  GoogleAppMeasurement: 8cd1f289d60e629cf16ab03363b9e89c776b9651
-  GoogleUtilities: e121a3867449ce16b0e35ddf1797ea7a389ffdf2
-  nanopb: c43f40fadfe79e8b8db116583945847910cbabc9
-  PromisesObjC: b48e0338dbbac2207e611750777895f7a5811b75
+  IQKeyboardManager: 2a6e97afdafc7becf0cb17a9a8d795e3a980717f
   RxCocoa: 32065309a38d29b5b0db858819b5bf9ef038b601
   RxRelay: d77f7d771495f43c556cbc43eebd1bb54d01e8e9
   RxSwift: 81470a2074fa8780320ea5fe4102807cb7118178
   SwiftGifOrigin: fbd6cf37afcfcf97a5c3db996ddc0492e5c5c145
 
-PODFILE CHECKSUM: 5305253daa195a5696bafd3774a4b6193b0271d3
+PODFILE CHECKSUM: 7f06615ffc66279377776eb9c655177278df24eb
 
 COCOAPODS: 1.9.3

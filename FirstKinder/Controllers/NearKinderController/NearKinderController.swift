@@ -97,7 +97,8 @@ class NearKinderController: UIViewController, MKMapViewDelegate {
                 }
             })
             let detailController = DetailController()
-            detailController.kinder = selectedKinder!
+            guard let selected = selectedKinder else { return }
+            detailController.kinder = selected
             
             let transition = CATransition()
             transition.duration = 0.3
@@ -110,7 +111,6 @@ class NearKinderController: UIViewController, MKMapViewDelegate {
         }
     }
 }
-
 extension NearKinderController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.last else { return }

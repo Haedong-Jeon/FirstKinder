@@ -15,9 +15,16 @@
 		E9088969257471DD00223BAA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E9088968257471DD00223BAA /* Assets.xcassets */; };
 		E908896C257471DD00223BAA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E908896A257471DD00223BAA /* LaunchScreen.storyboard */; };
 		E90889752574792300223BAA /* Kinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90889742574792300223BAA /* Kinder.swift */; };
+		E9091F07257F1383009782BB /* SelectorForChat.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9091F06257F1383009782BB /* SelectorForChat.swift */; };
 		E90A2F3C257F03BA0066C9B5 /* heart.gif in Resources */ = {isa = PBXBuildFile; fileRef = E90A2F3B257F03B90066C9B5 /* heart.gif */; };
+		E90A2F42257F0FE10066C9B5 /* ChatController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90A2F41257F0FE10066C9B5 /* ChatController.swift */; };
 		E93B75CD2576071B00D52A24 /* DetailHelpersForBasicUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93B75CC2576071B00D52A24 /* DetailHelpersForBasicUI.swift */; };
 		E93B75D12576075A00D52A24 /* DetailHelperForMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93B75D02576075A00D52A24 /* DetailHelperForMap.swift */; };
+		E95B8A1C257F26A6002EE9BC /* HelperForChat.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95B8A1B257F26A6002EE9BC /* HelperForChat.swift */; };
+		E95B8A24257F2A3D002EE9BC /* ChatWriteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95B8A23257F2A3D002EE9BC /* ChatWriteController.swift */; };
+		E95B8A28257F2A59002EE9BC /* HelperForWriteBasicUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95B8A27257F2A59002EE9BC /* HelperForWriteBasicUI.swift */; };
+		E95B8A38257F511A002EE9BC /* HelperForTextDelegateForChatWrite.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95B8A37257F511A002EE9BC /* HelperForTextDelegateForChatWrite.swift */; };
+		E95B8A3B257F5944002EE9BC /* SelectorForChatWrite.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95B8A3A257F5944002EE9BC /* SelectorForChatWrite.swift */; };
 		E960ACA82576087300985873 /* DetailSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = E960ACA72576087300985873 /* DetailSelector.swift */; };
 		E960ACB825764FEC00985873 /* ListHelperForBasicUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E960ACB725764FEC00985873 /* ListHelperForBasicUI.swift */; };
 		E960ACBE25774A8700985873 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = E960ACBD25774A8700985873 /* Constant.swift */; };
@@ -52,9 +59,17 @@
 		E908896B257471DD00223BAA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E908896D257471DD00223BAA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E90889742574792300223BAA /* Kinder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Kinder.swift; sourceTree = "<group>"; };
+		E9091F06257F1383009782BB /* SelectorForChat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectorForChat.swift; sourceTree = "<group>"; };
 		E90A2F3B257F03B90066C9B5 /* heart.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = heart.gif; sourceTree = "<group>"; };
+		E90A2F41257F0FE10066C9B5 /* ChatController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatController.swift; sourceTree = "<group>"; };
 		E93B75CC2576071B00D52A24 /* DetailHelpersForBasicUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailHelpersForBasicUI.swift; sourceTree = "<group>"; };
 		E93B75D02576075A00D52A24 /* DetailHelperForMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailHelperForMap.swift; sourceTree = "<group>"; };
+		E95B8A06257F1FEC002EE9BC /* FirstKinder.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FirstKinder.entitlements; sourceTree = "<group>"; };
+		E95B8A1B257F26A6002EE9BC /* HelperForChat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelperForChat.swift; sourceTree = "<group>"; };
+		E95B8A23257F2A3D002EE9BC /* ChatWriteController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatWriteController.swift; sourceTree = "<group>"; };
+		E95B8A27257F2A59002EE9BC /* HelperForWriteBasicUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelperForWriteBasicUI.swift; sourceTree = "<group>"; };
+		E95B8A37257F511A002EE9BC /* HelperForTextDelegateForChatWrite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelperForTextDelegateForChatWrite.swift; sourceTree = "<group>"; };
+		E95B8A3A257F5944002EE9BC /* SelectorForChatWrite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectorForChatWrite.swift; sourceTree = "<group>"; };
 		E960ACA72576087300985873 /* DetailSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailSelector.swift; sourceTree = "<group>"; };
 		E960ACB725764FEC00985873 /* ListHelperForBasicUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListHelperForBasicUI.swift; sourceTree = "<group>"; };
 		E960ACBD25774A8700985873 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
@@ -126,6 +141,7 @@
 		E908895E257471D800223BAA /* FirstKinder */ = {
 			isa = PBXGroup;
 			children = (
+				E95B8A06257F1FEC002EE9BC /* FirstKinder.entitlements */,
 				E960ACBC25774A7C00985873 /* Constant */,
 				E9D6338D2574CB7E00F6C3ED /* Gifs */,
 				E9F14392257483D6002A284F /* Model */,
@@ -143,6 +159,24 @@
 			path = FirstKinder;
 			sourceTree = "<group>";
 		};
+		E9091F05257F1370009782BB /* Selector */ = {
+			isa = PBXGroup;
+			children = (
+				E9091F06257F1383009782BB /* SelectorForChat.swift */,
+			);
+			path = Selector;
+			sourceTree = "<group>";
+		};
+		E90A2F40257F0FCE0066C9B5 /* ChatController */ = {
+			isa = PBXGroup;
+			children = (
+				E95B8A1A257F2695002EE9BC /* Helper */,
+				E9091F05257F1370009782BB /* Selector */,
+				E90A2F41257F0FE10066C9B5 /* ChatController.swift */,
+			);
+			path = ChatController;
+			sourceTree = "<group>";
+		};
 		E93B75CB2576070F00D52A24 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
@@ -151,6 +185,41 @@
 				E960ACEB257891D500985873 /* DetailHelperForMyKinder.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		E95B8A1A257F2695002EE9BC /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				E95B8A1B257F26A6002EE9BC /* HelperForChat.swift */,
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
+		E95B8A20257F2A23002EE9BC /* ChatWriteController */ = {
+			isa = PBXGroup;
+			children = (
+				E95B8A22257F2A32002EE9BC /* Helper */,
+				E95B8A21257F2A2D002EE9BC /* Selector */,
+				E95B8A23257F2A3D002EE9BC /* ChatWriteController.swift */,
+			);
+			path = ChatWriteController;
+			sourceTree = "<group>";
+		};
+		E95B8A21257F2A2D002EE9BC /* Selector */ = {
+			isa = PBXGroup;
+			children = (
+				E95B8A3A257F5944002EE9BC /* SelectorForChatWrite.swift */,
+			);
+			path = Selector;
+			sourceTree = "<group>";
+		};
+		E95B8A22257F2A32002EE9BC /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				E95B8A27257F2A59002EE9BC /* HelperForWriteBasicUI.swift */,
+				E95B8A37257F511A002EE9BC /* HelperForTextDelegateForChatWrite.swift */,
+			);
+			path = Helper;
 			sourceTree = "<group>";
 		};
 		E960ACA62576086400985873 /* Selector */ = {
@@ -259,6 +328,8 @@
 		E9F143882574833C002A284F /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				E95B8A20257F2A23002EE9BC /* ChatWriteController */,
+				E90A2F40257F0FCE0066C9B5 /* ChatController */,
 				E960ACE425788DCA00985873 /* NearKinderController */,
 				E960ACDD2578845100985873 /* MyKindersController */,
 				E960ACD72578838500985873 /* MainController */,
@@ -414,6 +485,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E95B8A3B257F5944002EE9BC /* SelectorForChatWrite.swift in Sources */,
 				E960ACEC257891D500985873 /* DetailHelperForMyKinder.swift in Sources */,
 				E960ACB825764FEC00985873 /* ListHelperForBasicUI.swift in Sources */,
 				E9D633822574915F00F6C3ED /* ListController.swift in Sources */,
@@ -422,9 +494,13 @@
 				E9D633A42575C4AB00F6C3ED /* ListHelperForCollectionView.swift in Sources */,
 				E9D633AC2575DC6300F6C3ED /* DetailController.swift in Sources */,
 				E960ACF22578978E00985873 /* MyKindersForBasicUI.swift in Sources */,
+				E95B8A28257F2A59002EE9BC /* HelperForWriteBasicUI.swift in Sources */,
 				E960ACE02578846800985873 /* MyKindersController.swift in Sources */,
+				E95B8A1C257F26A6002EE9BC /* HelperForChat.swift in Sources */,
 				E960ACE725788DDB00985873 /* NearKinderController.swift in Sources */,
 				E960ACEF2578965700985873 /* MyKinderHelpersForCollectionView.swift in Sources */,
+				E90A2F42257F0FE10066C9B5 /* ChatController.swift in Sources */,
+				E9091F07257F1383009782BB /* SelectorForChat.swift in Sources */,
 				E90889752574792300223BAA /* Kinder.swift in Sources */,
 				E960ACDA257883A100985873 /* MainController.swift in Sources */,
 				E9F14390257483A0002A284F /* HelperForLaunchBasicUI.swift in Sources */,
@@ -434,8 +510,10 @@
 				E9088960257471D800223BAA /* AppDelegate.swift in Sources */,
 				E93B75D12576075A00D52A24 /* DetailHelperForMap.swift in Sources */,
 				E9088962257471D800223BAA /* SceneDelegate.swift in Sources */,
+				E95B8A24257F2A3D002EE9BC /* ChatWriteController.swift in Sources */,
 				E9D633A82575C60B00F6C3ED /* KinderCell.swift in Sources */,
 				E9F1438C2574835F002A284F /* HelperForParsingKinderData.swift in Sources */,
+				E95B8A38257F511A002EE9BC /* HelperForTextDelegateForChatWrite.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -583,6 +661,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = FirstKinder/FirstKinder.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 983YQA8Y6W;
 				INFOPLIST_FILE = FirstKinder/Info.plist;
@@ -593,6 +672,7 @@
 				MARKETING_VERSION = 1.754;
 				PRODUCT_BUNDLE_IDENTIFIER = haedong.FirstKinder;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -604,6 +684,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = FirstKinder/FirstKinder.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 983YQA8Y6W;
 				INFOPLIST_FILE = FirstKinder/Info.plist;
@@ -614,6 +695,7 @@
 				MARKETING_VERSION = 1.754;
 				PRODUCT_BUNDLE_IDENTIFIER = haedong.FirstKinder;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
