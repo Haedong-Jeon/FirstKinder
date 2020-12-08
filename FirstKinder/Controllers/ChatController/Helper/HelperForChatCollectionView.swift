@@ -13,7 +13,7 @@ extension ChatController {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: chatCellReuseIdentifier, for: indexPath) as? ChatCell else {
             return UICollectionViewCell()
         }
-
+        
         cell.chatBodyTextView.text = nowChats[indexPath.row].chatBody
         if nowChats[indexPath.row].imgFileName != "NO IMG" {
             //이미지 있다.
@@ -30,6 +30,14 @@ extension ChatController {
                 cell.imgView.kf.indicator?.stopAnimatingView()
             }
         }
+        cell.cellDeleteButton.isUserInteractionEnabled = false
+        cell.cellDeleteButton.isHidden = true
+        myChatsSavedByUid.forEach({
+            if $0 == nowChats[indexPath.row].uid {
+                cell.cellDeleteButton.isUserInteractionEnabled = true
+                cell.cellDeleteButton.isHidden = false
+            }
+        })
         return cell
     }
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

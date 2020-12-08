@@ -8,6 +8,8 @@
 import UIKit
 
 class ChatCell: UICollectionViewCell {
+    let cellDeleteButton = UIButton(type: .system)
+
     var chatBodyTextView: UITextView = {
         var textView = UITextView()
         textView.isEditable = false
@@ -37,5 +39,17 @@ class ChatCell: UICollectionViewCell {
         imgView.topAnchor.constraint(equalTo: chatBodyTextView.bottomAnchor).isActive = true
         imgView.widthAnchor.constraint(equalTo: safeAreaLayoutGuide.widthAnchor).isActive = true
         imgView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor).isActive = true
+        
+        cellDeleteButton.setImage(UIImage(systemName: "trash"), for: .normal)
+        cellDeleteButton.tintColor = .lightGray
+        cellDeleteButton.translatesAutoresizingMaskIntoConstraints = false
+        cellDeleteButton.sizeToFit()
+        cellDeleteButton.addTarget(self, action: #selector(handleDelete), for: .touchUpInside)
+        addSubview(cellDeleteButton)
+        cellDeleteButton.topAnchor.constraint(equalTo: topAnchor).isActive = true
+        cellDeleteButton.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
+    }
+    @objc func handleDelete() {
+        
     }
 }

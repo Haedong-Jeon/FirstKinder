@@ -39,6 +39,16 @@ extension ChatWriteController {
     }
     
     @objc func handleUpload() {
+        let indicator = UIActivityIndicatorView()
+        indicator.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(indicator)
+        indicator.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
+        indicator.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor).isActive = true
+        indicator.style = .large
+        indicator.color = .black
+        
+        indicator.startAnimating()
+        
         view.isUserInteractionEnabled = false
         let uid = NSUUID().uuidString
         let imgFileName = uid
@@ -50,7 +60,10 @@ extension ChatWriteController {
         } else {
             uploadImg(uid, imgFileName) {
                 self.uploadText(uid) {
+                    indicator.stopAnimating()
                     self.showSuccessMsg()
+                    myChatsSavedByUid.append(uid)
+                    UserDefaults.standard.setValue(myChatsSavedByUid, forKey: "myChats")
                 }
             }
         }

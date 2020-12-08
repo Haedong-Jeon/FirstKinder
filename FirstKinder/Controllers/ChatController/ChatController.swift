@@ -26,6 +26,9 @@ class ChatController: UICollectionViewController, UICollectionViewDelegateFlowLa
     @objc func handleRefresh() {
         chatReload()
     }
+    @objc func handleDeleteCell() {
+        
+    }
     func chatReload() {
         collectionView.refreshControl?.beginRefreshing()
         nowChats = chats

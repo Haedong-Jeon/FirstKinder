@@ -14,3 +14,4 @@ struct Chat {
     var timeStamp: Int
 }
 var chats = [Chat]()
+var myChatsSavedByUid = [String]()
