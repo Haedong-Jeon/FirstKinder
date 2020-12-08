@@ -30,5 +30,7 @@
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
 	<string>1:173162108968:ios:e105ecb6b7548577f3fd1d</string>
+	<key>DATABASE_URL</key>
+	<string>https://firstkinder-86bac-default-rtdb.firebaseio.com</string>
 </dict>
 </plist>
