@@ -11,6 +11,7 @@ target 'FirstKinder' do
   pod 'IQKeyboardManager'
   pod 'Firebase/Firestore'
   pod 'Firebase/Database'
+  pod 'Firebase/Storage'
   # Pods for FirstKinder
 
 end

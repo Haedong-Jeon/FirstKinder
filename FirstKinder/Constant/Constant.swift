@@ -7,8 +7,12 @@
 
 import Foundation
 import FirebaseDatabase
+import FirebaseStorage
 
 let loadFinishProgress: Float = 0.95
 let chatPlaceHoldText = "즐겁게 육아에 관한 이야기를 나눠요 :)"
 let DB_ROOT = Database.database().reference()
 let DB_CHATS = DB_ROOT.child("chats")
+
+let STORAGE = Storage.storage().reference()
+let STORAGE_USER_UPLOAD_IMGS = STORAGE.child("userUploadImgs")

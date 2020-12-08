@@ -7,6 +7,7 @@
 
 import UIKit
 import FirebaseDatabase
+import FirebaseStorage
 
 extension ChatWriteController {
     @objc func keyBoardCameraButtonTap() {
@@ -26,26 +27,52 @@ extension ChatWriteController {
             redrawViewsWithoutImg()
         }
     }
-    @objc func handleUpload() {
-        if chatBodyTextView.text.isEmpty { return }
-        upload {
-            self.chatBodyTextView.text.removeAll()
-            let showSuccess = UIAlertController(title: "업로드", message: "업로드 됐어요!", preferredStyle: .alert)
-            let okButton = UIAlertAction(title: "확인", style: .default) { ACTION in
-                self.navigationController?.popViewController(animated: true)
-            }
-            showSuccess.addAction(okButton)
-            self.present(showSuccess, animated: true, completion: nil)
+    func showSuccessMsg() {
+        self.chatBodyTextView.text.removeAll()
+        let showSuccess = UIAlertController(title: "업로드", message: "업로드 됐어요!", preferredStyle: .alert)
+        let okButton = UIAlertAction(title: "확인", style: .default) { ACTION in
+            self.navigationController?.popViewController(animated: true)
         }
+        showSuccess.addAction(okButton)
+        self.present(showSuccess, animated: true, completion: nil)
     }
     
-    func upload(completion: @escaping() -> Void) {
+    @objc func handleUpload() {
         let uid = NSUUID().uuidString
-        let value: [String: Any] = ["uid": uid, "chat": chatBodyTextView.text]
+        let imgFileName = uid
+        if chatBodyTextView.text.isEmpty { return }
+        if imgView.image == nil {
+            uploadText(uid) {
+                self.showSuccessMsg()
+            }
+        } else {
+            uploadImg(uid, imgFileName) {
+                self.uploadText(uid) {
+                    self.showSuccessMsg()
+                }
+            }
+        }
+    }
+    func uploadText(_ uid: String, completion: @escaping() -> Void) {
+        let uid = NSUUID().uuidString
+        let value: [String: Any] = ["uid": uid, "chat": chatBodyTextView.text!]
         
         DB_CHATS.child(uid).updateChildValues(value) { (error, ref) in
             if error != nil {
                 let showError = UIAlertController(title: "업로드", message: "에러가 발생했어요 ㅜ.ㅜ", preferredStyle: .alert)
+                let okButton = UIAlertAction(title: "확인", style: .default, handler: nil)
+                showError.addAction(okButton)
+                self.present(showError, animated: true, completion: nil)
+            }
+            completion()
+        }
+    }
+    
+    func uploadImg(_ uid: String, _ imgFileName: String, completion: @escaping() -> Void) {
+        guard let imgData = imgView.image?.jpegData(compressionQuality: 0.3) else { return }
+        STORAGE_USER_UPLOAD_IMGS.child(imgFileName).putData(imgData, metadata: nil) { (metaData, error) in
+            if error != nil {
+                let showError = UIAlertController(title: "업로드", message: "이미지 업로드 중 에러가 발생했어요 ㅜ.ㅜ \(error)", preferredStyle: .alert)
                 let okButton = UIAlertAction(title: "확인", style: .default, handler: nil)
                 showError.addAction(okButton)
                 self.present(showError, animated: true, completion: nil)
