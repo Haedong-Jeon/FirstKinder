@@ -19,4 +19,10 @@ extension ChatWriteController {
     @objc func keyBoardDoneButtonTap() {
         view.endEditing(true)
     }
+    @objc func handleEraseImgTap() {
+        if imgView.image != nil {
+            imgView.image = nil
+            redrawViewsWithoutImg()
+        }
+    }
 }

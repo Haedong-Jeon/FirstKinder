@@ -17,9 +17,21 @@ class ChatWriteController: UIViewController, UITextViewDelegate {
         textView.textColor = .placeholderText
         return textView
     }()
+    var imgView: UIImageView = {
+        var imgView = UIImageView()
+        imgView.translatesAutoresizingMaskIntoConstraints = false
+        imgView.widthAnchor.constraint(equalToConstant: 100).isActive = true
+        imgView.heightAnchor.constraint(equalToConstant: 100).isActive = true
+        imgView.layer.cornerRadius = 5
+        imgView.layer.borderWidth = 1
+        imgView.layer.borderColor = UIColor.lightGray.cgColor
+        
+        return imgView
+    }()
     let imgPicker = UIImagePickerController()
     func keyboardToolBarSetup() {
         chatBodyTextView.delegate = self
+        imgPicker.delegate = self
         
         let keyboardToolbar = UIToolbar(frame:CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 50))
         keyboardToolbar.barStyle = .default
