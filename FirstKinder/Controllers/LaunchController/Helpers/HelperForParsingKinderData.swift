@@ -139,6 +139,7 @@ extension LaunchController {
                 DispatchQueue.main.async {
                     //한 지역의 데이터를 전부 받을 때마다 loadCount를 1 올린다.
                     self.loadCount += 1
+                    
                     if self.loadCount >= self.cities.count {
                         //전체 지역 수와 loadCount 수가 같아지면 로딩 완료.
                         self.progressBar.progress = 1

@@ -10,12 +10,14 @@ import SwiftGifOrigin
 
 extension LaunchController {
     func configureUI() {
-        view.backgroundColor = .white
+        view.backgroundColor = #colorLiteral(red: 0.5617534518, green: 0.5250410438, blue: 0.8910874724, alpha: 1)
         self.navigationController?.navigationBar.isHidden = true
         drawTitleImg()
         drawTitleTextView()
         drawKinderTitle()
         drawProgressBar()
+        drawDataSource()
+        drawHearts()
     }
     func drawTitleTextView() {
         view.addSubview(titleLabel)
@@ -28,7 +30,8 @@ extension LaunchController {
         view.addSubview(titleImgView)
         titleImgView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
         titleImgView.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor, constant: -30).isActive = true
-        titleImgView.loadGif(name: "loading")
+        titleImgView.image = UIImage(systemName: "smiley")
+        titleImgView.tintColor = .white
     }
     func drawKinderTitle() {
         view.addSubview(kinderLabel)
@@ -43,5 +46,25 @@ extension LaunchController {
         progressBar.widthAnchor.constraint(equalToConstant: 300).isActive = true
         progressBar.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
         progressBar.heightAnchor.constraint(equalToConstant: 5).isActive = true
+    }
+    func drawDataSource() {
+        view.addSubview(dataSourceLabel)
+        dataSourceLabel.topAnchor.constraint(equalTo: progressBar.bottomAnchor).isActive = true
+        dataSourceLabel.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor).isActive = true
+        dataSourceLabel.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        dataSourceLabel.text = "자료의 출처는 ⟪보육정보공개 API⟫입니다."
+    }
+    func drawHearts() {
+        view.addSubview(heartImgView)
+        view.addSubview(heartImgView2)
+        
+        heartImgView.loadGif(name: "heart")
+        heartImgView2.loadGif(name: "heart")
+        
+        heartImgView.topAnchor.constraint(equalTo: titleImgView.topAnchor).isActive = true
+        heartImgView.leftAnchor.constraint(equalTo: titleImgView.rightAnchor, constant: -100).isActive = true
+        
+        heartImgView2.topAnchor.constraint(equalTo: titleImgView.topAnchor, constant: 100).isActive = true
+        heartImgView2.rightAnchor.constraint(equalTo: titleImgView.leftAnchor, constant: 100).isActive = true
     }
 }

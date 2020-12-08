@@ -16,10 +16,10 @@ class LaunchController: UIViewController, XMLParserDelegate {
     var progressBar = UIProgressView()
     var loadCount = 0
     //대구 광역시 시군구 코드들
-    var cities = ["27200","27710","27140","27230","27170","27260","27110","27290"]
+    //var cities = ["27200","27710","27140","27230","27170","27260","27110","27290"]
     
     //서울 시군구 코드들
-    //var cities = ["11680", "11740", "11305", "11500", "11620", "11215", "11530", "11545", "11350", "11320", "11230", "11590", "11440", "11410", "11650", "11200", "11290", "11710", "11470", "11560", "11170", "11380", "11110", "11140", "11260"]
+    var cities = ["11680", "11740", "11305", "11500", "11620", "11215", "11530", "11545", "11350", "11320", "11230", "11590", "11440", "11410", "11650", "11200", "11290", "11710", "11470", "11560", "11170", "11380", "11110", "11140", "11260"]
     var titleLabel: UILabel = {
         var label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -34,11 +34,32 @@ class LaunchController: UIViewController, XMLParserDelegate {
         imgView.heightAnchor.constraint(equalToConstant: 300).isActive = true
         return imgView
     }()
+    var heartImgView: UIImageView = {
+        var imgView = UIImageView()
+        imgView.translatesAutoresizingMaskIntoConstraints = false
+        imgView.widthAnchor.constraint(equalToConstant: 50).isActive = true
+        imgView.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        return imgView
+    }()
+    var heartImgView2: UIImageView = {
+        var imgView = UIImageView()
+        imgView.translatesAutoresizingMaskIntoConstraints = false
+        imgView.widthAnchor.constraint(equalToConstant: 50).isActive = true
+        imgView.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        return imgView
+    }()
     var kinderLabel: UILabel = {
         var label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.backgroundColor = .white
+        
         label.textColor = .black
+        label.textAlignment = .center
+        return label
+    }()
+    var dataSourceLabel: UILabel = {
+        var label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = .white
         label.textAlignment = .center
         return label
     }()
