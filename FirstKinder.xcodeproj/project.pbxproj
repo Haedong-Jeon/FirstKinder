@@ -25,6 +25,7 @@
 		E95B8A28257F2A59002EE9BC /* HelperForWriteBasicUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95B8A27257F2A59002EE9BC /* HelperForWriteBasicUI.swift */; };
 		E95B8A38257F511A002EE9BC /* HelperForTextDelegateForChatWrite.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95B8A37257F511A002EE9BC /* HelperForTextDelegateForChatWrite.swift */; };
 		E95B8A3B257F5944002EE9BC /* SelectorForChatWrite.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95B8A3A257F5944002EE9BC /* SelectorForChatWrite.swift */; };
+		E95B8A3E257F63D7002EE9BC /* HelperForWriteImageSelect.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95B8A3D257F63D7002EE9BC /* HelperForWriteImageSelect.swift */; };
 		E960ACA82576087300985873 /* DetailSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = E960ACA72576087300985873 /* DetailSelector.swift */; };
 		E960ACB825764FEC00985873 /* ListHelperForBasicUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E960ACB725764FEC00985873 /* ListHelperForBasicUI.swift */; };
 		E960ACBE25774A8700985873 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = E960ACBD25774A8700985873 /* Constant.swift */; };
@@ -70,6 +71,7 @@
 		E95B8A27257F2A59002EE9BC /* HelperForWriteBasicUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelperForWriteBasicUI.swift; sourceTree = "<group>"; };
 		E95B8A37257F511A002EE9BC /* HelperForTextDelegateForChatWrite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelperForTextDelegateForChatWrite.swift; sourceTree = "<group>"; };
 		E95B8A3A257F5944002EE9BC /* SelectorForChatWrite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectorForChatWrite.swift; sourceTree = "<group>"; };
+		E95B8A3D257F63D7002EE9BC /* HelperForWriteImageSelect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelperForWriteImageSelect.swift; sourceTree = "<group>"; };
 		E960ACA72576087300985873 /* DetailSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailSelector.swift; sourceTree = "<group>"; };
 		E960ACB725764FEC00985873 /* ListHelperForBasicUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListHelperForBasicUI.swift; sourceTree = "<group>"; };
 		E960ACBD25774A8700985873 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
@@ -218,6 +220,7 @@
 			children = (
 				E95B8A27257F2A59002EE9BC /* HelperForWriteBasicUI.swift */,
 				E95B8A37257F511A002EE9BC /* HelperForTextDelegateForChatWrite.swift */,
+				E95B8A3D257F63D7002EE9BC /* HelperForWriteImageSelect.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -490,6 +493,7 @@
 				E960ACB825764FEC00985873 /* ListHelperForBasicUI.swift in Sources */,
 				E9D633822574915F00F6C3ED /* ListController.swift in Sources */,
 				E93B75CD2576071B00D52A24 /* DetailHelpersForBasicUI.swift in Sources */,
+				E95B8A3E257F63D7002EE9BC /* HelperForWriteImageSelect.swift in Sources */,
 				E960ACBE25774A8700985873 /* Constant.swift in Sources */,
 				E9D633A42575C4AB00F6C3ED /* ListHelperForCollectionView.swift in Sources */,
 				E9D633AC2575DC6300F6C3ED /* DetailController.swift in Sources */,

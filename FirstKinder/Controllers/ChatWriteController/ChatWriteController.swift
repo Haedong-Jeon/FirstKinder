@@ -17,6 +17,7 @@ class ChatWriteController: UIViewController, UITextViewDelegate {
         textView.textColor = .placeholderText
         return textView
     }()
+    let imgPicker = UIImagePickerController()
     func keyboardToolBarSetup() {
         chatBodyTextView.delegate = self
         
