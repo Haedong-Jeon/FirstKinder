@@ -26,6 +26,7 @@
 		E95B8A38257F511A002EE9BC /* HelperForTextDelegateForChatWrite.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95B8A37257F511A002EE9BC /* HelperForTextDelegateForChatWrite.swift */; };
 		E95B8A3B257F5944002EE9BC /* SelectorForChatWrite.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95B8A3A257F5944002EE9BC /* SelectorForChatWrite.swift */; };
 		E95B8A3E257F63D7002EE9BC /* HelperForWriteImageSelect.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95B8A3D257F63D7002EE9BC /* HelperForWriteImageSelect.swift */; };
+		E95B8A41257F78F0002EE9BC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E95B8A40257F78F0002EE9BC /* GoogleService-Info.plist */; };
 		E960ACA82576087300985873 /* DetailSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = E960ACA72576087300985873 /* DetailSelector.swift */; };
 		E960ACB825764FEC00985873 /* ListHelperForBasicUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E960ACB725764FEC00985873 /* ListHelperForBasicUI.swift */; };
 		E960ACBE25774A8700985873 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = E960ACBD25774A8700985873 /* Constant.swift */; };
@@ -72,6 +73,7 @@
 		E95B8A37257F511A002EE9BC /* HelperForTextDelegateForChatWrite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelperForTextDelegateForChatWrite.swift; sourceTree = "<group>"; };
 		E95B8A3A257F5944002EE9BC /* SelectorForChatWrite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectorForChatWrite.swift; sourceTree = "<group>"; };
 		E95B8A3D257F63D7002EE9BC /* HelperForWriteImageSelect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelperForWriteImageSelect.swift; sourceTree = "<group>"; };
+		E95B8A40257F78F0002EE9BC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E960ACA72576087300985873 /* DetailSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailSelector.swift; sourceTree = "<group>"; };
 		E960ACB725764FEC00985873 /* ListHelperForBasicUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListHelperForBasicUI.swift; sourceTree = "<group>"; };
 		E960ACBD25774A8700985873 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
@@ -154,6 +156,7 @@
 				E9088968257471DD00223BAA /* Assets.xcassets */,
 				E908896A257471DD00223BAA /* LaunchScreen.storyboard */,
 				E908896D257471DD00223BAA /* Info.plist */,
+				E95B8A40257F78F0002EE9BC /* GoogleService-Info.plist */,
 				E9D633992574DB6500F6C3ED /* CookieRun Black.ttf */,
 				E9D6339A2574DB6500F6C3ED /* CookieRun Bold.ttf */,
 				E9D6339B2574DB6500F6C3ED /* CookieRun Regular.ttf */,
@@ -430,6 +433,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E9D6339E2574DB6D00F6C3ED /* CookieRun Bold.ttf in Resources */,
+				E95B8A41257F78F0002EE9BC /* GoogleService-Info.plist in Resources */,
 				E90A2F3C257F03BA0066C9B5 /* heart.gif in Resources */,
 				E9D6339C2574DB6900F6C3ED /* CookieRun Black.ttf in Resources */,
 				E908896C257471DD00223BAA /* LaunchScreen.storyboard in Resources */,

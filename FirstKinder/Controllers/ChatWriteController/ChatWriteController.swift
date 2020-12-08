@@ -11,8 +11,6 @@ class ChatWriteController: UIViewController, UITextViewDelegate {
     var chatBodyTextView: UITextView = {
         var textView = UITextView()
         textView.translatesAutoresizingMaskIntoConstraints = false
-        textView.layer.borderWidth = 1
-        textView.layer.borderColor = #colorLiteral(red: 0.1889419258, green: 0.1871659458, blue: 0.2520412803, alpha: 1)
         textView.text = chatPlaceHoldText
         textView.textColor = .placeholderText
         return textView
@@ -25,7 +23,7 @@ class ChatWriteController: UIViewController, UITextViewDelegate {
         imgView.layer.cornerRadius = 5
         imgView.layer.borderWidth = 1
         imgView.layer.borderColor = UIColor.lightGray.cgColor
-        
+        imgView.clipsToBounds = true
         return imgView
     }()
     let imgPicker = UIImagePickerController()
@@ -39,7 +37,7 @@ class ChatWriteController: UIViewController, UITextViewDelegate {
             UIBarButtonItem(image: UIImage(systemName: "camera"), style: .plain, target: self, action: #selector(keyBoardCameraButtonTap)),
             UIBarButtonItem(image: UIImage(systemName: "photo"), style: .plain, target: self, action: #selector(keyBoardPhotoButtonTap)),
             UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil),
-            UIBarButtonItem(title: "완료❤︎", style: .plain, target: self, action: #selector(keyBoardDoneButtonTap))
+            UIBarButtonItem(image: UIImage(systemName: "keyboard.chevron.compact.down"), style: .plain, target: self, action: #selector(keyBoardDoneButtonTap))
         ]
         keyboardToolbar.tintColor = .black
         keyboardToolbar.sizeToFit()
@@ -48,9 +46,13 @@ class ChatWriteController: UIViewController, UITextViewDelegate {
     }
     override func viewDidLoad() {
         keyboardToolBarSetup()
+        configureUI()
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        configureUI()
+        self.navigationController?.navigationBar.topItem?.title = "육아 잡담 쓰기"
+        let uploadButton = UIBarButtonItem(title: "완료❤︎", style: .plain, target: self, action: #selector(handleUpload))
+        self.navigationController?.navigationBar.topItem?.rightBarButtonItem = uploadButton
+
     }
 }

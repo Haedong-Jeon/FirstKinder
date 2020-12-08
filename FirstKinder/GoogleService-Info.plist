@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>173162108968-4vflp25gjssgo9fk3772r4fagsgmsatr.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.173162108968-4vflp25gjssgo9fk3772r4fagsgmsatr</string>
+	<key>API_KEY</key>
+	<string>AIzaSyA_1iusFOAb0KcMgB6vYEzbuUlg-gm7aGk</string>
+	<key>GCM_SENDER_ID</key>
+	<string>173162108968</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>haedong.FirstKinder</string>
+	<key>PROJECT_ID</key>
+	<string>firstkinder-86bac</string>
+	<key>STORAGE_BUCKET</key>
+	<string>firstkinder-86bac.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:173162108968:ios:e105ecb6b7548577f3fd1d</string>
+</dict>
+</plist>

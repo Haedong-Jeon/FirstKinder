@@ -9,7 +9,8 @@ target 'FirstKinder' do
   pod 'SwiftGifOrigin'
   pod 'Charts'
   pod 'IQKeyboardManager'
-
+  pod 'Firebase/Firestore'
+  pod 'Firebase/Database'
   # Pods for FirstKinder
 
 end

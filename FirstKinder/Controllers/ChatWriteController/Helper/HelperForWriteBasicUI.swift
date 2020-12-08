@@ -10,7 +10,6 @@ import UIKit
 extension ChatWriteController {
     func configureUI() {
         view.backgroundColor = .white
-        self.navigationController?.navigationBar.topItem?.title = "육아 잡담 쓰기"
         view.addSubview(chatBodyTextView)
         chatBodyTextView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
         chatBodyTextView.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor).isActive = true

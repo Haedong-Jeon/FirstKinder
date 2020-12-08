@@ -25,4 +25,7 @@ extension ChatWriteController {
             redrawViewsWithoutImg()
         }
     }
+    @objc func handleUpload() {
+        
+    }
 }
