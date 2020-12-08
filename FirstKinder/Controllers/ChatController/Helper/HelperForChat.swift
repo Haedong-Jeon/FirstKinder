@@ -13,6 +13,5 @@ extension ChatController {
         self.navigationController?.navigationBar.topItem?.rightBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: .add, target: self, action: #selector(handleChatTap))
 
         view.backgroundColor = .white
-        self.collectionView.backgroundColor = .white
     }
 }

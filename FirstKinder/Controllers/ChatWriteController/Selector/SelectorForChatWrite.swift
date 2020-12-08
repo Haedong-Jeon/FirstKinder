@@ -31,6 +31,7 @@ extension ChatWriteController {
         self.chatBodyTextView.text.removeAll()
         let showSuccess = UIAlertController(title: "업로드", message: "업로드 됐어요!", preferredStyle: .alert)
         let okButton = UIAlertAction(title: "확인", style: .default) { ACTION in
+            self.view.isUserInteractionEnabled = true
             self.navigationController?.popViewController(animated: true)
         }
         showSuccess.addAction(okButton)
@@ -38,6 +39,7 @@ extension ChatWriteController {
     }
     
     @objc func handleUpload() {
+        view.isUserInteractionEnabled = false
         let uid = NSUUID().uuidString
         let imgFileName = uid
         if chatBodyTextView.text.isEmpty { return }
@@ -54,8 +56,15 @@ extension ChatWriteController {
         }
     }
     func uploadText(_ uid: String, completion: @escaping() -> Void) {
-        let uid = NSUUID().uuidString
-        let value: [String: Any] = ["uid": uid, "chat": chatBodyTextView.text!]
+        var imgFileName = ""
+        
+        if imgView.image == nil {
+            imgFileName = "NO IMG"
+        } else {
+            imgFileName = uid
+        }
+        let timeStamp = Int(NSDate().timeIntervalSince1970)
+        let value: [String: Any] = ["uid": uid, "chat": chatBodyTextView.text!, "imgFileName": imgFileName, "timeStamp": timeStamp]
         
         DB_CHATS.child(uid).updateChildValues(value) { (error, ref) in
             if error != nil {

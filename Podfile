@@ -12,6 +12,7 @@ target 'FirstKinder' do
   pod 'Firebase/Firestore'
   pod 'Firebase/Database'
   pod 'Firebase/Storage'
+  pod 'Kingfisher'
   # Pods for FirstKinder
 
 end
