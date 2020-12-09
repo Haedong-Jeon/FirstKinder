@@ -57,8 +57,8 @@ extension ChatController {
             }
         })
         cell.addDeleteButton()
-        cell.layer.borderWidth = 1
-        cell.layer.borderColor = UIColor.black.cgColor
+//        cell.layer.borderWidth = 1
+//        cell.layer.borderColor = UIColor.black.cgColor
         return cell
     }
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -71,7 +71,7 @@ extension ChatController {
         return CGSize(width: collectionView.frame.width - 10, height: 100)
     }
     func configureCollectionView() {
-        collectionView.backgroundColor = .white
+        collectionView.backgroundColor = #colorLiteral(red: 0.9763854146, green: 0.9765252471, blue: 0.9763546586, alpha: 1)
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.register(ChatCell.self, forCellWithReuseIdentifier: chatCellReuseIdentifier)
