@@ -56,6 +56,8 @@ extension ChatWriteController {
         if imgView.image == nil {
             uploadText(uid) {
                 self.showSuccessMsg()
+                myChatsSavedByUid.append(uid)
+                UserDefaults.standard.setValue(myChatsSavedByUid, forKey: "myChats")
             }
         } else {
             uploadImg(uid, imgFileName) {
@@ -70,14 +72,14 @@ extension ChatWriteController {
     }
     func uploadText(_ uid: String, completion: @escaping() -> Void) {
         var imgFileName = ""
-        
+        let deviceVendor = UIDevice.current.identifierForVendor?.uuidString
         if imgView.image == nil {
             imgFileName = "NO IMG"
         } else {
             imgFileName = uid
         }
         let timeStamp = Int(NSDate().timeIntervalSince1970)
-        let value: [String: Any] = ["uid": uid, "chat": chatBodyTextView.text!, "imgFileName": imgFileName, "timeStamp": timeStamp]
+        let value: [String: Any] = ["uid": uid, "chat": chatBodyTextView.text!, "imgFileName": imgFileName, "timeStamp": timeStamp, "vendor": deviceVendor]
         
         DB_CHATS.child(uid).updateChildValues(value) { (error, ref) in
             if error != nil {

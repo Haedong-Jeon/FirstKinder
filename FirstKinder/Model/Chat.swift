@@ -12,6 +12,7 @@ struct Chat {
     var uid: String
     var imgFileName: String
     var timeStamp: Int
+    var vendor: String
 }
 var chats = [Chat]()
 var myChatsSavedByUid = [String]()

@@ -9,6 +9,7 @@ import UIKit
 
 class ChatCell: UICollectionViewCell {
     let cellDeleteButton = UIButton(type: .system)
+    let cellCommentButton = UIButton(type: .system)
     var thisIdx = 0
     var chatController = ChatController()
     var chatBodyTextView: UITextView = {
@@ -30,6 +31,7 @@ class ChatCell: UICollectionViewCell {
         imgView.heightAnchor.constraint(equalToConstant: 1).isActive = true
         return imgView
     }()
+    var commentCountLabel = UILabel()
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
@@ -40,11 +42,33 @@ class ChatCell: UICollectionViewCell {
         cellDeleteButton.setImage(UIImage(systemName: "trash"), for: .normal)
         cellDeleteButton.tintColor = .black
         cellDeleteButton.translatesAutoresizingMaskIntoConstraints = false
-        cellDeleteButton.sizeToFit()
         cellDeleteButton.addTarget(self, action: #selector(handleDelete), for: .touchUpInside)
         addSubview(cellDeleteButton)
         cellDeleteButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -5).isActive = true
         cellDeleteButton.rightAnchor.constraint(equalTo: rightAnchor, constant: -10).isActive = true
+    }
+    func drawCommentCount() {
+        addSubview(commentCountLabel)
+        commentCountLabel.translatesAutoresizingMaskIntoConstraints = false
+        commentCountLabel.leftAnchor.constraint(equalTo: cellCommentButton.rightAnchor, constant: 5).isActive = true
+        commentCountLabel.centerYAnchor.constraint(equalTo: cellCommentButton.centerYAnchor).isActive = true
+        commentCountLabel.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        commentCountLabel.widthAnchor.constraint(equalToConstant: 50).isActive = true
+        commentCountLabel.font = UIFont.systemFont(ofSize: 15)
+        commentCountLabel.textColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
+        commentCountLabel.text = "댓글 0"
+    }
+    
+    func addCommentButton() {
+        cellCommentButton.setImage(UIImage(systemName: "bubble.right"), for: .normal)
+        cellCommentButton.tintColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
+        cellCommentButton.translatesAutoresizingMaskIntoConstraints = false
+        cellCommentButton.addTarget(self, action: #selector(handleComment), for: .touchUpInside)
+        addSubview(cellCommentButton)
+        cellCommentButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -5).isActive = true
+        cellCommentButton.leftAnchor.constraint(equalTo: leftAnchor, constant: 10).isActive = true
+        
+        drawCommentCount()
     }
     @objc func handleDelete() {
         let deleteTarget = chatController.nowChats[self.thisIdx]
@@ -59,6 +83,8 @@ class ChatCell: UICollectionViewCell {
         guard let deleteIdxForLocal = myChatsSavedByUid.firstIndex(of: deleteTarget.uid) else { return }
         myChatsSavedByUid.remove(at: deleteIdxForLocal)
     }
-    
+    @objc func handleComment() {
+        
+    }
 }
 

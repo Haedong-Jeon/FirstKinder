@@ -23,6 +23,7 @@ extension ChatController {
             drawCellWithoutImg(cell)
         }
         addDeleteButtonToCell(cell, indexPath)
+        cell.addCommentButton()
         cell.backgroundColor = .white
         return cell
     }
@@ -74,6 +75,7 @@ extension ChatController {
     }
     
     func addDeleteButtonToCell(_ cell: ChatCell, _ indexPath: IndexPath) {
+        cell.addDeleteButton()
         cell.cellDeleteButton.isUserInteractionEnabled = false
         cell.cellDeleteButton.isHidden = true
         myChatsSavedByUid.forEach({
@@ -84,7 +86,6 @@ extension ChatController {
                 cell.chatController = self
             }
         })
-        cell.addDeleteButton()
     }
     func downloadImgToCell(_ cell: ChatCell, _ indexPath: IndexPath) {
         cell.imgView.kf.indicatorType = .activity

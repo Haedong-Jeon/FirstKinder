@@ -24,7 +24,8 @@ class DBUtil {
                 guard let chatUid = data["uid"] as? String else { return }
                 guard let imgFileName = data["imgFileName"] as? String else { return }
                 guard let timeStamp = data["timeStamp"] as? Int else { return }
-                let chat = Chat(chatBody: chatBody, uid: chatUid, imgFileName: imgFileName, timeStamp: timeStamp)
+                guard let deviceVendor = data["vendor"] as? String else { return }
+                let chat = Chat(chatBody: chatBody, uid: chatUid, imgFileName: imgFileName, timeStamp: timeStamp, vendor: deviceVendor)
                 loadedChats.append(chat)
             }
             completion(loadedChats)
