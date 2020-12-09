@@ -70,17 +70,16 @@ extension ChatController {
     
     func drawCellWithImg(_ cell: ChatCell, _ indexPath: IndexPath) {
         downloadImgToCell(cell, indexPath)
+        cell.addSubview(cell.imgView)
+        cell.imgView.bottomAnchor.constraint(equalTo: cell.borderLineImgView.topAnchor, constant: -10).isActive = true
+        cell.imgView.leftAnchor.constraint(equalTo: cell.leftAnchor, constant: 10).isActive = true
+        cell.imgView.rightAnchor.constraint(equalTo: cell.rightAnchor, constant: -10).isActive = true
+        cell.imgView.heightAnchor.constraint(equalToConstant: 300).isActive = true
         cell.addSubview(cell.chatBodyTextView)
         cell.chatBodyTextView.topAnchor.constraint(equalTo: cell.vendorLabel.bottomAnchor).isActive = true
         cell.chatBodyTextView.widthAnchor.constraint(equalTo: cell.safeAreaLayoutGuide.widthAnchor).isActive = true
-        cell.chatBodyTextView.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        cell.addSubview(cell.imgView)
-        cell.imgView.topAnchor.constraint(equalTo: cell.chatBodyTextView.bottomAnchor).isActive = true
-        cell.imgView.leftAnchor.constraint(equalTo: cell.leftAnchor, constant: 10).isActive = true
-        cell.imgView.rightAnchor.constraint(equalTo: cell.rightAnchor, constant: -10).isActive = true
-        cell.imgView.bottomAnchor.constraint(equalTo: cell.borderLineImgView.topAnchor, constant: -2).isActive = true
+        cell.chatBodyTextView.bottomAnchor.constraint(equalTo: cell.imgView.topAnchor, constant: 10).isActive = true
     }
-    
     func drawCellWithoutImg(_ cell: ChatCell) {
         cell.addSubview(cell.chatBodyTextView)
         cell.chatBodyTextView.topAnchor.constraint(equalTo: cell.vendorLabel.bottomAnchor).isActive = true
