@@ -14,6 +14,8 @@ extension ChatController {
             return UICollectionViewCell()
         }
         
+        cell.imgView.removeFromSuperview()
+        cell.chatBodyTextView.removeFromSuperview()
         cell.chatBodyTextView.text = nowChats[indexPath.row].chatBody
         if nowChats[indexPath.row].imgFileName != "NO IMG" {
             //이미지 있다.
@@ -29,6 +31,20 @@ extension ChatController {
                 cell.imgView.image = DBUtil.shared.loadImgFromCache(nowChats[indexPath.row].imgFileName)
                 cell.imgView.kf.indicator?.stopAnimatingView()
             }
+            cell.addSubview(cell.chatBodyTextView)
+            cell.chatBodyTextView.topAnchor.constraint(equalTo: cell.safeAreaLayoutGuide.topAnchor).isActive = true
+            cell.chatBodyTextView.widthAnchor.constraint(equalTo: cell.safeAreaLayoutGuide.widthAnchor).isActive = true
+            cell.chatBodyTextView.heightAnchor.constraint(equalToConstant: 100).isActive = true
+            cell.addSubview(cell.imgView)
+            cell.imgView.topAnchor.constraint(equalTo: cell.chatBodyTextView.bottomAnchor).isActive = true
+            cell.imgView.widthAnchor.constraint(equalTo: cell.safeAreaLayoutGuide.widthAnchor).isActive = true
+            cell.imgView.bottomAnchor.constraint(equalTo: cell.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        } else {
+            //이미지 없다.
+            cell.addSubview(cell.chatBodyTextView)
+            cell.chatBodyTextView.topAnchor.constraint(equalTo: cell.safeAreaLayoutGuide.topAnchor).isActive = true
+            cell.chatBodyTextView.widthAnchor.constraint(equalTo: cell.safeAreaLayoutGuide.widthAnchor).isActive = true
+            cell.chatBodyTextView.bottomAnchor.constraint(equalTo: cell.safeAreaLayoutGuide.bottomAnchor).isActive = true
         }
         cell.cellDeleteButton.isUserInteractionEnabled = false
         cell.cellDeleteButton.isHidden = true
@@ -40,12 +56,32 @@ extension ChatController {
                 cell.chatController = self
             }
         })
+        cell.addDeleteButton()
+        cell.layer.borderWidth = 1
+        cell.layer.borderColor = UIColor.black.cgColor
         return cell
     }
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return nowChats.count
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.frame.width - 10, height: 200)
+        if nowChats[indexPath.row].imgFileName != "NO IMG" {
+            return CGSize(width: collectionView.frame.width - 10, height: 300)
+        }
+        return CGSize(width: collectionView.frame.width - 10, height: 100)
+    }
+    func configureCollectionView() {
+        collectionView.backgroundColor = .white
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.register(ChatCell.self, forCellWithReuseIdentifier: chatCellReuseIdentifier)
+        refreshControl.addTarget(self, action: #selector(handleRefresh), for: .valueChanged)
+        collectionView.refreshControl = refreshControl
+        
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 10).isActive = true
+        collectionView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -10).isActive = true
+        collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
+        collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10).isActive = true
     }
 }

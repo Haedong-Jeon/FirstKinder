@@ -84,9 +84,6 @@ class LaunchController: UIViewController, XMLParserDelegate {
         configureUI()
         DispatchQueue.global(qos: .background).async {
             self.getData()
-            DBUtil.shared.loadChatTexts { loadedChats in
-                chats = loadedChats.sorted(by: {$0.timeStamp > $1.timeStamp})
-            }
         }
     }
     override func viewDidAppear(_ animated: Bool) {

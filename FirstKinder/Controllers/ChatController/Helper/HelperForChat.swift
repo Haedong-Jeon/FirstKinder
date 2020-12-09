@@ -14,4 +14,16 @@ extension ChatController {
 
         view.backgroundColor = .white
     }
+    func configureIndicator() {
+        indicator.color = .black
+        indicator.style = .large
+        indicator.translatesAutoresizingMaskIntoConstraints = false
+        
+        view.addSubview(indicator)
+        indicator.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
+        indicator.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor).isActive = true
+        
+        indicator.hidesWhenStopped = true
+    }
+    
 }

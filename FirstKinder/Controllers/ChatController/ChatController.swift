@@ -10,15 +10,20 @@ let chatCellReuseIdentifier = "chat cell reuse"
 class ChatController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     var nowChats = [Chat]()
     let refreshControl = UIRefreshControl()
+    let indicator = UIActivityIndicatorView()
+
     override func viewDidLoad() {
-        nowChats = chats
         configureUI()
-        collectionView.delegate = self
-        collectionView.dataSource = self
-        collectionView.register(ChatCell.self, forCellWithReuseIdentifier: chatCellReuseIdentifier)
-        collectionView.backgroundColor = .lightGray
-        refreshControl.addTarget(self, action: #selector(handleRefresh), for: .valueChanged)
-        collectionView.refreshControl = refreshControl
+        configureCollectionView()
+        configureIndicator()
+        
+        indicator.startAnimating()
+        
+        DBUtil.shared.loadChatTexts { loadedChats in
+            chats = loadedChats.sorted(by: {$0.timeStamp > $1.timeStamp})
+            self.chatReload()
+            self.indicator.stopAnimating()
+        }
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -26,13 +31,11 @@ class ChatController: UICollectionViewController, UICollectionViewDelegateFlowLa
     @objc func handleRefresh() {
         chatReload()
     }
-    @objc func handleDeleteCell() {
-        
-    }
     func chatReload() {
         collectionView.refreshControl?.beginRefreshing()
         nowChats = chats
         collectionView.reloadData()
         collectionView.refreshControl?.endRefreshing()
     }
+ 
 }
