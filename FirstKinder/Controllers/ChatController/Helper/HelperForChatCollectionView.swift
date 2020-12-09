@@ -13,39 +13,67 @@ extension ChatController {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: chatCellReuseIdentifier, for: indexPath) as? ChatCell else {
             return UICollectionViewCell()
         }
-        
         cell.imgView.removeFromSuperview()
         cell.chatBodyTextView.removeFromSuperview()
         cell.chatBodyTextView.text = nowChats[indexPath.row].chatBody
+        drawBorderLine(cell)
         if nowChats[indexPath.row].imgFileName != "NO IMG" {
-            //이미지 있다.
-            cell.imgView.kf.indicatorType = .activity
-            cell.imgView.kf.indicator?.startAnimatingView()
-            if DBUtil.shared.loadImgFromCache(nowChats[indexPath.row].imgFileName) == nil {
-                DBUtil.shared.loadChatImgsFromStorage(nowChats[indexPath.row].imgFileName) { url in
-                    let resource = ImageResource(downloadURL: url, cacheKey: self.nowChats[indexPath.row].imgFileName)
-                    cell.imgView.kf.setImage(with: resource)
-                    cell.imgView.kf.indicator?.stopAnimatingView()
-                }
-            } else {
-                cell.imgView.image = DBUtil.shared.loadImgFromCache(nowChats[indexPath.row].imgFileName)
-                cell.imgView.kf.indicator?.stopAnimatingView()
-            }
-            cell.addSubview(cell.chatBodyTextView)
-            cell.chatBodyTextView.topAnchor.constraint(equalTo: cell.safeAreaLayoutGuide.topAnchor).isActive = true
-            cell.chatBodyTextView.widthAnchor.constraint(equalTo: cell.safeAreaLayoutGuide.widthAnchor).isActive = true
-            cell.chatBodyTextView.heightAnchor.constraint(equalToConstant: 100).isActive = true
-            cell.addSubview(cell.imgView)
-            cell.imgView.topAnchor.constraint(equalTo: cell.chatBodyTextView.bottomAnchor).isActive = true
-            cell.imgView.widthAnchor.constraint(equalTo: cell.safeAreaLayoutGuide.widthAnchor).isActive = true
-            cell.imgView.bottomAnchor.constraint(equalTo: cell.safeAreaLayoutGuide.bottomAnchor).isActive = true
+            drawCellWithImg(cell, indexPath)
         } else {
-            //이미지 없다.
-            cell.addSubview(cell.chatBodyTextView)
-            cell.chatBodyTextView.topAnchor.constraint(equalTo: cell.safeAreaLayoutGuide.topAnchor).isActive = true
-            cell.chatBodyTextView.widthAnchor.constraint(equalTo: cell.safeAreaLayoutGuide.widthAnchor).isActive = true
-            cell.chatBodyTextView.bottomAnchor.constraint(equalTo: cell.safeAreaLayoutGuide.bottomAnchor).isActive = true
+            drawCellWithoutImg(cell)
         }
+        addDeleteButtonToCell(cell, indexPath)
+        cell.backgroundColor = .white
+        return cell
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return nowChats.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        if nowChats[indexPath.row].imgFileName != "NO IMG" {
+            return CGSize(width: collectionView.frame.width - 10, height: 350)
+        }
+        return CGSize(width: collectionView.frame.width - 10, height: 100)
+    }
+    
+    func configureCollectionView() {
+        collectionView.backgroundColor = #colorLiteral(red: 0.9411764706, green: 0.9411764706, blue: 0.9411764706, alpha: 1)
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.register(ChatCell.self, forCellWithReuseIdentifier: chatCellReuseIdentifier)
+        refreshControl.addTarget(self, action: #selector(handleRefresh), for: .valueChanged)
+        collectionView.refreshControl = refreshControl
+    }
+    
+    func drawBorderLine(_ cell: ChatCell) {
+        cell.addSubview(cell.borderLineImgView)
+        cell.borderLineImgView.widthAnchor.constraint(equalTo: cell.widthAnchor).isActive = true
+        cell.borderLineImgView.bottomAnchor.constraint(equalTo: cell.bottomAnchor, constant: -30).isActive = true
+    }
+    
+    func drawCellWithImg(_ cell: ChatCell, _ indexPath: IndexPath) {
+        downloadImgToCell(cell, indexPath)
+        cell.addSubview(cell.chatBodyTextView)
+        cell.chatBodyTextView.topAnchor.constraint(equalTo: cell.safeAreaLayoutGuide.topAnchor).isActive = true
+        cell.chatBodyTextView.widthAnchor.constraint(equalTo: cell.safeAreaLayoutGuide.widthAnchor).isActive = true
+        cell.chatBodyTextView.heightAnchor.constraint(equalToConstant: 100).isActive = true
+        cell.addSubview(cell.imgView)
+        cell.imgView.topAnchor.constraint(equalTo: cell.chatBodyTextView.bottomAnchor).isActive = true
+        cell.imgView.leftAnchor.constraint(equalTo: cell.leftAnchor, constant: 10).isActive = true
+        cell.imgView.rightAnchor.constraint(equalTo: cell.rightAnchor, constant: -10).isActive = true
+        cell.imgView.heightAnchor.constraint(equalToConstant: 200).isActive = true
+    }
+    
+    func drawCellWithoutImg(_ cell: ChatCell) {
+        cell.addSubview(cell.chatBodyTextView)
+        cell.chatBodyTextView.topAnchor.constraint(equalTo: cell.safeAreaLayoutGuide.topAnchor).isActive = true
+        cell.chatBodyTextView.widthAnchor.constraint(equalTo: cell.safeAreaLayoutGuide.widthAnchor).isActive = true
+        cell.chatBodyTextView.bottomAnchor.constraint(equalTo: cell.borderLineImgView.topAnchor).isActive = true
+    }
+    
+    func addDeleteButtonToCell(_ cell: ChatCell, _ indexPath: IndexPath) {
         cell.cellDeleteButton.isUserInteractionEnabled = false
         cell.cellDeleteButton.isHidden = true
         myChatsSavedByUid.forEach({
@@ -57,31 +85,19 @@ extension ChatController {
             }
         })
         cell.addDeleteButton()
-//        cell.layer.borderWidth = 1
-//        cell.layer.borderColor = UIColor.black.cgColor
-        return cell
     }
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return nowChats.count
-    }
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        if nowChats[indexPath.row].imgFileName != "NO IMG" {
-            return CGSize(width: collectionView.frame.width - 10, height: 300)
+    func downloadImgToCell(_ cell: ChatCell, _ indexPath: IndexPath) {
+        cell.imgView.kf.indicatorType = .activity
+        cell.imgView.kf.indicator?.startAnimatingView()
+        if DBUtil.shared.loadImgFromCache(nowChats[indexPath.row].imgFileName) == nil {
+            DBUtil.shared.loadChatImgsFromStorage(nowChats[indexPath.row].imgFileName) { url in
+                let resource = ImageResource(downloadURL: url, cacheKey: self.nowChats[indexPath.row].imgFileName)
+                cell.imgView.kf.setImage(with: resource)
+                cell.imgView.kf.indicator?.stopAnimatingView()
+            }
+        } else {
+            cell.imgView.image = DBUtil.shared.loadImgFromCache(nowChats[indexPath.row].imgFileName)
+            cell.imgView.kf.indicator?.stopAnimatingView()
         }
-        return CGSize(width: collectionView.frame.width - 10, height: 100)
-    }
-    func configureCollectionView() {
-        collectionView.backgroundColor = #colorLiteral(red: 0.9763854146, green: 0.9765252471, blue: 0.9763546586, alpha: 1)
-        collectionView.delegate = self
-        collectionView.dataSource = self
-        collectionView.register(ChatCell.self, forCellWithReuseIdentifier: chatCellReuseIdentifier)
-        refreshControl.addTarget(self, action: #selector(handleRefresh), for: .valueChanged)
-        collectionView.refreshControl = refreshControl
-        
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 10).isActive = true
-        collectionView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -10).isActive = true
-        collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
-        collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10).isActive = true
     }
 }

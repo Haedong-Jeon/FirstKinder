@@ -11,7 +11,6 @@ class ChatCell: UICollectionViewCell {
     let cellDeleteButton = UIButton(type: .system)
     var thisIdx = 0
     var chatController = ChatController()
-
     var chatBodyTextView: UITextView = {
         var textView = UITextView()
         textView.isEditable = false
@@ -24,6 +23,13 @@ class ChatCell: UICollectionViewCell {
         imgView.translatesAutoresizingMaskIntoConstraints = false
         return imgView
     }()
+    var borderLineImgView: UIImageView = {
+        var imgView = UIImageView()
+        imgView.translatesAutoresizingMaskIntoConstraints = false
+        imgView.backgroundColor = #colorLiteral(red: 0.9293304086, green: 0.929463923, blue: 0.9293010831, alpha: 1)
+        imgView.heightAnchor.constraint(equalToConstant: 1).isActive = true
+        return imgView
+    }()
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
@@ -32,13 +38,13 @@ class ChatCell: UICollectionViewCell {
     }
     func addDeleteButton() {
         cellDeleteButton.setImage(UIImage(systemName: "trash"), for: .normal)
-        cellDeleteButton.tintColor = .lightGray
+        cellDeleteButton.tintColor = .black
         cellDeleteButton.translatesAutoresizingMaskIntoConstraints = false
         cellDeleteButton.sizeToFit()
         cellDeleteButton.addTarget(self, action: #selector(handleDelete), for: .touchUpInside)
         addSubview(cellDeleteButton)
-        cellDeleteButton.topAnchor.constraint(equalTo: topAnchor).isActive = true
-        cellDeleteButton.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
+        cellDeleteButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -5).isActive = true
+        cellDeleteButton.rightAnchor.constraint(equalTo: rightAnchor, constant: -10).isActive = true
     }
     @objc func handleDelete() {
         let deleteTarget = chatController.nowChats[self.thisIdx]
