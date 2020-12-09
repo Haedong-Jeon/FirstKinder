@@ -6,6 +6,7 @@
 //
 
 import UIKit
+
 let chatCellReuseIdentifier = "chat cell reuse"
 class ChatController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     var nowChats = [Chat]()

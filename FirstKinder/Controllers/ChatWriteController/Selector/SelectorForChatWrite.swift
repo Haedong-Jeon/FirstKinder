@@ -56,16 +56,12 @@ extension ChatWriteController {
         if imgView.image == nil {
             uploadText(uid) {
                 self.showSuccessMsg()
-                myChatsSavedByUid.append(uid)
-                UserDefaults.standard.setValue(myChatsSavedByUid, forKey: "myChats")
             }
         } else {
             uploadImg(uid, imgFileName) {
                 self.uploadText(uid) {
                     indicator.stopAnimating()
                     self.showSuccessMsg()
-                    myChatsSavedByUid.append(uid)
-                    UserDefaults.standard.setValue(myChatsSavedByUid, forKey: "myChats")
                 }
             }
         }

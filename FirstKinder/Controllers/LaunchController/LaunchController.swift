@@ -65,10 +65,6 @@ class LaunchController: UIViewController, XMLParserDelegate {
     }()
     override func viewDidLoad() {
         super.viewDidLoad()
-        if (UserDefaults.standard.value(forKey: "myChats") as? [String]) != nil {
-            myChatsSavedByUid = UserDefaults.standard.array(forKey: "myChats") as! [String]
-        }
-        myChatsSavedByUid.forEach({print("saved uid: \($0)")})
         if let data = UserDefaults.standard.value(forKey:"myKinders") as? Data {
             do {
                 myKinders = try PropertyListDecoder().decode(Array<Kinder>.self, from: data)

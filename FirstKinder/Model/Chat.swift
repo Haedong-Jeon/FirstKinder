@@ -15,4 +15,3 @@ struct Chat {
     var vendor: String
 }
 var chats = [Chat]()
-var myChatsSavedByUid = [String]()

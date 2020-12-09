@@ -6,12 +6,29 @@
 //
 
 import UIKit
-
+protocol CellDeleteDelegate: class {
+    func delete(indexPath: IndexPath)
+}
 class ChatCell: UICollectionViewCell {
     let cellDeleteButton = UIButton(type: .system)
     let cellCommentButton = UIButton(type: .system)
-    var thisIdx = 0
-    var chatController = ChatController()
+    var deleteDelegate: CellDeleteDelegate?
+    var thisIdxPath: IndexPath?
+    var faceImgView: UIImageView = {
+        var imgView = UIImageView()
+        imgView.translatesAutoresizingMaskIntoConstraints = false
+        imgView.widthAnchor.constraint(equalToConstant: 25).isActive = true
+        imgView.heightAnchor.constraint(equalToConstant: 25).isActive = true
+        imgView.image = UIImage(systemName: "smiley")
+        return imgView
+    }()
+    var vendorLabel: UILabel = {
+        var label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        label.widthAnchor.constraint(equalToConstant: 100).isActive = true
+        return label
+    }()
     var chatBodyTextView: UITextView = {
         var textView = UITextView()
         textView.isEditable = false
@@ -71,20 +88,9 @@ class ChatCell: UICollectionViewCell {
         drawCommentCount()
     }
     @objc func handleDelete() {
-        let deleteTarget = chatController.nowChats[self.thisIdx]
-        chatController.nowChats.remove(at: self.thisIdx)
-        chatController.collectionView.reloadData()
-        
-        DB_CHATS.child(deleteTarget.uid).removeValue()
-        STORAGE_USER_UPLOAD_IMGS.child(deleteTarget.uid).delete { error in
-            print("이미지 삭제 에러 -\(error)")
-        }
-        
-        guard let deleteIdxForLocal = myChatsSavedByUid.firstIndex(of: deleteTarget.uid) else { return }
-        myChatsSavedByUid.remove(at: deleteIdxForLocal)
+        deleteDelegate?.delete(indexPath: thisIdxPath!)
     }
     @objc func handleComment() {
         
     }
 }
-

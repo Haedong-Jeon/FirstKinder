@@ -13,8 +13,11 @@ extension ChatController {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: chatCellReuseIdentifier, for: indexPath) as? ChatCell else {
             return UICollectionViewCell()
         }
+        cell.deleteDelegate = self
+        cell.thisIdxPath = indexPath
         cell.imgView.removeFromSuperview()
         cell.chatBodyTextView.removeFromSuperview()
+        addVendor(cell, indexPath)
         cell.chatBodyTextView.text = nowChats[indexPath.row].chatBody
         drawBorderLine(cell)
         if nowChats[indexPath.row].imgFileName != "NO IMG" {
@@ -33,10 +36,21 @@ extension ChatController {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        if nowChats[indexPath.row].imgFileName != "NO IMG" {
-            return CGSize(width: collectionView.frame.width - 10, height: 350)
+        let width = view.frame.width - 10
+        let estimatedHeight: CGFloat = 500.0
+        let dummyCell = ChatCell(frame: CGRect(x: 0, y: 0, width: width, height: estimatedHeight))
+        addVendor(dummyCell, indexPath)
+        drawBorderLine(dummyCell)
+        dummyCell.chatBodyTextView.text = nowChats[indexPath.row].chatBody
+        if nowChats[indexPath.row].imgFileName == "NO IMG" {
+            drawCellWithoutImg(dummyCell)
+        } else {
+            drawCellWithImg(dummyCell, indexPath)
         }
-        return CGSize(width: collectionView.frame.width - 10, height: 100)
+        dummyCell.layoutIfNeeded()
+        let estimatedSize = dummyCell.systemLayoutSizeFitting(CGSize(width: width, height: estimatedHeight))
+        
+        return CGSize(width: width, height: estimatedSize.height)
     }
     
     func configureCollectionView() {
@@ -57,19 +71,19 @@ extension ChatController {
     func drawCellWithImg(_ cell: ChatCell, _ indexPath: IndexPath) {
         downloadImgToCell(cell, indexPath)
         cell.addSubview(cell.chatBodyTextView)
-        cell.chatBodyTextView.topAnchor.constraint(equalTo: cell.safeAreaLayoutGuide.topAnchor).isActive = true
+        cell.chatBodyTextView.topAnchor.constraint(equalTo: cell.vendorLabel.bottomAnchor).isActive = true
         cell.chatBodyTextView.widthAnchor.constraint(equalTo: cell.safeAreaLayoutGuide.widthAnchor).isActive = true
-        cell.chatBodyTextView.heightAnchor.constraint(equalToConstant: 100).isActive = true
+        cell.chatBodyTextView.heightAnchor.constraint(equalToConstant: 50).isActive = true
         cell.addSubview(cell.imgView)
         cell.imgView.topAnchor.constraint(equalTo: cell.chatBodyTextView.bottomAnchor).isActive = true
         cell.imgView.leftAnchor.constraint(equalTo: cell.leftAnchor, constant: 10).isActive = true
         cell.imgView.rightAnchor.constraint(equalTo: cell.rightAnchor, constant: -10).isActive = true
-        cell.imgView.heightAnchor.constraint(equalToConstant: 200).isActive = true
+        cell.imgView.bottomAnchor.constraint(equalTo: cell.borderLineImgView.topAnchor, constant: -2).isActive = true
     }
     
     func drawCellWithoutImg(_ cell: ChatCell) {
         cell.addSubview(cell.chatBodyTextView)
-        cell.chatBodyTextView.topAnchor.constraint(equalTo: cell.safeAreaLayoutGuide.topAnchor).isActive = true
+        cell.chatBodyTextView.topAnchor.constraint(equalTo: cell.vendorLabel.bottomAnchor).isActive = true
         cell.chatBodyTextView.widthAnchor.constraint(equalTo: cell.safeAreaLayoutGuide.widthAnchor).isActive = true
         cell.chatBodyTextView.bottomAnchor.constraint(equalTo: cell.borderLineImgView.topAnchor).isActive = true
     }
@@ -78,14 +92,10 @@ extension ChatController {
         cell.addDeleteButton()
         cell.cellDeleteButton.isUserInteractionEnabled = false
         cell.cellDeleteButton.isHidden = true
-        myChatsSavedByUid.forEach({
-            if $0 == nowChats[indexPath.row].uid {
-                cell.cellDeleteButton.isUserInteractionEnabled = true
-                cell.cellDeleteButton.isHidden = false
-                cell.thisIdx = indexPath.row
-                cell.chatController = self
-            }
-        })
+        if nowChats[indexPath.row].vendor == UIDevice.current.identifierForVendor?.uuidString {
+            cell.cellDeleteButton.isUserInteractionEnabled = true
+            cell.cellDeleteButton.isHidden = false
+        }
     }
     func downloadImgToCell(_ cell: ChatCell, _ indexPath: IndexPath) {
         cell.imgView.kf.indicatorType = .activity
@@ -100,5 +110,30 @@ extension ChatController {
             cell.imgView.image = DBUtil.shared.loadImgFromCache(nowChats[indexPath.row].imgFileName)
             cell.imgView.kf.indicator?.stopAnimatingView()
         }
+    }
+    func addVendor(_ cell: ChatCell, _ indexPath: IndexPath) {
+        cell.addSubview(cell.faceImgView)
+        cell.faceImgView.topAnchor.constraint(equalTo: cell.safeAreaLayoutGuide.topAnchor, constant: 5).isActive = true
+        cell.faceImgView.leftAnchor.constraint(equalTo: cell.safeAreaLayoutGuide.leftAnchor, constant: 10).isActive = true
+        cell.addSubview(cell.vendorLabel)
+        cell.vendorLabel.topAnchor.constraint(equalTo: cell.safeAreaLayoutGuide.topAnchor).isActive = true
+        cell.vendorLabel.leftAnchor.constraint(equalTo: cell.faceImgView.rightAnchor).isActive = true
+        
+        let fullVendorString = nowChats[indexPath.row].vendor
+        var splitedVendorString = fullVendorString.components(separatedBy: "-")
+        
+        cell.vendorLabel.text = splitedVendorString[0]
+    }
+}
+
+extension ChatController: CellDeleteDelegate {
+    func delete(indexPath: IndexPath) {
+        DB_CHATS.child(nowChats[indexPath.row].uid).removeValue()
+        STORAGE_USER_UPLOAD_IMGS.child(nowChats[indexPath.row].uid).delete { error in
+            print("이미지 삭제 에러 -\(error)")
+        }
+        nowChats.remove(at: indexPath.row)
+        
+        collectionView.reloadData()
     }
 }
