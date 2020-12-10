@@ -7,7 +7,7 @@
 
 import UIKit
 
-extension DetailController {
+extension KinderDetailController {
     @objc func handleTelTap() {
         let urlString = "tel://" + kinder.tel
         guard let numberURL = URL(string: urlString) else { return }

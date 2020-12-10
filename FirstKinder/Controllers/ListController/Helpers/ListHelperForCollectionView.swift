@@ -38,7 +38,7 @@ extension ListController {
     }
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let kinder = nowShowingKinders[indexPath.row]
-        let detailViewController = DetailController()
+        let detailViewController = KinderDetailController()
         detailViewController.kinder = kinder
         
         let transition = CATransition()

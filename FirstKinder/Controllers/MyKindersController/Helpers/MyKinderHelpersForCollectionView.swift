@@ -41,7 +41,7 @@ extension MyKindersController {
     }
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let kinder = myKinders[indexPath.row]
-        let detailViewController = DetailController()
+        let detailViewController = KinderDetailController()
         detailViewController.kinder = kinder
         detailViewController.isFromMyKinder = true
         

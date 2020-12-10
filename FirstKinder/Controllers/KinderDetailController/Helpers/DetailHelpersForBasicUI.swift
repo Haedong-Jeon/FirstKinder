@@ -8,7 +8,7 @@
 import UIKit
 import Charts
 
-extension DetailController: ChartViewDelegate {
+extension KinderDetailController: ChartViewDelegate {
     func configureUI() {
         view.backgroundColor = .white
         setScrollView()

@@ -16,11 +16,11 @@ extension ChatController {
         cell.deleteDelegate = self
         cell.thisIdxPath = indexPath
         cell.imgView.removeFromSuperview()
-        cell.chatBodyTextView.removeFromSuperview()
+        cell.chatBodyLabel.removeFromSuperview()
         drawVendor(cell, indexPath)
         drawCategoryLabel(cell, indexPath)
         drawTimeLabel(cell, indexPath)
-        cell.chatBodyTextView.text = nowChats[indexPath.row].chatBody
+        cell.chatBodyLabel.text = nowChats[indexPath.row].chatBody
         drawBorderLine(cell)
         if nowChats[indexPath.row].imgFileName != "NO IMG" {
             drawCellWithImg(cell, indexPath)
@@ -40,6 +40,18 @@ extension ChatController {
         let height = getEstimatedHeightFromDummyCell(indexPath)
         return CGSize(width: collectionView.frame.width - 10, height: height)
     }
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let chatDetailController = ChatDetailController(collectionViewLayout: UICollectionViewFlowLayout())
+        chatDetailController.chat = nowChats[indexPath.row]
+        
+        let transition = CATransition()
+        transition.duration = 0.3
+        transition.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
+        transition.type = .fade
+        self.navigationController?.view.layer.add(transition, forKey: nil)
+
+        self.navigationController?.pushViewController(chatDetailController, animated: false)
+    }
     func getEstimatedHeightFromDummyCell(_ indexPath: IndexPath) -> CGFloat{
         let width = view.frame.width - 10
         let estimatedHeight: CGFloat = 800.0
@@ -47,7 +59,7 @@ extension ChatController {
         drawVendor(dummyCell, indexPath)
         drawCategoryLabel(dummyCell, indexPath)
         drawBorderLine(dummyCell)
-        dummyCell.chatBodyTextView.text = nowChats[indexPath.row].chatBody
+        dummyCell.chatBodyLabel.text = nowChats[indexPath.row].chatBody
         if nowChats[indexPath.row].imgFileName == "NO IMG" {
             drawCellWithoutImg(dummyCell)
         } else {
@@ -66,7 +78,6 @@ extension ChatController {
         collectionView.refreshControl = refreshControl
         collectionView.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
     }
-    
     func drawBorderLine(_ cell: ChatCell) {
         cell.addSubview(cell.borderLineImgView)
         cell.borderLineImgView.widthAnchor.constraint(equalTo: cell.widthAnchor).isActive = true
@@ -85,16 +96,16 @@ extension ChatController {
         cell.imgView.layer.borderColor = UIColor.lightGray.cgColor
         cell.imgView.layer.cornerRadius = 10
         cell.imgView.clipsToBounds = true
-        cell.addSubview(cell.chatBodyTextView)
-        cell.chatBodyTextView.topAnchor.constraint(equalTo: cell.categoryLabel.bottomAnchor).isActive = true
-        cell.chatBodyTextView.widthAnchor.constraint(equalTo: cell.safeAreaLayoutGuide.widthAnchor).isActive = true
-        cell.chatBodyTextView.bottomAnchor.constraint(equalTo: cell.imgView.topAnchor, constant: -10).isActive = true
+        cell.addSubview(cell.chatBodyLabel)
+        cell.chatBodyLabel.topAnchor.constraint(equalTo: cell.categoryLabel.bottomAnchor, constant: 10).isActive = true
+        cell.chatBodyLabel.widthAnchor.constraint(equalTo: cell.safeAreaLayoutGuide.widthAnchor).isActive = true
+        cell.chatBodyLabel.bottomAnchor.constraint(equalTo: cell.imgView.topAnchor, constant: -10).isActive = true
     }
     func drawCellWithoutImg(_ cell: ChatCell) {
-        cell.addSubview(cell.chatBodyTextView)
-        cell.chatBodyTextView.topAnchor.constraint(equalTo: cell.categoryLabel.bottomAnchor).isActive = true
-        cell.chatBodyTextView.widthAnchor.constraint(equalTo: cell.safeAreaLayoutGuide.widthAnchor).isActive = true
-        cell.chatBodyTextView.bottomAnchor.constraint(equalTo: cell.borderLineImgView.topAnchor).isActive = true
+        cell.addSubview(cell.chatBodyLabel)
+        cell.chatBodyLabel.topAnchor.constraint(equalTo: cell.categoryLabel.bottomAnchor, constant: 10).isActive = true
+        cell.chatBodyLabel.widthAnchor.constraint(equalTo: cell.safeAreaLayoutGuide.widthAnchor).isActive = true
+        cell.chatBodyLabel.bottomAnchor.constraint(equalTo: cell.borderLineImgView.topAnchor, constant: -10).isActive = true
     }
     
     func addDeleteButtonToCell(_ cell: ChatCell, _ indexPath: IndexPath) {
@@ -122,7 +133,7 @@ extension ChatController {
     func drawVendor(_ cell: ChatCell, _ indexPath: IndexPath) {
         cell.addSubview(cell.faceImgView)
         cell.faceImgView.topAnchor.constraint(equalTo: cell.safeAreaLayoutGuide.topAnchor, constant: 5).isActive = true
-        cell.faceImgView.leftAnchor.constraint(equalTo: cell.safeAreaLayoutGuide.leftAnchor, constant: 10).isActive = true
+        cell.faceImgView.leftAnchor.constraint(equalTo: cell.safeAreaLayoutGuide.leftAnchor).isActive = true
         cell.addSubview(cell.vendorLabel)
         cell.vendorLabel.topAnchor.constraint(equalTo: cell.safeAreaLayoutGuide.topAnchor).isActive = true
         cell.vendorLabel.leftAnchor.constraint(equalTo: cell.faceImgView.rightAnchor).isActive = true

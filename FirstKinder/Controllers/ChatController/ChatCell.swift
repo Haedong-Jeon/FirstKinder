@@ -49,12 +49,14 @@ class ChatCell: UICollectionViewCell {
         label.widthAnchor.constraint(equalToConstant: 100).isActive = true
         return label
     }()
-    var chatBodyTextView: UITextView = {
-        var textView = UITextView()
-        textView.isEditable = false
-        textView.isScrollEnabled = false
-        textView.translatesAutoresizingMaskIntoConstraints = false
-        return textView
+    var chatBodyLabel: UILabel = {
+        var label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 15)
+        label.lineBreakMode = .byCharWrapping
+        label.numberOfLines = 0
+        label.isUserInteractionEnabled = true
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
     }()
     var imgView: UIImageView = {
         var imgView = UIImageView()

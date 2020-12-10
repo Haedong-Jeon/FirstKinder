@@ -9,7 +9,7 @@ import UIKit
 import MapKit
 import Charts
 
-class DetailController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
+class KinderDetailController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
     var kinder = Kinder()
     var isFromMyKinder = false
     lazy var chart: PieChartView = {

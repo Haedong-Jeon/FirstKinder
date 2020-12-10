@@ -96,7 +96,7 @@ class NearKinderController: UIViewController, MKMapViewDelegate {
                     selectedKinder = $0
                 }
             })
-            let detailController = DetailController()
+            let detailController = KinderDetailController()
             guard let selected = selectedKinder else { return }
             detailController.kinder = selected
             

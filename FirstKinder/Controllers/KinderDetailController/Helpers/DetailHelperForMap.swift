@@ -8,7 +8,7 @@
 import UIKit
 import MapKit
 
-extension DetailController {
+extension KinderDetailController {
     func setAnnotaion() {
         let annotation = MKPointAnnotation()
         guard let lo = Double(kinder.lo) else { return }

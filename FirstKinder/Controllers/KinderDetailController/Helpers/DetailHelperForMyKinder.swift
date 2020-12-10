@@ -7,7 +7,7 @@
 
 import UIKit
 
-extension DetailController {
+extension KinderDetailController {
     func saveMyKinder(completion: ()-> Void) {
         myKinders.append(self.kinder)
         UserDefaults.standard.set(try? PropertyListEncoder().encode(myKinders), forKey: "myKinders")
