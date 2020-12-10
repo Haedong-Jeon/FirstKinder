@@ -76,7 +76,6 @@ extension ChatController {
         collectionView.register(ChatCell.self, forCellWithReuseIdentifier: chatCellReuseIdentifier)
         refreshControl.addTarget(self, action: #selector(handleRefresh), for: .valueChanged)
         collectionView.refreshControl = refreshControl
-        collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 10, right: 0)
     }
     func drawBorderLine(_ cell: ChatCell) {
         cell.addSubview(cell.borderLineImgView)
@@ -197,7 +196,9 @@ extension ChatController: CellDeleteDelegate {
             print("이미지 삭제 에러 -\(error)")
         }
         nowChats.remove(at: indexPath.row)
-        
+        if isShowingMyChats {
+            isShowingMyChats = false
+        }
         collectionView.reloadData()
     }
 }

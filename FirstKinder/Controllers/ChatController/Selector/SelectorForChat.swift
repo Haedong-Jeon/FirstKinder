@@ -22,7 +22,17 @@ extension ChatController {
     }
     @objc func handleGearTap() {
         let actionSheetAlert = UIAlertController()
-        let button1 = UIAlertAction(title: "차단 목록 관리 할거에요", style: .default, handler: nil)
+        let button1 = UIAlertAction(title: "차단 목록 관리 할거에요", style: .default) { ACTION in
+            let blockedUserController = BlockedUserController(collectionViewLayout: UICollectionViewFlowLayout())
+            let transition = CATransition()
+            transition.duration = 0.3
+            transition.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
+            transition.type = .fade
+            
+            self.navigationController?.view.layer.add(transition, forKey: nil)
+            self.navigationController?.pushViewController(blockedUserController, animated: false)
+
+        }
         var button2 = UIAlertAction()
         if !self.isShowingMyChats {
             button2 = UIAlertAction(title: "내가 쓴 글만 모아 볼거에요", style: .default) { ACTION in

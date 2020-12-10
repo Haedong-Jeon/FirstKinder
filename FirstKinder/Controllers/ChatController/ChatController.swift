@@ -21,7 +21,7 @@ class ChatController: UICollectionViewController, UICollectionViewDelegateFlowLa
         button.heightAnchor.constraint(equalToConstant: 50).isActive = true
         button.layer.cornerRadius = 25
         button.setTitle("+", for: .normal)
-        button.backgroundColor = #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1)
+        button.backgroundColor = #colorLiteral(red: 0.6369027091, green: 0.5376098795, blue: 1, alpha: 1)
         button.setTitleColor(.white, for: .normal)
         button.addTarget(self, action: #selector(handleChatTap), for: .touchUpInside)
         return button
@@ -29,6 +29,7 @@ class ChatController: UICollectionViewController, UICollectionViewDelegateFlowLa
     var isShowingMyChats = false
     var blockedUsers = [String]()
     var blockedReasons = [String]()
+    var blockReasonCategories = [String]()
     let refreshControl = UIRefreshControl()
     let indicator = UIActivityIndicatorView()
 
@@ -52,11 +53,19 @@ class ChatController: UICollectionViewController, UICollectionViewDelegateFlowLa
         }
         self.blockedUsers = blockedUsers
         self.blockedUsers.forEach({print("blocked user: \($0)")})
+        
         guard let blockedReasons = UserDefaults.standard.array(forKey: "blockedReasons") as? [String] else {
             return
         }
         self.blockedReasons = blockedReasons
         self.blockedReasons.forEach({print("blocked reason: \($0)")})
+        
+        guard let reasonCategories = UserDefaults.standard.array(forKey: "blockedReasonCategories") as? [String] else {
+            return
+        }
+        self.blockReasonCategories = reasonCategories
+        self.blockReasonCategories.forEach({print("blocked categories: \($0)")})
+        
         chatReload()
     }
     override func viewWillDisappear(_ animated: Bool) {
