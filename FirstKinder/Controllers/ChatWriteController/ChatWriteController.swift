@@ -50,7 +50,7 @@ class ChatWriteController: UIViewController, UITextViewDelegate {
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        self.navigationController?.navigationBar.topItem?.title = "육아 잡담 쓰기"
+        self.navigationController?.navigationBar.topItem?.title = "육아 이야기 쓰기"
         let uploadButton = UIBarButtonItem(title: "완료❤︎", style: .plain, target: self, action: #selector(handleUpload))
         self.navigationController?.navigationBar.topItem?.rightBarButtonItem = uploadButton
 

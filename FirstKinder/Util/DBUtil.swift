@@ -37,7 +37,15 @@ class DBUtil {
                 print("error in download img \(error)")
             }
             guard let imgURL = url else { return }
-            completion(imgURL)
+            let cache = ImageCache.default
+            do {
+                let imgData = try Data(contentsOf: imgURL)
+                guard let img = UIImage(data: imgData) else { return }
+                cache.store(img, forKey: imgFileName)
+                completion(imgURL)
+            } catch {
+                
+            }
         }
     }
     func loadImgFromCache(_ imgFileName: String) -> UIImage?{

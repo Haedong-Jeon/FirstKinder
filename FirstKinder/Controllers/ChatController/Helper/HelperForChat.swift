@@ -9,7 +9,7 @@ import UIKit
 
 extension ChatController {
     func configureUI () {
-        self.navigationController?.navigationBar.topItem?.title = "육아 잡담"
+        self.navigationController?.navigationBar.topItem?.title = "육아 이야기"
         self.navigationController?.navigationBar.topItem?.rightBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: .add, target: self, action: #selector(handleChatTap))
 
         view.backgroundColor = #colorLiteral(red: 0.9411764706, green: 0.9411764706, blue: 0.9411764706, alpha: 1)

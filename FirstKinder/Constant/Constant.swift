@@ -10,7 +10,7 @@ import FirebaseDatabase
 import FirebaseStorage
 
 let loadFinishProgress: Float = 0.95
-let chatPlaceHoldText = "즐겁게 육아에 관한 이야기를 나눠요 :)"
+let chatPlaceHoldText = "타인에게 상처를 주는 말은 하지 말아요 :)\n마음이 따뜻해지는 말을 나눠요.❤︎"
 let DB_ROOT = Database.database().reference()
 let DB_CHATS = DB_ROOT.child("chats")
 

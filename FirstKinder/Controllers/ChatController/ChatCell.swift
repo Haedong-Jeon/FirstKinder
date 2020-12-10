@@ -14,6 +14,26 @@ class ChatCell: UICollectionViewCell {
     let cellCommentButton = UIButton(type: .system)
     var deleteDelegate: CellDeleteDelegate?
     var thisIdxPath: IndexPath?
+    var categoryLabel: UILabel = {
+        var label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.widthAnchor.constraint(equalToConstant: 60).isActive = true
+        label.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        label.font = UIFont.systemFont(ofSize: 15)
+        label.layer.cornerRadius = 5
+        label.clipsToBounds = true
+        return label
+    }()
+    var timeLabel: UILabel = {
+        var label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.widthAnchor.constraint(equalToConstant: 100).isActive = true
+        label.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        label.font = UIFont.systemFont(ofSize: 15)
+        label.textAlignment = .right
+        label.textColor = .placeholderText
+        return label
+    }()
     var faceImgView: UIImageView = {
         var imgView = UIImageView()
         imgView.translatesAutoresizingMaskIntoConstraints = false
@@ -88,7 +108,8 @@ class ChatCell: UICollectionViewCell {
         drawCommentCount()
     }
     @objc func handleDelete() {
-        deleteDelegate?.delete(indexPath: thisIdxPath!)
+        guard let deleteIndexPath = self.thisIdxPath else { return }
+        deleteDelegate?.delete(indexPath: deleteIndexPath)
     }
     @objc func handleComment() {
         
