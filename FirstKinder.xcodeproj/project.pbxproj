@@ -53,6 +53,7 @@
 		E9DDDCA42581EB49005B3BE8 /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DDDCA32581EB49005B3BE8 /* CommentCell.swift */; };
 		E9DDDCA72581EB9A005B3BE8 /* ChatDetailHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DDDCA62581EB9A005B3BE8 /* ChatDetailHeader.swift */; };
 		E9DDDCAA2581F042005B3BE8 /* ChatDetailHelperForCollectionViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DDDCA92581F042005B3BE8 /* ChatDetailHelperForCollectionViewDelegate.swift */; };
+		E9DDDCAD2581FC60005B3BE8 /* ChatDetailSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DDDCAC2581FC5F005B3BE8 /* ChatDetailSelector.swift */; };
 		E9F1438C2574835F002A284F /* HelperForParsingKinderData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F1438B2574835F002A284F /* HelperForParsingKinderData.swift */; };
 		E9F14390257483A0002A284F /* HelperForLaunchBasicUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F1438F257483A0002A284F /* HelperForLaunchBasicUI.swift */; };
 		E9F14394257483E0002A284F /* TagKind.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F14393257483E0002A284F /* TagKind.swift */; };
@@ -110,6 +111,7 @@
 		E9DDDCA32581EB49005B3BE8 /* CommentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentCell.swift; sourceTree = "<group>"; };
 		E9DDDCA62581EB9A005B3BE8 /* ChatDetailHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatDetailHeader.swift; sourceTree = "<group>"; };
 		E9DDDCA92581F042005B3BE8 /* ChatDetailHelperForCollectionViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatDetailHelperForCollectionViewDelegate.swift; sourceTree = "<group>"; };
+		E9DDDCAC2581FC5F005B3BE8 /* ChatDetailSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatDetailSelector.swift; sourceTree = "<group>"; };
 		E9F1438B2574835F002A284F /* HelperForParsingKinderData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelperForParsingKinderData.swift; sourceTree = "<group>"; };
 		E9F1438F257483A0002A284F /* HelperForLaunchBasicUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelperForLaunchBasicUI.swift; sourceTree = "<group>"; };
 		E9F14393257483E0002A284F /* TagKind.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagKind.swift; sourceTree = "<group>"; };
@@ -229,6 +231,7 @@
 		E93B13312581E69500A22FF6 /* Selector */ = {
 			isa = PBXGroup;
 			children = (
+				E9DDDCAC2581FC5F005B3BE8 /* ChatDetailSelector.swift */,
 			);
 			path = Selector;
 			sourceTree = "<group>";
@@ -591,6 +594,7 @@
 				E95B8A84257F9704002EE9BC /* ChatCell.swift in Sources */,
 				E9F14394257483E0002A284F /* TagKind.swift in Sources */,
 				E93B13372581E6EE00A22FF6 /* ChatDetailHelperForBasicUI.swift in Sources */,
+				E9DDDCAD2581FC60005B3BE8 /* ChatDetailSelector.swift in Sources */,
 				E960ACA82576087300985873 /* DetailSelector.swift in Sources */,
 				E9088964257471D800223BAA /* LaunchController.swift in Sources */,
 				E9088960257471D800223BAA /* AppDelegate.swift in Sources */,
