@@ -59,6 +59,9 @@ class ChatController: UICollectionViewController, UICollectionViewDelegateFlowLa
         self.blockedReasons.forEach({print("blocked reason: \($0)")})
         chatReload()
     }
+    override func viewWillDisappear(_ animated: Bool) {
+        isShowingMyChats = false
+    }
     @objc func handleRefresh() {
         chatReload()
     }
