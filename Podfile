@@ -13,6 +13,7 @@ target 'FirstKinder' do
   pod 'Firebase/Database'
   pod 'Firebase/Storage'
   pod 'Kingfisher'
+  pod 'ANActivityIndicator'
   # Pods for FirstKinder
 
 end

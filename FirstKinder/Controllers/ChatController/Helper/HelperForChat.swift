@@ -19,16 +19,4 @@ extension ChatController {
         floatingButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor,constant: -20).isActive = true
         floatingButton.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -20).isActive = true
     }
-    func configureIndicator() {
-        indicator.color = .black
-        indicator.style = .large
-        indicator.translatesAutoresizingMaskIntoConstraints = false
-        
-        view.addSubview(indicator)
-        indicator.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
-        indicator.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor).isActive = true
-        
-        indicator.hidesWhenStopped = true
-    }
-    
 }

@@ -8,6 +8,7 @@
 import Foundation
 import FirebaseDatabase
 import FirebaseStorage
+import UIKit
 
 let loadFinishProgress: Float = 0.95
 let chatPlaceHoldText = "타인에게 상처를 주는 말은 하지 말아요 :)\n마음이 따뜻해지는 말을 나눠요.❤︎"
@@ -21,3 +22,4 @@ var blockedUserVendors = [String]()
 var blockedUserReasons = [String]()
 var blockedReasonCategories = [String]()
 
+var imgs = [UIImage]()

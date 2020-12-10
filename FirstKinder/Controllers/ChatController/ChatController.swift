@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import ANActivityIndicator
 
 let chatCellReuseIdentifier = "chat cell reuse"
 class ChatController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
@@ -31,19 +32,22 @@ class ChatController: UICollectionViewController, UICollectionViewDelegateFlowLa
     var blockedReasons = [String]()
     var blockReasonCategories = [String]()
     let refreshControl = UIRefreshControl()
-    let indicator = UIActivityIndicatorView()
 
     override func viewDidLoad() {
         configureUI()
         configureCollectionView()
-        configureIndicator()
         
+        let indicator = ANActivityIndicatorView.init(frame: CGRect(x: 0, y: 0, width: 30, height: 30), animationType: .ballPulse, color: .black, padding: .none)
+        indicator.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(indicator)
+        indicator.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
+        indicator.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor).isActive = true
         indicator.startAnimating()
-        
+
         DBUtil.shared.loadChatTexts { loadedChats in
             chats = loadedChats.sorted(by: {$0.timeStamp > $1.timeStamp})
             self.chatReload()
-            self.indicator.stopAnimating()
+            indicator.stopAnimating()
         }
     }
     override func viewDidAppear(_ animated: Bool) {

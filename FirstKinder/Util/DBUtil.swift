@@ -14,38 +14,42 @@ class DBUtil {
     static let shared = DBUtil()
     
     func loadChatTexts(completion: @escaping([Chat]) -> Void) {
-        DB_CHATS.observe(.value) { snapShot in
-            var loadedChats = [Chat]()
-            for child in snapShot.children {
-                guard let snap = child as? DataSnapshot else { return }
-                guard let data = snap.value as? [String: Any] else { return }
-                
-                guard let chatBody = data["chat"] as? String else { return }
-                guard let chatUid = data["uid"] as? String else { return }
-                guard let imgFileName = data["imgFileName"] as? String else { return }
-                guard let timeStamp = data["timeStamp"] as? Int else { return }
-                guard let deviceVendor = data["vendor"] as? String else { return }
-                guard let cateogry = data["category"] as? String else { return }
-                let chat = Chat(chatBody: chatBody, uid: chatUid, imgFileName: imgFileName, timeStamp: timeStamp, vendor: deviceVendor, category: cateogry)
-                loadedChats.append(chat)
+        DispatchQueue.global(qos: .background).async {
+            DB_CHATS.observe(.value) { snapShot in
+                var loadedChats = [Chat]()
+                for child in snapShot.children {
+                    guard let snap = child as? DataSnapshot else { return }
+                    guard let data = snap.value as? [String: Any] else { return }
+                    
+                    guard let chatBody = data["chat"] as? String else { return }
+                    guard let chatUid = data["uid"] as? String else { return }
+                    guard let imgFileName = data["imgFileName"] as? String else { return }
+                    guard let timeStamp = data["timeStamp"] as? Int else { return }
+                    guard let deviceVendor = data["vendor"] as? String else { return }
+                    guard let cateogry = data["category"] as? String else { return }
+                    let chat = Chat(chatBody: chatBody, uid: chatUid, imgFileName: imgFileName, timeStamp: timeStamp, vendor: deviceVendor, category: cateogry)
+                    loadedChats.append(chat)
+                }
+                completion(loadedChats)
             }
-            completion(loadedChats)
         }
     }
     func loadChatImgsFromStorage(_ imgFileName: String, completion: @escaping(URL) -> Void) {
-        STORAGE_USER_UPLOAD_IMGS.child(imgFileName).downloadURL { (url, error) in
-            if error != nil {
-                print("error in download img \(error)")
-            }
-            guard let imgURL = url else { return }
-            let cache = ImageCache.default
-            do {
-                let imgData = try Data(contentsOf: imgURL)
-                guard let img = UIImage(data: imgData) else { return }
-                cache.store(img, forKey: imgFileName)
-                completion(imgURL)
-            } catch {
-                
+        DispatchQueue.global(qos: .background).async {
+            STORAGE_USER_UPLOAD_IMGS.child(imgFileName).downloadURL { (url, error) in
+                if error != nil {
+                    print("error in download img \(error)")
+                }
+                guard let imgURL = url else { return }
+                let cache = ImageCache.default
+                do {
+                    let imgData = try Data(contentsOf: imgURL)
+                    guard let img = UIImage(data: imgData) else { return }
+                    cache.store(img, forKey: imgFileName)
+                    completion(imgURL)
+                } catch {
+                    
+                }
             }
         }
     }
@@ -63,5 +67,32 @@ class DBUtil {
             }
         }
         return image
+    }
+    func loadAllImg() {
+        STORAGE_USER_UPLOAD_IMGS.listAll { (list, error) in
+            if error != nil {
+                print("error in load all imgs \(error)")
+            }
+            DispatchQueue.global(qos: .background).async {
+                for item in list.items {
+                    item.downloadURL { (url, error) in
+                        if error != nil {
+                            print("error in download img \(error)")
+                        }
+                        guard let imgURL = url else { return }
+                        let cache = ImageCache.default
+                        do {
+                            let imgData = try Data(contentsOf: imgURL)
+                            guard let img = UIImage(data: imgData) else { return }
+                            cache.store(img, forKey: item.name)
+                            print(item.name)
+                            imgs.append(img)
+                        } catch {
+                            
+                        }
+                    }
+                }
+            }
+        }
     }
 }

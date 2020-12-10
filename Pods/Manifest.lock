@@ -212,6 +212,7 @@ PODS:
     - abseil/base/base_internal
     - abseil/base/config
     - abseil/meta/type_traits
+  - ANActivityIndicator (1.2.0)
   - BoringSSL-GRPC (0.0.7):
     - BoringSSL-GRPC/Implementation (= 0.0.7)
     - BoringSSL-GRPC/Interface (= 0.0.7)
@@ -310,6 +311,7 @@ PODS:
   - SwiftGifOrigin (1.7.0)
 
 DEPENDENCIES:
+  - ANActivityIndicator
   - Charts
   - Firebase/Database
   - Firebase/Firestore
@@ -323,6 +325,7 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - abseil
+    - ANActivityIndicator
     - BoringSSL-GRPC
     - Charts
     - Firebase
@@ -348,6 +351,7 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   abseil: 6c8eb7892aefa08d929b39f9bb108e5367e3228f
+  ANActivityIndicator: 44a996931d0c554cf157b31056603b23bbdbe76a
   BoringSSL-GRPC: 8edf627ee524575e2f8d19d56f068b448eea3879
   Charts: b1e3a1f5a1c9ba5394438ca3b91bd8c9076310af
   Firebase: ed042590caa0029392257529a8003c25ee82bc18
@@ -371,6 +375,6 @@ SPEC CHECKSUMS:
   RxSwift: 81470a2074fa8780320ea5fe4102807cb7118178
   SwiftGifOrigin: fbd6cf37afcfcf97a5c3db996ddc0492e5c5c145
 
-PODFILE CHECKSUM: e2351cdce05fdb6920cf34aec780ecee62aa2a50
+PODFILE CHECKSUM: fe455a58694b2f76f044e73c144a6657a906fe51
 
 COCOAPODS: 1.9.3

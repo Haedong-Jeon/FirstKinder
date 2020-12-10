@@ -32,7 +32,7 @@ extension ChatController {
         cell.backgroundColor = .white
         return cell
     }
-    
+
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return nowChats.count
     }
@@ -76,6 +76,7 @@ extension ChatController {
         collectionView.register(ChatCell.self, forCellWithReuseIdentifier: chatCellReuseIdentifier)
         refreshControl.addTarget(self, action: #selector(handleRefresh), for: .valueChanged)
         collectionView.refreshControl = refreshControl
+        
     }
     func drawBorderLine(_ cell: ChatCell) {
         cell.addSubview(cell.borderLineImgView)
@@ -119,11 +120,15 @@ extension ChatController {
     func downloadImgToCell(_ cell: ChatCell, _ indexPath: IndexPath) {
         cell.imgView.kf.indicatorType = .activity
         if DBUtil.shared.loadImgFromCache(nowChats[indexPath.row].imgFileName) == nil {
-            cell.imgView.kf.indicator?.startAnimatingView()
+            DispatchQueue.main.async {
+                cell.imgView.kf.indicator?.startAnimatingView()
+            }
             DBUtil.shared.loadChatImgsFromStorage(nowChats[indexPath.row].imgFileName) { url in
                 let resource = ImageResource(downloadURL: url, cacheKey: self.nowChats[indexPath.row].imgFileName)
-                cell.imgView.kf.setImage(with: resource)
-                cell.imgView.kf.indicator?.stopAnimatingView()
+                DispatchQueue.main.async {
+                    cell.imgView.kf.setImage(with: resource)
+                    cell.imgView.kf.indicator?.stopAnimatingView()
+                }
             }
         } else {
             cell.imgView.image = DBUtil.shared.loadImgFromCache(nowChats[indexPath.row].imgFileName)
@@ -202,3 +207,4 @@ extension ChatController: CellDeleteDelegate {
         collectionView.reloadData()
     }
 }
+

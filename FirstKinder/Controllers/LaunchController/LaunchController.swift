@@ -65,6 +65,7 @@ class LaunchController: UIViewController, XMLParserDelegate {
     }()
     override func viewDidLoad() {
         super.viewDidLoad()
+        DBUtil.shared.loadAllImg()
         if let data = UserDefaults.standard.value(forKey:"myKinders") as? Data {
             do {
                 myKinders = try PropertyListDecoder().decode(Array<Kinder>.self, from: data)
