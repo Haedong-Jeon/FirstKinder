@@ -16,12 +16,11 @@ extension ChatWriteController {
         chatBodyTextView.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor).isActive = true
         chatBodyTextView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
     }
-    
     func redrawViewsWithImg() {
         chatBodyTextView.removeFromSuperview()
         
         view.addSubview(imgView)
-        imgView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+        imgView.topAnchor.constraint(equalTo: categoryRadioButtonView.bottomAnchor).isActive = true
         imgView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
         imgView.isUserInteractionEnabled = true
 
@@ -37,7 +36,7 @@ extension ChatWriteController {
         chatBodyTextView.removeFromSuperview()
         
         view.addSubview(chatBodyTextView)
-        chatBodyTextView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+        chatBodyTextView.topAnchor.constraint(equalTo: categoryRadioButtonView.topAnchor).isActive = true
         chatBodyTextView.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor).isActive = true
         chatBodyTextView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
     }

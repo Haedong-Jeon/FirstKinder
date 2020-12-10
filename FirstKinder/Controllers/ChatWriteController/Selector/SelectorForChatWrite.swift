@@ -74,8 +74,15 @@ extension ChatWriteController {
         } else {
             imgFileName = uid
         }
+        if categoryRadioButtonView.firstButton.tintColor == .red {
+            category = "어린이집"
+        } else if categoryRadioButtonView.secondButton.tintColor == .red {
+            category = "육아"
+        } else if categoryRadioButtonView.thirdButton.tintColor == .red {
+            category = "잡담"
+        }
         let timeStamp = Int(NSDate().timeIntervalSince1970)
-        let value: [String: Any] = ["uid": uid, "chat": chatBodyTextView.text!, "imgFileName": imgFileName, "timeStamp": timeStamp, "vendor": deviceVendor]
+        let value: [String: Any] = ["uid": uid, "chat": chatBodyTextView.text!, "imgFileName": imgFileName, "timeStamp": timeStamp, "vendor": deviceVendor, "category": category]
         
         DB_CHATS.child(uid).updateChildValues(value) { (error, ref) in
             if error != nil {

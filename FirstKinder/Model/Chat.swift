@@ -13,5 +13,6 @@ struct Chat {
     var imgFileName: String
     var timeStamp: Int
     var vendor: String
+    var category: String
 }
 var chats = [Chat]()

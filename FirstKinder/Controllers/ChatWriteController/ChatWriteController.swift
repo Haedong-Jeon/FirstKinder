@@ -9,6 +9,7 @@ import UIKit
 
 class ChatWriteController: UIViewController, UITextViewDelegate {
     var categoryRadioButtonView = RadioButtonView()
+    var category = ""
     var chatBodyTextView: UITextView = {
         var textView = UITextView()
         textView.translatesAutoresizingMaskIntoConstraints = false

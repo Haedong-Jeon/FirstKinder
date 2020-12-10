@@ -160,14 +160,24 @@ extension ChatController {
         cell.categoryLabel.topAnchor.constraint(equalTo: cell.faceImgView.bottomAnchor).isActive = true
         cell.categoryLabel.leftAnchor.constraint(equalTo: cell.faceImgView.leftAnchor).isActive = true
         
-        cell.categoryLabel.backgroundColor = .systemIndigo
-        cell.categoryLabel.textColor = .white
-        cell.categoryLabel.textAlignment = .center
-        cell.categoryLabel.text = "어린이집"
+        if nowChats[indexPath.row].category == "어린이집" {
+            cell.categoryLabel.backgroundColor = #colorLiteral(red: 0.8549019694, green: 0.250980407, blue: 0.4784313738, alpha: 1)
+            cell.categoryLabel.textColor = .white
+            cell.categoryLabel.textAlignment = .center
+            cell.categoryLabel.text = "어린이집"
+        } else if nowChats[indexPath.row].category == "육아" {
+            cell.categoryLabel.backgroundColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
+            cell.categoryLabel.textColor = .white
+            cell.categoryLabel.textAlignment = .center
+            cell.categoryLabel.text = "육아"
+        } else if nowChats[indexPath.row].category == "잡담" {
+            cell.categoryLabel.backgroundColor = #colorLiteral(red: 0.3647058904, green: 0.06666667014, blue: 0.9686274529, alpha: 1)
+            cell.categoryLabel.textColor = .white
+            cell.categoryLabel.textAlignment = .center
+            cell.categoryLabel.text = "잡담"
+        }
     }
-    
 }
-
 extension ChatController: CellDeleteDelegate {
     func delete(indexPath: IndexPath) {
         DB_CHATS.child(nowChats[indexPath.row].uid).removeValue()
