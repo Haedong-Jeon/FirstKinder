@@ -13,6 +13,7 @@ extension ChatDetailController {
             return UICollectionReusableView()
         }
         header.chat = self.chat
+        header.backgroundColor = .white
         header.setUp()
         if self.chat?.imgFileName == "NO IMG" {
             header.configureUIWithoutImg()
@@ -35,7 +36,7 @@ extension ChatDetailController {
     }
     func getEstimatedHeightByDummyHeader() -> CGFloat {
         let width = view.frame.width - 10
-        let estimatedHeight: CGFloat = 800.0
+        let estimatedHeight: CGFloat = 10000000
         let dummyHeader = ChatDetailHeader(frame: CGRect(x: 0, y: 0, width: width, height: estimatedHeight))
         dummyHeader.chat = chat
         dummyHeader.setUp()
