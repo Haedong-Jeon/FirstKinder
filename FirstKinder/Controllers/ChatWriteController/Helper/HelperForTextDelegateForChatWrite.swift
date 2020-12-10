@@ -16,12 +16,6 @@ extension ChatWriteController {
             chatBodyTextViewSetUp()
         }
     }
-    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        if text == "\n" {
-            chatBodyTextView.resignFirstResponder()
-        }
-        return true
-    }
     func chatBodyTextViewSetUp() {
         if chatBodyTextView.text == chatPlaceHoldText {
             chatBodyTextView.text = ""
