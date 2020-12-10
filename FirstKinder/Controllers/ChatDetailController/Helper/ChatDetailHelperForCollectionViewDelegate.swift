@@ -31,6 +31,21 @@ extension ChatDetailController {
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize(width: view.frame.width, height: 250)
+        return CGSize(width: view.frame.width - 10, height: getEstimatedHeightByDummyHeader())
+    }
+    func getEstimatedHeightByDummyHeader() -> CGFloat {
+        let width = view.frame.width - 10
+        let estimatedHeight: CGFloat = 800.0
+        let dummyHeader = ChatDetailHeader(frame: CGRect(x: 0, y: 0, width: width, height: estimatedHeight))
+        dummyHeader.chat = chat
+        dummyHeader.setUp()
+        if self.chat?.imgFileName == "NO IMG" {
+            dummyHeader.configureUIWithoutImg()
+        } else {
+            dummyHeader.configureUIWithImg()
+        }
+        dummyHeader.layoutIfNeeded()
+        let estimateSize = dummyHeader.systemLayoutSizeFitting(CGSize(width: width, height: estimatedHeight))
+        return estimateSize.height
     }
 }
