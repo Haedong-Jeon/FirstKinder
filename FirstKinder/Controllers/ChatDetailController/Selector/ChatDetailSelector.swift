@@ -74,6 +74,6 @@ extension ChatDetailController {
         }
         blockedUserReasons = reasons
         blockedUserReasons.append(reason)
-        UserDefaults.standard.setValue(blockedUserVendors, forKey: "blockedReasons")
+        UserDefaults.standard.setValue(blockedUserReasons, forKey: "blockedReasons")
     }
 }
