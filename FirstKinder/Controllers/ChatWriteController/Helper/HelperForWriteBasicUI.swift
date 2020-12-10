@@ -11,7 +11,8 @@ extension ChatWriteController {
     func configureUI() {
         view.backgroundColor = .white
         view.addSubview(chatBodyTextView)
-        chatBodyTextView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+        drawCategoryRadioButtonsView()
+        chatBodyTextView.topAnchor.constraint(equalTo: categoryRadioButtonView.bottomAnchor).isActive = true
         chatBodyTextView.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor).isActive = true
         chatBodyTextView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
     }
@@ -51,5 +52,14 @@ extension ChatWriteController {
         
         eraseImgButton.topAnchor.constraint(equalTo: imgView.topAnchor).isActive = true
         eraseImgButton.rightAnchor.constraint(equalTo: imgView.rightAnchor).isActive = true
+    }
+    func drawCategoryRadioButtonsView() {
+        categoryRadioButtonView.translatesAutoresizingMaskIntoConstraints = false
+        categoryRadioButtonView.backgroundColor = .lightGray
+        view.addSubview(categoryRadioButtonView)
+        categoryRadioButtonView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+        categoryRadioButtonView.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor).isActive = true
+        categoryRadioButtonView.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        categoryRadioButtonView.setButtonTitles(firstTitle: "어린이집", secondTitle: "육아", thirdTitle: "잡담")
     }
 }

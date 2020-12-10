@@ -40,6 +40,7 @@
 		E960ACEC257891D500985873 /* DetailHelperForMyKinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E960ACEB257891D500985873 /* DetailHelperForMyKinder.swift */; };
 		E960ACEF2578965700985873 /* MyKinderHelpersForCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E960ACEE2578965700985873 /* MyKinderHelpersForCollectionView.swift */; };
 		E960ACF22578978E00985873 /* MyKindersForBasicUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E960ACF12578978E00985873 /* MyKindersForBasicUI.swift */; };
+		E9B448CF2581BCB10013DA2E /* RadioButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9B448CE2581BCB10013DA2E /* RadioButtonView.swift */; };
 		E9D633822574915F00F6C3ED /* ListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D633812574915F00F6C3ED /* ListController.swift */; };
 		E9D6339C2574DB6900F6C3ED /* CookieRun Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E9D633992574DB6500F6C3ED /* CookieRun Black.ttf */; };
 		E9D6339E2574DB6D00F6C3ED /* CookieRun Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E9D6339A2574DB6500F6C3ED /* CookieRun Bold.ttf */; };
@@ -91,6 +92,7 @@
 		E960ACEB257891D500985873 /* DetailHelperForMyKinder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailHelperForMyKinder.swift; sourceTree = "<group>"; };
 		E960ACEE2578965700985873 /* MyKinderHelpersForCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyKinderHelpersForCollectionView.swift; sourceTree = "<group>"; };
 		E960ACF12578978E00985873 /* MyKindersForBasicUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyKindersForBasicUI.swift; sourceTree = "<group>"; };
+		E9B448CE2581BCB10013DA2E /* RadioButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioButtonView.swift; sourceTree = "<group>"; };
 		E9D633812574915F00F6C3ED /* ListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListController.swift; sourceTree = "<group>"; };
 		E9D633992574DB6500F6C3ED /* CookieRun Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "CookieRun Black.ttf"; sourceTree = "<group>"; };
 		E9D6339A2574DB6500F6C3ED /* CookieRun Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "CookieRun Bold.ttf"; sourceTree = "<group>"; };
@@ -153,6 +155,7 @@
 		E908895E257471D800223BAA /* FirstKinder */ = {
 			isa = PBXGroup;
 			children = (
+				E9B448CD2581BCA50013DA2E /* View */,
 				E95B8A8C257F9A2B002EE9BC /* Util */,
 				E95B8A06257F1FEC002EE9BC /* FirstKinder.entitlements */,
 				E960ACBC25774A7C00985873 /* Constant */,
@@ -311,6 +314,14 @@
 			children = (
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		E9B448CD2581BCA50013DA2E /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E9B448CE2581BCB10013DA2E /* RadioButtonView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		E9D633802574915200F6C3ED /* ListController */ = {
@@ -521,6 +532,7 @@
 				E95B8A3E257F63D7002EE9BC /* HelperForWriteImageSelect.swift in Sources */,
 				E960ACBE25774A8700985873 /* Constant.swift in Sources */,
 				E9D633A42575C4AB00F6C3ED /* ListHelperForCollectionView.swift in Sources */,
+				E9B448CF2581BCB10013DA2E /* RadioButtonView.swift in Sources */,
 				E9D633AC2575DC6300F6C3ED /* DetailController.swift in Sources */,
 				E960ACF22578978E00985873 /* MyKindersForBasicUI.swift in Sources */,
 				E95B8A28257F2A59002EE9BC /* HelperForWriteBasicUI.swift in Sources */,

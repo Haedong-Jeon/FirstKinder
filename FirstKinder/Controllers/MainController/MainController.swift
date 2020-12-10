@@ -29,7 +29,7 @@ class MainController: UITabBarController, UITabBarControllerDelegate {
         
         let parentsChatController = ChatController(collectionViewLayout: UICollectionViewFlowLayout())
         parentsChatController.tabBarItem.image = UIImage(systemName: "quote.bubble.fill")
-        parentsChatController.tabBarItem.title = "육아 이야기"
+        parentsChatController.tabBarItem.title = "이야기"
         
         let myKindersController = MyKindersController(collectionViewLayout: UICollectionViewFlowLayout())
         myKindersController.tabBarItem.image = UIImage(systemName: "heart.fill")
