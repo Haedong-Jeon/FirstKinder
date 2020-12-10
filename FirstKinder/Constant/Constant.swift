@@ -18,3 +18,4 @@ let STORAGE = Storage.storage().reference()
 let STORAGE_USER_UPLOAD_IMGS = STORAGE.child("userUploadImgs")
 
 var blockedUserVendors = [String]()
+var blockedUserReasons = [String]()

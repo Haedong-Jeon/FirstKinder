@@ -40,6 +40,23 @@ extension ChatDetailController {
         }
     }
     func blockThisUser() {
+        var reason = ""
+        let addReasonAlert = UIAlertController(title: "차단", message: "이유가 뭔가요?", preferredStyle: .alert)
+        addReasonAlert.addTextField { textField in
+            textField.placeholder = "이 사람 글이 보기 싫은 이유를 알려주세요."
+        }
+        let okButton = UIAlertAction(title: "확인", style: .default) { ACTION in
+            self.localSaveBlockedUser()
+            reason = addReasonAlert.textFields?[0].text ?? "이유를 안 알려주셨어요."
+            self.localSaveBlockedReason(reason: reason)
+        }
+        addReasonAlert.addAction(okButton)
+        self.present(addReasonAlert, animated: true, completion: nil)
+    }
+    func reportThisUser() {
+        
+    }
+    func localSaveBlockedUser() {
         guard let blocks = UserDefaults.standard.array(forKey: "blockedUsers") as? [String] else {
             blockedUserVendors.append(self.chat!.vendor)
             UserDefaults.standard.setValue(blockedUserVendors, forKey: "blockedUsers")
@@ -49,7 +66,14 @@ extension ChatDetailController {
         blockedUserVendors.append(self.chat!.vendor)
         UserDefaults.standard.setValue(blockedUserVendors, forKey: "blockedUsers")
     }
-    func reportThisUser() {
-        
+    func localSaveBlockedReason(reason: String) {
+        guard let reasons = UserDefaults.standard.array(forKey: "blockedReasons") as? [String] else {
+            blockedUserReasons.append(reason)
+            UserDefaults.standard.setValue(blockedUserReasons, forKey: "blockedReasons")
+            return
+        }
+        blockedUserReasons = reasons
+        blockedUserReasons.append(reason)
+        UserDefaults.standard.setValue(blockedUserVendors, forKey: "blockedReasons")
     }
 }

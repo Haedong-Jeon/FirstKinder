@@ -20,4 +20,32 @@ extension ChatController {
         
         self.present(askWriteAlert, animated: true, completion: nil)
     }
+    @objc func handleGearTap() {
+        let actionSheetAlert = UIAlertController()
+        let button1 = UIAlertAction(title: "차단 목록 관리 할거에요", style: .default, handler: nil)
+        var button2 = UIAlertAction()
+        if !self.isShowingMyChats {
+            button2 = UIAlertAction(title: "내가 쓴 글만 모아 볼거에요", style: .default) { ACTION in
+                self.nowChats = self.nowChats
+                    .filter({$0.vendor == UIDevice.current.identifierForVendor?.uuidString})
+                self.isShowingMyChats = true
+            }
+        } else {
+            button2 = UIAlertAction(title: "전체 글 볼거에요", style: .default) { ACTION in
+                if self.blockedUsers.isEmpty {
+                    self.nowChats = chats
+                } else {
+                    self.loadChatWithoutBlockedUsers()
+                }
+                self.isShowingMyChats = false
+            }
+        }
+        let button3 = UIAlertAction(title: "닫기", style: .cancel, handler: nil)
+        
+        actionSheetAlert.addAction(button1)
+        actionSheetAlert.addAction(button2)
+        actionSheetAlert.addAction(button3)
+        
+        self.present(actionSheetAlert, animated: true, completion: nil)
+    }
 }

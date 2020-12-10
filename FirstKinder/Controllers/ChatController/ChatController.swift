@@ -14,7 +14,21 @@ class ChatController: UICollectionViewController, UICollectionViewDelegateFlowLa
             collectionView.reloadData()
         }
     }
+    var floatingButton: UIButton = {
+        var button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.widthAnchor.constraint(equalToConstant: 50).isActive = true
+        button.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        button.layer.cornerRadius = 25
+        button.setTitle("+", for: .normal)
+        button.backgroundColor = #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1)
+        button.setTitleColor(.white, for: .normal)
+        button.addTarget(self, action: #selector(handleChatTap), for: .touchUpInside)
+        return button
+    }()
+    var isShowingMyChats = false
     var blockedUsers = [String]()
+    var blockedReasons = [String]()
     let refreshControl = UIRefreshControl()
     let indicator = UIActivityIndicatorView()
 
@@ -38,12 +52,17 @@ class ChatController: UICollectionViewController, UICollectionViewDelegateFlowLa
         }
         self.blockedUsers = blockedUsers
         self.blockedUsers.forEach({print("blocked user: \($0)")})
+        guard let blockedReasons = UserDefaults.standard.array(forKey: "blockedReasons") as? [String] else {
+            return
+        }
+        self.blockedReasons = blockedReasons
+        self.blockedReasons.forEach({print("blocked reason: \($0)")})
         chatReload()
     }
     @objc func handleRefresh() {
         chatReload()
     }
-    func removeBlockedUser() {
+    func loadChatWithoutBlockedUsers() {
         nowChats.removeAll()
         for chat in chats {
             var blocked = false
@@ -63,7 +82,7 @@ class ChatController: UICollectionViewController, UICollectionViewDelegateFlowLa
         if self.blockedUsers.isEmpty {
             nowChats = chats
         } else {
-            removeBlockedUser()
+            loadChatWithoutBlockedUsers()
         }
         collectionView.refreshControl?.endRefreshing()
     }
