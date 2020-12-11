@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 import FirebaseDatabase
 import FirebaseStorage
 
@@ -48,7 +49,54 @@ extension ChatWriteController {
         indicator.color = .black
         
         indicator.startAnimating()
+        // 게시글 수정하는 상황
+        if editingChat != nil {
+            view.isUserInteractionEnabled = false
+            DB_CHATS.child(editingChat!.uid).updateChildValues(["chat": chatBodyTextView.text!])
+            DB_CHATS.child(editingChat!.uid).updateChildValues(["category": category])
+            
+            if editingChat!.imgFileName != "NO IMG" {
+                //이미지가 있었는데 지운 경우
+                if imgView.image == nil {
+                    ImageCache.default.removeImage(forKey: editingChat!.imgFileName)
+                    DB_CHATS.child(editingChat!.uid).updateChildValues(["imgFileName": "NO IMG"])
+                    STORAGE_USER_UPLOAD_IMGS.child(editingChat!.imgFileName).delete { (error) in
+                        if error != nil {
+                            print("error in editing chat image \(error)")
+                        }
+                        self.navigationController?.popViewController(animated: true)
+                    }
+                } else {
+                    //이미지가 있었는데 교체한 경우
+                    if imgView.image != nil {
+                        STORAGE_USER_UPLOAD_IMGS.child(editingChat!.imgFileName).delete(completion: nil)
+                        ImageCache.default.removeImage(forKey: editingChat!.imgFileName)
+                        uploadImg(editingChat!.uid, editingChat!.imgFileName) {
+                            self.showSuccessMsg()
+                            indicator.stopAnimating()
+                            self.view.isUserInteractionEnabled = true
+                            self.navigationController?.popViewController(animated: true)
+                        }
+                    }
+                }
+            } else {
+                //이미지가 없었는데 생긴 경우
+                let imgFileName = editingChat!.uid
+                DB_CHATS.child(editingChat!.uid).updateChildValues(["imgFileName": imgFileName])
+                uploadImg(editingChat!.uid, imgFileName) {
+                    self.showSuccessMsg()
+                    indicator.stopAnimating()
+                    self.view.isUserInteractionEnabled = true
+                    self.navigationController?.popViewController(animated: true)
+                }
+            }
+            indicator.stopAnimating()
+            view.isUserInteractionEnabled = true
+            self.navigationController?.popViewController(animated: true)
+            return
+        }
         
+        //새 게시글 쓰는 상황
         view.isUserInteractionEnabled = false
         let uid = NSUUID().uuidString
         let imgFileName = uid
