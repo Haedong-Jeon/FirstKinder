@@ -14,5 +14,6 @@ struct Chat {
     var timeStamp: Int
     var vendor: String
     var category: String
+    var commentCount: Int
 }
 var chats = [Chat]()

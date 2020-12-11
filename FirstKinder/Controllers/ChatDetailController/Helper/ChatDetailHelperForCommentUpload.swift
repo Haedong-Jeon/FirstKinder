@@ -26,6 +26,7 @@ extension ChatDetailController {
         if imgView.image == nil {
             uploadText(uid) {
                 self.showSuccessMsg()
+                indicator.stopAnimating()
             }
         } else {
             uploadImg(uid, imgFileName) {
@@ -76,8 +77,14 @@ extension ChatDetailController {
         let showSuccess = UIAlertController(title: "댓글", message: "댓글이 업로드 됐어요!", preferredStyle: .alert)
         let okButton = UIAlertAction(title: "확인", style: .default) { ACTION in
             self.view.isUserInteractionEnabled = true
+            self.commentCountUp()
         }
         showSuccess.addAction(okButton)
         self.present(showSuccess, animated: true, completion: nil)
+    }
+    func commentCountUp() {
+        let commentCount = self.thisComments.count
+        let value: [String: Any] = ["uid": self.chat!.uid, "chat": self.chat!.chatBody, "imgFileName": self.chat!.imgFileName, "timeStamp": self.chat!.timeStamp, "vendor": self.chat!.vendor, "category": self.chat!.category, "commentCount": commentCount]
+        DB_CHATS.child(self.chat!.uid).updateChildValues(value)
     }
 }

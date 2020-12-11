@@ -26,7 +26,7 @@ extension ChatController {
         } else {
             drawCellWithoutImg(cell)
         }
-        cell.addCommentButton()
+        cell.drawCommentCount(nowChats[indexPath.row].commentCount)
         cell.backgroundColor = .white
         return cell
     }
@@ -36,7 +36,7 @@ extension ChatController {
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let height = getEstimatedHeightFromDummyCell(indexPath)
-        return CGSize(width: collectionView.frame.width - 10, height: height)
+        return CGSize(width: collectionView.frame.width, height: height)
     }
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let chatDetailController = ChatDetailController(collectionViewLayout: UICollectionViewFlowLayout())
@@ -73,7 +73,6 @@ extension ChatController {
         collectionView.register(ChatCell.self, forCellWithReuseIdentifier: chatCellReuseIdentifier)
         refreshControl.addTarget(self, action: #selector(handleRefresh), for: .valueChanged)
         collectionView.refreshControl = refreshControl
-        
     }
     func drawBorderLine(_ cell: ChatCell) {
         cell.addSubview(cell.borderLineImgView)

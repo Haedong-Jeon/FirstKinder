@@ -22,6 +22,7 @@ extension ChatDetailController {
         collectionView.register(ChatDetailHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerReuseIdentifier )
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+
         collectionView.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor).isActive = true
         collectionView.bottomAnchor.constraint(equalTo: commentTextView.topAnchor).isActive = true
         

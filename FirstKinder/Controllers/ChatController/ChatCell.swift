@@ -8,7 +8,6 @@
 import UIKit
 
 class ChatCell: UICollectionViewCell {
-    let cellCommentButton = UIButton(type: .system)
     var thisIdxPath: IndexPath?
     var categoryLabel: UILabel = {
         var label = UILabel()
@@ -73,28 +72,16 @@ class ChatCell: UICollectionViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    func drawCommentCount() {
+    func drawCommentCount(_ count: Int) {
         addSubview(commentCountLabel)
         commentCountLabel.translatesAutoresizingMaskIntoConstraints = false
-        commentCountLabel.leftAnchor.constraint(equalTo: cellCommentButton.rightAnchor, constant: 5).isActive = true
-        commentCountLabel.centerYAnchor.constraint(equalTo: cellCommentButton.centerYAnchor).isActive = true
+        commentCountLabel.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor, constant: 5).isActive = true
+        commentCountLabel.topAnchor.constraint(equalTo: borderLineImgView.bottomAnchor).isActive = true
         commentCountLabel.heightAnchor.constraint(equalToConstant: 30).isActive = true
         commentCountLabel.widthAnchor.constraint(equalToConstant: 50).isActive = true
         commentCountLabel.font = UIFont.systemFont(ofSize: 15)
         commentCountLabel.textColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
-        commentCountLabel.text = "댓글 0"
-    }
-    
-    func addCommentButton() {
-        cellCommentButton.setImage(UIImage(systemName: "bubble.right"), for: .normal)
-        cellCommentButton.tintColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
-        cellCommentButton.translatesAutoresizingMaskIntoConstraints = false
-        cellCommentButton.addTarget(self, action: #selector(handleComment), for: .touchUpInside)
-        addSubview(cellCommentButton)
-        cellCommentButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -5).isActive = true
-        cellCommentButton.leftAnchor.constraint(equalTo: leftAnchor, constant: 10).isActive = true
-        
-        drawCommentCount()
+        commentCountLabel.text = "댓글 \(count)"
     }
     @objc func handleComment() {
         

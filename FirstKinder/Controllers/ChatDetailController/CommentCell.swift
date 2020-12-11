@@ -12,6 +12,7 @@ protocol CommentDeleteDelegate: class {
 }
 class CommentCell: UICollectionViewCell {
     let cellDeleteButton = UIButton(type: .system)
+    let editButton = UIButton(type: .system)
     var deleteDelegate: CommentDeleteDelegate?
     var thisIdxPath: IndexPath?
     var timeLabel: UILabel = {
@@ -53,6 +54,13 @@ class CommentCell: UICollectionViewCell {
         imgView.translatesAutoresizingMaskIntoConstraints = false
         return imgView
     }()
+    var borderLineImgView: UIImageView = {
+        var imgView = UIImageView()
+        imgView.translatesAutoresizingMaskIntoConstraints = false
+        imgView.backgroundColor = #colorLiteral(red: 0.9293304086, green: 0.929463923, blue: 0.9293010831, alpha: 1)
+        imgView.heightAnchor.constraint(equalToConstant: 1).isActive = true
+        return imgView
+    }()
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
@@ -60,13 +68,30 @@ class CommentCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     func addDeleteButton() {
-        cellDeleteButton.setImage(UIImage(systemName: "trash"), for: .normal)
-        cellDeleteButton.tintColor = .black
+        cellDeleteButton.widthAnchor.constraint(equalToConstant: 60).isActive = true
+        cellDeleteButton.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        cellDeleteButton.layer.cornerRadius = 5
+        cellDeleteButton.setTitle("삭제", for: .normal)
+        cellDeleteButton.setTitleColor(.white, for: .normal)
+        cellDeleteButton.backgroundColor = .red
         cellDeleteButton.translatesAutoresizingMaskIntoConstraints = false
         cellDeleteButton.addTarget(self, action: #selector(handleDelete), for: .touchUpInside)
         addSubview(cellDeleteButton)
         cellDeleteButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -2).isActive = true
         cellDeleteButton.rightAnchor.constraint(equalTo: rightAnchor, constant: -10).isActive = true
+    }
+    func addEditButton() {
+        editButton.widthAnchor.constraint(equalToConstant: 60).isActive = true
+        editButton.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        editButton.layer.cornerRadius = 5
+        editButton.setTitle("수정", for: .normal)
+        editButton.setTitleColor(.white, for: .normal)
+        editButton.backgroundColor = .black
+        editButton.translatesAutoresizingMaskIntoConstraints = false
+        editButton.addTarget(self, action: #selector(handleDelete), for: .touchUpInside)
+        addSubview(editButton)
+        editButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -2).isActive = true
+        editButton.rightAnchor.constraint(equalTo: cellDeleteButton.leftAnchor, constant: -10).isActive = true
     }
     @objc func handleDelete() {
         guard let deleteIndexPath = self.thisIdxPath else { return }

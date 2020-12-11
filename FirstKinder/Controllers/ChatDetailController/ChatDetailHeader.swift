@@ -66,6 +66,14 @@ class ChatDetailHeader: UICollectionReusableView {
         imgView.heightAnchor.constraint(equalToConstant: 1).isActive = true
         return imgView
     }()
+    lazy var commentCountLabel: UILabel = {
+        var label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = .gray
+        label.font = UIFont.systemFont(ofSize: 15)
+        label.text = "댓글 0"
+        return label
+    }()
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
@@ -81,6 +89,7 @@ class ChatDetailHeader: UICollectionReusableView {
         drawTime()
         drawVendor()
         drawCategoryLabel()
+        drawCommentCountLabel()
     }
     func setTime() {
         let now = Int(NSDate().timeIntervalSince1970)
@@ -114,7 +123,7 @@ class ChatDetailHeader: UICollectionReusableView {
         imgView.leftAnchor.constraint(equalTo: leftAnchor, constant: 10).isActive = true
         imgView.rightAnchor.constraint(equalTo: rightAnchor, constant: -10).isActive = true
         imgView.heightAnchor.constraint(equalToConstant: 300).isActive = true
-        imgView.bottomAnchor.constraint(equalTo: borderLineImgView.topAnchor, constant: -10).isActive = true
+        imgView.bottomAnchor.constraint(equalTo: commentCountLabel.topAnchor, constant: -10).isActive = true
 
         imgView.layer.borderWidth = 1
         imgView.layer.borderColor = UIColor.lightGray.cgColor
@@ -130,7 +139,7 @@ class ChatDetailHeader: UICollectionReusableView {
         addSubview(chatBodyLabel)
         chatBodyLabel.topAnchor.constraint(equalTo: categoryLabel.bottomAnchor, constant: 10).isActive = true
         chatBodyLabel.widthAnchor.constraint(equalTo: safeAreaLayoutGuide.widthAnchor).isActive = true
-        chatBodyLabel.bottomAnchor.constraint(equalTo: borderLineImgView.bottomAnchor, constant: -10).isActive = true
+        chatBodyLabel.bottomAnchor.constraint(equalTo: commentCountLabel.topAnchor, constant: -10).isActive = true
     }
     func drawCategoryLabel() {
         addSubview(categoryLabel)
@@ -171,7 +180,13 @@ class ChatDetailHeader: UICollectionReusableView {
     func drawBorderLine() {
         addSubview(borderLineImgView)
         borderLineImgView.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
-        borderLineImgView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -30).isActive = true
+        borderLineImgView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+    }
+    func drawCommentCountLabel() {
+        addSubview(commentCountLabel)
+        commentCountLabel.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
+        commentCountLabel.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        commentCountLabel.bottomAnchor.constraint(equalTo: borderLineImgView.topAnchor).isActive = true
     }
     func downloadImg(imgFileName: String) {
         imgView.kf.indicatorType = .activity

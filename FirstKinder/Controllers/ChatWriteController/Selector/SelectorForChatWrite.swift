@@ -82,7 +82,7 @@ extension ChatWriteController {
             category = "잡담"
         }
         let timeStamp = Int(NSDate().timeIntervalSince1970)
-        let value: [String: Any] = ["uid": uid, "chat": chatBodyTextView.text!, "imgFileName": imgFileName, "timeStamp": timeStamp, "vendor": deviceVendor, "category": category]
+        let value: [String: Any] = ["uid": uid, "chat": chatBodyTextView.text!, "imgFileName": imgFileName, "timeStamp": timeStamp, "vendor": deviceVendor, "category": category, "commentCount": 0]
         
         DB_CHATS.child(uid).updateChildValues(value) { (error, ref) in
             if error != nil {
