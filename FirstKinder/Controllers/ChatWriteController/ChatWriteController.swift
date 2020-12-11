@@ -6,9 +6,20 @@
 //
 
 import UIKit
+import Kingfisher
 
 class ChatWriteController: UIViewController, UITextViewDelegate {
     var categoryRadioButtonView = RadioButtonView()
+    var editingChat: Chat?
+    override var isEditing: Bool {
+        didSet {
+            chatBodyTextView.text = editingChat?.chatBody
+            category = editingChat?.category ?? "어린이집"
+            if editingChat?.imgFileName != "NO IMG" {
+                imgView.image = DBUtil.shared.loadImgFromCache(editingChat!.imgFileName)
+            }
+        }
+    }
     var category = ""
     var chatBodyTextView: UITextView = {
         var textView = UITextView()
@@ -56,5 +67,12 @@ class ChatWriteController: UIViewController, UITextViewDelegate {
         let uploadButton = UIBarButtonItem(title: "완료❤︎", style: .plain, target: self, action: #selector(handleUpload))
         self.navigationController?.navigationBar.topItem?.rightBarButtonItem = uploadButton
 
+        if editingChat != nil {
+            if imgView.image != nil {
+                redrawViewsWithImg()
+            } else {
+                redrawViewsWithoutImg()
+            }
+        }
     }
 }

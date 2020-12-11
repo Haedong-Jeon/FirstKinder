@@ -12,7 +12,9 @@ extension ChatDetailController {
         if self.chat?.vendor == UIDevice.current.identifierForVendor?.uuidString {
             //글 쓴 사람임.
             let actionAlertController = UIAlertController()
-            let button1 = UIAlertAction(title: "수정할게요", style: .default, handler: nil)
+            let button1 = UIAlertAction(title: "수정할게요", style: .default) { ACTION in
+                self.editThis()
+            }
             let button2 = UIAlertAction(title: "삭제할게요", style: .default) { ACTION in
                 self.deleteThis()
             }
@@ -87,6 +89,13 @@ extension ChatDetailController {
             }
         })
         navigationController?.popViewController(animated: true)
+    }
+    func editThis() {
+        var editWriteController = ChatWriteController()
+        editWriteController.editingChat = self.chat
+        editWriteController.isEditing = true
+        
+        navigationController?.pushViewController(editWriteController, animated: true)
     }
     func blockThisUser() {
         var category = ""
