@@ -13,7 +13,6 @@ extension ChatController {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: chatCellReuseIdentifier, for: indexPath) as? ChatCell else {
             return UICollectionViewCell()
         }
-        cell.deleteDelegate = self
         cell.thisIdxPath = indexPath
         cell.imgView.removeFromSuperview()
         cell.chatBodyLabel.removeFromSuperview()
@@ -27,7 +26,6 @@ extension ChatController {
         } else {
             drawCellWithoutImg(cell)
         }
-        addDeleteButtonToCell(cell, indexPath)
         cell.addCommentButton()
         cell.backgroundColor = .white
         return cell
@@ -43,7 +41,6 @@ extension ChatController {
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let chatDetailController = ChatDetailController(collectionViewLayout: UICollectionViewFlowLayout())
         chatDetailController.chat = nowChats[indexPath.row]
-        
         let transition = CATransition()
         transition.duration = 0.3
         transition.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
@@ -106,16 +103,6 @@ extension ChatController {
         cell.chatBodyLabel.topAnchor.constraint(equalTo: cell.categoryLabel.bottomAnchor, constant: 10).isActive = true
         cell.chatBodyLabel.widthAnchor.constraint(equalTo: cell.safeAreaLayoutGuide.widthAnchor).isActive = true
         cell.chatBodyLabel.bottomAnchor.constraint(equalTo: cell.borderLineImgView.topAnchor, constant: -10).isActive = true
-    }
-    
-    func addDeleteButtonToCell(_ cell: ChatCell, _ indexPath: IndexPath) {
-        cell.addDeleteButton()
-        cell.cellDeleteButton.isUserInteractionEnabled = false
-        cell.cellDeleteButton.isHidden = true
-        if nowChats[indexPath.row].vendor == UIDevice.current.identifierForVendor?.uuidString {
-            cell.cellDeleteButton.isUserInteractionEnabled = true
-            cell.cellDeleteButton.isHidden = false
-        }
     }
     func downloadImgToCell(_ cell: ChatCell, _ indexPath: IndexPath) {
         cell.imgView.kf.indicatorType = .activity
@@ -194,17 +181,3 @@ extension ChatController {
         }
     }
 }
-extension ChatController: CellDeleteDelegate {
-    func delete(indexPath: IndexPath) {
-        DB_CHATS.child(nowChats[indexPath.row].uid).removeValue()
-        STORAGE_USER_UPLOAD_IMGS.child(nowChats[indexPath.row].uid).delete { error in
-            print("이미지 삭제 에러 -\(error)")
-        }
-        nowChats.remove(at: indexPath.row)
-        if isShowingMyChats {
-            isShowingMyChats = false
-        }
-        collectionView.reloadData()
-    }
-}
-

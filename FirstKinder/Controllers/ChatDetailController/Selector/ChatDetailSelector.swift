@@ -41,11 +41,51 @@ extension ChatDetailController {
             self.present(actionAlertController, animated: true, completion: nil)
         }
     }
+    @objc func keyBoardCameraButtonTap() {
+        imgPicker.sourceType = .camera
+        present(imgPicker, animated: true, completion: nil)
+    }
+    @objc func keyBoardPhotoButtonTap() {
+        imgPicker.sourceType = .photoLibrary
+        present(imgPicker, animated: true, completion: nil)
+    }
+    @objc func keyBoardDoneButtonTap() {
+        view.endEditing(true)
+    }
+    @objc func handleEraseImgTap() {
+        if imgView.image != nil {
+            imgView.image = nil
+            redrawViewsWithoutImg()
+        }
+    }
+    @objc func handleUploadTap() {
+        let askAlert = UIAlertController(title: "댓글", message: "댓글을 업로드 할까요?", preferredStyle: .alert)
+        let okButton = UIAlertAction(title: "네", style: .default) { ACTION in
+            self.commentUpload()
+        }
+        let cancelButton = UIAlertAction(title: "아니오", style: .cancel, handler: nil)
+        askAlert.addAction(okButton)
+        askAlert.addAction(cancelButton)
+        
+        self.present(askAlert, animated: true, completion: nil)
+    }
     func deleteThis() {
+        var deleteCommentUid = [String]()
+        comments.forEach({
+            if $0.targetChatUid == chat!.uid {
+                deleteCommentUid.append($0.uid)
+            }
+        })
         DB_CHATS.child(chat!.uid).removeValue()
         STORAGE_USER_UPLOAD_IMGS.child(chat!.uid).delete { error in
             print("이미지 삭제 에러 -\(error)")
         }
+        deleteCommentUid.forEach({
+            DB_COMMENTS.child($0).removeValue()
+            STORAGE_COMMENT_IMGS.child($0).delete { (error) in
+                //NOTHING
+            }
+        })
         navigationController?.popViewController(animated: true)
     }
     func blockThisUser() {

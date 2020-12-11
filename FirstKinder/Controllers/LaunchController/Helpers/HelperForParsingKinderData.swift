@@ -74,6 +74,7 @@ extension LaunchController {
             .subscribe(onNext: {
                 if $0.isOn != "폐지" {
                     kinders.append($0)
+                    print($0.title)
                 }
                 self.kinderLabel.text = "데이터 확인..." + $0.title
             },onCompleted: {

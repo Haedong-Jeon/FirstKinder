@@ -18,6 +18,8 @@
 		E9091F07257F1383009782BB /* SelectorForChat.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9091F06257F1383009782BB /* SelectorForChat.swift */; };
 		E90A2F3C257F03BA0066C9B5 /* heart.gif in Resources */ = {isa = PBXBuildFile; fileRef = E90A2F3B257F03B90066C9B5 /* heart.gif */; };
 		E90A2F42257F0FE10066C9B5 /* ChatController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90A2F41257F0FE10066C9B5 /* ChatController.swift */; };
+		E93A527C2582F4F6006E5F54 /* ChatDetailHelperForImageSelect.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A527B2582F4F6006E5F54 /* ChatDetailHelperForImageSelect.swift */; };
+		E93A527F2582FBFD006E5F54 /* ChatDetailHelperForCommentUpload.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A527E2582FBFD006E5F54 /* ChatDetailHelperForCommentUpload.swift */; };
 		E93B13332581E69F00A22FF6 /* ChatDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93B13322581E69F00A22FF6 /* ChatDetailController.swift */; };
 		E93B13372581E6EE00A22FF6 /* ChatDetailHelperForBasicUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93B13362581E6EE00A22FF6 /* ChatDetailHelperForBasicUI.swift */; };
 		E93B75CD2576071B00D52A24 /* DetailHelpersForBasicUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93B75CC2576071B00D52A24 /* DetailHelpersForBasicUI.swift */; };
@@ -26,6 +28,7 @@
 		E93EDBB825823BEB007BBF40 /* BlockedUserHelperForBasicUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93EDBB725823BEB007BBF40 /* BlockedUserHelperForBasicUI.swift */; };
 		E93EDBBB25823C42007BBF40 /* BlockUserHelperForCollectionViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93EDBBA25823C42007BBF40 /* BlockUserHelperForCollectionViewDelegate.swift */; };
 		E93EDBBE25823D62007BBF40 /* BlockUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93EDBBD25823D62007BBF40 /* BlockUserCell.swift */; };
+		E93EDC112582EF72007BBF40 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93EDC102582EF72007BBF40 /* Comment.swift */; };
 		E95B8A1C257F26A6002EE9BC /* HelperForChat.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95B8A1B257F26A6002EE9BC /* HelperForChat.swift */; };
 		E95B8A24257F2A3D002EE9BC /* ChatWriteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95B8A23257F2A3D002EE9BC /* ChatWriteController.swift */; };
 		E95B8A28257F2A59002EE9BC /* HelperForWriteBasicUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95B8A27257F2A59002EE9BC /* HelperForWriteBasicUI.swift */; };
@@ -79,6 +82,8 @@
 		E9091F06257F1383009782BB /* SelectorForChat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectorForChat.swift; sourceTree = "<group>"; };
 		E90A2F3B257F03B90066C9B5 /* heart.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = heart.gif; sourceTree = "<group>"; };
 		E90A2F41257F0FE10066C9B5 /* ChatController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatController.swift; sourceTree = "<group>"; };
+		E93A527B2582F4F6006E5F54 /* ChatDetailHelperForImageSelect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatDetailHelperForImageSelect.swift; sourceTree = "<group>"; };
+		E93A527E2582FBFD006E5F54 /* ChatDetailHelperForCommentUpload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatDetailHelperForCommentUpload.swift; sourceTree = "<group>"; };
 		E93B13322581E69F00A22FF6 /* ChatDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatDetailController.swift; sourceTree = "<group>"; };
 		E93B13362581E6EE00A22FF6 /* ChatDetailHelperForBasicUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatDetailHelperForBasicUI.swift; sourceTree = "<group>"; };
 		E93B75CC2576071B00D52A24 /* DetailHelpersForBasicUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailHelpersForBasicUI.swift; sourceTree = "<group>"; };
@@ -87,6 +92,7 @@
 		E93EDBB725823BEB007BBF40 /* BlockedUserHelperForBasicUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockedUserHelperForBasicUI.swift; sourceTree = "<group>"; };
 		E93EDBBA25823C42007BBF40 /* BlockUserHelperForCollectionViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockUserHelperForCollectionViewDelegate.swift; sourceTree = "<group>"; };
 		E93EDBBD25823D62007BBF40 /* BlockUserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockUserCell.swift; sourceTree = "<group>"; };
+		E93EDC102582EF72007BBF40 /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		E95B8A06257F1FEC002EE9BC /* FirstKinder.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FirstKinder.entitlements; sourceTree = "<group>"; };
 		E95B8A1B257F26A6002EE9BC /* HelperForChat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelperForChat.swift; sourceTree = "<group>"; };
 		E95B8A23257F2A3D002EE9BC /* ChatWriteController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatWriteController.swift; sourceTree = "<group>"; };
@@ -232,6 +238,8 @@
 			children = (
 				E93B13362581E6EE00A22FF6 /* ChatDetailHelperForBasicUI.swift */,
 				E9DDDCA92581F042005B3BE8 /* ChatDetailHelperForCollectionViewDelegate.swift */,
+				E93A527B2582F4F6006E5F54 /* ChatDetailHelperForImageSelect.swift */,
+				E93A527E2582FBFD006E5F54 /* ChatDetailHelperForCommentUpload.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -478,6 +486,7 @@
 				E90889742574792300223BAA /* Kinder.swift */,
 				E9F14393257483E0002A284F /* TagKind.swift */,
 				E95B8A86257F98E6002EE9BC /* Chat.swift */,
+				E93EDC102582EF72007BBF40 /* Comment.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -602,6 +611,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E95B8A3B257F5944002EE9BC /* SelectorForChatWrite.swift in Sources */,
+				E93EDC112582EF72007BBF40 /* Comment.swift in Sources */,
 				E960ACEC257891D500985873 /* DetailHelperForMyKinder.swift in Sources */,
 				E9DDDCA72581EB9A005B3BE8 /* ChatDetailHeader.swift in Sources */,
 				E960ACB825764FEC00985873 /* ListHelperForBasicUI.swift in Sources */,
@@ -609,6 +619,7 @@
 				E9D633822574915F00F6C3ED /* ListController.swift in Sources */,
 				E93B75CD2576071B00D52A24 /* DetailHelpersForBasicUI.swift in Sources */,
 				E9DDDCAA2581F042005B3BE8 /* ChatDetailHelperForCollectionViewDelegate.swift in Sources */,
+				E93A527C2582F4F6006E5F54 /* ChatDetailHelperForImageSelect.swift in Sources */,
 				E95B8A87257F98E6002EE9BC /* Chat.swift in Sources */,
 				E95B8A3E257F63D7002EE9BC /* HelperForWriteImageSelect.swift in Sources */,
 				E960ACBE25774A8700985873 /* Constant.swift in Sources */,
@@ -634,6 +645,7 @@
 				E9F14394257483E0002A284F /* TagKind.swift in Sources */,
 				E93B13372581E6EE00A22FF6 /* ChatDetailHelperForBasicUI.swift in Sources */,
 				E9DDDCAD2581FC60005B3BE8 /* ChatDetailSelector.swift in Sources */,
+				E93A527F2582FBFD006E5F54 /* ChatDetailHelperForCommentUpload.swift in Sources */,
 				E960ACA82576087300985873 /* DetailSelector.swift in Sources */,
 				E93EDBB425823B81007BBF40 /* BlockedUserController.swift in Sources */,
 				E9088964257471D800223BAA /* LaunchController.swift in Sources */,

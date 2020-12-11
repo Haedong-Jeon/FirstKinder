@@ -43,7 +43,6 @@ class ChatController: UICollectionViewController, UICollectionViewDelegateFlowLa
         indicator.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
         indicator.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor).isActive = true
         indicator.startAnimating()
-
         DBUtil.shared.loadChatTexts { loadedChats in
             chats = loadedChats.sorted(by: {$0.timeStamp > $1.timeStamp})
             self.chatReload()
