@@ -57,21 +57,22 @@ extension ChatDetailController {
         let imgFileName = uid
         if commentTextView.text.isEmpty { return }
         if isCommentEditing {
+            guard let editIdx = self.editingIdx else { return }
             if isEditTargetCommentHasIMg {
                 if imgView.image != nil {
-                    ImageCache.default.removeImage(forKey: thisComments[editingIdx!.row].imgFileName)
+                    ImageCache.default.removeImage(forKey: thisComments[editIdx.row].imgFileName)
                     editImg(indicator)
                 } else {
-                    STORAGE_COMMENT_IMGS.child(thisComments[editingIdx!.row].imgFileName).delete(completion: nil)
-                    DB_COMMENTS.child(thisComments[editingIdx!.row].uid).updateChildValues(["imgFileName" : "NO IMG"])
+                    STORAGE_COMMENT_IMGS.child(thisComments[editIdx.row].imgFileName).delete(completion: nil)
+                    DB_COMMENTS.child(thisComments[editIdx.row].uid).updateChildValues(["imgFileName" : "NO IMG"])
                     indicator.stopAnimating()
                 }
             } else {
                 if imgView.image != nil {
-                    DB_COMMENTS.child(thisComments[editingIdx!.row].uid).updateChildValues(["imgFileName" : imgFileName])
+                    DB_COMMENTS.child(thisComments[editIdx.row].uid).updateChildValues(["imgFileName" : imgFileName])
                     uploadImg(uid, imgFileName) {}
                 }
-                DB_COMMENTS.child(thisComments[editingIdx!.row].uid).updateChildValues(["commentBody" : commentTextView.text!])
+                DB_COMMENTS.child(thisComments[editIdx.row].uid).updateChildValues(["commentBody" : commentTextView.text!])
                 self.showSuccessMsg()
             }
             isEditTargetCommentHasIMg = false

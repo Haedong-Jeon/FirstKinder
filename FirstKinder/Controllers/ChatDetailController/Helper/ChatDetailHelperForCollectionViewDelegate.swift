@@ -44,6 +44,7 @@ extension ChatDetailController {
         cell.addDeleteButton()
         cell.addEditButton()
         activateDeleteButtonIfUserComment(cell, indexPath)
+        activateEditButtonIfUserComment(cell, indexPath)
         cell.deleteDelegate = self
         cell.thisIdxPath = indexPath
         cell.imgView.removeFromSuperview()
