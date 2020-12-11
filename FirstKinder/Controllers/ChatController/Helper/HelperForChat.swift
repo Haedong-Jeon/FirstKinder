@@ -10,10 +10,11 @@ import UIKit
 extension ChatController {
     func configureUI () {
         self.navigationController?.navigationBar.topItem?.title = "이야기"
+        
         let gearButton = UIBarButtonItem(image: UIImage(systemName: "gear"), style: .plain, target: self, action: #selector(handleGearTap))
         
         self.navigationController?.navigationBar.topItem?.rightBarButtonItem = gearButton
-
+        
         view.backgroundColor = #colorLiteral(red: 0.9411764706, green: 0.9411764706, blue: 0.9411764706, alpha: 1)
         view.addSubview(floatingButton)
         floatingButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor,constant: -20).isActive = true

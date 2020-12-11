@@ -39,7 +39,7 @@ extension ChatWriteController {
         chatBodyTextView.removeFromSuperview()
         
         view.addSubview(chatBodyTextView)
-        chatBodyTextView.topAnchor.constraint(equalTo: categoryRadioButtonView.topAnchor).isActive = true
+        chatBodyTextView.topAnchor.constraint(equalTo: categoryRadioButtonView.bottomAnchor).isActive = true
         chatBodyTextView.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor).isActive = true
         chatBodyTextView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
         

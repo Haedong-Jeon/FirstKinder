@@ -11,6 +11,7 @@ class MainController: UITabBarController, UITabBarControllerDelegate {
     override func viewDidLoad() {
         configureUI()
         setTabs()
+        print("total data: \(kinders.count)")
     }
     override func viewDidAppear(_ animated: Bool) {
         navigationController?.interactivePopGestureRecognizer?.isEnabled = false
