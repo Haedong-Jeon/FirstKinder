@@ -52,6 +52,13 @@ extension ChatWriteController {
         // 게시글 수정하는 상황
         if editingChat != nil {
             view.isUserInteractionEnabled = false
+            if categoryRadioButtonView.firstButton.tintColor == .red {
+                category = "어린이집"
+            } else if categoryRadioButtonView.secondButton.tintColor == .red {
+                category = "육아"
+            } else if categoryRadioButtonView.thirdButton.tintColor == .red {
+                category = "잡담"
+            }
             DB_CHATS.child(editingChat!.uid).updateChildValues(["chat": chatBodyTextView.text!])
             DB_CHATS.child(editingChat!.uid).updateChildValues(["category": category])
             
@@ -64,7 +71,7 @@ extension ChatWriteController {
                         if error != nil {
                             print("error in editing chat image \(error)")
                         }
-                        self.navigationController?.popViewController(animated: true)
+                        self.navigationController?.popToRootViewController(animated: true)
                     }
                 } else {
                     //이미지가 있었는데 교체한 경우
@@ -75,7 +82,7 @@ extension ChatWriteController {
                             self.showSuccessMsg()
                             indicator.stopAnimating()
                             self.view.isUserInteractionEnabled = true
-                            self.navigationController?.popViewController(animated: true)
+                            self.navigationController?.popToRootViewController(animated: true)
                         }
                     }
                 }
@@ -87,12 +94,12 @@ extension ChatWriteController {
                     self.showSuccessMsg()
                     indicator.stopAnimating()
                     self.view.isUserInteractionEnabled = true
-                    self.navigationController?.popViewController(animated: true)
+                    self.navigationController?.popToRootViewController(animated: true)
                 }
             }
             indicator.stopAnimating()
             view.isUserInteractionEnabled = true
-            self.navigationController?.popViewController(animated: true)
+            self.navigationController?.popToRootViewController(animated: true)
             return
         }
         

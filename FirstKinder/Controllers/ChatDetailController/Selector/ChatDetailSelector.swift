@@ -94,6 +94,7 @@ extension ChatDetailController {
         var editWriteController = ChatWriteController()
         editWriteController.editingChat = self.chat
         editWriteController.isEditing = true
+        editWriteController.editiedDetailChat = self
         
         navigationController?.pushViewController(editWriteController, animated: true)
     }

@@ -17,6 +17,7 @@ extension ChatWriteController {
         chatBodyTextView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
     }
     func redrawViewsWithImg() {
+        
         chatBodyTextView.removeFromSuperview()
         
         view.addSubview(imgView)
@@ -30,6 +31,8 @@ extension ChatWriteController {
         chatBodyTextView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
         
         addImgEraseButton()
+        
+        drawCategoryRadioButtonsView()
     }
     func redrawViewsWithoutImg() {
         imgView.removeFromSuperview()
@@ -39,6 +42,9 @@ extension ChatWriteController {
         chatBodyTextView.topAnchor.constraint(equalTo: categoryRadioButtonView.topAnchor).isActive = true
         chatBodyTextView.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor).isActive = true
         chatBodyTextView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        
+        drawCategoryRadioButtonsView()
+
     }
     func addImgEraseButton() {
         let eraseImgButton = UIButton(type: .system)

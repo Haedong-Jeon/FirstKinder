@@ -11,6 +11,7 @@ import Kingfisher
 class ChatWriteController: UIViewController, UITextViewDelegate {
     var categoryRadioButtonView = RadioButtonView()
     var editingChat: Chat?
+    var editiedDetailChat: ChatDetailController?
     override var isEditing: Bool {
         didSet {
             chatBodyTextView.text = editingChat?.chatBody
