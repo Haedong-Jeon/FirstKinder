@@ -9,6 +9,7 @@ import UIKit
 
 protocol CommentDeleteDelegate: class {
     func delete(indexPath: IndexPath)
+    func edit(indexPath: IndexPath)
 }
 class CommentCell: UICollectionViewCell {
     let cellDeleteButton = UIButton(type: .system)
@@ -88,7 +89,7 @@ class CommentCell: UICollectionViewCell {
         editButton.setTitleColor(.white, for: .normal)
         editButton.backgroundColor = .black
         editButton.translatesAutoresizingMaskIntoConstraints = false
-        editButton.addTarget(self, action: #selector(handleDelete), for: .touchUpInside)
+        editButton.addTarget(self, action: #selector(handleEdit), for: .touchUpInside)
         addSubview(editButton)
         editButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -2).isActive = true
         editButton.rightAnchor.constraint(equalTo: cellDeleteButton.leftAnchor, constant: -10).isActive = true
@@ -97,7 +98,8 @@ class CommentCell: UICollectionViewCell {
         guard let deleteIndexPath = self.thisIdxPath else { return }
         deleteDelegate?.delete(indexPath: deleteIndexPath)
     }
-    @objc func handleComment() {
-        
+    @objc func handleEdit() {
+        guard let editIndexPath = self.thisIdxPath else { return }
+        deleteDelegate?.edit(indexPath: editIndexPath)
     }
 }

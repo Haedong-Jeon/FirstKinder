@@ -6,9 +6,24 @@
 //
 
 import UIKit
+import Kingfisher
 
 extension ChatDetailController {
-    func commentUpload() {
+    
+    func getNewImg(_ cell: CommentCell) {
+        STORAGE_COMMENT_IMGS.child(thisComments[editingIdx!.row].uid).downloadURL { (url, error) in
+            if error != nil {
+                print("error in img edit \(error)")
+            }
+            DispatchQueue.global(qos: .background).async {
+                let resource = ImageResource(downloadURL: url!, cacheKey: self.thisComments[self.editingIdx!.row].imgFileName)
+                DispatchQueue.main.async {
+                    cell.imgView.kf.setImage(with: resource)
+                }
+            }
+        }
+    }
+    func setIndicator() -> UIActivityIndicatorView {
         let indicator = UIActivityIndicatorView()
         indicator.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(indicator)
@@ -16,17 +31,63 @@ extension ChatDetailController {
         indicator.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor).isActive = true
         indicator.style = .large
         indicator.color = .black
-        
+        return indicator
+    }
+    func editImg(_ indicator: UIActivityIndicatorView) {
+        STORAGE_COMMENT_IMGS.child(thisComments[editingIdx!.row].imgFileName).delete { (error) in
+            if error != nil {
+                print("error in img delete while editing \(error)")
+            }
+        }
+        uploadImg(thisComments[editingIdx!.row].uid, thisComments[editingIdx!.row].uid) {
+            self.showSuccessMsg()
+            guard let cell = self.collectionView.cellForItem(at: self.editingIdx!) as? CommentCell else { return }
+            cell.editButton.backgroundColor = .black
+            cell.editButton.setTitleColor(.white, for: .normal)
+            cell.editButton.setTitle("수정", for: .normal)
+            indicator.stopAnimating()
+            self.getNewImg(cell)
+        }
+    }
+    
+    func commentUpload() {
+        let indicator = setIndicator()
         indicator.startAnimating()
-        
-        view.isUserInteractionEnabled = false
         let uid = NSUUID().uuidString
         let imgFileName = uid
         if commentTextView.text.isEmpty { return }
+        if isCommentEditing {
+            if isEditTargetCommentHasIMg {
+                if imgView.image != nil {
+                    ImageCache.default.removeImage(forKey: thisComments[editingIdx!.row].imgFileName)
+                    editImg(indicator)
+                } else {
+                    STORAGE_COMMENT_IMGS.child(thisComments[editingIdx!.row].imgFileName).delete(completion: nil)
+                    DB_COMMENTS.child(thisComments[editingIdx!.row].uid).updateChildValues(["imgFileName" : "NO IMG"])
+                    indicator.stopAnimating()
+                }
+            } else {
+                if imgView.image != nil {
+                    DB_COMMENTS.child(thisComments[editingIdx!.row].uid).updateChildValues(["imgFileName" : imgFileName])
+                    uploadImg(uid, imgFileName) {}
+                }
+                DB_COMMENTS.child(thisComments[editingIdx!.row].uid).updateChildValues(["commentBody" : commentTextView.text!])
+                self.showSuccessMsg()
+            }
+            isEditTargetCommentHasIMg = false
+            isCommentEditing = false
+            editButtonsUnlock()
+            imgView.image = nil
+            commentTextView.text = ""
+            redrawViewsWithoutImg()
+            indicator.stopAnimating()
+            collectionView.reloadData()
+            return
+        }
         if imgView.image == nil {
             uploadText(uid) {
-                self.showSuccessMsg()
                 indicator.stopAnimating()
+                self.showSuccessMsg()
             }
         } else {
             uploadImg(uid, imgFileName) {
@@ -84,7 +145,6 @@ extension ChatDetailController {
     }
     func commentCountUp() {
         let commentCount = self.thisComments.count
-        let value: [String: Any] = ["uid": self.chat!.uid, "chat": self.chat!.chatBody, "imgFileName": self.chat!.imgFileName, "timeStamp": self.chat!.timeStamp, "vendor": self.chat!.vendor, "category": self.chat!.category, "commentCount": commentCount]
-        DB_CHATS.child(self.chat!.uid).updateChildValues(value)
+        DB_CHATS.child(self.chat!.uid).updateChildValues(["commentCount": commentCount])
     }
 }

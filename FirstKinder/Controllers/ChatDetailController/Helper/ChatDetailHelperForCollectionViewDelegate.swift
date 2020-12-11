@@ -28,8 +28,8 @@ extension ChatDetailController {
         return thisComments.count
     }
     func collectionView(_ collectionView: UICollectionView,
-                      layout collectionViewLayout: UICollectionViewLayout,
-                      minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 0
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -112,8 +112,6 @@ extension ChatDetailController {
         downloadImgToCell(cell, indexPath)
         cell.addSubview(cell.imgView)
         cell.imgView.bottomAnchor.constraint(equalTo: cell.safeAreaLayoutGuide.bottomAnchor, constant: -35).isActive = true
-//        cell.imgView.leftAnchor.constraint(equalTo: cell.leftAnchor, constant: 10).isActive = true
-//        cell.imgView.rightAnchor.constraint(equalTo: cell.rightAnchor, constant: -10).isActive = true
         cell.imgView.widthAnchor.constraint(equalToConstant: 100).isActive = true
         cell.imgView.heightAnchor.constraint(equalToConstant: 100).isActive = true
         cell.imgView.layer.borderWidth = 1
@@ -195,6 +193,45 @@ extension ChatDetailController {
     }
 }
 extension ChatDetailController: CommentDeleteDelegate {
+    func edit(indexPath: IndexPath) {
+        if self.isCommentEditing {
+            guard let cell = collectionView.cellForItem(at: indexPath) as? CommentCell else {
+                return
+            }
+            editCancel(cell)
+            redrawViewsWithoutImg()
+            editButtonsUnlock()
+            return
+        }
+        drawEditingUI(indexPath: indexPath)
+        redrawCellUIForEdit(indexPath: indexPath)
+        otherEditButtonsLock()
+        
+        self.isCommentEditing = true
+        self.editingIdx = indexPath
+    }
+    func drawEditingUI(indexPath: IndexPath) {
+        commentTextView.text = thisComments[indexPath.row].commentBody
+        if thisComments[indexPath.row].imgFileName != "NO IMG" {
+            self.isEditTargetCommentHasIMg = true
+            redrawViewsWithImg()
+            self.imgView.image = DBUtil.shared.loadImgFromCache(thisComments[indexPath.row].imgFileName)
+        }
+    }
+    func redrawCellUIForEdit(indexPath: IndexPath) {
+        guard let cell = collectionView.cellForItem(at: indexPath) as? CommentCell else { return }
+        cell.editButton.backgroundColor = .white
+        cell.editButton.setTitleColor(.lightGray, for: .normal)
+        cell.editButton.setTitle("수정중", for: .normal)
+    }
+    func editCancel(_ cell: CommentCell) {
+        cell.editButton.backgroundColor = .black
+        cell.editButton.setTitleColor(.white, for: .normal)
+        cell.editButton.setTitle("수정", for: .normal)
+        self.isCommentEditing = false
+        self.isEditTargetCommentHasIMg = false
+        self.commentTextView.text = ""
+    }
     func delete(indexPath: IndexPath) {
         DB_COMMENTS.child(thisComments[indexPath.row].uid).removeValue()
         STORAGE_COMMENT_IMGS.child(thisComments[indexPath.row].imgFileName).delete { error in
@@ -206,7 +243,6 @@ extension ChatDetailController: CommentDeleteDelegate {
     }
     func commentCountDown() {
         let commentCount = thisComments.count
-        let value: [String: Any] = ["uid": self.chat!.uid, "chat": self.chat!.chatBody, "imgFileName": self.chat!.imgFileName, "timeStamp": self.chat!.timeStamp, "vendor": self.chat!.vendor, "category": self.chat!.category, "commentCount": commentCount]
-        DB_CHATS.child(self.chat!.uid).updateChildValues(value)
+        DB_CHATS.child(self.chat!.uid).updateChildValues(["commentCount": commentCount])
     }
 }

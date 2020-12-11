@@ -13,6 +13,9 @@ let headerReuseIdentifier = "header reuse identifier"
 
 class ChatDetailController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     var chat: Chat?
+    var isCommentEditing = false
+    var isEditTargetCommentHasIMg = false
+    var editingIdx: IndexPath?
     var thisComments: [Comment] = [] {
         didSet {
             collectionView.reloadData()
@@ -49,6 +52,18 @@ class ChatDetailController: UICollectionViewController, UICollectionViewDelegate
                                     .filter({$0.targetChatUid == self.chat?.uid})
                                     .sorted(by: {$0.timeStamp < $1.timeStamp})
             indicator.stopAnimating()
+        }
+    }
+    func editButtonsUnlock() {
+        guard let cells = collectionView.visibleCells as? [CommentCell] else { return }
+        cells.forEach({$0.editButton.isUserInteractionEnabled = true})
+    }
+    func otherEditButtonsLock() {
+        guard let cells = collectionView.visibleCells as? [CommentCell] else { return }
+        for _cell in cells {
+            if _cell.editButton.backgroundColor != .white {
+                _cell.editButton.isUserInteractionEnabled = false
+            }
         }
     }
 }
