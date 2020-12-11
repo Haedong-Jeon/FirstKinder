@@ -104,7 +104,7 @@ extension KinderDetailController: ChartViewDelegate {
         
         let imgView = UIImageView()
         imgView.translatesAutoresizingMaskIntoConstraints = false
-        imgView.image = UIImage(systemName: "person.3.fill")
+        imgView.image = #imageLiteral(resourceName: "teacher")
         imgView.widthAnchor.constraint(equalToConstant: 75).isActive = true
         imgView.heightAnchor.constraint(equalToConstant: 75).isActive = true
         imgView.contentMode = .scaleAspectFit
@@ -169,13 +169,13 @@ extension KinderDetailController: ChartViewDelegate {
         carAvailableLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
         carAvailableLabel.text = kinder.isCarAvailable
         if kinder.isCarAvailable == "운영" {
-            imgView.image = UIImage(systemName: "car")
+            imgView.image = #imageLiteral(resourceName: "car")
             imgView.tintColor = .black
             carAvailableLabel.textColor = .systemGreen
             carLabel.text = "YES"
             carLabel.textColor = .systemGreen
         } else {
-            imgView.image = UIImage(systemName: "car")
+            imgView.image = #imageLiteral(resourceName: "car")
             imgView.tintColor = .lightGray
             carAvailableLabel.textColor = .systemRed
             carLabel.text = "NO"
@@ -245,7 +245,7 @@ extension KinderDetailController: ChartViewDelegate {
         imgView.centerXAnchor.constraint(equalTo: roomCountBoxView.centerXAnchor).isActive = true
         imgView.centerYAnchor.constraint(equalTo: roomCountBoxView.centerYAnchor).isActive = true
         imgView.contentMode = .scaleAspectFit
-        imgView.image = UIImage(systemName: "house")
+        imgView.image = #imageLiteral(resourceName: "kindergarten")
         imgView.tintColor = .black
         
         let roomNumLabel = UILabel()
@@ -282,7 +282,7 @@ extension KinderDetailController: ChartViewDelegate {
         imgView.centerXAnchor.constraint(equalTo: roomSizeBoxView.centerXAnchor).isActive = true
         imgView.centerYAnchor.constraint(equalTo: roomSizeBoxView.centerYAnchor).isActive = true
         imgView.contentMode = .scaleAspectFit
-        imgView.image = UIImage(systemName: "aspectratio")
+        imgView.image = #imageLiteral(resourceName: "plans")
         imgView.tintColor = .black
         
         let roomSizeLabel = UILabel()
@@ -339,7 +339,7 @@ extension KinderDetailController: ChartViewDelegate {
     //총 수용 인원 중 현재 인원의 비율
     func setChildBoxByCurrentChildNum(_ imgView: UIImageView, _ label: UILabel) {
         
-        imgView.image = UIImage(systemName: "smiley")
+        imgView.image = #imageLiteral(resourceName: "playtime")
         guard let currentChildNum = Double(kinder.currentNumOfChild) else { return }
         guard let totalChildNum = Double(kinder.totalNumOfChild) else { return }
         
