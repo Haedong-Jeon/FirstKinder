@@ -27,10 +27,8 @@ class KinderCell: UICollectionViewCell {
     var medalForManyChildImgView: UIImageView = {
         var imgView = UIImageView()
         imgView.translatesAutoresizingMaskIntoConstraints = false
-        imgView.widthAnchor.constraint(equalToConstant: 30).isActive = true
-        imgView.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        imgView.layer.cornerRadius = 25
-        imgView.clipsToBounds = true
+        imgView.widthAnchor.constraint(equalToConstant: 32).isActive = true
+        imgView.heightAnchor.constraint(equalToConstant: 32).isActive = true
         return imgView
     }()
     override init(frame: CGRect) {

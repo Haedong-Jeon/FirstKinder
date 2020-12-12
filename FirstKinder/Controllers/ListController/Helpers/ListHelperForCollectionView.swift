@@ -26,7 +26,7 @@ extension ListController {
         }
         guard let currentChildNum = Int(nowShowingKinders[indexPath.row].currentNumOfChild) else { return UICollectionViewCell() }
         if currentChildNum >= 50 {
-            cell.medalForManyChildImgView.image = #imageLiteral(resourceName: "medal")
+            cell.medalForManyChildImgView.image = #imageLiteral(resourceName: "50")
         } else {
             cell.medalForManyChildImgView.image = nil
         }
