@@ -78,7 +78,7 @@ extension ChatDetailController {
         }
         cell.backgroundColor = .white
         
-        let commentorVendor = chats[indexPath.row].vendor
+        let commentorVendor = thisComments[indexPath.row].vendor
         var commentorReportCount = 0
         chats.forEach({
             if $0.vendor == commentorVendor {

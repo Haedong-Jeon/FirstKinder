@@ -46,6 +46,8 @@ extension ChatDetailController {
             cell.editButton.setTitleColor(.white, for: .normal)
             cell.editButton.setTitle("수정", for: .normal)
             indicator.stopAnimating()
+            self.imgView.image = nil
+            self.redrawViewsWithoutImg()
             self.getNewImg(cell)
         }
     }
@@ -57,23 +59,33 @@ extension ChatDetailController {
         let imgFileName = uid
         if commentTextView.text.isEmpty { return }
         if isCommentEditing {
+            //댓글을 수정하는 경우.
             guard let editIdx = self.editingIdx else { return }
+            DB_COMMENTS.child(thisComments[editIdx.row].uid).updateChildValues(["commentBody" : commentTextView.text!])
+            
             if isEditTargetCommentHasIMg {
+                //수정 전 게시글에 이미지가 있다.
                 if imgView.image != nil {
+                    //새로운 이미지로 교체하는 경우.
                     ImageCache.default.removeImage(forKey: thisComments[editIdx.row].imgFileName)
                     editImg(indicator)
                 } else {
+                    //이미지를 삭제하는 경우.
                     STORAGE_COMMENT_IMGS.child(thisComments[editIdx.row].imgFileName).delete(completion: nil)
                     DB_COMMENTS.child(thisComments[editIdx.row].uid).updateChildValues(["imgFileName" : "NO IMG"])
                     indicator.stopAnimating()
+                    self.showSuccessMsg()
                 }
             } else {
+                //수정 전 게시글에 이미지가 없다.
                 if imgView.image != nil {
+                    //이미지 추가.
                     DB_COMMENTS.child(thisComments[editIdx.row].uid).updateChildValues(["imgFileName" : imgFileName])
-                    uploadImg(uid, imgFileName) {}
+                    uploadImg(uid, imgFileName) {
+                        indicator.stopAnimating()
+                        self.showSuccessMsg()
+                    }
                 }
-                DB_COMMENTS.child(thisComments[editIdx.row].uid).updateChildValues(["commentBody" : commentTextView.text!])
-                self.showSuccessMsg()
             }
             isEditTargetCommentHasIMg = false
             isCommentEditing = false
@@ -85,6 +97,7 @@ extension ChatDetailController {
             collectionView.reloadData()
             return
         }
+        //새로운 댓글을 작성하는 경우
         if imgView.image == nil {
             uploadText(uid) {
                 indicator.stopAnimating()
