@@ -27,12 +27,10 @@ extension MyKindersController {
         }
         guard let currentChildNum = Int(myKinders[indexPath.row].currentNumOfChild) else { return UICollectionViewCell() }
         if currentChildNum >= 50 {
-            cell.medalForManyChildImgView.image = #imageLiteral(resourceName: "medal")
+            cell.medalForManyChildImgView.image = #imageLiteral(resourceName: "50")
         } else {
             cell.medalForManyChildImgView.image = nil
         }
-//        cell.layer.borderWidth = 2
-//        cell.layer.borderColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
         cell.layer.cornerRadius = 10
         return cell
     }

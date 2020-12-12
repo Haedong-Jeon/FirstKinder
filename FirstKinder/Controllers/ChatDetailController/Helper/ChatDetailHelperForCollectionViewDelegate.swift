@@ -14,8 +14,10 @@ extension ChatDetailController {
             return UICollectionReusableView()
         }
         header.chat = self.chat
+        header.imgView.isUserInteractionEnabled = true
         header.backgroundColor = .white
         header.setUp()
+        header.imgView.addMakeBigFunction()
         header.commentCountLabel.text = "댓글 \(thisComments.count)"
         if self.chat?.imgFileName == "NO IMG" {
             header.configureUIWithoutImg()
@@ -75,6 +77,23 @@ extension ChatDetailController {
             drawCellWithoutImg(cell)
         }
         cell.backgroundColor = .white
+        
+        let commentorVendor = chats[indexPath.row].vendor
+        var commentorReportCount = 0
+        chats.forEach({
+            if $0.vendor == commentorVendor {
+                commentorReportCount += $0.reportCount
+            }
+        })
+        if commentorReportCount < 1 {
+            cell.faceImgView.image = #imageLiteral(resourceName: "happy")
+        } else if commentorReportCount < 3 {
+            cell.faceImgView.image = #imageLiteral(resourceName: "smile")
+        } else if commentorReportCount < 6 {
+            cell.faceImgView.image = #imageLiteral(resourceName: "neutral")
+        } else {
+            cell.faceImgView.image = #imageLiteral(resourceName: "sad")
+        }
         return cell
     }
     
@@ -117,7 +136,7 @@ extension ChatDetailController {
         cell.faceImgView.leftAnchor.constraint(equalTo: cell.safeAreaLayoutGuide.leftAnchor).isActive = true
         cell.addSubview(cell.vendorLabel)
         cell.vendorLabel.topAnchor.constraint(equalTo: cell.safeAreaLayoutGuide.topAnchor).isActive = true
-        cell.vendorLabel.leftAnchor.constraint(equalTo: cell.faceImgView.rightAnchor).isActive = true
+        cell.vendorLabel.leftAnchor.constraint(equalTo: cell.faceImgView.rightAnchor, constant: 10).isActive = true
         
         let fullVendorString = thisComments[indexPath.row].vendor
         var splitedVendorString = fullVendorString.components(separatedBy: "-")
@@ -139,6 +158,9 @@ extension ChatDetailController {
         cell.chatBodyLabel.topAnchor.constraint(equalTo: cell.faceImgView.bottomAnchor, constant: 10).isActive = true
         cell.chatBodyLabel.widthAnchor.constraint(equalTo: cell.safeAreaLayoutGuide.widthAnchor).isActive = true
         cell.chatBodyLabel.bottomAnchor.constraint(equalTo: cell.imgView.topAnchor, constant: -10).isActive = true
+        
+        cell.imgView.isUserInteractionEnabled = true
+        cell.imgView.addMakeBigFunction()
     }
     func drawCellWithoutImg(_ cell: CommentCell) {
         cell.addSubview(cell.chatBodyLabel)
@@ -263,3 +285,4 @@ extension ChatDetailController: CommentDeleteDelegate {
         DB_CHATS.child(self.chat!.uid).updateChildValues(["commentCount": commentCount])
     }
 }
+

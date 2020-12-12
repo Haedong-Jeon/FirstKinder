@@ -28,6 +28,23 @@ extension BlockedUserController {
             cell.blockReasonStickerLabel.backgroundColor = .systemBlue
             cell.blockReasonStickerLabel.text = "기타 사유"
         }
+        
+        let userVendor = chats[indexPath.row].vendor
+        var userReportCount = 0
+        chats.forEach({
+            if $0.vendor == userVendor {
+                userReportCount += $0.reportCount
+            }
+        })
+        if userReportCount < 1 {
+            cell.faceImgView.image = #imageLiteral(resourceName: "happy")
+        } else if userReportCount < 3 {
+            cell.faceImgView.image = #imageLiteral(resourceName: "smile")
+        } else if userReportCount < 6 {
+            cell.faceImgView.image = #imageLiteral(resourceName: "neutral")
+        } else {
+            cell.faceImgView.image = #imageLiteral(resourceName: "sad")
+        }
         return cell
     }
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

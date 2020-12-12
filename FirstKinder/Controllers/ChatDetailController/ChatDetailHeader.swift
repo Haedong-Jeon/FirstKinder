@@ -8,8 +8,13 @@
 import UIKit
 import Kingfisher
 
+protocol BigImgDelegate: class {
+    func makeImgBig(img: UIImage)
+}
+
 class ChatDetailHeader: UICollectionReusableView {
     var chat: Chat?
+    var bigImgDelegate: BigImgDelegate?
     lazy var categoryLabel: UILabel = {
         var label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -33,9 +38,9 @@ class ChatDetailHeader: UICollectionReusableView {
     lazy var faceImgView: UIImageView = {
         var imgView = UIImageView()
         imgView.translatesAutoresizingMaskIntoConstraints = false
+        imgView.isUserInteractionEnabled = true
         imgView.widthAnchor.constraint(equalToConstant: 25).isActive = true
         imgView.heightAnchor.constraint(equalToConstant: 25).isActive = true
-        imgView.image = UIImage(systemName: "smiley")
         return imgView
     }()
     lazy var vendorLabel: UILabel = {
@@ -57,6 +62,8 @@ class ChatDetailHeader: UICollectionReusableView {
     lazy var imgView: UIImageView = {
         var imgView = UIImageView()
         imgView.translatesAutoresizingMaskIntoConstraints = false
+        let tap = UITapGestureRecognizer(target: self, action: #selector(handleImgTap))
+        imgView.addGestureRecognizer(tap)
         return imgView
     }()
     lazy var borderLineImgView: UIImageView = {
@@ -143,7 +150,7 @@ class ChatDetailHeader: UICollectionReusableView {
     }
     func drawCategoryLabel() {
         addSubview(categoryLabel)
-        categoryLabel.topAnchor.constraint(equalTo: faceImgView.bottomAnchor).isActive = true
+        categoryLabel.topAnchor.constraint(equalTo: faceImgView.bottomAnchor, constant: 5).isActive = true
         categoryLabel.leftAnchor.constraint(equalTo: faceImgView.leftAnchor).isActive = true
         
         if chat?.category == "어린이집" {
@@ -174,7 +181,7 @@ class ChatDetailHeader: UICollectionReusableView {
         faceImgView.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor).isActive = true
         addSubview(vendorLabel)
         vendorLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor).isActive = true
-        vendorLabel.leftAnchor.constraint(equalTo: faceImgView.rightAnchor).isActive = true
+        vendorLabel.leftAnchor.constraint(equalTo: faceImgView.rightAnchor,constant: 10).isActive = true
 
     }
     func drawBorderLine() {
@@ -200,5 +207,8 @@ class ChatDetailHeader: UICollectionReusableView {
         } else {
             imgView.image = DBUtil.shared.loadImgFromCache(imgFileName)
         }
+    }
+    @objc func handleImgTap() {
+        bigImgDelegate?.makeImgBig(img: self.imgView.image!)
     }
 }

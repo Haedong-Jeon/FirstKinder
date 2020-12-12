@@ -126,16 +126,16 @@ extension ChatController {
         cell.faceImgView.leftAnchor.constraint(equalTo: cell.safeAreaLayoutGuide.leftAnchor).isActive = true
         cell.addSubview(cell.vendorLabel)
         cell.vendorLabel.topAnchor.constraint(equalTo: cell.safeAreaLayoutGuide.topAnchor).isActive = true
-        cell.vendorLabel.leftAnchor.constraint(equalTo: cell.faceImgView.rightAnchor).isActive = true
+        cell.vendorLabel.leftAnchor.constraint(equalTo: cell.faceImgView.rightAnchor, constant: 10).isActive = true
         
         let fullVendorString = nowChats[indexPath.row].vendor
         var splitedVendorString = fullVendorString.components(separatedBy: "-")
         
         cell.vendorLabel.text = splitedVendorString[0]
         
-        let thisUserVendor = nowChats[indexPath.row].vendor
+        let thisUserVendor = chats[indexPath.row].vendor
         var thisUserReportCount = 0
-        nowChats.forEach({
+        chats.forEach({
             if $0.vendor == thisUserVendor {
                 thisUserReportCount += $0.reportCount
             }
@@ -176,7 +176,7 @@ extension ChatController {
     }
     func drawCategoryLabel(_ cell: ChatCell, _ indexPath: IndexPath) {
         cell.addSubview(cell.categoryLabel)
-        cell.categoryLabel.topAnchor.constraint(equalTo: cell.faceImgView.bottomAnchor).isActive = true
+        cell.categoryLabel.topAnchor.constraint(equalTo: cell.faceImgView.bottomAnchor, constant: 5).isActive = true
         cell.categoryLabel.leftAnchor.constraint(equalTo: cell.faceImgView.leftAnchor).isActive = true
         
         if nowChats[indexPath.row].category == "어린이집" {

@@ -15,6 +15,7 @@ class ChatDetailController: UICollectionViewController, UICollectionViewDelegate
     var chat: Chat?
     var isCommentEditing = false
     var isEditTargetCommentHasIMg = false
+    var tapedCommentImg: UIImage?
     var editingIdx: IndexPath?
     var thisComments: [Comment] = [] {
         didSet {
