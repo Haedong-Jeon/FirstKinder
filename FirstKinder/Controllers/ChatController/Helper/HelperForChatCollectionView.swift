@@ -132,6 +132,23 @@ extension ChatController {
         var splitedVendorString = fullVendorString.components(separatedBy: "-")
         
         cell.vendorLabel.text = splitedVendorString[0]
+        
+        let thisUserVendor = nowChats[indexPath.row].vendor
+        var thisUserReportCount = 0
+        nowChats.forEach({
+            if $0.vendor == thisUserVendor {
+                thisUserReportCount += $0.reportCount
+            }
+        })
+        if thisUserReportCount < 1 {
+            cell.faceImgView.image = #imageLiteral(resourceName: "happy")
+        } else if thisUserReportCount < 3 {
+            cell.faceImgView.image = #imageLiteral(resourceName: "smile")
+        } else if thisUserReportCount < 6 {
+            cell.faceImgView.image = #imageLiteral(resourceName: "neutral")
+        } else {
+            cell.faceImgView.image = #imageLiteral(resourceName: "sad")
+        }
     }
     func drawTimeLabel(_ cell: ChatCell, _ indexPath: IndexPath) {
         cell.addSubview(cell.timeLabel)

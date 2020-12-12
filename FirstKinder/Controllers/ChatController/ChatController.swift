@@ -45,7 +45,12 @@ class ChatController: UICollectionViewController, UICollectionViewDelegateFlowLa
         indicator.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor).isActive = true
         indicator.startAnimating()
         DBUtil.shared.loadChatTexts { loadedChats in
-            chats = loadedChats.sorted(by: {$0.timeStamp > $1.timeStamp})
+            //1. 최신 게시글이 위로 올라간다.
+            //2. 신고 당한 횟수가 5회 이하인 게시글만 표시한다.
+            chats = loadedChats
+                        .sorted(by: {$0.timeStamp > $1.timeStamp})
+                        .filter({$0.reportCount < 5})
+            
             self.chatReload()
             indicator.stopAnimating()
         }
