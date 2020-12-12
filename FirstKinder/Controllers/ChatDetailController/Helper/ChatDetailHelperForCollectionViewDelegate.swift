@@ -66,11 +66,11 @@ extension ChatDetailController {
         cell.deleteDelegate = self
         cell.thisIdxPath = indexPath
         cell.imgView.removeFromSuperview()
-        cell.chatBodyLabel.removeFromSuperview()
+        cell.commentBodyLabel.removeFromSuperview()
         drawVendor(cell, indexPath)
         drawTimeLabel(cell, indexPath)
         drawBorderLine(cell, indexPath)
-        cell.chatBodyLabel.text = thisComments[indexPath.row].commentBody
+        cell.commentBodyLabel.text = thisComments[indexPath.row].commentBody
         if thisComments[indexPath.row].imgFileName != "NO IMG" {
             drawCellWithImg(cell, indexPath)
         } else {
@@ -120,7 +120,7 @@ extension ChatDetailController {
         let estimatedHeight: CGFloat = 800.0
         let dummyCell = CommentCell(frame: CGRect(x: 0, y: 0, width: width, height: estimatedHeight))
         drawVendor(dummyCell, indexPath)
-        dummyCell.chatBodyLabel.text = thisComments[indexPath.row].commentBody
+        dummyCell.commentBodyLabel.text = thisComments[indexPath.row].commentBody
         if thisComments[indexPath.row].imgFileName == "NO IMG" {
             drawCellWithoutImg(dummyCell)
         } else {
@@ -154,19 +154,19 @@ extension ChatDetailController {
         cell.imgView.layer.borderColor = UIColor.lightGray.cgColor
         cell.imgView.layer.cornerRadius = 10
         cell.imgView.clipsToBounds = true
-        cell.addSubview(cell.chatBodyLabel)
-        cell.chatBodyLabel.topAnchor.constraint(equalTo: cell.faceImgView.bottomAnchor, constant: 10).isActive = true
-        cell.chatBodyLabel.widthAnchor.constraint(equalTo: cell.safeAreaLayoutGuide.widthAnchor).isActive = true
-        cell.chatBodyLabel.bottomAnchor.constraint(equalTo: cell.imgView.topAnchor, constant: -10).isActive = true
+        cell.addSubview(cell.commentBodyLabel)
+        cell.commentBodyLabel.topAnchor.constraint(equalTo: cell.faceImgView.bottomAnchor, constant: 10).isActive = true
+        cell.commentBodyLabel.widthAnchor.constraint(equalTo: cell.safeAreaLayoutGuide.widthAnchor).isActive = true
+        cell.commentBodyLabel.bottomAnchor.constraint(equalTo: cell.imgView.topAnchor, constant: -10).isActive = true
         
         cell.imgView.isUserInteractionEnabled = true
         cell.imgView.addMakeBigFunction()
     }
     func drawCellWithoutImg(_ cell: CommentCell) {
-        cell.addSubview(cell.chatBodyLabel)
-        cell.chatBodyLabel.topAnchor.constraint(equalTo: cell.faceImgView.bottomAnchor, constant: 10).isActive = true
-        cell.chatBodyLabel.widthAnchor.constraint(equalTo: cell.safeAreaLayoutGuide.widthAnchor).isActive = true
-        cell.chatBodyLabel.bottomAnchor.constraint(equalTo: cell.safeAreaLayoutGuide.bottomAnchor, constant: -35).isActive = true
+        cell.addSubview(cell.commentBodyLabel)
+        cell.commentBodyLabel.topAnchor.constraint(equalTo: cell.faceImgView.bottomAnchor, constant: 10).isActive = true
+        cell.commentBodyLabel.widthAnchor.constraint(equalTo: cell.safeAreaLayoutGuide.widthAnchor).isActive = true
+        cell.commentBodyLabel.bottomAnchor.constraint(equalTo: cell.safeAreaLayoutGuide.bottomAnchor, constant: -35).isActive = true
     }
     func downloadImgToCell(_ cell: CommentCell, _ indexPath: IndexPath) {
         cell.imgView.kf.indicatorType = .activity

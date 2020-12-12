@@ -26,17 +26,21 @@ extension ChatController {
         } else {
             drawCellWithoutImg(cell)
         }
+        collectionView.addSubview(cell)
+        cell.leftAnchor.constraint(equalTo: collectionView.leftAnchor,constant: 10).isActive = true
+        cell.rightAnchor.constraint(equalTo: collectionView.rightAnchor,constant: -10).isActive = true
         cell.drawCommentCount(nowChats[indexPath.row].commentCount)
         cell.backgroundColor = .white
+        cell.layer.cornerRadius = 10
         return cell
     }
-
+    
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return nowChats.count
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let height = getEstimatedHeightFromDummyCell(indexPath)
-        return CGSize(width: collectionView.frame.width, height: height)
+        return CGSize(width: collectionView.frame.width - 20, height: height)
     }
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let chatDetailController = ChatDetailController(collectionViewLayout: UICollectionViewFlowLayout())
@@ -46,7 +50,7 @@ extension ChatController {
         transition.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
         transition.type = .fade
         self.navigationController?.view.layer.add(transition, forKey: nil)
-
+        
         self.navigationController?.pushViewController(chatDetailController, animated: false)
     }
     func getEstimatedHeightFromDummyCell(_ indexPath: IndexPath) -> CGFloat{
@@ -67,12 +71,20 @@ extension ChatController {
         return estimateSize.height
     }
     func configureCollectionView() {
+        collectionView.translatesAutoresizingMaskIntoConstraints = true
         collectionView.backgroundColor = #colorLiteral(red: 0.9411764706, green: 0.9411764706, blue: 0.9411764706, alpha: 1)
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.register(ChatCell.self, forCellWithReuseIdentifier: chatCellReuseIdentifier)
         refreshControl.addTarget(self, action: #selector(handleRefresh), for: .valueChanged)
         collectionView.refreshControl = refreshControl
+        
+        collectionView.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor).isActive = true
+        collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+        collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        
+        collectionView.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
+        
     }
     func drawBorderLine(_ cell: ChatCell) {
         cell.addSubview(cell.borderLineImgView)
@@ -94,13 +106,16 @@ extension ChatController {
         cell.imgView.clipsToBounds = true
         cell.addSubview(cell.chatBodyLabel)
         cell.chatBodyLabel.topAnchor.constraint(equalTo: cell.categoryLabel.bottomAnchor, constant: 10).isActive = true
-        cell.chatBodyLabel.widthAnchor.constraint(equalTo: cell.safeAreaLayoutGuide.widthAnchor).isActive = true
+        cell.chatBodyLabel.widthAnchor.constraint(equalToConstant: cell.frame.width - 10).isActive = true
+        cell.chatBodyLabel.centerXAnchor.constraint(equalTo: cell.centerXAnchor).isActive = true
+
         cell.chatBodyLabel.bottomAnchor.constraint(equalTo: cell.imgView.topAnchor, constant: -10).isActive = true
     }
     func drawCellWithoutImg(_ cell: ChatCell) {
         cell.addSubview(cell.chatBodyLabel)
         cell.chatBodyLabel.topAnchor.constraint(equalTo: cell.categoryLabel.bottomAnchor, constant: 10).isActive = true
-        cell.chatBodyLabel.widthAnchor.constraint(equalTo: cell.safeAreaLayoutGuide.widthAnchor).isActive = true
+        cell.chatBodyLabel.widthAnchor.constraint(equalToConstant: cell.frame.width - 10).isActive = true
+        cell.chatBodyLabel.centerXAnchor.constraint(equalTo: cell.centerXAnchor).isActive = true
         cell.chatBodyLabel.bottomAnchor.constraint(equalTo: cell.borderLineImgView.topAnchor, constant: -10).isActive = true
     }
     func downloadImgToCell(_ cell: ChatCell, _ indexPath: IndexPath) {
@@ -123,7 +138,7 @@ extension ChatController {
     func drawVendor(_ cell: ChatCell, _ indexPath: IndexPath) {
         cell.addSubview(cell.faceImgView)
         cell.faceImgView.topAnchor.constraint(equalTo: cell.safeAreaLayoutGuide.topAnchor, constant: 5).isActive = true
-        cell.faceImgView.leftAnchor.constraint(equalTo: cell.safeAreaLayoutGuide.leftAnchor).isActive = true
+        cell.faceImgView.leftAnchor.constraint(equalTo: cell.safeAreaLayoutGuide.leftAnchor, constant: 10).isActive = true
         cell.addSubview(cell.vendorLabel)
         cell.vendorLabel.topAnchor.constraint(equalTo: cell.safeAreaLayoutGuide.topAnchor).isActive = true
         cell.vendorLabel.leftAnchor.constraint(equalTo: cell.faceImgView.rightAnchor, constant: 10).isActive = true

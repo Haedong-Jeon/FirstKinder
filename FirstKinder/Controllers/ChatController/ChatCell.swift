@@ -83,7 +83,4 @@ class ChatCell: UICollectionViewCell {
         commentCountLabel.textColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
         commentCountLabel.text = "댓글 \(count)"
     }
-    @objc func handleComment() {
-        
-    }
 }

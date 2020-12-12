@@ -15,6 +15,8 @@ extension ListController {
    
         //실제 아이폰으로 테스트 할 때
         collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        collectionView.backgroundColor = #colorLiteral(red: 0.9411764706, green: 0.9411764706, blue: 0.9411764706, alpha: 1)
+
     }
     func configureUI() {
         view.backgroundColor = .white

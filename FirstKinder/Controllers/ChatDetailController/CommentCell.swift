@@ -41,7 +41,7 @@ class CommentCell: UICollectionViewCell {
         label.widthAnchor.constraint(equalToConstant: 100).isActive = true
         return label
     }()
-    var chatBodyLabel: UILabel = {
+    var commentBodyLabel: UILabel = {
         var label = UILabel()
         label.font = UIFont.systemFont(ofSize: 15)
         label.lineBreakMode = .byCharWrapping
