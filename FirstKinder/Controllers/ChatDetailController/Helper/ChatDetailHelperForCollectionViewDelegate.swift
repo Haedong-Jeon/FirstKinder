@@ -22,6 +22,22 @@ extension ChatDetailController {
         } else {
             header.configureUIWithImg()
         }
+        let thisUserVendor = chat!.vendor
+        var thisUserReportCount = 0
+        chats.forEach({
+            if $0.vendor == thisUserVendor {
+                thisUserReportCount += $0.reportCount
+            }
+        })
+        if thisUserReportCount < 1 {
+            header.faceImgView.image = #imageLiteral(resourceName: "happy")
+        } else if thisUserReportCount < 3 {
+            header.faceImgView.image = #imageLiteral(resourceName: "smile")
+        } else if thisUserReportCount < 6 {
+            header.faceImgView.image = #imageLiteral(resourceName: "neutral")
+        } else {
+            header.faceImgView.image = #imageLiteral(resourceName: "sad")
+        }
         return header
     }
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

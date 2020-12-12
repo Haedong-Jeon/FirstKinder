@@ -24,5 +24,5 @@ let STORAGE_COMMENT_IMGS = STORAGE.child("commentImgs")
 var blockedUserVendors = [String]()
 var blockedUserReasons = [String]()
 var blockedReasonCategories = [String]()
-
+var reportedChatList = [String]()
 var commentReloader = false

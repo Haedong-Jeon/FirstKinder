@@ -19,7 +19,7 @@ extension ChatDetailController {
                 self.deleteThis()
             }
             let button3 = UIAlertAction(title: "닫기", style: .cancel, handler: nil)
-
+            
             actionAlertController.addAction(button1)
             actionAlertController.addAction(button2)
             actionAlertController.addAction(button3)
@@ -35,13 +35,28 @@ extension ChatDetailController {
                 self.blockThisUser()
             }
             let button3 = UIAlertAction(title: "닫기", style: .cancel, handler: nil)
-
+            
+            if isAlreadyReported() {
+                button1.isEnabled = false
+            }
             actionAlertController.addAction(button1)
             actionAlertController.addAction(button2)
             actionAlertController.addAction(button3)
-
+            
             self.present(actionAlertController, animated: true, completion: nil)
         }
+    }
+    func isAlreadyReported() -> Bool {
+        var isReported = false
+        guard let reportedChat = UserDefaults.standard.array(forKey: "reportedChatList") as? [String] else {
+            return false
+        }
+        reportedChat.forEach({
+            if $0 == self.chat!.uid {
+                isReported = true
+            }
+        })
+        return isReported
     }
     @objc func keyBoardCameraButtonTap() {
         imgPicker.sourceType = .camera
@@ -114,7 +129,7 @@ extension ChatDetailController {
             self.addDetailReason(category: category)
         }
         let button4 = UIAlertAction(title: "취소", style: .cancel, handler: nil)
-
+        
         blockReasonCategoryAlert.addAction(button1)
         blockReasonCategoryAlert.addAction(button2)
         blockReasonCategoryAlert.addAction(button3)
@@ -142,6 +157,15 @@ extension ChatDetailController {
     func reportThisChat() {
         let reportCount = chat!.reportCount + 1
         DB_CHATS.child(chat!.uid).updateChildValues(["reportCount": reportCount])
+        
+        guard let reportedChat = UserDefaults.standard.array(forKey: "reportedChatList") as? [String] else {
+            reportedChatList.append(self.chat!.uid)
+            UserDefaults.standard.setValue(reportedChatList, forKey: "reportedChatList")
+            return
+        }
+        reportedChatList = reportedChat
+        reportedChatList.append(self.chat!.uid)
+        UserDefaults.standard.setValue(reportedChatList, forKey: "reportedChatList")
     }
     func localSaveBlockedUser() {
         guard let blocks = UserDefaults.standard.array(forKey: "blockedUsers") as? [String] else {
