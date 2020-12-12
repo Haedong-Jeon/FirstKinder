@@ -21,9 +21,7 @@ class ChatController: UICollectionViewController, UICollectionViewDelegateFlowLa
         button.widthAnchor.constraint(equalToConstant: 50).isActive = true
         button.heightAnchor.constraint(equalToConstant: 50).isActive = true
         button.layer.cornerRadius = 25
-        let pencilImg = UIImage(named: "pencil")
-        pencilImg?.draw(in: CGRect(x: 0, y: 0, width: 40, height: 40))
-        button.setImage(pencilImg, for: .normal)
+        button.setTitle("+", for: .normal)
         button.backgroundColor = #colorLiteral(red: 0.6369027091, green: 0.5376098795, blue: 1, alpha: 1)
         button.setTitleColor(.white, for: .normal)
         

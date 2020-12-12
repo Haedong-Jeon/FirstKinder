@@ -15,5 +15,6 @@ struct Chat {
     var vendor: String
     var category: String
     var commentCount: Int
+    var reportCount: Int
 }
 var chats = [Chat]()

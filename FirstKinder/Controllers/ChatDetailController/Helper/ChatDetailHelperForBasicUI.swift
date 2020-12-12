@@ -28,7 +28,7 @@ extension ChatDetailController {
         
     }
     func configureNavBar() {
-        let gearButton = UIBarButtonItem.init(image: UIImage(systemName: "gear"), style: .plain, target: self, action: #selector(handleGearButtonTap))
+        let gearButton = UIBarButtonItem.init(image: #imageLiteral(resourceName: "gear"), style: .plain, target: self, action: #selector(handleGearButtonTap))
         self.navigationController?.navigationBar.topItem?.rightBarButtonItem = gearButton
     }
     func drawCommentTextView() {

@@ -29,7 +29,7 @@ extension ChatDetailController {
             //글 쓴 사람이 아님.
             let actionAlertController = UIAlertController()
             let button1 = UIAlertAction(title: "신고할 거에요", style: .default) { ACTION in
-                self.reportThisUser()
+                self.reportThisChat()
             }
             let button2 = UIAlertAction(title: "이 사람의 글은 더 이상 보기 싫어요", style: .default) { ACTION in
                 self.blockThisUser()
@@ -139,8 +139,9 @@ extension ChatDetailController {
         addReasonAlert.addAction(cancelButton)
         self.present(addReasonAlert, animated: true, completion: nil)
     }
-    func reportThisUser() {
-        
+    func reportThisChat() {
+        let reportCount = chat!.reportCount + 1
+        DB_CHATS.child(chat!.uid).updateChildValues(["reportCount": reportCount])
     }
     func localSaveBlockedUser() {
         guard let blocks = UserDefaults.standard.array(forKey: "blockedUsers") as? [String] else {
