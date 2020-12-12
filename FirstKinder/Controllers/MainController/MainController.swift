@@ -21,22 +21,24 @@ class MainController: UITabBarController, UITabBarControllerDelegate {
     }
     func setTabs() {
         let kinderListController = ListController(collectionViewLayout: UICollectionViewFlowLayout())
-        kinderListController.tabBarItem.image = UIImage(systemName: "list.dash")
+        kinderListController.tabBarItem.image = #imageLiteral(resourceName: "list-1")
         kinderListController.tabBarItem.title = "어린이집 목록"
         
         let nearKinderController = NearKinderController()
-        nearKinderController.tabBarItem.image = UIImage(systemName: "mappin.and.ellipse")
+        nearKinderController.tabBarItem.image = #imageLiteral(resourceName: "map (1)")
         nearKinderController.tabBarItem.title = "근처 어린이집"
         
         let parentsChatController = ChatController(collectionViewLayout: UICollectionViewFlowLayout())
-        parentsChatController.tabBarItem.image = UIImage(systemName: "quote.bubble.fill")
+        parentsChatController.tabBarItem.image = #imageLiteral(resourceName: "chat (1)")
         parentsChatController.tabBarItem.title = "이야기"
         
         let myKindersController = MyKindersController(collectionViewLayout: UICollectionViewFlowLayout())
-        myKindersController.tabBarItem.image = UIImage(systemName: "heart.fill")
+        myKindersController.tabBarItem.image = #imageLiteral(resourceName: "like")
         myKindersController.tabBarItem.title = "관심 어린이집"
         
         let controllers = [kinderListController, nearKinderController, parentsChatController, myKindersController]
         viewControllers = controllers.map({UINavigationController(rootViewController: $0)})//탭안의 뷰컨트롤러들에게 네비 바 붙이기.
+        
+        tabBar.isTranslucent = false
     }
 }

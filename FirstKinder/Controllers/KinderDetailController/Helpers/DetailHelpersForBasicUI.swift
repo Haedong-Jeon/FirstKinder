@@ -16,7 +16,7 @@ extension KinderDetailController: ChartViewDelegate {
         drawAddress()
         drawMap()
         drawChart()
-        addPlusButtonOnNavBar()
+        addLikeButtonOnNavBar()
         setAnnotaion()
         drawNumOfChild()
         drawNumOfTeacher()
@@ -328,12 +328,13 @@ extension KinderDetailController: ChartViewDelegate {
         data.setDrawValues(false)
         pieChart.data = data
     }
-    func addPlusButtonOnNavBar() {
+    func addLikeButtonOnNavBar() {
         if !isFromMyKinder {
-            let heartButton = UIBarButtonItem(image: UIImage(systemName: "suit.heart"), style: .plain, target: self, action: #selector(handleHeartButtonTap))
+            let heartButton = UIBarButtonItem(image: #imageLiteral(resourceName: "like"), style: .plain, target: self, action: #selector(handleHeartButtonTap))
             self.navigationController?.navigationBar.topItem?.rightBarButtonItem = heartButton
         } else {
-            self.navigationController?.navigationBar.topItem?.rightBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: .trash, target: self, action: #selector(handleTrashButtonTap))
+            let trashButton = UIBarButtonItem(image: #imageLiteral(resourceName: "delete"), style: .plain, target: self, action: #selector(handleTrashButtonTap))
+            self.navigationController?.navigationBar.topItem?.rightBarButtonItem = trashButton
         }
     }
     //총 수용 인원 중 현재 인원의 비율
