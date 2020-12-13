@@ -16,25 +16,19 @@ extension ListController {
         cell.kinderIsOnLabel.text = nowShowingKinders[indexPath.row].isOn
         
         if cell.kinderIsOnLabel.text == "정상" {
-            cell.kinderIsOnLabel.textColor = .systemBlue
+            cell.kinderIsOnLabel.backgroundColor = .link
         } else if cell.kinderIsOnLabel.text == "폐지" {
-            cell.kinderIsOnLabel.textColor = .systemPink
+            cell.kinderIsOnLabel.backgroundColor = .red
         } else if cell.kinderIsOnLabel.text == "휴지" {
-            cell.kinderIsOnLabel.textColor = .systemYellow
+            cell.kinderIsOnLabel.backgroundColor = .orange
         } else if cell.kinderIsOnLabel.text == "재개" {
-            cell.kinderIsOnLabel.textColor = .systemGreen
+            cell.kinderIsOnLabel.backgroundColor = .systemGreen
         }
-        guard let currentChildNum = Int(nowShowingKinders[indexPath.row].currentNumOfChild) else { return UICollectionViewCell() }
-        if currentChildNum < 50 {
-            cell.overFiftyLabel.backgroundColor = .white
-        } else {
-            cell.overFiftyLabel.backgroundColor = .systemPink
-        }
-        
+
         if nowShowingKinders[indexPath.row].isCarAvailable != "운영" {
             cell.carAvailableLabel.backgroundColor = .white
         } else {
-            cell.carAvailableLabel.backgroundColor = .black
+            cell.carAvailableLabel.backgroundColor = .systemPink
         }
         cell.layer.cornerRadius = 10
         return cell
@@ -57,7 +51,7 @@ extension ListController {
         navigationController?.pushViewController(detailViewController, animated: false)
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.frame.width - 10, height: getEstimatedHeightFromDummyCell(indexPath))
+        return CGSize(width: collectionView.frame.width - 20, height: getEstimatedHeightFromDummyCell(indexPath))
     }
     func getEstimatedHeightFromDummyCell(_ indexPath: IndexPath) -> CGFloat{
         let width = view.frame.width - 10

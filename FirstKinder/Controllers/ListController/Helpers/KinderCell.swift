@@ -7,7 +7,9 @@
 
 import UIKit
 
+let labelCellReuseIdentifier = "reuse identifier for label reuse"
 class KinderCell: UICollectionViewCell {
+  
     var kinderTitleLabel: UILabel = {
         var label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -24,11 +26,6 @@ class KinderCell: UICollectionViewCell {
     var kinderIsOnLabel: UILabel = {
         var label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    var overFiftyLabel: UILabel = {
-        var label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
         label.widthAnchor.constraint(equalToConstant: 60).isActive = true
         label.heightAnchor.constraint(equalToConstant: 20).isActive = true
         label.font = UIFont.systemFont(ofSize: 15)
@@ -43,10 +40,13 @@ class KinderCell: UICollectionViewCell {
         label.heightAnchor.constraint(equalToConstant: 20).isActive = true
         label.font = UIFont.systemFont(ofSize: 15)
         label.layer.cornerRadius = 5
+        label.backgroundColor = .systemPink
+        label.textAlignment = .center
+        label.textColor = .white
+        label.text = "차량 운행"
         label.clipsToBounds = true
         return label
     }()
-
     override init(frame: CGRect) {
         super.init(frame: frame)
         configureUI()
@@ -55,49 +55,39 @@ class KinderCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     func configureUI() {
-        backgroundColor = .white 
-        drawOverFiftylabel()
+        backgroundColor = .white
+        drawKinderIsOn()
         drawCarAvailableLabel()
         drawKinderTitle()
         drawKinderPosition()
-        drawKinderIsOn()
     }
     func drawKinderTitle() {
         addSubview(kinderTitleLabel)
-        kinderTitleLabel.topAnchor.constraint(equalTo: carAvailableLabel.bottomAnchor, constant: 5).isActive = true
-        kinderTitleLabel.widthAnchor.constraint(equalTo: safeAreaLayoutGuide.widthAnchor).isActive = true
+        kinderTitleLabel.topAnchor.constraint(equalTo: kinderIsOnLabel.bottomAnchor, constant: 5).isActive = true
+        kinderTitleLabel.widthAnchor.constraint(equalToConstant: frame.width - 10).isActive = true
+        kinderTitleLabel.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor).isActive = true
         kinderTitleLabel.heightAnchor.constraint(equalToConstant: 50).isActive = true
     }
     func drawKinderPosition() {
         addSubview(kinderPositionLabel)
         kinderPositionLabel.topAnchor.constraint(equalTo: kinderTitleLabel.bottomAnchor).isActive = true
-        kinderPositionLabel.widthAnchor.constraint(equalTo: safeAreaLayoutGuide.widthAnchor).isActive = true
+        kinderPositionLabel.widthAnchor.constraint(equalToConstant: frame.width - 10).isActive = true
+        kinderPositionLabel.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor).isActive = true
+        kinderPositionLabel.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -5).isActive = true
     }
     func drawKinderIsOn() {
         addSubview(kinderIsOnLabel)
-        kinderIsOnLabel.topAnchor.constraint(equalTo: kinderPositionLabel.bottomAnchor).isActive = true
-        kinderIsOnLabel.widthAnchor.constraint(equalTo: safeAreaLayoutGuide.widthAnchor).isActive = true
-        kinderIsOnLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
-        kinderIsOnLabel.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor).isActive = true
-    }
-    func drawOverFiftylabel() {
-        addSubview(overFiftyLabel)
-        overFiftyLabel.rightAnchor.constraint(equalTo: safeAreaLayoutGuide.rightAnchor,constant: -20).isActive = true
-        overFiftyLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
+        kinderIsOnLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
+        kinderIsOnLabel.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor, constant: 10).isActive = true
         
-        overFiftyLabel.backgroundColor = .systemPink
-        overFiftyLabel.textColor = .white
-        overFiftyLabel.textAlignment = .center
-        overFiftyLabel.text = "50명 ↑"
+        kinderIsOnLabel.backgroundColor = .link
+        kinderIsOnLabel.textColor = .white
+        kinderIsOnLabel.textAlignment = .center
+        kinderIsOnLabel.text = "정상"
     }
     func drawCarAvailableLabel() {
         addSubview(carAvailableLabel)
-        carAvailableLabel.rightAnchor.constraint(equalTo: overFiftyLabel.leftAnchor, constant: -10).isActive = true
-        carAvailableLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
-        
-        carAvailableLabel.backgroundColor = .black
-        carAvailableLabel.textColor = .white
-        carAvailableLabel.textAlignment = .center
-        carAvailableLabel.text = "차량 운행"
+        carAvailableLabel.topAnchor.constraint(equalTo: kinderIsOnLabel.topAnchor).isActive = true
+        carAvailableLabel.rightAnchor.constraint(equalTo: safeAreaLayoutGuide.rightAnchor, constant: -10).isActive = true
     }
 }
