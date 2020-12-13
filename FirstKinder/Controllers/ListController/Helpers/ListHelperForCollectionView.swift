@@ -51,6 +51,18 @@ extension ListController {
         navigationController?.pushViewController(detailViewController, animated: false)
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.frame.width - 10, height: 95)
+        return CGSize(width: collectionView.frame.width - 10, height: getEstimatedHeightFromDummyCell(indexPath))
+    }
+    func getEstimatedHeightFromDummyCell(_ indexPath: IndexPath) -> CGFloat{
+        let width = view.frame.width - 10
+        let estimatedHeight: CGFloat = 800.0
+        let dummyCell = KinderCell(frame: CGRect(x: 0, y: 0, width: width, height: estimatedHeight))
+        dummyCell.kinderTitleLabel.text = nowShowingKinders[indexPath.row].title
+        dummyCell.kinderPositionLabel.text = nowShowingKinders[indexPath.row].craddr
+        dummyCell.kinderIsOnLabel.text = nowShowingKinders[indexPath.row].isOn
+    
+        dummyCell.layoutIfNeeded()
+        let estimateSize = dummyCell.systemLayoutSizeFitting(CGSize(width: width, height: estimatedHeight))
+        return estimateSize.height
     }
 }

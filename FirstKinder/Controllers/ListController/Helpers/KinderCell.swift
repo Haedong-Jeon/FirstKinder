@@ -11,12 +11,14 @@ class KinderCell: UICollectionViewCell {
     var kinderTitleLabel: UILabel = {
         var label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.init(name: "CookieRun", size: 20)
+        label.font = UIFont.boldSystemFont(ofSize: 20)
         return label
     }()
     var kinderPositionLabel: UILabel = {
         var label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.lineBreakMode = .byCharWrapping
+        label.numberOfLines = 0
         return label
     }()
     var kinderIsOnLabel: UILabel = {
@@ -39,7 +41,7 @@ class KinderCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     func configureUI() {
-        backgroundColor = #colorLiteral(red: 0.9098039216, green: 0.8980392157, blue: 0.9607843137, alpha: 1)
+        backgroundColor = .white 
         drawKinderTitle()
         drawKinderPosition()
         drawKinderIsOn()
@@ -55,13 +57,13 @@ class KinderCell: UICollectionViewCell {
         addSubview(kinderPositionLabel)
         kinderPositionLabel.topAnchor.constraint(equalTo: kinderTitleLabel.bottomAnchor).isActive = true
         kinderPositionLabel.widthAnchor.constraint(equalTo: safeAreaLayoutGuide.widthAnchor).isActive = true
-        kinderPositionLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
     }
     func drawKinderIsOn() {
         addSubview(kinderIsOnLabel)
         kinderIsOnLabel.topAnchor.constraint(equalTo: kinderPositionLabel.bottomAnchor).isActive = true
         kinderIsOnLabel.widthAnchor.constraint(equalTo: safeAreaLayoutGuide.widthAnchor).isActive = true
         kinderIsOnLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        kinderIsOnLabel.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor).isActive = true
     }
     func drawFaceIcon() {
         addSubview(medalForManyChildImgView)
