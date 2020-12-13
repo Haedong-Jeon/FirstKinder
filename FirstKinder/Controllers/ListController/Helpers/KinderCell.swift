@@ -26,13 +26,27 @@ class KinderCell: UICollectionViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    var medalForManyChildImgView: UIImageView = {
-        var imgView = UIImageView()
-        imgView.translatesAutoresizingMaskIntoConstraints = false
-        imgView.widthAnchor.constraint(equalToConstant: 32).isActive = true
-        imgView.heightAnchor.constraint(equalToConstant: 32).isActive = true
-        return imgView
+    var overFiftyLabel: UILabel = {
+        var label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.widthAnchor.constraint(equalToConstant: 60).isActive = true
+        label.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        label.font = UIFont.systemFont(ofSize: 15)
+        label.layer.cornerRadius = 5
+        label.clipsToBounds = true
+        return label
     }()
+    var carAvailableLabel: UILabel = {
+        var label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.widthAnchor.constraint(equalToConstant: 60).isActive = true
+        label.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        label.font = UIFont.systemFont(ofSize: 15)
+        label.layer.cornerRadius = 5
+        label.clipsToBounds = true
+        return label
+    }()
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         configureUI()
@@ -42,14 +56,15 @@ class KinderCell: UICollectionViewCell {
     }
     func configureUI() {
         backgroundColor = .white 
+        drawOverFiftylabel()
+        drawCarAvailableLabel()
         drawKinderTitle()
         drawKinderPosition()
         drawKinderIsOn()
-        drawFaceIcon()
     }
     func drawKinderTitle() {
         addSubview(kinderTitleLabel)
-        kinderTitleLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor).isActive = true
+        kinderTitleLabel.topAnchor.constraint(equalTo: carAvailableLabel.bottomAnchor, constant: 5).isActive = true
         kinderTitleLabel.widthAnchor.constraint(equalTo: safeAreaLayoutGuide.widthAnchor).isActive = true
         kinderTitleLabel.heightAnchor.constraint(equalToConstant: 50).isActive = true
     }
@@ -65,9 +80,24 @@ class KinderCell: UICollectionViewCell {
         kinderIsOnLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
         kinderIsOnLabel.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor).isActive = true
     }
-    func drawFaceIcon() {
-        addSubview(medalForManyChildImgView)
-        medalForManyChildImgView.rightAnchor.constraint(equalTo: safeAreaLayoutGuide.rightAnchor,constant: -20).isActive = true
-        medalForManyChildImgView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor).isActive = true
+    func drawOverFiftylabel() {
+        addSubview(overFiftyLabel)
+        overFiftyLabel.rightAnchor.constraint(equalTo: safeAreaLayoutGuide.rightAnchor,constant: -20).isActive = true
+        overFiftyLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
+        
+        overFiftyLabel.backgroundColor = .systemPink
+        overFiftyLabel.textColor = .white
+        overFiftyLabel.textAlignment = .center
+        overFiftyLabel.text = "50명 ↑"
+    }
+    func drawCarAvailableLabel() {
+        addSubview(carAvailableLabel)
+        carAvailableLabel.rightAnchor.constraint(equalTo: overFiftyLabel.leftAnchor, constant: -10).isActive = true
+        carAvailableLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
+        
+        carAvailableLabel.backgroundColor = .black
+        carAvailableLabel.textColor = .white
+        carAvailableLabel.textAlignment = .center
+        carAvailableLabel.text = "차량 운행"
     }
 }

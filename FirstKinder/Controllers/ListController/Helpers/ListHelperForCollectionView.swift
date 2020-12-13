@@ -25,10 +25,16 @@ extension ListController {
             cell.kinderIsOnLabel.textColor = .systemGreen
         }
         guard let currentChildNum = Int(nowShowingKinders[indexPath.row].currentNumOfChild) else { return UICollectionViewCell() }
-        if currentChildNum >= 50 {
-            cell.medalForManyChildImgView.image = #imageLiteral(resourceName: "50")
+        if currentChildNum < 50 {
+            cell.overFiftyLabel.backgroundColor = .white
         } else {
-            cell.medalForManyChildImgView.image = nil
+            cell.overFiftyLabel.backgroundColor = .systemPink
+        }
+        
+        if nowShowingKinders[indexPath.row].isCarAvailable != "운영" {
+            cell.carAvailableLabel.backgroundColor = .white
+        } else {
+            cell.carAvailableLabel.backgroundColor = .black
         }
         cell.layer.cornerRadius = 10
         return cell
