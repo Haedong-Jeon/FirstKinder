@@ -47,7 +47,7 @@ extension ChatDetailController {
             UIBarButtonItem(image: UIImage(systemName: "photo"), style: .plain, target: self, action: #selector(keyBoardPhotoButtonTap)),
             UIBarButtonItem(image: UIImage(systemName: "keyboard.chevron.compact.down"), style: .plain, target: self, action: #selector(keyBoardDoneButtonTap)),
             UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil),
-            UIBarButtonItem(image: UIImage(systemName: "capslock.fill"), style: .plain, target: self, action: #selector(handleUploadTap)),
+            uploadButton
         ]
         keyboardToolbar.tintColor = .black
         keyboardToolbar.sizeToFit()

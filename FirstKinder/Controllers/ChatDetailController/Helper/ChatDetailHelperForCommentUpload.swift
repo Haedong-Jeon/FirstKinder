@@ -133,7 +133,6 @@ extension ChatDetailController {
             completion()
         }
     }
-    
     func uploadImg(_ uid: String, _ imgFileName: String, completion: @escaping() -> Void) {
         guard let imgData = imgView.image?.jpegData(compressionQuality: 0.3) else { return }
         STORAGE_COMMENT_IMGS.child(imgFileName).putData(imgData, metadata: nil) { (metaData, error) in
@@ -148,6 +147,7 @@ extension ChatDetailController {
     }
     func showSuccessMsg() {
         self.commentTextView.text.removeAll()
+        self.imgView.image = nil
         self.imgView.removeFromSuperview()
         let showSuccess = UIAlertController(title: "댓글", message: "댓글이 업로드 됐어요!", preferredStyle: .alert)
         let okButton = UIAlertAction(title: "확인", style: .default) { ACTION in

@@ -7,8 +7,10 @@
 
 import UIKit
 import Kingfisher
+import RxSwift
 
 class ChatWriteController: UIViewController, UITextViewDelegate {
+    var chatBody$: Observable<Bool>?
     var categoryRadioButtonView = RadioButtonView()
     var editingChat: Chat?
     var editiedDetailChat: ChatDetailController?
@@ -22,6 +24,7 @@ class ChatWriteController: UIViewController, UITextViewDelegate {
         }
     }
     var category = ""
+    let uploadButton = UIBarButtonItem(title: "완료❤︎", style: .plain, target: self, action: #selector(handleUpload))
     var chatBodyTextView: UITextView = {
         var textView = UITextView()
         textView.translatesAutoresizingMaskIntoConstraints = false
@@ -61,14 +64,18 @@ class ChatWriteController: UIViewController, UITextViewDelegate {
     override func viewDidLoad() {
         keyboardToolBarSetup()
         configureUI()
+        setRx()
+        setSubscriberForRx()
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.navigationController?.navigationBar.topItem?.title = "이야기 쓰기"
-        let uploadButton = UIBarButtonItem(title: "완료❤︎", style: .plain, target: self, action: #selector(handleUpload))
+        uploadButton.tintColor = .gray
+        uploadButton.isEnabled = false
         self.navigationController?.navigationBar.topItem?.rightBarButtonItem = uploadButton
 
         if editingChat != nil {
+            //게시글 수정중.
             if imgView.image != nil {
                 redrawViewsWithImg()
             } else {

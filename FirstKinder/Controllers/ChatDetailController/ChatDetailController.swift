@@ -7,6 +7,8 @@
 
 import UIKit
 import ANActivityIndicator
+import RxSwift
+import RxCocoa
 
 let commentCellReuseIdentifier = "reuse identifer for comment cell"
 let headerReuseIdentifier = "header reuse identifier"
@@ -22,7 +24,9 @@ class ChatDetailController: UICollectionViewController, UICollectionViewDelegate
             collectionView.reloadData()
         }
     }
+    let uploadButton = UIBarButtonItem(image: UIImage(systemName: "capslock.fill"), style: .plain, target: self, action: #selector(handleUploadTap))
     let imgPicker = UIImagePickerController()
+    var comment$: Observable<Bool>?
     var commentTextView: UITextView = {
         var textView = UITextView()
         textView.translatesAutoresizingMaskIntoConstraints = false
@@ -54,6 +58,8 @@ class ChatDetailController: UICollectionViewController, UICollectionViewDelegate
                                     .sorted(by: {$0.timeStamp < $1.timeStamp})
             indicator.stopAnimating()
         }
+        setRx()
+        setSubscriberForRx()
     }
     func editButtonsUnlock() {
         guard let cells = collectionView.visibleCells as? [CommentCell] else { return }
