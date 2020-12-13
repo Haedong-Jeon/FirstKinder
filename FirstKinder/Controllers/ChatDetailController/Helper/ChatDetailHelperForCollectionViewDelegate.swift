@@ -48,11 +48,11 @@ extension ChatDetailController {
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
+        return 10
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let height = getEstimatedHeightFromDummyCell(indexPath)
-        return CGSize(width: collectionView.frame.width, height: height)
+        return CGSize(width: collectionView.frame.width - 10, height: height)
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -94,6 +94,7 @@ extension ChatDetailController {
         } else {
             cell.faceImgView.image = #imageLiteral(resourceName: "sad")
         }
+        cell.layer.cornerRadius = 10
         return cell
     }
     

@@ -70,7 +70,7 @@ class ChatDetailHeader: UICollectionReusableView {
         var imgView = UIImageView()
         imgView.translatesAutoresizingMaskIntoConstraints = false
         imgView.backgroundColor = #colorLiteral(red: 0.9293304086, green: 0.929463923, blue: 0.9293010831, alpha: 1)
-        imgView.heightAnchor.constraint(equalToConstant: 1).isActive = true
+        imgView.heightAnchor.constraint(equalToConstant: 10).isActive = true
         return imgView
     }()
     lazy var commentCountLabel: UILabel = {

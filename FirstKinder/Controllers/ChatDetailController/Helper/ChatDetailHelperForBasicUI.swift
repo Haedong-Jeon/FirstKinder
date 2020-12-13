@@ -26,6 +26,8 @@ extension ChatDetailController {
         collectionView.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor).isActive = true
         collectionView.bottomAnchor.constraint(equalTo: commentTextView.topAnchor).isActive = true
         
+        collectionView.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
+        
     }
     func configureNavBar() {
         let gearButton = UIBarButtonItem.init(image: #imageLiteral(resourceName: "gear"), style: .plain, target: self, action: #selector(handleGearButtonTap))
