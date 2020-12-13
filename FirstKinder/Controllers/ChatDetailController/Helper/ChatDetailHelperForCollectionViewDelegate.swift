@@ -48,26 +48,23 @@ extension ChatDetailController {
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 10
+        return 0
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let height = getEstimatedHeightFromDummyCell(indexPath)
-        return CGSize(width: collectionView.frame.width - 10, height: height)
+        return CGSize(width: collectionView.frame.width, height: height)
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: commentCellReuseIdentifier, for: indexPath) as? CommentCell else {
             return UICollectionViewCell()
         }
-        cell.addDeleteButton()
-        cell.addEditButton()
-        activateDeleteButtonIfUserComment(cell, indexPath)
-        activateEditButtonIfUserComment(cell, indexPath)
         cell.deleteDelegate = self
         cell.thisIdxPath = indexPath
         cell.imgView.removeFromSuperview()
         cell.commentBodyLabel.removeFromSuperview()
         drawVendor(cell, indexPath)
+        drawVerticalDots(cell, indexPath)
         drawTimeLabel(cell, indexPath)
         drawBorderLine(cell, indexPath)
         cell.commentBodyLabel.text = thisComments[indexPath.row].commentBody
@@ -94,10 +91,10 @@ extension ChatDetailController {
         } else {
             cell.faceImgView.image = #imageLiteral(resourceName: "sad")
         }
-        cell.layer.cornerRadius = 10
+        cell.contentView.isUserInteractionEnabled = true
+        cell.addFunctionToVerticalDots()
         return cell
     }
-    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         return CGSize(width: view.frame.width, height: getEstimatedHeightByDummyHeader())
     }
@@ -148,7 +145,7 @@ extension ChatDetailController {
         //파이어베이스 렉 때문에 잠시동안만 이미지 다운로드를 하지 않는다. 대신 대체 이미지 사용.
         downloadImgToCell(cell, indexPath)
         cell.addSubview(cell.imgView)
-        cell.imgView.bottomAnchor.constraint(equalTo: cell.safeAreaLayoutGuide.bottomAnchor, constant: -35).isActive = true
+        cell.imgView.bottomAnchor.constraint(equalTo: cell.safeAreaLayoutGuide.bottomAnchor, constant: -5).isActive = true
         cell.imgView.widthAnchor.constraint(equalToConstant: 100).isActive = true
         cell.imgView.heightAnchor.constraint(equalToConstant: 100).isActive = true
         cell.imgView.layer.borderWidth = 1
@@ -162,12 +159,14 @@ extension ChatDetailController {
         
         cell.imgView.isUserInteractionEnabled = true
         cell.imgView.addMakeBigFunction()
+        
+        
     }
     func drawCellWithoutImg(_ cell: CommentCell) {
         cell.addSubview(cell.commentBodyLabel)
         cell.commentBodyLabel.topAnchor.constraint(equalTo: cell.faceImgView.bottomAnchor, constant: 10).isActive = true
         cell.commentBodyLabel.widthAnchor.constraint(equalTo: cell.safeAreaLayoutGuide.widthAnchor).isActive = true
-        cell.commentBodyLabel.bottomAnchor.constraint(equalTo: cell.safeAreaLayoutGuide.bottomAnchor, constant: -35).isActive = true
+        cell.commentBodyLabel.bottomAnchor.constraint(equalTo: cell.safeAreaLayoutGuide.bottomAnchor, constant: -5).isActive = true
     }
     func downloadImgToCell(_ cell: CommentCell, _ indexPath: IndexPath) {
         cell.imgView.kf.indicatorType = .activity
@@ -186,10 +185,15 @@ extension ChatDetailController {
             cell.imgView.image = DBUtil.shared.loadImgFromCache(thisComments[indexPath.row].imgFileName)
         }
     }
+    func drawVerticalDots(_ cell: CommentCell, _ indexPath: IndexPath) {
+        cell.contentView.addSubview(cell.verticalDotButton)
+        cell.verticalDotButton.topAnchor.constraint(equalTo: cell.safeAreaLayoutGuide.topAnchor, constant: 5).isActive = true
+        cell.verticalDotButton.rightAnchor.constraint(equalTo: cell.safeAreaLayoutGuide.rightAnchor,constant: -5).isActive = true
+    }
     func drawTimeLabel(_ cell: CommentCell, _ indexPath: IndexPath) {
         cell.addSubview(cell.timeLabel)
         cell.timeLabel.topAnchor.constraint(equalTo: cell.safeAreaLayoutGuide.topAnchor, constant: 5).isActive = true
-        cell.timeLabel.rightAnchor.constraint(equalTo: cell.safeAreaLayoutGuide.rightAnchor, constant: -5).isActive = true
+        cell.timeLabel.rightAnchor.constraint(equalTo: cell.verticalDotButton.leftAnchor, constant: -5).isActive = true
         let now = Int(NSDate().timeIntervalSince1970)
         var elapsedTime = (now - thisComments[indexPath.row].timeStamp) / 60
         if elapsedTime <= 0 {
@@ -215,24 +219,29 @@ extension ChatDetailController {
         cell.borderLineImgView.widthAnchor.constraint(equalTo: cell.widthAnchor).isActive = true
         cell.borderLineImgView.bottomAnchor.constraint(equalTo: cell.safeAreaLayoutGuide.bottomAnchor).isActive = true
     }
-    func activateDeleteButtonIfUserComment(_ cell: CommentCell, _ indexPath: IndexPath) {
-        cell.cellDeleteButton.isUserInteractionEnabled = false
-        cell.cellDeleteButton.isHidden = true
-        if thisComments[indexPath.row].vendor == UIDevice.current.identifierForVendor?.uuidString {
-            cell.cellDeleteButton.isUserInteractionEnabled = true
-            cell.cellDeleteButton.isHidden = false
-        }
-    }
-    func activateEditButtonIfUserComment(_ cell: CommentCell, _ indexPath: IndexPath) {
-        cell.editButton.isUserInteractionEnabled = false
-        cell.editButton.isHidden = true
-        if thisComments[indexPath.row].vendor == UIDevice.current.identifierForVendor?.uuidString {
-            cell.editButton.isUserInteractionEnabled = true
-            cell.editButton.isHidden = false
-        }
+    @objc func handleDotTap() {
+        
     }
 }
 extension ChatDetailController: CommentDeleteDelegate {
+    func dotTap(indexPath: IndexPath) {
+        if thisComments[indexPath.row].vendor == UIDevice.current.identifierForVendor?.uuidString {
+            
+            let askAlertController = UIAlertController()
+            let deleteButton = UIAlertAction(title: "삭제", style: .default) { ACTTION in
+                self.delete(indexPath: indexPath)
+            }
+            let editButton = UIAlertAction(title: "수정", style: .default) { ACTTION in
+                self.edit(indexPath: indexPath)
+            }
+            let cancelButton = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+            askAlertController.addAction(deleteButton)
+            askAlertController.addAction(editButton)
+            askAlertController.addAction(cancelButton)
+            
+            self.present(askAlertController, animated: true, completion: nil)
+        }
+    }
     func edit(indexPath: IndexPath) {
         if self.isCommentEditing {
             guard let cell = collectionView.cellForItem(at: indexPath) as? CommentCell else {
@@ -240,12 +249,9 @@ extension ChatDetailController: CommentDeleteDelegate {
             }
             editCancel(cell)
             redrawViewsWithoutImg()
-            editButtonsUnlock()
             return
         }
         drawEditingUI(indexPath: indexPath)
-        redrawCellUIForEdit(indexPath: indexPath)
-        otherEditButtonsLock()
         
         self.isCommentEditing = true
         self.editingIdx = indexPath
@@ -258,19 +264,11 @@ extension ChatDetailController: CommentDeleteDelegate {
             self.imgView.image = DBUtil.shared.loadImgFromCache(thisComments[indexPath.row].imgFileName)
         }
     }
-    func redrawCellUIForEdit(indexPath: IndexPath) {
-        guard let cell = collectionView.cellForItem(at: indexPath) as? CommentCell else { return }
-        cell.editButton.backgroundColor = .white
-        cell.editButton.setTitleColor(.lightGray, for: .normal)
-        cell.editButton.setTitle("수정중", for: .normal)
-    }
     func editCancel(_ cell: CommentCell) {
-        cell.editButton.backgroundColor = .black
-        cell.editButton.setTitleColor(.white, for: .normal)
-        cell.editButton.setTitle("수정", for: .normal)
-        self.isCommentEditing = false
+               self.isCommentEditing = false
         self.isEditTargetCommentHasIMg = false
         self.commentTextView.text = ""
+        
     }
     func delete(indexPath: IndexPath) {
         DB_COMMENTS.child(thisComments[indexPath.row].uid).removeValue()
@@ -285,5 +283,6 @@ extension ChatDetailController: CommentDeleteDelegate {
         let commentCount = thisComments.count
         DB_CHATS.child(self.chat!.uid).updateChildValues(["commentCount": commentCount])
     }
+    
 }
 

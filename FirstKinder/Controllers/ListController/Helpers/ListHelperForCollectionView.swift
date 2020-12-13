@@ -14,7 +14,7 @@ extension ListController {
         cell.kinderTitleLabel.text = nowShowingKinders[indexPath.row].title
         cell.kinderPositionLabel.text = nowShowingKinders[indexPath.row].craddr
         cell.kinderIsOnLabel.text = nowShowingKinders[indexPath.row].isOn
-        
+
         if cell.kinderIsOnLabel.text == "정상" {
             cell.kinderIsOnLabel.backgroundColor = .link
         } else if cell.kinderIsOnLabel.text == "폐지" {

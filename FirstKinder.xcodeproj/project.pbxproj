@@ -35,6 +35,7 @@
 		E93EDBBB25823C42007BBF40 /* BlockUserHelperForCollectionViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93EDBBA25823C42007BBF40 /* BlockUserHelperForCollectionViewDelegate.swift */; };
 		E93EDBBE25823D62007BBF40 /* BlockUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93EDBBD25823D62007BBF40 /* BlockUserCell.swift */; };
 		E93EDC112582EF72007BBF40 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93EDC102582EF72007BBF40 /* Comment.swift */; };
+		E945E9822586285E009CFEE4 /* ButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E945E9812586285E009CFEE4 /* ButtonExtension.swift */; };
 		E95B8A1C257F26A6002EE9BC /* HelperForChat.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95B8A1B257F26A6002EE9BC /* HelperForChat.swift */; };
 		E95B8A24257F2A3D002EE9BC /* ChatWriteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95B8A23257F2A3D002EE9BC /* ChatWriteController.swift */; };
 		E95B8A28257F2A59002EE9BC /* HelperForWriteBasicUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95B8A27257F2A59002EE9BC /* HelperForWriteBasicUI.swift */; };
@@ -105,6 +106,7 @@
 		E93EDBBA25823C42007BBF40 /* BlockUserHelperForCollectionViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockUserHelperForCollectionViewDelegate.swift; sourceTree = "<group>"; };
 		E93EDBBD25823D62007BBF40 /* BlockUserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockUserCell.swift; sourceTree = "<group>"; };
 		E93EDC102582EF72007BBF40 /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
+		E945E9812586285E009CFEE4 /* ButtonExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonExtension.swift; sourceTree = "<group>"; };
 		E95B8A06257F1FEC002EE9BC /* FirstKinder.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FirstKinder.entitlements; sourceTree = "<group>"; };
 		E95B8A1B257F26A6002EE9BC /* HelperForChat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelperForChat.swift; sourceTree = "<group>"; };
 		E95B8A23257F2A3D002EE9BC /* ChatWriteController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatWriteController.swift; sourceTree = "<group>"; };
@@ -369,6 +371,7 @@
 			children = (
 				E95B8A8D257F9A32002EE9BC /* DBUtil.swift */,
 				E93A528E25848137006E5F54 /* imgExtension.swift */,
+				E945E9812586285E009CFEE4 /* ButtonExtension.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -674,6 +677,7 @@
 				E95B8A28257F2A59002EE9BC /* HelperForWriteBasicUI.swift in Sources */,
 				E960ACE02578846800985873 /* MyKindersController.swift in Sources */,
 				E95B8A1C257F26A6002EE9BC /* HelperForChat.swift in Sources */,
+				E945E9822586285E009CFEE4 /* ButtonExtension.swift in Sources */,
 				E960ACE725788DDB00985873 /* NearKinderController.swift in Sources */,
 				E93B13332581E69F00A22FF6 /* ChatDetailController.swift in Sources */,
 				E960ACEF2578965700985873 /* MyKinderHelpersForCollectionView.swift in Sources */,

@@ -42,9 +42,6 @@ extension ChatDetailController {
         uploadImg(thisComments[editingIdx!.row].uid, thisComments[editingIdx!.row].uid) {
             self.showSuccessMsg()
             guard let cell = self.collectionView.cellForItem(at: self.editingIdx!) as? CommentCell else { return }
-            cell.editButton.backgroundColor = .black
-            cell.editButton.setTitleColor(.white, for: .normal)
-            cell.editButton.setTitle("수정", for: .normal)
             indicator.stopAnimating()
             self.imgView.image = nil
             self.redrawViewsWithoutImg()
@@ -89,7 +86,6 @@ extension ChatDetailController {
             }
             isEditTargetCommentHasIMg = false
             isCommentEditing = false
-            editButtonsUnlock()
             imgView.image = nil
             commentTextView.text = ""
             redrawViewsWithoutImg()

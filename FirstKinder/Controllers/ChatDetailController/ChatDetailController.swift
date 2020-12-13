@@ -61,17 +61,5 @@ class ChatDetailController: UICollectionViewController, UICollectionViewDelegate
         setRx()
         setSubscriberForRx()
     }
-    func editButtonsUnlock() {
-        guard let cells = collectionView.visibleCells as? [CommentCell] else { return }
-        cells.forEach({$0.editButton.isUserInteractionEnabled = true})
-    }
-    func otherEditButtonsLock() {
-        guard let cells = collectionView.visibleCells as? [CommentCell] else { return }
-        for _cell in cells {
-            if _cell.editButton.backgroundColor != .white {
-                _cell.editButton.isUserInteractionEnabled = false
-            }
-        }
-    }
 }
 

@@ -10,12 +10,19 @@ import UIKit
 protocol CommentDeleteDelegate: class {
     func delete(indexPath: IndexPath)
     func edit(indexPath: IndexPath)
+    func dotTap(indexPath: IndexPath)
 }
 class CommentCell: UICollectionViewCell {
-    let cellDeleteButton = UIButton(type: .system)
-    let editButton = UIButton(type: .system)
     var deleteDelegate: CommentDeleteDelegate?
     var thisIdxPath: IndexPath?
+    var verticalDotButton: UIButton = {
+        var button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setImage(#imageLiteral(resourceName: "vertical-dots"), for: .normal)
+        button.widthAnchor.constraint(equalToConstant: 20).isActive = true
+        button.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        return button
+    }()
     var timeLabel: UILabel = {
         var label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -64,35 +71,13 @@ class CommentCell: UICollectionViewCell {
     }()
     override init(frame: CGRect) {
         super.init(frame: frame)
+        
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    func addDeleteButton() {
-        cellDeleteButton.widthAnchor.constraint(equalToConstant: 60).isActive = true
-        cellDeleteButton.heightAnchor.constraint(equalToConstant: 20).isActive = true
-        cellDeleteButton.layer.cornerRadius = 5
-        cellDeleteButton.setTitle("삭제", for: .normal)
-        cellDeleteButton.setTitleColor(.white, for: .normal)
-        cellDeleteButton.backgroundColor = .red
-        cellDeleteButton.translatesAutoresizingMaskIntoConstraints = false
-        cellDeleteButton.addTarget(self, action: #selector(handleDelete), for: .touchUpInside)
-        addSubview(cellDeleteButton)
-        cellDeleteButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -2).isActive = true
-        cellDeleteButton.rightAnchor.constraint(equalTo: rightAnchor, constant: -10).isActive = true
-    }
-    func addEditButton() {
-        editButton.widthAnchor.constraint(equalToConstant: 60).isActive = true
-        editButton.heightAnchor.constraint(equalToConstant: 20).isActive = true
-        editButton.layer.cornerRadius = 5
-        editButton.setTitle("수정", for: .normal)
-        editButton.setTitleColor(.white, for: .normal)
-        editButton.backgroundColor = .black
-        editButton.translatesAutoresizingMaskIntoConstraints = false
-        editButton.addTarget(self, action: #selector(handleEdit), for: .touchUpInside)
-        addSubview(editButton)
-        editButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -2).isActive = true
-        editButton.rightAnchor.constraint(equalTo: cellDeleteButton.leftAnchor, constant: -10).isActive = true
+    func addFunctionToVerticalDots() {
+        verticalDotButton.addTarget(self, action: #selector(handleDotTap), for: .touchUpInside)
     }
     @objc func handleDelete() {
         guard let deleteIndexPath = self.thisIdxPath else { return }
@@ -101,5 +86,10 @@ class CommentCell: UICollectionViewCell {
     @objc func handleEdit() {
         guard let editIndexPath = self.thisIdxPath else { return }
         deleteDelegate?.edit(indexPath: editIndexPath)
+    }
+    @objc func handleDotTap() {
+        print("dot taped!")
+        guard let selectedIndexPath = self.thisIdxPath else { return }
+        deleteDelegate?.dotTap(indexPath: selectedIndexPath)
     }
 }

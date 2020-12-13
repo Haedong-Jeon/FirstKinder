@@ -30,8 +30,6 @@ class ListController: UICollectionViewController, UICollectionViewDelegateFlowLa
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.register(KinderCell.self, forCellWithReuseIdentifier: cellReuseIdentifier)
-
-        
         drawCollectionView()
     }
 }
