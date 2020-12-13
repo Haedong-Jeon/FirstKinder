@@ -186,9 +186,18 @@ extension ChatDetailController {
         }
     }
     func drawVerticalDots(_ cell: CommentCell, _ indexPath: IndexPath) {
+        
+        if thisComments[indexPath.row].vendor == UIDevice.current.identifierForVendor?.uuidString {
+            cell.verticalDotButton.setImage(#imageLiteral(resourceName: "more"), for: .normal)
+            cell.verticalDotButton.isEnabled = true
+        } else {
+            cell.verticalDotButton.setImage(#imageLiteral(resourceName: "output-onlinepngtools (5)"), for: .normal)
+            cell.verticalDotButton.isEnabled = false
+        }
         cell.contentView.addSubview(cell.verticalDotButton)
         cell.verticalDotButton.topAnchor.constraint(equalTo: cell.safeAreaLayoutGuide.topAnchor, constant: 5).isActive = true
         cell.verticalDotButton.rightAnchor.constraint(equalTo: cell.safeAreaLayoutGuide.rightAnchor,constant: -5).isActive = true
+        
     }
     func drawTimeLabel(_ cell: CommentCell, _ indexPath: IndexPath) {
         cell.addSubview(cell.timeLabel)

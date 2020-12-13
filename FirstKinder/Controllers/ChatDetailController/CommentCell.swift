@@ -18,7 +18,6 @@ class CommentCell: UICollectionViewCell {
     var verticalDotButton: UIButton = {
         var button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setImage(#imageLiteral(resourceName: "vertical-dots"), for: .normal)
         button.widthAnchor.constraint(equalToConstant: 20).isActive = true
         button.heightAnchor.constraint(equalToConstant: 20).isActive = true
         return button

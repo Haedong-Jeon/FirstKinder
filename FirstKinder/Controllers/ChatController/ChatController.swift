@@ -57,6 +57,7 @@ class ChatController: UICollectionViewController, UICollectionViewDelegateFlowLa
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        configureNavBar()
         guard let blockedUsers = UserDefaults.standard.array(forKey: "blockedUsers") as? [String] else {
             return
         }

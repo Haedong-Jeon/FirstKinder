@@ -61,5 +61,9 @@ class ChatDetailController: UICollectionViewController, UICollectionViewDelegate
         setRx()
         setSubscriberForRx()
     }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        configureNavBar()
+    }
 }
 

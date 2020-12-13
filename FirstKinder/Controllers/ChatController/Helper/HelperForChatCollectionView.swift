@@ -45,13 +45,8 @@ extension ChatController {
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let chatDetailController = ChatDetailController(collectionViewLayout: UICollectionViewFlowLayout())
         chatDetailController.chat = nowChats[indexPath.row]
-        let transition = CATransition()
-        transition.duration = 0.3
-        transition.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
-        transition.type = .fade
-        self.navigationController?.view.layer.add(transition, forKey: nil)
         
-        self.navigationController?.pushViewController(chatDetailController, animated: false)
+        self.navigationController?.pushViewController(chatDetailController, animated: true)
     }
     func getEstimatedHeightFromDummyCell(_ indexPath: IndexPath) -> CGFloat{
         let width = view.frame.width - 10

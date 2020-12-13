@@ -12,7 +12,6 @@ extension ChatDetailController {
         view.backgroundColor = .white
         drawCommentTextView()
         configureCollectionView()
-        configureNavBar()
     }
     func configureCollectionView() {
         collectionView.backgroundColor = #colorLiteral(red: 0.9411764706, green: 0.9411764706, blue: 0.9411764706, alpha: 1)
