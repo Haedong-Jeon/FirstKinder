@@ -22,9 +22,13 @@ extension ChatController {
         cell.chatBodyLabel.text = nowChats[indexPath.row].chatBody
         drawBorderLine(cell)
         if nowChats[indexPath.row].imgFileName != "NO IMG" {
-            drawCellWithImg(cell, indexPath)
+            DispatchQueue.main.async {
+                self.drawCellWithImg(cell, indexPath)
+            }
         } else {
-            drawCellWithoutImg(cell)
+            DispatchQueue.main.async {
+                self.drawCellWithoutImg(cell)                
+            }
         }
         collectionView.addSubview(cell)
         cell.leftAnchor.constraint(equalTo: collectionView.leftAnchor,constant: 10).isActive = true
@@ -88,7 +92,7 @@ extension ChatController {
     }
     
     func drawCellWithImg(_ cell: ChatCell, _ indexPath: IndexPath) {
-        //파이어베이스 렉 때문에 잠시동안만 이미지 다운로드를 하지 않는다. 대신 대체 이미지 사용.
+        
         downloadImgToCell(cell, indexPath)
         cell.addSubview(cell.imgView)
         cell.imgView.bottomAnchor.constraint(equalTo: cell.borderLineImgView.topAnchor, constant: -10).isActive = true

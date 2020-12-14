@@ -7,6 +7,7 @@
 
 import UIKit
 import RxSwift
+import ANActivityIndicator
 
 class LaunchController: UIViewController, XMLParserDelegate {
 
@@ -38,14 +39,6 @@ class LaunchController: UIViewController, XMLParserDelegate {
         imgView.heightAnchor.constraint(equalToConstant: 50).isActive = true
         return imgView
     }()
-    var kinderLabel: UILabel = {
-        var label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        
-        label.textColor = .black
-        label.textAlignment = .center
-        return label
-    }()
     var dataSourceLabel: UILabel = {
         var label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -53,11 +46,9 @@ class LaunchController: UIViewController, XMLParserDelegate {
         label.textAlignment = .center
         return label
     }()
+    let indicator = ANActivityIndicatorView.init(frame: CGRect(x: 0, y: 0, width: 30, height: 30), animationType: .ballSpinFadeLoader, color: .black, padding: .none)
     override func viewDidLoad() {
         super.viewDidLoad()
-//        DispatchQueue.global(qos: .background).async {
-//            DBUtil.shared.loadAllImg()
-//        }
         if let data = UserDefaults.standard.value(forKey:"myKinders") as? Data {
             do {
                 myKinders = try PropertyListDecoder().decode(Array<Kinder>.self, from: data)
@@ -71,6 +62,10 @@ class LaunchController: UIViewController, XMLParserDelegate {
             }
         }
         configureUI()
+        indicator.startAnimating()
+//        DispatchQueue.global(qos: .default).async {
+//            DBUtil.shared.loadAllImg()
+//        }
         DispatchQueue.global(qos: .background).async {
             if ParsingUtil.shared.getData(cityCode: cities[0]) == nil {
                 let transition = CATransition()
@@ -78,6 +73,7 @@ class LaunchController: UIViewController, XMLParserDelegate {
                 transition.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
                 transition.type = .fade
                 DispatchQueue.main.async {
+                    self.indicator.stopAnimating()
                     self.navigationController?.view.layer.add(transition, forKey: nil)
                     self.navigationController?.pushViewController(MainController(), animated: false)
                 }

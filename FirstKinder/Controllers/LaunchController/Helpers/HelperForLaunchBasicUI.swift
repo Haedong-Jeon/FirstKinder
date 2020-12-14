@@ -14,9 +14,9 @@ extension LaunchController {
         self.navigationController?.navigationBar.isHidden = true
         drawTitleImg()
         drawTitleTextView()
-        drawKinderTitle()
         drawDataSource()
         drawHearts()
+        drawIndicator()
     }
     func drawTitleTextView() {
         view.addSubview(titleLabel)
@@ -32,15 +32,9 @@ extension LaunchController {
         titleImgView.image = UIImage(systemName: "smiley")
         titleImgView.tintColor = .white
     }
-    func drawKinderTitle() {
-        view.addSubview(kinderLabel)
-        kinderLabel.topAnchor.constraint(equalTo: titleImgView.bottomAnchor).isActive = true
-        kinderLabel.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor).isActive = true
-        kinderLabel.heightAnchor.constraint(equalToConstant: 30).isActive = true
-    }
     func drawDataSource() {
         view.addSubview(dataSourceLabel)
-        dataSourceLabel.topAnchor.constraint(equalTo: kinderLabel.bottomAnchor).isActive = true
+        dataSourceLabel.topAnchor.constraint(equalTo: titleImgView.bottomAnchor).isActive = true
         dataSourceLabel.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor).isActive = true
         dataSourceLabel.heightAnchor.constraint(equalToConstant: 30).isActive = true
         dataSourceLabel.text = "데이터 출처는 ⟪보육정보공개 API⟫입니다."
@@ -57,5 +51,11 @@ extension LaunchController {
         
         heartImgView2.topAnchor.constraint(equalTo: titleImgView.topAnchor, constant: 100).isActive = true
         heartImgView2.rightAnchor.constraint(equalTo: titleImgView.leftAnchor, constant: 100).isActive = true
+    }
+    func drawIndicator() {
+        indicator.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(indicator)
+        indicator.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
+        indicator.topAnchor.constraint(equalTo: dataSourceLabel.bottomAnchor).isActive = true
     }
 }

@@ -134,7 +134,6 @@ class DBUtil {
                             guard let img = UIImage(data: imgData) else { return }
                             cache.store(img, forKey: item.name)
                             print(item.name)
-                            
                         } catch {
                             
                         }

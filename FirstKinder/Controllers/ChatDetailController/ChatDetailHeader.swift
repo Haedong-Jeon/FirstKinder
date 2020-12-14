@@ -200,8 +200,15 @@ class ChatDetailHeader: UICollectionReusableView {
         if DBUtil.shared.loadImgFromCache(imgFileName) == nil {
             imgView.kf.indicator?.startAnimatingView()
             DBUtil.shared.loadChatImgsFromStorage(imgFileName) { url in
-                let resource = ImageResource(downloadURL: url, cacheKey: imgFileName)
-                self.imgView.kf.setImage(with: resource)
+                if DBUtil.shared.loadImgFromCache(self.chat!.imgFileName) != nil {
+                    self.imgView.image = DBUtil.shared.loadImgFromCache(self.chat!.imgFileName)
+                } else {
+                    let cache = ImageCache.default
+                    guard let imgData = try? Data(contentsOf: url) else { return }
+                    guard let img = UIImage(data: imgData) else { return }
+                    cache.store(img, forKey: self.chat!.imgFileName)
+                    self.imgView.image = img                    
+                }
                 self.imgView.kf.indicator?.stopAnimatingView()
             }
         } else {

@@ -59,20 +59,24 @@ extension ChatDetailController {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: commentCellReuseIdentifier, for: indexPath) as? CommentCell else {
             return UICollectionViewCell()
         }
-        cell.deleteDelegate = self
-        cell.thisIdxPath = indexPath
         cell.imgView.removeFromSuperview()
         cell.commentBodyLabel.removeFromSuperview()
+        if thisComments[indexPath.row].imgFileName != "NO IMG" {
+            DispatchQueue.main.async {
+                self.drawCellWithImg(cell, indexPath)
+            }
+        } else {
+            DispatchQueue.main.async {
+                self.drawCellWithoutImg(cell)
+            }
+        }
+        cell.deleteDelegate = self
+        cell.thisIdxPath = indexPath
         drawVendor(cell, indexPath)
         drawVerticalDots(cell, indexPath)
         drawTimeLabel(cell, indexPath)
         drawBorderLine(cell, indexPath)
         cell.commentBodyLabel.text = thisComments[indexPath.row].commentBody
-        if thisComments[indexPath.row].imgFileName != "NO IMG" {
-            drawCellWithImg(cell, indexPath)
-        } else {
-            drawCellWithoutImg(cell)
-        }
         cell.backgroundColor = .white
         
         let commentorVendor = thisComments[indexPath.row].vendor
@@ -175,9 +179,12 @@ extension ChatDetailController {
                 cell.imgView.kf.indicator?.startAnimatingView()
             }
             DBUtil.shared.loadCommentImgsFromStorage(thisComments[indexPath.row].imgFileName) { url in
-                let resource = ImageResource(downloadURL: url, cacheKey: self.thisComments[indexPath.row].imgFileName)
+                let cache = ImageCache.default
+                guard let imgData = try? Data(contentsOf: url) else { return }
+                guard let img = UIImage(data: imgData) else { return }
+                cache.store(img, forKey: self.thisComments[indexPath.row].imgFileName)
                 DispatchQueue.main.async {
-                    cell.imgView.kf.setImage(with: resource)
+                    cell.imgView.image = img
                     cell.imgView.kf.indicator?.stopAnimatingView()
                 }
             }

@@ -16,9 +16,12 @@ extension ChatDetailController {
                 print("error in img edit \(error)")
             }
             DispatchQueue.global(qos: .background).async {
-                let resource = ImageResource(downloadURL: url!, cacheKey: self.thisComments[self.editingIdx!.row].imgFileName)
+                let cache = ImageCache.default
+                guard let imgData = try? Data(contentsOf: url!) else { return }
+                guard let img = UIImage(data: imgData) else { return }
+                cache.store(img, forKey: self.thisComments[self.editingIdx!.row].imgFileName)
                 DispatchQueue.main.async {
-                    cell.imgView.kf.setImage(with: resource)
+                    cell.imgView.image = img
                 }
             }
         }
