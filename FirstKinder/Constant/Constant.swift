@@ -16,6 +16,7 @@ let chatPlaceHoldText = "타인에게 상처를 주는 말은 하지 말아요 :
 let DB_ROOT = Database.database().reference()
 let DB_CHATS = DB_ROOT.child("chats")
 let DB_COMMENTS = DB_ROOT.child("comments")
+let DB_INFO = DB_ROOT.child("info")
 
 let STORAGE = Storage.storage().reference()
 let STORAGE_USER_UPLOAD_IMGS = STORAGE.child("userUploadImgs")
@@ -28,6 +29,7 @@ var reportedChatList = [String]()
 var commentReloader = false
 
 
-
-
 var cities = ["11680", "11740", "11305", "11500", "11620", "11215", "11530", "11545", "11350", "11320", "11230", "11590", "11440", "11410", "11650", "11200", "11290", "11710", "11470", "11560", "11170", "11380", "11110", "11140", "11260"]
+
+var loadedImgCount = 0
+var totalImgCount = 0

@@ -33,24 +33,26 @@ class ChatController: UICollectionViewController, UICollectionViewDelegateFlowLa
     var blockedReasons = [String]()
     var blockReasonCategories = [String]()
     let refreshControl = UIRefreshControl()
-
+    var scrollChecker = false
+    
     override func viewDidLoad() {
+        let indicator = ANActivityIndicatorView.init(frame: CGRect(x: 0, y: 0, width: 30, height: 30), animationType: .ballPulse, color: .black, padding: .none)
+        
         configureUI()
         configureCollectionView()
-        
-        let indicator = ANActivityIndicatorView.init(frame: CGRect(x: 0, y: 0, width: 30, height: 30), animationType: .ballPulse, color: .black, padding: .none)
         indicator.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(indicator)
         indicator.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
         indicator.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor).isActive = true
         indicator.startAnimating()
         
+        DBUtil.shared.loadAllImg()
         DBUtil.shared.loadChatTexts { loadedChats in
             //1. 최신 게시글이 위로 올라간다.
             //2. 신고 당한 횟수가 5회 이하인 게시글만 표시한다.
             chats = loadedChats
-                        .sorted(by: {$0.timeStamp > $1.timeStamp})
-                        .filter({$0.reportCount < 5})
+                .sorted(by: {$0.timeStamp > $1.timeStamp})
+                .filter({$0.reportCount < 5})
             
             self.chatReload()
             indicator.stopAnimating()

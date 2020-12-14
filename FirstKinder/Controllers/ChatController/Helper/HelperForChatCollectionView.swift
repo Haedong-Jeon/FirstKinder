@@ -36,6 +36,7 @@ extension ChatController {
         cell.drawCommentCount(nowChats[indexPath.row].commentCount)
         cell.backgroundColor = .white
         cell.layer.cornerRadius = 10
+        scrollChecker = true
         return cell
     }
     
@@ -208,6 +209,18 @@ extension ChatController {
             cell.categoryLabel.textColor = .white
             cell.categoryLabel.textAlignment = .center
             cell.categoryLabel.text = "잡담"
+        }
+    }
+}
+
+//무한 스크롤 구현.
+extension ChatController {
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if !scrollChecker { return }
+        let contentOffsetY = scrollView.contentOffset.y
+        if contentOffsetY >= (scrollView.contentSize.height - scrollView.bounds.height) - 20 {
+            print("스크롤이 바닥에 도달! offset - \(contentOffsetY)")
+            scrollChecker = false
         }
     }
 }

@@ -50,11 +50,13 @@ class ChatWriteController: UIViewController, UITextViewDelegate {
         
         let keyboardToolbar = UIToolbar(frame:CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 50))
         keyboardToolbar.barStyle = .default
+       
         keyboardToolbar.items = [
             UIBarButtonItem(image: UIImage(systemName: "camera"), style: .plain, target: self, action: #selector(keyBoardCameraButtonTap)),
             UIBarButtonItem(image: UIImage(systemName: "photo"), style: .plain, target: self, action: #selector(keyBoardPhotoButtonTap)),
+            UIBarButtonItem(image: UIImage(systemName: "keyboard.chevron.compact.down"), style: .plain, target: self, action: #selector(keyBoardDoneButtonTap)),
             UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil),
-            UIBarButtonItem(image: UIImage(systemName: "keyboard.chevron.compact.down"), style: .plain, target: self, action: #selector(keyBoardDoneButtonTap))
+            uploadButton
         ]
         keyboardToolbar.tintColor = .black
         keyboardToolbar.sizeToFit()
@@ -66,13 +68,11 @@ class ChatWriteController: UIViewController, UITextViewDelegate {
         configureUI()
         setRx()
         setSubscriberForRx()
+        uploadButton.tintColor = .gray
+        uploadButton.isEnabled = false
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        self.navigationController?.navigationBar.topItem?.title = "이야기 쓰기"
-        uploadButton.tintColor = .gray
-        uploadButton.isEnabled = false
-        self.navigationController?.navigationBar.topItem?.rightBarButtonItem = uploadButton
 
         if editingChat != nil {
             //게시글 수정중.

@@ -17,21 +17,22 @@ extension MyKindersController {
         cell.kinderIsOnLabel.text = myKinders[indexPath.row].isOn
         
         if cell.kinderIsOnLabel.text == "정상" {
-            cell.kinderIsOnLabel.textColor = .systemBlue
+            cell.kinderIsOnLabel.backgroundColor = .link
         } else if cell.kinderIsOnLabel.text == "폐지" {
-            cell.kinderIsOnLabel.textColor = .systemPink
+            cell.kinderIsOnLabel.backgroundColor = .red
         } else if cell.kinderIsOnLabel.text == "휴지" {
-            cell.kinderIsOnLabel.textColor = .systemYellow
+            cell.kinderIsOnLabel.backgroundColor = .orange
         } else if cell.kinderIsOnLabel.text == "재개" {
-            cell.kinderIsOnLabel.textColor = .systemGreen
+            cell.kinderIsOnLabel.backgroundColor = .systemGreen
         }
         guard let currentChildNum = Int(myKinders[indexPath.row].currentNumOfChild) else { return UICollectionViewCell() }
          
         if myKinders[indexPath.row].isCarAvailable != "운영" {
             cell.carAvailableLabel.backgroundColor = .white
         } else {
-            cell.carAvailableLabel.backgroundColor = .systemPink
+            cell.carAvailableLabel.backgroundColor = .systemIndigo
         }
+        cell.backgroundColor = .white
         cell.layer.cornerRadius = 10
         return cell
     }
@@ -54,6 +55,6 @@ extension MyKindersController {
         navigationController?.pushViewController(detailViewController, animated: false)
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.frame.width - 10, height: 95)
+        return CGSize(width: collectionView.frame.width - 10, height: 110)
     }
 }

@@ -111,6 +111,7 @@ class DBUtil {
         return image
     }
     func loadAllImg() {
+        var imgs = [UIImage]()
         DispatchQueue.global(qos: .background).async { [self] in
             loadAllUserUploadImgs()
             loadAllCommentImgs()
@@ -121,6 +122,7 @@ class DBUtil {
             if error != nil {
                 print("error in load all imgs \(error)")
             }
+            
             for item in list.items {
                 DispatchQueue.global(qos: .background).async {
                     item.downloadURL { (url, error) in
@@ -133,6 +135,7 @@ class DBUtil {
                             let imgData = try Data(contentsOf: imgURL)
                             guard let img = UIImage(data: imgData) else { return }
                             cache.store(img, forKey: item.name)
+                            
                             print(item.name)
                         } catch {
                             
@@ -140,6 +143,7 @@ class DBUtil {
                     }
                 }
             }
+
         }
     }
     func loadAllCommentImgs() {
@@ -159,6 +163,7 @@ class DBUtil {
                             let imgData = try Data(contentsOf: imgURL)
                             guard let img = UIImage(data: imgData) else { return }
                             cache.store(img, forKey: item.name)
+                            
                             print(item.name)
                             
                         } catch {

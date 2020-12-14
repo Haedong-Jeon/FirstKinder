@@ -63,9 +63,6 @@ class LaunchController: UIViewController, XMLParserDelegate {
         }
         configureUI()
         indicator.startAnimating()
-//        DispatchQueue.global(qos: .default).async {
-//            DBUtil.shared.loadAllImg()
-//        }
         DispatchQueue.global(qos: .background).async {
             if ParsingUtil.shared.getData(cityCode: cities[0]) == nil {
                 let transition = CATransition()

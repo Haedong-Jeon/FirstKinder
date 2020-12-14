@@ -18,7 +18,7 @@ class KinderDetailController: UIViewController, CLLocationManagerDelegate, MKMap
     }()
     lazy var containerView: UIView = {
         var view = UIView()
-        view.backgroundColor = .white
+        view.backgroundColor = #colorLiteral(red: 0.9411764706, green: 0.9411764706, blue: 0.9411764706, alpha: 1)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -38,7 +38,8 @@ class KinderDetailController: UIViewController, CLLocationManagerDelegate, MKMap
         var label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
-        label.font = UIFont.init(name: "CookieRun", size: 20)
+        label.font = UIFont.boldSystemFont(ofSize: 20)
+        label.backgroundColor = .white
         return label
     }()
     var numOfChildLabel: UILabel = {
@@ -84,14 +85,14 @@ class KinderDetailController: UIViewController, CLLocationManagerDelegate, MKMap
     var childNumBoxView: UIView = {
         var view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = #colorLiteral(red: 0.9098039216, green: 0.8980392157, blue: 0.9607843137, alpha: 1)
+        view.backgroundColor = .white
         view.layer.cornerRadius = 5
         return view
     }()
     var teacherNumBoxView: UIView = {
         var view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = #colorLiteral(red: 0.9098039216, green: 0.8980392157, blue: 0.9607843137, alpha: 1)
+        view.backgroundColor = .white
         view.layer.cornerRadius = 5
 
         return view
@@ -99,7 +100,7 @@ class KinderDetailController: UIViewController, CLLocationManagerDelegate, MKMap
     var busBoxView: UIView = {
         var view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = #colorLiteral(red: 0.9098039216, green: 0.8980392157, blue: 0.9607843137, alpha: 1)
+        view.backgroundColor = .white
         view.layer.cornerRadius = 5
 
         return view
@@ -107,14 +108,14 @@ class KinderDetailController: UIViewController, CLLocationManagerDelegate, MKMap
     var telBoxView: UIView = {
         var view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = #colorLiteral(red: 0.9098039216, green: 0.8980392157, blue: 0.9607843137, alpha: 1)
+        view.backgroundColor = .white
         view.layer.cornerRadius = 5
         return view
     }()
     var webBoxView: UIView = {
         var view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = #colorLiteral(red: 0.9098039216, green: 0.8980392157, blue: 0.9607843137, alpha: 1)
+        view.backgroundColor = .white
         view.layer.cornerRadius = 5
         return view
     }()
@@ -126,14 +127,14 @@ class KinderDetailController: UIViewController, CLLocationManagerDelegate, MKMap
     var roomCountBoxView: UIView = {
         var view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = #colorLiteral(red: 0.9098039216, green: 0.8980392157, blue: 0.9607843137, alpha: 1)
+        view.backgroundColor = .white
         view.layer.cornerRadius = 5
         return view
     }()
     var roomSizeBoxView: UIView = {
         var view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = #colorLiteral(red: 0.9098039216, green: 0.8980392157, blue: 0.9607843137, alpha: 1)
+        view.backgroundColor = .white
         view.layer.cornerRadius = 5
         return view
     }()

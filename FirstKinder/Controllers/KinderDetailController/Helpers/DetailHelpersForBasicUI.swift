@@ -10,7 +10,7 @@ import Charts
 
 extension KinderDetailController: ChartViewDelegate {
     func configureUI() {
-        view.backgroundColor = .white
+        view.backgroundColor = #colorLiteral(red: 0.9411764706, green: 0.9411764706, blue: 0.9411764706, alpha: 1)
         setScrollView()
         drawKinderTitle()
         drawAddress()
@@ -49,7 +49,7 @@ extension KinderDetailController: ChartViewDelegate {
     }
     func drawKinderTitle() {
         containerView.addSubview(kinderTitleLabel)
-        kinderTitleLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 20).isActive = true
+        kinderTitleLabel.topAnchor.constraint(equalTo: containerView.topAnchor).isActive = true
         kinderTitleLabel.widthAnchor.constraint(equalTo: containerView.safeAreaLayoutGuide.widthAnchor).isActive = true
         kinderTitleLabel.heightAnchor.constraint(equalToConstant: 25).isActive = true
         kinderTitleLabel.text = kinder.title
@@ -149,7 +149,6 @@ extension KinderDetailController: ChartViewDelegate {
         busBoxView.addSubview(imgView)
         imgView.centerXAnchor.constraint(equalTo: busBoxView.centerXAnchor).isActive = true
         imgView.centerYAnchor.constraint(equalTo: busBoxView.centerYAnchor).isActive = true
-        imgView.backgroundColor = #colorLiteral(red: 0.9098039216, green: 0.8980392157, blue: 0.9607843137, alpha: 1)
         
         let carLabel = UILabel()
         carLabel.translatesAutoresizingMaskIntoConstraints = false
