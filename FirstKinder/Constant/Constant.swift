@@ -26,3 +26,8 @@ var blockedUserReasons = [String]()
 var blockedReasonCategories = [String]()
 var reportedChatList = [String]()
 var commentReloader = false
+
+
+
+
+var cities = ["11680", "11740", "11305", "11500", "11620", "11215", "11530", "11545", "11350", "11320", "11230", "11590", "11440", "11410", "11650", "11200", "11290", "11710", "11470", "11560", "11170", "11380", "11110", "11140", "11260"]

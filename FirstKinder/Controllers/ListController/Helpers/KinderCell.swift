@@ -20,6 +20,8 @@ class KinderCell: UICollectionViewCell {
         var label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.lineBreakMode = .byCharWrapping
+        label.font = UIFont.systemFont(ofSize: 15)
+        label.textColor = .gray
         label.numberOfLines = 0
         return label
     }()
@@ -40,10 +42,24 @@ class KinderCell: UICollectionViewCell {
         label.heightAnchor.constraint(equalToConstant: 20).isActive = true
         label.font = UIFont.systemFont(ofSize: 15)
         label.layer.cornerRadius = 5
-        label.backgroundColor = .systemPink
+        label.backgroundColor = .systemIndigo
         label.textAlignment = .center
         label.textColor = .white
         label.text = "차량 운행"
+        label.clipsToBounds = true
+        return label
+    }()
+    var overFiftyLabel: UILabel = {
+        var label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.widthAnchor.constraint(equalToConstant: 60).isActive = true
+        label.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        label.font = UIFont.systemFont(ofSize: 15)
+        label.layer.cornerRadius = 5
+        label.backgroundColor = .systemPink
+        label.textAlignment = .center
+        label.textColor = .white
+        label.text = "50명 ↑"
         label.clipsToBounds = true
         return label
     }()
@@ -58,6 +74,7 @@ class KinderCell: UICollectionViewCell {
         backgroundColor = .white
         drawKinderIsOn()
         drawCarAvailableLabel()
+        drawOverFiftyLabel()
         drawKinderTitle()
         drawKinderPosition()
     }
@@ -88,6 +105,11 @@ class KinderCell: UICollectionViewCell {
     func drawCarAvailableLabel() {
         addSubview(carAvailableLabel)
         carAvailableLabel.topAnchor.constraint(equalTo: kinderIsOnLabel.topAnchor).isActive = true
-        carAvailableLabel.rightAnchor.constraint(equalTo: safeAreaLayoutGuide.rightAnchor, constant: -10).isActive = true
+        carAvailableLabel.leftAnchor.constraint(equalTo: kinderIsOnLabel.rightAnchor, constant: 10).isActive = true
+    }
+    func drawOverFiftyLabel() {
+        addSubview(overFiftyLabel)
+        overFiftyLabel.topAnchor.constraint(equalTo: kinderIsOnLabel.topAnchor).isActive = true
+        overFiftyLabel.rightAnchor.constraint(equalTo: safeAreaLayoutGuide.rightAnchor, constant: -10).isActive = true
     }
 }

@@ -9,6 +9,9 @@ import UIKit
 let cellReuseIdentifier = "reuseIdentifier"
 
 class ListController: UICollectionViewController, UICollectionViewDelegateFlowLayout, UISearchResultsUpdating {
+    var showKindersRangeStart = 0
+    var showKindersRangeEnd = 10
+    var scrollChecker = false
     var nowShowingKinders = [Kinder]() {
         didSet {
             collectionView.reloadData()
@@ -31,5 +34,8 @@ class ListController: UICollectionViewController, UICollectionViewDelegateFlowLa
         collectionView.dataSource = self
         collectionView.register(KinderCell.self, forCellWithReuseIdentifier: cellReuseIdentifier)
         drawCollectionView()
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
     }
 }

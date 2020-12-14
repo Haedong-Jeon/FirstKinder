@@ -36,6 +36,7 @@
 		E93EDBBE25823D62007BBF40 /* BlockUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93EDBBD25823D62007BBF40 /* BlockUserCell.swift */; };
 		E93EDC112582EF72007BBF40 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93EDC102582EF72007BBF40 /* Comment.swift */; };
 		E945E9822586285E009CFEE4 /* ButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E945E9812586285E009CFEE4 /* ButtonExtension.swift */; };
+		E94E91DA2586F27500139859 /* ParsingUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = E94E91D92586F27500139859 /* ParsingUtil.swift */; };
 		E95B8A1C257F26A6002EE9BC /* HelperForChat.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95B8A1B257F26A6002EE9BC /* HelperForChat.swift */; };
 		E95B8A24257F2A3D002EE9BC /* ChatWriteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95B8A23257F2A3D002EE9BC /* ChatWriteController.swift */; };
 		E95B8A28257F2A59002EE9BC /* HelperForWriteBasicUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95B8A27257F2A59002EE9BC /* HelperForWriteBasicUI.swift */; };
@@ -68,7 +69,6 @@
 		E9DDDCA72581EB9A005B3BE8 /* ChatDetailHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DDDCA62581EB9A005B3BE8 /* ChatDetailHeader.swift */; };
 		E9DDDCAA2581F042005B3BE8 /* ChatDetailHelperForCollectionViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DDDCA92581F042005B3BE8 /* ChatDetailHelperForCollectionViewDelegate.swift */; };
 		E9DDDCAD2581FC60005B3BE8 /* ChatDetailSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DDDCAC2581FC5F005B3BE8 /* ChatDetailSelector.swift */; };
-		E9F1438C2574835F002A284F /* HelperForParsingKinderData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F1438B2574835F002A284F /* HelperForParsingKinderData.swift */; };
 		E9F14390257483A0002A284F /* HelperForLaunchBasicUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F1438F257483A0002A284F /* HelperForLaunchBasicUI.swift */; };
 		E9F14394257483E0002A284F /* TagKind.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F14393257483E0002A284F /* TagKind.swift */; };
 /* End PBXBuildFile section */
@@ -107,6 +107,7 @@
 		E93EDBBD25823D62007BBF40 /* BlockUserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockUserCell.swift; sourceTree = "<group>"; };
 		E93EDC102582EF72007BBF40 /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		E945E9812586285E009CFEE4 /* ButtonExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonExtension.swift; sourceTree = "<group>"; };
+		E94E91D92586F27500139859 /* ParsingUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParsingUtil.swift; sourceTree = "<group>"; };
 		E95B8A06257F1FEC002EE9BC /* FirstKinder.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FirstKinder.entitlements; sourceTree = "<group>"; };
 		E95B8A1B257F26A6002EE9BC /* HelperForChat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelperForChat.swift; sourceTree = "<group>"; };
 		E95B8A23257F2A3D002EE9BC /* ChatWriteController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatWriteController.swift; sourceTree = "<group>"; };
@@ -140,7 +141,6 @@
 		E9DDDCA62581EB9A005B3BE8 /* ChatDetailHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatDetailHeader.swift; sourceTree = "<group>"; };
 		E9DDDCA92581F042005B3BE8 /* ChatDetailHelperForCollectionViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatDetailHelperForCollectionViewDelegate.swift; sourceTree = "<group>"; };
 		E9DDDCAC2581FC5F005B3BE8 /* ChatDetailSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatDetailSelector.swift; sourceTree = "<group>"; };
-		E9F1438B2574835F002A284F /* HelperForParsingKinderData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelperForParsingKinderData.swift; sourceTree = "<group>"; };
 		E9F1438F257483A0002A284F /* HelperForLaunchBasicUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelperForLaunchBasicUI.swift; sourceTree = "<group>"; };
 		E9F14393257483E0002A284F /* TagKind.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagKind.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -372,6 +372,7 @@
 				E95B8A8D257F9A32002EE9BC /* DBUtil.swift */,
 				E93A528E25848137006E5F54 /* imgExtension.swift */,
 				E945E9812586285E009CFEE4 /* ButtonExtension.swift */,
+				E94E91D92586F27500139859 /* ParsingUtil.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -520,7 +521,6 @@
 			isa = PBXGroup;
 			children = (
 				E9F1438F257483A0002A284F /* HelperForLaunchBasicUI.swift */,
-				E9F1438B2574835F002A284F /* HelperForParsingKinderData.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -661,6 +661,7 @@
 				E9DDDCA72581EB9A005B3BE8 /* ChatDetailHeader.swift in Sources */,
 				E960ACB825764FEC00985873 /* ListHelperForBasicUI.swift in Sources */,
 				E93EDBBB25823C42007BBF40 /* BlockUserHelperForCollectionViewDelegate.swift in Sources */,
+				E94E91DA2586F27500139859 /* ParsingUtil.swift in Sources */,
 				E9D633822574915F00F6C3ED /* ListController.swift in Sources */,
 				E93A5283258470B4006E5F54 /* BigSizeImgViewController.swift in Sources */,
 				E93B75CD2576071B00D52A24 /* DetailHelpersForBasicUI.swift in Sources */,
@@ -706,7 +707,6 @@
 				E9088962257471D800223BAA /* SceneDelegate.swift in Sources */,
 				E95B8A24257F2A3D002EE9BC /* ChatWriteController.swift in Sources */,
 				E9D633A82575C60B00F6C3ED /* KinderCell.swift in Sources */,
-				E9F1438C2574835F002A284F /* HelperForParsingKinderData.swift in Sources */,
 				E93A5295258595ED006E5F54 /* HelperForChatWriteRx.swift in Sources */,
 				E95B8A38257F511A002EE9BC /* HelperForTextDelegateForChatWrite.swift in Sources */,
 				E95B8A8A257F9993002EE9BC /* HelperForChatCollectionView.swift in Sources */,

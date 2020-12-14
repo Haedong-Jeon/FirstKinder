@@ -1,35 +1,39 @@
 //
-//  HelperForGetData.swift
+//  ParsingUtil.swift
 //  FirstKinder
 //
-//  Created by 전해동 on 2020/11/30.
+//  Created by 전해동 on 2020/12/14.
 //
-import Foundation
+
+import UIKit
 import RxSwift
 
-extension LaunchController {    
-    func getData() {
-        for city in cities {
-            if isParseStopSignOn {
-                DispatchQueue.main.async {
-                    self.kinderLabel.text = "초기화 에러: 최신 버전으로 재설치 해주세요."                    
-                }
-                return
-            }
-            let key = "b88e8eb18a894c84b9a20f1be9d079e8"
-            let url = URL(string: "https://api.childcare.go.kr/mediate/rest/cpmsapi030/cpmsapi030/request?key=\(key)&arcode=\(city)&stcode=")
-            guard let targetURL = url else { return }
-            let xmlParser = XMLParser(contentsOf: targetURL)
-            xmlParser?.delegate = self
-            xmlParser?.parse()
-            if xmlParser?.parserError != nil {
-                DispatchQueue.global(qos: .background).async {
-                    //중간에 받아 오지 못하는 데이터가 있더라도 자연스럽게 넘어간다.
-                    //오류가 났을 때 loadCount를 1 올리지 않으면, 런치 스크린에서 다음 화면으로 넘어가지 않게 된다.
-                    self.loadCount += 1
-                }
+class ParsingUtil: NSObject, XMLParserDelegate {
+    
+    var kinder = Kinder()
+    var disposeBag = DisposeBag()
+    var tagKind = TagKind.title
+    var isParseStopSignOn = false
+    var loadedCityCount = 0
+    static let shared = ParsingUtil()
+    
+    func getData(cityCode: String) -> Error? {
+        var errorCode: Error?
+        if isParseStopSignOn {
+            return errorCode
+        }
+        let key = "b88e8eb18a894c84b9a20f1be9d079e8"
+        let url = URL(string: "https://api.childcare.go.kr/mediate/rest/cpmsapi030/cpmsapi030/request?key=\(key)&arcode=\(cityCode)&stcode=")
+        guard let targetURL = url else { return errorCode }
+        let xmlParser = XMLParser(contentsOf: targetURL)
+        xmlParser?.delegate = self
+        xmlParser?.parse()
+        if xmlParser?.parserError != nil {
+            DispatchQueue.global(qos: .background).async {
+                errorCode = xmlParser?.parserError
             }
         }
+        return errorCode
     }
     func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String] = [:]) {
         if elementName == "crname" {
@@ -76,16 +80,10 @@ extension LaunchController {
                     kinders.append($0)
                     print($0.title)
                 }
-                self.kinderLabel.text = "데이터 확인..." + $0.title
             },onCompleted: {
-                let transition = CATransition()
-                transition.duration = 0.3
-                transition.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
-                transition.type = .fade
-                
-                self.navigationController?.view.layer.add(transition, forKey: nil)
-                self.navigationController?.pushViewController(MainController(), animated: false)
-                
+                if self.loadedCityCount < cities.count - 1 {
+                    self.loadedCityCount += 1
+                }
             }).disposed(by: self.disposeBag)
     }
     func parser(_ parser: XMLParser, foundCharacters string: String) {
@@ -133,25 +131,15 @@ extension LaunchController {
         return Observable.create { observer in
             if tag == "item" {
                 observer.onNext(self.kinder)
-                DispatchQueue.main.async {
-                    self.progressBar.progress += 0.0001
-                }
             } else if tag == "response" {
                 DispatchQueue.main.async {
-                    //한 지역의 데이터를 전부 받을 때마다 loadCount를 1 올린다.
-                    self.loadCount += 1
-                    
-                    if self.loadCount >= self.cities.count {
-                        //전체 지역 수와 loadCount 수가 같아지면 로딩 완료.
-                        self.progressBar.progress = 1
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                            //로딩 바가 꽉찬걸 보여줄려고 일부러 1초 뒤에 화면 전환.
-                            observer.onCompleted()
-                        }
-                    }
+                    observer.onCompleted()
                 }
             }
             return Disposables.create()
         }
     }
 }
+
+
+

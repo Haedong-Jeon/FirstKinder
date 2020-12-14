@@ -9,18 +9,7 @@ import UIKit
 import RxSwift
 
 class LaunchController: UIViewController, XMLParserDelegate {
-    var isParseStopSignOn = false
-    var kinder = Kinder()
-    var disposeBag = DisposeBag()
-    var tagKind = TagKind.title
-    var progressBar = UIProgressView()
-    var loadCount = 0
-    //대구 광역시 시군구 코드들
-    //var cities = ["27200","27710","27140","27230","27170","27260","27110","27290"]
-    
-    //서울 시군구 코드들
-    var cities = ["11680", "11740", "11305", "11500", "11620", "11215", "11530", "11545", "11350", "11320", "11230", "11590", "11440", "11410", "11650", "11200", "11290", "11710", "11470", "11560", "11170", "11380", "11110", "11140", "11260"]
-    
+
     var titleLabel: UILabel = {
         var label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -66,14 +55,13 @@ class LaunchController: UIViewController, XMLParserDelegate {
     }()
     override func viewDidLoad() {
         super.viewDidLoad()
-        DispatchQueue.global(qos: .background).async {
-            DBUtil.shared.loadAllImg()
-        }
+//        DispatchQueue.global(qos: .background).async {
+//            DBUtil.shared.loadAllImg()
+//        }
         if let data = UserDefaults.standard.value(forKey:"myKinders") as? Data {
             do {
                 myKinders = try PropertyListDecoder().decode(Array<Kinder>.self, from: data)
             } catch {
-                self.isParseStopSignOn = true
                 let showErrorAlert = UIAlertController(title: "초기화 에러", message: "호환성에 문제가 발생했습니다. 앱을 삭제 후 최신 버전을 설치 해주세요.", preferredStyle: .alert)
                 let okButton = UIAlertAction(title: "확인", style: .default) { ACTION in
                     UIControl().sendAction(#selector(URLSessionTask.suspend), to: UIApplication.shared, for: nil)
@@ -84,7 +72,16 @@ class LaunchController: UIViewController, XMLParserDelegate {
         }
         configureUI()
         DispatchQueue.global(qos: .background).async {
-            self.getData()
+            if ParsingUtil.shared.getData(cityCode: cities[0]) == nil {
+                let transition = CATransition()
+                transition.duration = 0.3
+                transition.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
+                transition.type = .fade
+                DispatchQueue.main.async {
+                    self.navigationController?.view.layer.add(transition, forKey: nil)
+                    self.navigationController?.pushViewController(MainController(), animated: false)
+                }
+            }
         }
     }
 }

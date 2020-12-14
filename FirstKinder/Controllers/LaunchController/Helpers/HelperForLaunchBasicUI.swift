@@ -15,7 +15,6 @@ extension LaunchController {
         drawTitleImg()
         drawTitleTextView()
         drawKinderTitle()
-        drawProgressBar()
         drawDataSource()
         drawHearts()
     }
@@ -39,17 +38,9 @@ extension LaunchController {
         kinderLabel.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor).isActive = true
         kinderLabel.heightAnchor.constraint(equalToConstant: 30).isActive = true
     }
-    func drawProgressBar() {
-        progressBar.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(progressBar)
-        progressBar.topAnchor.constraint(equalTo: kinderLabel.bottomAnchor).isActive = true
-        progressBar.widthAnchor.constraint(equalToConstant: 300).isActive = true
-        progressBar.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
-        progressBar.heightAnchor.constraint(equalToConstant: 5).isActive = true
-    }
     func drawDataSource() {
         view.addSubview(dataSourceLabel)
-        dataSourceLabel.topAnchor.constraint(equalTo: progressBar.bottomAnchor).isActive = true
+        dataSourceLabel.topAnchor.constraint(equalTo: kinderLabel.bottomAnchor).isActive = true
         dataSourceLabel.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor).isActive = true
         dataSourceLabel.heightAnchor.constraint(equalToConstant: 30).isActive = true
         dataSourceLabel.text = "데이터 출처는 ⟪보육정보공개 API⟫입니다."
