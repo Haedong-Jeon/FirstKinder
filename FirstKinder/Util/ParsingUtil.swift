@@ -9,14 +9,13 @@ import UIKit
 import RxSwift
 
 class ParsingUtil: NSObject, XMLParserDelegate {
-    
     var kinder = Kinder()
     var disposeBag = DisposeBag()
     var tagKind = TagKind.title
     var isParseStopSignOn = false
     var loadedCityCount = 0
+    var isIndicatorSet = false
     static let shared = ParsingUtil()
-    
     func getData(cityCode: String) -> Error? {
         var errorCode: Error?
         if isParseStopSignOn {
@@ -132,9 +131,7 @@ class ParsingUtil: NSObject, XMLParserDelegate {
             if tag == "item" {
                 observer.onNext(self.kinder)
             } else if tag == "response" {
-                DispatchQueue.main.async {
-                    observer.onCompleted()
-                }
+                observer.onCompleted()
             }
             return Disposables.create()
         }

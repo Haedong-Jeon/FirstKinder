@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import ANActivityIndicator
 let cellReuseIdentifier = "reuseIdentifier"
 
 class ListController: UICollectionViewController, UICollectionViewDelegateFlowLayout, UISearchResultsUpdating {
@@ -34,8 +35,6 @@ class ListController: UICollectionViewController, UICollectionViewDelegateFlowLa
         collectionView.dataSource = self
         collectionView.register(KinderCell.self, forCellWithReuseIdentifier: cellReuseIdentifier)
         drawCollectionView()
-    }
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+        
     }
 }

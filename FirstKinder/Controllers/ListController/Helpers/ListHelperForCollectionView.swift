@@ -5,6 +5,7 @@
 //  Created by 전해동 on 2020/12/01.
 //
 import UIKit
+import ANActivityIndicator
 
 extension ListController {
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -81,14 +82,15 @@ extension ListController {
         let contentOffsetY = scrollView.contentOffset.y
         if contentOffsetY >= (scrollView.contentSize.height - scrollView.bounds.height) - 20 /* Needed offset */ {
             print("스크롤이 바닥에 도달! offset - \(contentOffsetY)")
-            let load = ParsingUtil.shared.getData(cityCode: cities[ParsingUtil.shared.loadedCityCount])
             
-            if load == nil {
-                print("데이터 파싱...!!")
-                nowShowingKinders = kinders
-                scrollChecker = false
+            let loadResult = ParsingUtil.shared.getData(cityCode: cities[ParsingUtil.shared.loadedCityCount])
+            print("데이터 파싱...!!")
+            if loadResult == nil {
+                self.nowShowingKinders = kinders
+                self.scrollChecker = false
+                print("현재 데이터 - \(kinders.count)")
             }
-            print("현재 데이터 - \(kinders.count)")
+            
         }
     }
 }
