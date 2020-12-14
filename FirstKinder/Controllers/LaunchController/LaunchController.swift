@@ -46,7 +46,7 @@ class LaunchController: UIViewController, XMLParserDelegate {
         label.textAlignment = .center
         return label
     }()
-    let indicator = ANActivityIndicatorView.init(frame: CGRect(x: 0, y: 0, width: 30, height: 30), animationType: .ballSpinFadeLoader, color: .black, padding: .none)
+    let indicator = ANActivityIndicatorView.init(frame: CGRect(x: 0, y: 0, width: 30, height: 30), animationType: .ballSpinFadeLoader, color: .white, padding: .none)
     override func viewDidLoad() {
         super.viewDidLoad()
         if let data = UserDefaults.standard.value(forKey:"myKinders") as? Data {

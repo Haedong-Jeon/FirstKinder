@@ -38,7 +38,7 @@ class ChatController: UICollectionViewController, UICollectionViewDelegateFlowLa
     var disposeBag = DisposeBag()
     
     override func viewDidLoad() {
-        let indicator = ANActivityIndicatorView.init(frame: CGRect(x: 0, y: 0, width: 30, height: 30), animationType: .ballPulse, color: .black, padding: .none)
+        let indicator = ANActivityIndicatorView.init(frame: CGRect(x: 0, y: 0, width: 30, height: 30), animationType: .ballPulse, color: #colorLiteral(red: 0.5617534518, green: 0.5250410438, blue: 0.8910874724, alpha: 1), padding: .none)
         
         configureUI()
         configureCollectionView()
