@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RxSwift
 import ANActivityIndicator
 
 let chatCellReuseIdentifier = "chat cell reuse"
@@ -34,6 +35,7 @@ class ChatController: UICollectionViewController, UICollectionViewDelegateFlowLa
     var blockReasonCategories = [String]()
     let refreshControl = UIRefreshControl()
     var scrollChecker = false
+    var disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         let indicator = ANActivityIndicatorView.init(frame: CGRect(x: 0, y: 0, width: 30, height: 30), animationType: .ballPulse, color: .black, padding: .none)
@@ -46,21 +48,24 @@ class ChatController: UICollectionViewController, UICollectionViewDelegateFlowLa
         indicator.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor).isActive = true
         indicator.startAnimating()
         
-        DBUtil.shared.loadAllImg()
-        DispatchQueue.global().sync {
-            DBUtil.shared.loadChatTexts { loadedChats in
-                //1. 최신 게시글이 위로 올라간다.
-                //2. 신고 당한 횟수가 5회 이하인 게시글만 표시한다.
-                chats = loadedChats
-                    .sorted(by: {$0.timeStamp > $1.timeStamp})
-                    .filter({$0.reportCount < 5})
-             
-                DispatchQueue.main.async {
-                    self.chatReload()
-                    indicator.stopAnimating()                    
+        DBUtil.shared.loadAllUserUploadImgs().subscribe(onCompleted: {
+            DBUtil.shared.loadAllCommentImgs().subscribe(onCompleted: {
+                DispatchQueue.global().async {
+                    DBUtil.shared.loadChatTexts { loadedChats in
+                        //1. 최신 게시글이 위로 올라간다.
+                        //2. 신고 당한 횟수가 5회 이하인 게시글만 표시한다.
+                        chats = loadedChats
+                            .sorted(by: {$0.timeStamp > $1.timeStamp})
+                            .filter({$0.reportCount < 5})
+                        
+                        DispatchQueue.main.async {
+                            self.chatReload()
+                            indicator.stopAnimating()
+                        }
+                    }
                 }
-            }
-        }
+            }).disposed(by: self.disposeBag)
+        }).disposed(by: disposeBag)
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
