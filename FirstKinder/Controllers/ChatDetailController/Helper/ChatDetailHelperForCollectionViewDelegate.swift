@@ -93,7 +93,11 @@ extension ChatDetailController {
         }
         cell.deleteDelegate = self
         cell.thisIdxPath = indexPath
-        drawVendor(cell, indexPath)
+        if self.thisComments[indexPath.row].isCommentToComment == nil {
+            drawVendor(cell, indexPath)
+        } else {
+            drawVendorCommentToComment(cell, indexPath)
+        }
         drawVerticalDots(cell, indexPath)
         drawTimeLabel(cell, indexPath)
         drawBorderLine(cell, indexPath)
@@ -154,31 +158,33 @@ extension ChatDetailController {
         return estimateSize.height
     }
     func drawVendor(_ cell: CommentCell, _ indexPath: IndexPath) {
-        if thisComments[indexPath.row].isCommentToComment == nil {
-            cell.addSubview(cell.faceImgView)
-            cell.faceImgView.topAnchor.constraint(equalTo: cell.safeAreaLayoutGuide.topAnchor, constant: 5).isActive = true
-            cell.faceImgView.leftAnchor.constraint(equalTo: cell.safeAreaLayoutGuide.leftAnchor).isActive = true
-            cell.addSubview(cell.vendorLabel)
-            cell.vendorLabel.topAnchor.constraint(equalTo: cell.safeAreaLayoutGuide.topAnchor).isActive = true
-            cell.vendorLabel.leftAnchor.constraint(equalTo: cell.faceImgView.rightAnchor, constant: 10).isActive = true
-            
-            let fullVendorString = thisComments[indexPath.row].vendor
-            var splitedVendorString = fullVendorString.components(separatedBy: "-")
-            
-            cell.vendorLabel.text = splitedVendorString[0]
-        } else {
-            cell.addSubview(cell.faceImgView)
-            cell.faceImgView.topAnchor.constraint(equalTo: cell.safeAreaLayoutGuide.topAnchor, constant: 5).isActive = true
-            cell.faceImgView.leftAnchor.constraint(equalTo: cell.safeAreaLayoutGuide.leftAnchor, constant: 20).isActive = true
-            cell.addSubview(cell.vendorLabel)
-            cell.vendorLabel.topAnchor.constraint(equalTo: cell.safeAreaLayoutGuide.topAnchor).isActive = true
-            cell.vendorLabel.leftAnchor.constraint(equalTo: cell.faceImgView.rightAnchor, constant: 10).isActive = true
-            
-            let fullVendorString = thisComments[indexPath.row].vendor
-            var splitedVendorString = fullVendorString.components(separatedBy: "-")
-            
-            cell.vendorLabel.text = splitedVendorString[0]
-        }
+        cell.addSubview(cell.faceImgView)
+        cell.faceImgView.topAnchor.constraint(equalTo: cell.safeAreaLayoutGuide.topAnchor, constant: 5).isActive = true
+        cell.faceImgView.leftAnchor.constraint(equalTo: cell.safeAreaLayoutGuide.leftAnchor).isActive = true
+        cell.addSubview(cell.vendorLabel)
+        cell.vendorLabel.topAnchor.constraint(equalTo: cell.safeAreaLayoutGuide.topAnchor).isActive = true
+        cell.vendorLabel.leftAnchor.constraint(equalTo: cell.faceImgView.rightAnchor, constant: 10).isActive = true
+        
+        let fullVendorString = thisComments[indexPath.row].vendor
+        var splitedVendorString = fullVendorString.components(separatedBy: "-")
+        
+        cell.vendorLabel.text = splitedVendorString[0]
+    }
+    func drawVendorCommentToComment(_ cell: CommentCell, _ indexPath: IndexPath) {
+        cell.addSubview(cell.downRightArrow)
+        cell.downRightArrow.leftAnchor.constraint(equalTo: cell.leftAnchor).isActive = true
+        cell.centerYAnchor.constraint(equalTo: cell.centerYAnchor).isActive = true
+        cell.addSubview(cell.faceImgView)
+        cell.faceImgView.topAnchor.constraint(equalTo: cell.safeAreaLayoutGuide.topAnchor, constant: 5).isActive = true
+        cell.faceImgView.leftAnchor.constraint(equalTo: cell.downRightArrow.rightAnchor, constant: 10).isActive = true
+        cell.addSubview(cell.vendorLabel)
+        cell.vendorLabel.topAnchor.constraint(equalTo: cell.safeAreaLayoutGuide.topAnchor).isActive = true
+        cell.vendorLabel.leftAnchor.constraint(equalTo: cell.faceImgView.rightAnchor, constant: 10).isActive = true
+        
+        let fullVendorString = thisComments[indexPath.row].vendor
+        var splitedVendorString = fullVendorString.components(separatedBy: "-")
+        
+        cell.vendorLabel.text = splitedVendorString[0]
     }
     func drawCellWithImg(_ cell: CommentCell, _ indexPath: IndexPath) {
         //파이어베이스 렉 때문에 잠시동안만 이미지 다운로드를 하지 않는다. 대신 대체 이미지 사용.
@@ -237,7 +243,7 @@ extension ChatDetailController {
         cell.commentBodyLabel.leftAnchor.constraint(equalTo: cell.downRightArrow.rightAnchor, constant: 10).isActive = true
         cell.commentBodyLabel.widthAnchor.constraint(equalToConstant: cell.frame.width - 10).isActive = true
         cell.commentBodyLabel.bottomAnchor.constraint(equalTo: cell.safeAreaLayoutGuide.bottomAnchor, constant: -5).isActive = true
-
+        
     }
     func downloadImgToCell(_ cell: CommentCell, _ indexPath: IndexPath) {
         cell.imgView.kf.indicatorType = .activity
@@ -348,7 +354,7 @@ extension ChatDetailController: CommentDeleteDelegate {
         }
     }
     func editCancel(_ cell: CommentCell) {
-               self.isCommentEditing = false
+        self.isCommentEditing = false
         self.isEditTargetCommentHasIMg = false
         self.commentTextView.text = ""
         

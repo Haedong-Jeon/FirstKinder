@@ -79,24 +79,24 @@ class ChatDetailController: UICollectionViewController, UICollectionViewDelegate
         
         self.commentToComments = comments
                                     .filter({$0.isCommentToComment != nil})
-        
+                                    .sorted(by: {$0.timeStamp < $1.timeStamp})
+
         if self.commentToComments.isEmpty { return }
-       
-        var linkList = [(fromCommentToCommentIdx: Int, ToThisCommentIdx: Int)]()
-        var insertCount = 0
+
+        var mergedComments = [Comment]()
         
-        for i in 0 ... commentToComments.count - 1 {
-            for j in 0 ... thisComments.count - 1 {
-                if commentToComments[i].targetCommentUid! == thisComments[j].uid {
-                    linkList.append((i,j))
+        for i in 0 ... thisComments.count - 1 {
+            var tempCmts = [Comment]()
+            mergedComments.append(thisComments[i])
+            commentToComments.forEach({
+                if mergedComments.last!.uid == $0.targetCommentUid {
+                    tempCmts.append($0)
                 }
-            }
+            })
+            mergedComments += tempCmts
+            tempCmts.removeAll()
         }
-        linkList.forEach({
-            thisComments.insert(commentToComments[$0.fromCommentToCommentIdx], at: $0.ToThisCommentIdx + 1 + insertCount)
-            insertCount += 1
-        })
-        
+        thisComments = mergedComments
     }
 }
 
