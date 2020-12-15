@@ -144,6 +144,7 @@ extension ChatDetailController {
         } else {
             drawCellWithImg(dummyCell, indexPath)
         }
+        dummyCell.layoutIfNeeded()
         let estimateSize = dummyCell.systemLayoutSizeFitting(CGSize(width: width, height: estimatedHeight))
         return estimateSize.height
     }
