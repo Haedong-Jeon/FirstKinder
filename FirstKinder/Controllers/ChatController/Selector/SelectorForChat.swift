@@ -23,6 +23,7 @@ extension ChatController {
     @objc func handleGearTap() {
         let actionSheetAlert = UIAlertController()
         let button1 = UIAlertAction(title: "차단 목록 관리 할거에요", style: .default) { ACTION in
+            self.isShowingMyChats = false
             let blockedUserController = BlockedUserController(collectionViewLayout: UICollectionViewFlowLayout())
             let transition = CATransition()
             transition.duration = 0.3

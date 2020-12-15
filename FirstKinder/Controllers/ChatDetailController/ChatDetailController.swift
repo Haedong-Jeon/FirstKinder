@@ -15,11 +15,18 @@ let headerReuseIdentifier = "header reuse identifier"
 
 class ChatDetailController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     var chat: Chat?
+    var isCommentToComment = false
+    var targetCommentUid = ""
     var isCommentEditing = false
     var isEditTargetCommentHasIMg = false
     var tapedCommentImg: UIImage?
     var editingIdx: IndexPath?
     var thisComments: [Comment] = [] {
+        didSet {
+            collectionView.reloadData()
+        }
+    }
+    var commentToComments: [Comment] = [] {
         didSet {
             collectionView.reloadData()
         }
@@ -54,8 +61,10 @@ class ChatDetailController: UICollectionViewController, UICollectionViewDelegate
         DBUtil.shared.loadCommentTexts { loadedComments in
             comments = loadedComments
             self.thisComments = comments
-                                    .filter({$0.targetChatUid == self.chat?.uid})
+                                    .filter({$0.targetChatUid == self.chat?.uid && $0.isCommentToComment == nil})
                                     .sorted(by: {$0.timeStamp < $1.timeStamp})
+                
+            self.commentToCommentControl()
             indicator.stopAnimating()
         }
         setRx()
@@ -64,6 +73,30 @@ class ChatDetailController: UICollectionViewController, UICollectionViewDelegate
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         configureNavBar()
+    }
+    func commentToCommentControl() {
+        if self.thisComments.isEmpty { return }
+        
+        self.commentToComments = comments
+                                    .filter({$0.isCommentToComment != nil})
+        
+        if self.commentToComments.isEmpty { return }
+       
+        var linkList = [(fromCommentToCommentIdx: Int, ToThisCommentIdx: Int)]()
+        var insertCount = 0
+        
+        for i in 0 ... commentToComments.count - 1 {
+            for j in 0 ... thisComments.count - 1 {
+                if commentToComments[i].targetCommentUid! == thisComments[j].uid {
+                    linkList.append((i,j))
+                }
+            }
+        }
+        linkList.forEach({
+            thisComments.insert(commentToComments[$0.fromCommentToCommentIdx], at: $0.ToThisCommentIdx + 1 + insertCount)
+            insertCount += 1
+        })
+        
     }
 }
 

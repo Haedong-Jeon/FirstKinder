@@ -61,6 +61,13 @@ class CommentCell: UICollectionViewCell {
         imgView.translatesAutoresizingMaskIntoConstraints = false
         return imgView
     }()
+    var downRightArrow: UIImageView = {
+        var imgView = UIImageView()
+        imgView.translatesAutoresizingMaskIntoConstraints = false
+        imgView.image = #imageLiteral(resourceName: "right-arrow")
+        imgView.sizeToFit()
+        return imgView
+    }()
     var borderLineImgView: UIImageView = {
         var imgView = UIImageView()
         imgView.translatesAutoresizingMaskIntoConstraints = false

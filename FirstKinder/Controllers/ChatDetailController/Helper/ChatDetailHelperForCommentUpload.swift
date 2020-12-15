@@ -43,7 +43,6 @@ extension ChatDetailController {
             }
         }
         uploadImg(thisComments[editingIdx!.row].uid, thisComments[editingIdx!.row].uid) {
-            self.showSuccessMsg()
             guard let cell = self.collectionView.cellForItem(at: self.editingIdx!) as? CommentCell else { return }
             indicator.stopAnimating()
             self.imgView.image = nil
@@ -74,7 +73,7 @@ extension ChatDetailController {
                     STORAGE_COMMENT_IMGS.child(thisComments[editIdx.row].imgFileName).delete(completion: nil)
                     DB_COMMENTS.child(thisComments[editIdx.row].uid).updateChildValues(["imgFileName" : "NO IMG"])
                     indicator.stopAnimating()
-                    self.showSuccessMsg()
+                    
                 }
             } else {
                 //수정 전 게시글에 이미지가 없다.
@@ -83,7 +82,7 @@ extension ChatDetailController {
                     DB_COMMENTS.child(thisComments[editIdx.row].uid).updateChildValues(["imgFileName" : imgFileName])
                     uploadImg(uid, imgFileName) {
                         indicator.stopAnimating()
-                        self.showSuccessMsg()
+                        
                     }
                 }
             }
@@ -93,6 +92,7 @@ extension ChatDetailController {
             commentTextView.text = ""
             redrawViewsWithoutImg()
             indicator.stopAnimating()
+            self.showSuccessMsg()
             collectionView.reloadData()
             return
         }
@@ -120,8 +120,12 @@ extension ChatDetailController {
             imgFileName = uid
         }
         let timeStamp = Int(NSDate().timeIntervalSince1970)
-        let value: [String: Any] = ["uid": uid, "commentBody": commentTextView.text!, "imgFileName": imgFileName, "timeStamp": timeStamp, "vendor": deviceVendor, "targetChatUid": chat?.uid]
-        
+        var value = [String: Any]()
+        if !self.isCommentToComment {
+            value = ["uid": uid, "commentBody": commentTextView.text!, "imgFileName": imgFileName, "timeStamp": timeStamp, "vendor": deviceVendor, "targetChatUid": chat?.uid]
+        } else {
+            value = ["uid": uid, "commentBody": commentTextView.text!, "imgFileName": imgFileName, "timeStamp": timeStamp, "vendor": deviceVendor, "targetChatUid": chat?.uid, "isCommentToComment": "true", "targetCommentUid": self.targetCommentUid]
+        }
         DB_COMMENTS.child(uid).updateChildValues(value) { (error, ref) in
             if error != nil {
                 let showError = UIAlertController(title: "업로드", message: "에러가 발생했어요 ㅜ.ㅜ", preferredStyle: .alert)
@@ -148,6 +152,8 @@ extension ChatDetailController {
         self.commentTextView.text.removeAll()
         self.imgView.image = nil
         self.imgView.removeFromSuperview()
+        self.isCommentEditing = false
+        self.targetCommentUid = ""
         let showSuccess = UIAlertController(title: "댓글", message: "댓글이 업로드 됐어요!", preferredStyle: .alert)
         let okButton = UIAlertAction(title: "확인", style: .default) { ACTION in
             self.view.isUserInteractionEnabled = true

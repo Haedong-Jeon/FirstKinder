@@ -14,6 +14,8 @@ struct Comment {
     var imgFileName: String
     var timeStamp: Int
     var vendor: String
+    var isCommentToComment: String?
+    var targetCommentUid: String?
 }
 var comments = [Comment]()
 

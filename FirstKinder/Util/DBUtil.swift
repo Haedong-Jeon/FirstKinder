@@ -52,8 +52,15 @@ class DBUtil {
                 guard let imgFileName = data["imgFileName"] as? String else { return }
                 guard let timeStamp = data["timeStamp"] as? Int else { return }
                 guard let deviceVendor = data["vendor"] as? String else { return }
-                let comment = Comment(commentBody: commentBody, targetChatUid: targetChatUid, uid: uid, imgFileName: imgFileName, timeStamp: timeStamp, vendor: deviceVendor)
-                loadedComments.append(comment)
+                var comment: Comment?
+                if data["isCommentToComment"] == nil {
+                    comment = Comment(commentBody: commentBody, targetChatUid: targetChatUid, uid: uid, imgFileName: imgFileName, timeStamp: timeStamp, vendor: deviceVendor)
+                } else {
+                    guard let isCommentToComment = data["isCommentToComment"] as? String else { return }
+                    guard let targetCommentUid = data["targetCommentUid"] as? String else { return }
+                    comment = Comment(commentBody: commentBody, targetChatUid: targetChatUid, uid: uid, imgFileName: imgFileName, timeStamp: timeStamp, vendor: deviceVendor, isCommentToComment: isCommentToComment, targetCommentUid: targetCommentUid)
+                }
+                loadedComments.append(comment!)
             }
             completion(loadedComments)
         }
