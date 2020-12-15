@@ -55,11 +55,11 @@ extension ChatDetailController {
         return CGSize(width: collectionView.frame.width, height: height)
     }
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if thisComments[indexPath.row].isCommentToComment != nil { return }
+        if thisComments[(indexPath.row % self.thisComments.count)].isCommentToComment != nil { return }
         let askCommentToCommentAlert = UIAlertController(title: "대댓글", message: "이 댓글에 대댓글을 다시겠습니까?", preferredStyle: .alert)
         let okButton = UIAlertAction(title: "네", style: .default) { ACTION in
             self.isCommentToComment = true
-            self.targetCommentUid = self.thisComments[indexPath.row].uid
+            self.targetCommentUid = self.thisComments[(indexPath.row % self.thisComments.count)].uid
             self.commentTextView.becomeFirstResponder()
         }
         let cancelButton = UIAlertAction(title: "아니오", style: .cancel, handler: nil)
@@ -74,11 +74,11 @@ extension ChatDetailController {
         }
         cell.imgView.removeFromSuperview()
         cell.commentBodyLabel.removeFromSuperview()
-        if thisComments[indexPath.row].imgFileName != "NO IMG" {
+        if thisComments[(indexPath.row % self.thisComments.count)].imgFileName != "NO IMG" {
             DispatchQueue.main.async {
                 if self.thisComments.isEmpty {
                     self.drawCellWithImg(cell, indexPath)
-                } else if self.thisComments[indexPath.row].isCommentToComment == nil {
+                } else if self.thisComments[(indexPath.row % self.thisComments.count)].isCommentToComment == nil {
                     self.drawCellWithImg(cell, indexPath)
                 } else {
                     self.drawCellWithImgCommentToComment(cell, indexPath)
@@ -88,7 +88,7 @@ extension ChatDetailController {
             DispatchQueue.main.async {
                 if self.thisComments.isEmpty {
                     self.drawCellWithoutImg(cell)
-                } else if self.thisComments[indexPath.row].isCommentToComment == nil {
+                } else if self.thisComments[(indexPath.row % self.thisComments.count)].isCommentToComment == nil {
                     self.drawCellWithoutImg(cell)
                 } else {
                     self.drawCellWithoutImgCommentToComment(cell, indexPath)
@@ -97,7 +97,7 @@ extension ChatDetailController {
         }
         cell.deleteDelegate = self
         cell.thisIdxPath = indexPath
-        if self.thisComments[indexPath.row].isCommentToComment == nil {
+        if self.thisComments[(indexPath.row % self.thisComments.count)].isCommentToComment == nil {
             drawVendor(cell, indexPath)
         } else {
             drawVendorCommentToComment(cell, indexPath)
@@ -105,10 +105,10 @@ extension ChatDetailController {
         drawVerticalDots(cell, indexPath)
         drawTimeLabel(cell, indexPath)
         drawBorderLine(cell, indexPath)
-        cell.commentBodyLabel.text = thisComments[indexPath.row].commentBody
+        cell.commentBodyLabel.text = thisComments[(indexPath.row % self.thisComments.count)].commentBody
         cell.backgroundColor = .white
         
-        let commentorVendor = thisComments[indexPath.row].vendor
+        let commentorVendor = thisComments[(indexPath.row % self.thisComments.count)].vendor
         var commentorReportCount = 0
         chats.forEach({
             if $0.vendor == commentorVendor {
@@ -151,8 +151,8 @@ extension ChatDetailController {
         let estimatedHeight: CGFloat = 800.0
         let dummyCell = CommentCell(frame: CGRect(x: 0, y: 0, width: width, height: estimatedHeight))
         drawVendor(dummyCell, indexPath)
-        dummyCell.commentBodyLabel.text = thisComments[indexPath.row].commentBody
-        if thisComments[indexPath.row].imgFileName == "NO IMG" {
+        dummyCell.commentBodyLabel.text = thisComments[(indexPath.row % self.thisComments.count)].commentBody
+        if thisComments[(indexPath.row % self.thisComments.count)].imgFileName == "NO IMG" {
             drawCellWithoutImg(dummyCell)
         } else {
             drawCellWithImg(dummyCell, indexPath)
@@ -169,7 +169,7 @@ extension ChatDetailController {
         cell.vendorLabel.topAnchor.constraint(equalTo: cell.safeAreaLayoutGuide.topAnchor).isActive = true
         cell.vendorLabel.leftAnchor.constraint(equalTo: cell.faceImgView.rightAnchor, constant: 10).isActive = true
         
-        let fullVendorString = thisComments[indexPath.row].vendor
+        let fullVendorString = thisComments[(indexPath.row % self.thisComments.count)].vendor
         var splitedVendorString = fullVendorString.components(separatedBy: "-")
         
         cell.vendorLabel.text = splitedVendorString[0]
@@ -185,7 +185,7 @@ extension ChatDetailController {
         cell.vendorLabel.topAnchor.constraint(equalTo: cell.safeAreaLayoutGuide.topAnchor).isActive = true
         cell.vendorLabel.leftAnchor.constraint(equalTo: cell.faceImgView.rightAnchor, constant: 10).isActive = true
         
-        let fullVendorString = thisComments[indexPath.row].vendor
+        let fullVendorString = thisComments[(indexPath.row % self.thisComments.count)].vendor
         var splitedVendorString = fullVendorString.components(separatedBy: "-")
         
         cell.vendorLabel.text = splitedVendorString[0]
@@ -252,27 +252,27 @@ extension ChatDetailController {
     func downloadImgToCell(_ cell: CommentCell, _ indexPath: IndexPath) {
         cell.imgView.kf.indicatorType = .activity
         if thisComments.isEmpty { return }
-        if DBUtil.shared.loadImgFromCache(thisComments[indexPath.row].imgFileName) == nil {
+        if DBUtil.shared.loadImgFromCache(thisComments[(indexPath.row % self.thisComments.count)].imgFileName) == nil {
             DispatchQueue.main.async {
                 cell.imgView.kf.indicator?.startAnimatingView()
             }
-            DBUtil.shared.loadCommentImgsFromStorage(thisComments[indexPath.row].imgFileName) { url in
+            DBUtil.shared.loadCommentImgsFromStorage(thisComments[(indexPath.row % self.thisComments.count)].imgFileName) { url in
                 let cache = ImageCache.default
                 guard let imgData = try? Data(contentsOf: url) else { return }
                 guard let img = UIImage(data: imgData) else { return }
-                cache.store(img, forKey: self.thisComments[indexPath.row].imgFileName)
+                cache.store(img, forKey: self.thisComments[(indexPath.row % self.thisComments.count)].imgFileName)
                 DispatchQueue.main.async {
                     cell.imgView.image = img
                     cell.imgView.kf.indicator?.stopAnimatingView()
                 }
             }
         } else {
-            cell.imgView.image = DBUtil.shared.loadImgFromCache(thisComments[indexPath.row].imgFileName)
+            cell.imgView.image = DBUtil.shared.loadImgFromCache(thisComments[(indexPath.row % self.thisComments.count)].imgFileName)
         }
     }
     func drawVerticalDots(_ cell: CommentCell, _ indexPath: IndexPath) {
         
-        if thisComments[indexPath.row].vendor == UIDevice.current.identifierForVendor?.uuidString {
+        if thisComments[(indexPath.row % self.thisComments.count)].vendor == UIDevice.current.identifierForVendor?.uuidString {
             cell.verticalDotButton.setImage(#imageLiteral(resourceName: "more"), for: .normal)
             cell.verticalDotButton.isEnabled = true
         } else {
@@ -289,7 +289,7 @@ extension ChatDetailController {
         cell.timeLabel.topAnchor.constraint(equalTo: cell.safeAreaLayoutGuide.topAnchor, constant: 5).isActive = true
         cell.timeLabel.rightAnchor.constraint(equalTo: cell.verticalDotButton.leftAnchor, constant: -5).isActive = true
         let now = Int(NSDate().timeIntervalSince1970)
-        var elapsedTime = (now - thisComments[indexPath.row].timeStamp) / 60
+        var elapsedTime = (now - thisComments[(indexPath.row % self.thisComments.count)].timeStamp) / 60
         if elapsedTime <= 0 {
             cell.timeLabel.text = "방금 전"
         } else if elapsedTime < 60 {
@@ -319,7 +319,7 @@ extension ChatDetailController {
 }
 extension ChatDetailController: CommentDeleteDelegate {
     func dotTap(indexPath: IndexPath) {
-        if thisComments[indexPath.row].vendor == UIDevice.current.identifierForVendor?.uuidString {
+        if thisComments[(indexPath.row % self.thisComments.count)].vendor == UIDevice.current.identifierForVendor?.uuidString {
             
             let askAlertController = UIAlertController()
             let deleteButton = UIAlertAction(title: "삭제", style: .default) { ACTTION in
@@ -351,11 +351,11 @@ extension ChatDetailController: CommentDeleteDelegate {
         self.editingIdx = indexPath
     }
     func drawEditingUI(indexPath: IndexPath) {
-        commentTextView.text = thisComments[indexPath.row].commentBody
-        if thisComments[indexPath.row].imgFileName != "NO IMG" {
+        commentTextView.text = thisComments[(indexPath.row % self.thisComments.count)].commentBody
+        if thisComments[(indexPath.row % self.thisComments.count)].imgFileName != "NO IMG" {
             self.isEditTargetCommentHasIMg = true
             redrawViewsWithImg()
-            self.imgView.image = DBUtil.shared.loadImgFromCache(thisComments[indexPath.row].imgFileName)
+            self.imgView.image = DBUtil.shared.loadImgFromCache(thisComments[(indexPath.row % self.thisComments.count)].imgFileName)
         }
     }
     func editCancel(_ cell: CommentCell) {
@@ -366,18 +366,18 @@ extension ChatDetailController: CommentDeleteDelegate {
     }
     func delete(indexPath: IndexPath) {
         self.commentToComments.forEach({
-            if $0.targetCommentUid == self.thisComments[indexPath.row].uid {
+            if $0.targetCommentUid == self.thisComments[(indexPath.row % self.thisComments.count)].uid {
                 DB_COMMENTS.child($0.uid).removeValue()
                 STORAGE_COMMENT_IMGS.child($0.imgFileName).delete { error in
                     print("이미지 삭제 에러 -\(error)")
                 }
             }
         })
-        DB_COMMENTS.child(thisComments[indexPath.row].uid).removeValue()
-        STORAGE_COMMENT_IMGS.child(thisComments[indexPath.row].imgFileName).delete { error in
+        DB_COMMENTS.child(thisComments[(indexPath.row % self.thisComments.count)].uid).removeValue()
+        STORAGE_COMMENT_IMGS.child(thisComments[(indexPath.row % self.thisComments.count)].imgFileName).delete { error in
             print("이미지 삭제 에러 -\(error)")
         }
-        thisComments.remove(at: indexPath.row)
+        thisComments.remove(at: (indexPath.row % self.thisComments.count))
         commentCountDown()
         collectionView.reloadData()
     }
