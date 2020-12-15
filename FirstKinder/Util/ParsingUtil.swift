@@ -28,9 +28,7 @@ class ParsingUtil: NSObject, XMLParserDelegate {
         xmlParser?.delegate = self
         xmlParser?.parse()
         if xmlParser?.parserError != nil {
-            DispatchQueue.global(qos: .background).async {
-                errorCode = xmlParser?.parserError
-            }
+            errorCode = xmlParser?.parserError
         }
         return errorCode
     }

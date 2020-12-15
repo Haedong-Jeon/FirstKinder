@@ -115,6 +115,10 @@ class DBUtil {
                 if error != nil {
                     print("error in load all imgs \(error)")
                 }
+                print("유저 업로드 이미지 불러오기! 총 \(list.items.count)장")
+                if list.items.isEmpty {
+                    loadedImg.onError(NoImgError.instance)
+                }
                 for item in list.items {
                     DispatchQueue.global(qos: .background).async {
                         item.downloadURL { (url, error) in
@@ -127,7 +131,7 @@ class DBUtil {
                                 guard let imgData = try? Data(contentsOf: imgURL) else { return }
                                 guard let img = UIImage(data: imgData) else { return }
                                 cache.store(img, forKey: item.name)
-                                print(item.name)
+                                print("게시글 첨부 이미지 - \(item.name)")
                                 loadedImg.onNext(img)
                                 loadCount += 1
                                 if loadCount == list.items.count {
@@ -148,6 +152,12 @@ class DBUtil {
                 if error != nil {
                     print("error in load all imgs \(error)")
                 }
+                print("댓글 이미지 불러오기! 총 \(list.items.count)장")
+                if list.items.count == 0 {
+                    if list.items.isEmpty {
+                        loadedImg.onError(NoImgError.instance)
+                    }
+                }
                 for item in list.items {
                     DispatchQueue.global(qos: .background).async {
                         item.downloadURL { (url, error) in
@@ -159,7 +169,7 @@ class DBUtil {
                             guard let imgData = try? Data(contentsOf: imgURL) else { return }
                             guard let img = UIImage(data: imgData) else { return }
                             cache.store(img, forKey: item.name)
-                            print(item.name)
+                            print("댓글 첨부 이미지 - \(item.name)")
                             loadedImg.onNext(img)
                             loadedImgCount += 1
                             if loadedImgCount == list.items.count {
@@ -173,4 +183,9 @@ class DBUtil {
         }
     }
     
+}
+
+class NoImgError: Error {
+    static let instance = NoImgError()
+    var msg = "img list empty"
 }

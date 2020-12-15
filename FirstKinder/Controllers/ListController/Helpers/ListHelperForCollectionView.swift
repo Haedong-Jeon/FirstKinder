@@ -76,21 +76,21 @@ extension ListController {
     }
 }
 //무한 스크롤 구현.
-extension ListController {
-    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if !scrollChecker { return }
-        let contentOffsetY = scrollView.contentOffset.y
-        if contentOffsetY >= (scrollView.contentSize.height - scrollView.bounds.height) - 20 /* Needed offset */ {
-            print("스크롤이 바닥에 도달! offset - \(contentOffsetY)")
-            
-            let loadResult = ParsingUtil.shared.getData(cityCode: cities[ParsingUtil.shared.loadedCityCount])
-            print("데이터 파싱...!!")
-            if loadResult == nil {
-                self.nowShowingKinders = kinders
-                self.scrollChecker = false
-                print("현재 데이터 - \(kinders.count)")
-            }
-            
-        }
-    }
-}
+//extension ListController {
+//    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//        if !scrollChecker { return }
+//        let contentOffsetY = scrollView.contentOffset.y
+//        if contentOffsetY >= (scrollView.contentSize.height - scrollView.bounds.height) - 20 /* Needed offset */ {
+//            print("스크롤이 바닥에 도달! offset - \(contentOffsetY)")
+//
+//            let loadResult = ParsingUtil.shared.getData(cityCode: cities[ParsingUtil.shared.loadedCityCount])
+//            print("데이터 파싱...!!")
+//            if loadResult == nil {
+//                self.nowShowingKinders = kinders
+//                self.scrollChecker = false
+//                print("현재 데이터 - \(kinders.count)")
+//            }
+//
+//        }
+//    }
+//}

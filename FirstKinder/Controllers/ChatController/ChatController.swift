@@ -46,26 +46,22 @@ class ChatController: UICollectionViewController, UICollectionViewDelegateFlowLa
         view.addSubview(indicator)
         indicator.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
         indicator.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor).isActive = true
-        indicator.startAnimating()
         
-        DBUtil.shared.loadAllUserUploadImgs().subscribe(onCompleted: {
-            DBUtil.shared.loadAllCommentImgs().subscribe(onCompleted: {
-                DispatchQueue.global().async {
-                    DBUtil.shared.loadChatTexts { loadedChats in
-                        //1. 최신 게시글이 위로 올라간다.
-                        //2. 신고 당한 횟수가 5회 이하인 게시글만 표시한다.
-                        chats = loadedChats
-                            .sorted(by: {$0.timeStamp > $1.timeStamp})
-                            .filter({$0.reportCount < 5})
-                        
-                        DispatchQueue.main.async {
-                            self.chatReload()
-                            indicator.stopAnimating()
-                        }
-                    }
+        indicator.startAnimating()
+        DispatchQueue.global().async {
+            DBUtil.shared.loadChatTexts { loadedChats in
+                //1. 최신 게시글이 위로 올라간다.
+                //2. 신고 당한 횟수가 5회 이하인 게시글만 표시한다.
+                chats = loadedChats
+                    .sorted(by: {$0.timeStamp > $1.timeStamp})
+                    .filter({$0.reportCount < 5})
+                
+                DispatchQueue.main.async {
+                    self.chatReload()
+                    indicator.stopAnimating()
                 }
-            }).disposed(by: self.disposeBag)
-        }).disposed(by: disposeBag)
+            }
+        }
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)

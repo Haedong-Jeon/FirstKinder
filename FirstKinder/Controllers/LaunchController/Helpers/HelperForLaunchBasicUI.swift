@@ -17,6 +17,7 @@ extension LaunchController {
         drawDataSource()
         drawHearts()
         drawIndicator()
+        drawGuidance()
     }
     func drawTitleTextView() {
         view.addSubview(titleLabel)
@@ -57,5 +58,11 @@ extension LaunchController {
         view.addSubview(indicator)
         indicator.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
         indicator.topAnchor.constraint(equalTo: dataSourceLabel.bottomAnchor).isActive = true
+    }
+    func drawGuidance() {
+        view.addSubview(guidanceMsgLabel)
+        guidanceMsgLabel.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
+        guidanceMsgLabel.topAnchor.constraint(equalTo: dataSourceLabel.bottomAnchor).isActive = true
+        guidanceMsgLabel.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
     }
 }

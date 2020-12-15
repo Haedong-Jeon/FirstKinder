@@ -151,7 +151,7 @@ extension ChatWriteController {
     }
     
     func uploadImg(_ uid: String, _ imgFileName: String, completion: @escaping() -> Void) {
-        guard let imgData = imgView.image?.jpegData(compressionQuality: 0.1) else { return }
+        guard let imgData = imgView.image?.jpegData(compressionQuality: 0.3) else { return }
         STORAGE_USER_UPLOAD_IMGS.child(imgFileName).putData(imgData, metadata: nil) { (metaData, error) in
             if error != nil {
                 let showError = UIAlertController(title: "업로드", message: "이미지 업로드 중 에러가 발생했어요 ㅜ.ㅜ \(error?.localizedDescription)", preferredStyle: .alert)
