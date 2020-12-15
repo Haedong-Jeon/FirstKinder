@@ -251,6 +251,7 @@ extension ChatDetailController {
     }
     func downloadImgToCell(_ cell: CommentCell, _ indexPath: IndexPath) {
         cell.imgView.kf.indicatorType = .activity
+        if thisComments.isEmpty { return }
         if DBUtil.shared.loadImgFromCache(thisComments[indexPath.row].imgFileName) == nil {
             DispatchQueue.main.async {
                 cell.imgView.kf.indicator?.startAnimatingView()
@@ -367,6 +368,9 @@ extension ChatDetailController: CommentDeleteDelegate {
         self.commentToComments.forEach({
             if $0.targetCommentUid == self.thisComments[indexPath.row].uid {
                 DB_COMMENTS.child($0.uid).removeValue()
+                STORAGE_COMMENT_IMGS.child($0.imgFileName).delete { error in
+                    print("이미지 삭제 에러 -\(error)")
+                }
             }
         })
         DB_COMMENTS.child(thisComments[indexPath.row].uid).removeValue()
