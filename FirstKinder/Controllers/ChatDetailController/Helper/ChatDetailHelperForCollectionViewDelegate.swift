@@ -76,7 +76,9 @@ extension ChatDetailController {
         cell.commentBodyLabel.removeFromSuperview()
         if thisComments[indexPath.row].imgFileName != "NO IMG" {
             DispatchQueue.main.async {
-                if self.thisComments[indexPath.row].isCommentToComment == nil {
+                if self.thisComments.isEmpty {
+                    self.drawCellWithImg(cell, indexPath)
+                } else if self.thisComments[indexPath.row].isCommentToComment == nil {
                     self.drawCellWithImg(cell, indexPath)
                 } else {
                     self.drawCellWithImgCommentToComment(cell, indexPath)
@@ -84,7 +86,9 @@ extension ChatDetailController {
             }
         } else {
             DispatchQueue.main.async {
-                if self.thisComments[indexPath.row].isCommentToComment == nil {
+                if self.thisComments.isEmpty {
+                    self.drawCellWithoutImg(cell)
+                } else if self.thisComments[indexPath.row].isCommentToComment == nil {
                     self.drawCellWithoutImg(cell)
                 } else {
                     self.drawCellWithoutImgCommentToComment(cell, indexPath)
@@ -360,6 +364,11 @@ extension ChatDetailController: CommentDeleteDelegate {
         
     }
     func delete(indexPath: IndexPath) {
+        self.commentToComments.forEach({
+            if $0.targetCommentUid == self.thisComments[indexPath.row].uid {
+                DB_COMMENTS.child($0.uid).removeValue()
+            }
+        })
         DB_COMMENTS.child(thisComments[indexPath.row].uid).removeValue()
         STORAGE_COMMENT_IMGS.child(thisComments[indexPath.row].imgFileName).delete { error in
             print("이미지 삭제 에러 -\(error)")
