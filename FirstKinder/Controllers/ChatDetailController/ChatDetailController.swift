@@ -26,11 +26,7 @@ class ChatDetailController: UICollectionViewController, UICollectionViewDelegate
             collectionView.reloadData()
         }
     }
-    var commentToComments: [Comment] = [] {
-        didSet {
-            collectionView.reloadData()
-        }
-    }
+    var commentToComments = [Comment]()
     let uploadButton = UIBarButtonItem(image: UIImage(systemName: "capslock.fill"), style: .plain, target: self, action: #selector(handleUploadTap))
     let imgPicker = UIImagePickerController()
     var comment$: Observable<Bool>?
@@ -51,7 +47,6 @@ class ChatDetailController: UICollectionViewController, UICollectionViewDelegate
         return imgView
     }()
     override func viewDidLoad() {
-        configureUI()
         let indicator = ANActivityIndicatorView.init(frame: CGRect(x: 0, y: 0, width: 30, height: 30), animationType: .ballPulse, color: .black, padding: .none)
         indicator.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(indicator)
@@ -67,6 +62,7 @@ class ChatDetailController: UICollectionViewController, UICollectionViewDelegate
             self.commentToCommentControl()
             indicator.stopAnimating()
         }
+        configureUI()
         setRx()
         setSubscriberForRx()
     }

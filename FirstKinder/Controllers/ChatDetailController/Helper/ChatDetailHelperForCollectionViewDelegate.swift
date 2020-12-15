@@ -74,39 +74,26 @@ extension ChatDetailController {
         }
         cell.imgView.removeFromSuperview()
         cell.commentBodyLabel.removeFromSuperview()
-        if thisComments[(indexPath.row % self.thisComments.count)].imgFileName != "NO IMG" {
-            DispatchQueue.main.async {
-                if self.thisComments.isEmpty {
-                    self.drawCellWithImg(cell, indexPath)
-                } else if self.thisComments[(indexPath.row % self.thisComments.count)].isCommentToComment == nil {
-                    self.drawCellWithImg(cell, indexPath)
-                } else {
-                    self.drawCellWithImgCommentToComment(cell, indexPath)
-                }
-            }
-        } else {
-            DispatchQueue.main.async {
-                if self.thisComments.isEmpty {
-                    self.drawCellWithoutImg(cell)
-                } else if self.thisComments[(indexPath.row % self.thisComments.count)].isCommentToComment == nil {
-                    self.drawCellWithoutImg(cell)
-                } else {
-                    self.drawCellWithoutImgCommentToComment(cell, indexPath)
-                }
-            }
-        }
-        cell.deleteDelegate = self
-        cell.thisIdxPath = indexPath
-        if self.thisComments[(indexPath.row % self.thisComments.count)].isCommentToComment == nil {
-            drawVendor(cell, indexPath)
-        } else {
-            drawVendorCommentToComment(cell, indexPath)
-        }
         drawVerticalDots(cell, indexPath)
         drawTimeLabel(cell, indexPath)
         drawBorderLine(cell, indexPath)
+        drawVendor(cell, indexPath)
+        cell.layoutIfNeeded()
+        
         cell.commentBodyLabel.text = thisComments[(indexPath.row % self.thisComments.count)].commentBody
         cell.backgroundColor = .white
+        
+        if thisComments[(indexPath.row % self.thisComments.count)].imgFileName != "NO IMG" {
+            drawCellWithImg(cell, indexPath)
+        } else {
+            drawCellWithoutImg(cell)
+        }
+        //일반 댓글과 대댓글 구별
+        if thisComments[(indexPath.row % self.thisComments.count)].isCommentToComment == nil {
+            cell.upArrowForCommentToComment.textColor = .white
+        }
+        cell.deleteDelegate = self
+        cell.thisIdxPath = indexPath
         
         let commentorVendor = thisComments[(indexPath.row % self.thisComments.count)].vendor
         var commentorReportCount = 0
@@ -157,38 +144,42 @@ extension ChatDetailController {
         } else {
             drawCellWithImg(dummyCell, indexPath)
         }
-        dummyCell.layoutIfNeeded()
         let estimateSize = dummyCell.systemLayoutSizeFitting(CGSize(width: width, height: estimatedHeight))
         return estimateSize.height
     }
     func drawVendor(_ cell: CommentCell, _ indexPath: IndexPath) {
         cell.addSubview(cell.faceImgView)
         cell.faceImgView.topAnchor.constraint(equalTo: cell.safeAreaLayoutGuide.topAnchor, constant: 5).isActive = true
-        cell.faceImgView.leftAnchor.constraint(equalTo: cell.safeAreaLayoutGuide.leftAnchor).isActive = true
+        cell.faceImgView.leftAnchor.constraint(equalTo: cell.safeAreaLayoutGuide.leftAnchor, constant: 10).isActive = true
         cell.addSubview(cell.vendorLabel)
         cell.vendorLabel.topAnchor.constraint(equalTo: cell.safeAreaLayoutGuide.topAnchor).isActive = true
         cell.vendorLabel.leftAnchor.constraint(equalTo: cell.faceImgView.rightAnchor, constant: 10).isActive = true
+        
         
         let fullVendorString = thisComments[(indexPath.row % self.thisComments.count)].vendor
         var splitedVendorString = fullVendorString.components(separatedBy: "-")
         
         cell.vendorLabel.text = splitedVendorString[0]
+        if fullVendorString == chat?.vendor {
+            cell.vendorLabel.text = cell.vendorLabel.text! + " (글쓴이)"
+            let attributedStr = NSMutableAttributedString(string: cell.vendorLabel.text!)
+            let ns: NSString = cell.vendorLabel.text! as NSString
+            let range = ns.range(of: "(글쓴이)")
+            attributedStr.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.link , range: range)
+            cell.vendorLabel.attributedText = attributedStr
+        }
     }
-    func drawVendorCommentToComment(_ cell: CommentCell, _ indexPath: IndexPath) {
-        cell.addSubview(cell.downRightArrow)
-        cell.downRightArrow.leftAnchor.constraint(equalTo: cell.leftAnchor).isActive = true
-        cell.centerYAnchor.constraint(equalTo: cell.centerYAnchor).isActive = true
-        cell.addSubview(cell.faceImgView)
-        cell.faceImgView.topAnchor.constraint(equalTo: cell.safeAreaLayoutGuide.topAnchor, constant: 5).isActive = true
-        cell.faceImgView.leftAnchor.constraint(equalTo: cell.downRightArrow.rightAnchor, constant: 10).isActive = true
-        cell.addSubview(cell.vendorLabel)
-        cell.vendorLabel.topAnchor.constraint(equalTo: cell.safeAreaLayoutGuide.topAnchor).isActive = true
-        cell.vendorLabel.leftAnchor.constraint(equalTo: cell.faceImgView.rightAnchor, constant: 10).isActive = true
-        
-        let fullVendorString = thisComments[(indexPath.row % self.thisComments.count)].vendor
-        var splitedVendorString = fullVendorString.components(separatedBy: "-")
-        
-        cell.vendorLabel.text = splitedVendorString[0]
+    func drawVerticalDots(_ cell: CommentCell, _ indexPath: IndexPath) {
+        if thisComments[(indexPath.row % self.thisComments.count)].vendor == UIDevice.current.identifierForVendor?.uuidString {
+            cell.verticalDotButton.setImage(#imageLiteral(resourceName: "more"), for: .normal)
+            cell.verticalDotButton.isEnabled = true
+        } else {
+            cell.verticalDotButton.setImage(#imageLiteral(resourceName: "output-onlinepngtools (5)"), for: .normal)
+            cell.verticalDotButton.isEnabled = false
+        }
+        cell.contentView.addSubview(cell.verticalDotButton)
+        cell.verticalDotButton.topAnchor.constraint(equalTo: cell.safeAreaLayoutGuide.topAnchor, constant: 5).isActive = true
+        cell.verticalDotButton.rightAnchor.constraint(equalTo: cell.safeAreaLayoutGuide.rightAnchor,constant: -5).isActive = true
     }
     func drawCellWithImg(_ cell: CommentCell, _ indexPath: IndexPath) {
         //파이어베이스 렉 때문에 잠시동안만 이미지 다운로드를 하지 않는다. 대신 대체 이미지 사용.
@@ -201,53 +192,22 @@ extension ChatDetailController {
         cell.imgView.layer.borderColor = UIColor.lightGray.cgColor
         cell.imgView.layer.cornerRadius = 10
         cell.imgView.clipsToBounds = true
-        cell.addSubview(cell.commentBodyLabel)
-        cell.commentBodyLabel.topAnchor.constraint(equalTo: cell.faceImgView.bottomAnchor, constant: 10).isActive = true
-        cell.commentBodyLabel.widthAnchor.constraint(equalTo: cell.safeAreaLayoutGuide.widthAnchor).isActive = true
-        cell.commentBodyLabel.bottomAnchor.constraint(equalTo: cell.imgView.topAnchor, constant: -10).isActive = true
-        
+        cell.imgView.leftAnchor.constraint(equalTo: cell.faceImgView.leftAnchor).isActive = true
         cell.imgView.isUserInteractionEnabled = true
         cell.imgView.addMakeBigFunction()
-    }
-    func drawCellWithImgCommentToComment(_ cell: CommentCell, _ indexPath: IndexPath) {
-        downloadImgToCell(cell, indexPath)
-        cell.addSubview(cell.downRightArrow)
-        cell.downRightArrow.centerYAnchor.constraint(equalTo: cell.centerYAnchor).isActive = true
-        cell.downRightArrow.leftAnchor.constraint(equalTo: cell.leftAnchor).isActive = true
-        cell.addSubview(cell.imgView)
-        cell.imgView.bottomAnchor.constraint(equalTo: cell.safeAreaLayoutGuide.bottomAnchor, constant: -5).isActive = true
-        cell.imgView.widthAnchor.constraint(equalToConstant: 100).isActive = true
-        cell.imgView.leftAnchor.constraint(equalTo: cell.downRightArrow.rightAnchor, constant: 5).isActive = true
-        cell.imgView.heightAnchor.constraint(equalToConstant: 100).isActive = true
-        cell.imgView.layer.borderWidth = 1
-        cell.imgView.layer.borderColor = UIColor.lightGray.cgColor
-        cell.imgView.layer.cornerRadius = 10
-        cell.imgView.clipsToBounds = true
+        
         cell.addSubview(cell.commentBodyLabel)
         cell.commentBodyLabel.topAnchor.constraint(equalTo: cell.faceImgView.bottomAnchor, constant: 10).isActive = true
-        cell.commentBodyLabel.leftAnchor.constraint(equalTo: cell.downRightArrow.rightAnchor, constant: 5).isActive = true
-        cell.commentBodyLabel.widthAnchor.constraint(equalToConstant: cell.frame.width - 10).isActive = true
+        cell.commentBodyLabel.leftAnchor.constraint(equalTo:cell.faceImgView.leftAnchor).isActive = true
         cell.commentBodyLabel.bottomAnchor.constraint(equalTo: cell.imgView.topAnchor, constant: -10).isActive = true
-        
-        cell.imgView.isUserInteractionEnabled = true
-        cell.imgView.addMakeBigFunction()
+        cell.commentBodyLabel.rightAnchor.constraint(equalTo: cell.rightAnchor, constant:  -20).isActive = true
     }
     func drawCellWithoutImg(_ cell: CommentCell) {
         cell.addSubview(cell.commentBodyLabel)
         cell.commentBodyLabel.topAnchor.constraint(equalTo: cell.faceImgView.bottomAnchor, constant: 10).isActive = true
-        cell.commentBodyLabel.widthAnchor.constraint(equalTo: cell.safeAreaLayoutGuide.widthAnchor).isActive = true
+        cell.commentBodyLabel.leftAnchor.constraint(equalTo: cell.faceImgView.leftAnchor).isActive = true
+        cell.commentBodyLabel.rightAnchor.constraint(equalTo: cell.rightAnchor, constant:  -20).isActive = true
         cell.commentBodyLabel.bottomAnchor.constraint(equalTo: cell.safeAreaLayoutGuide.bottomAnchor, constant: -5).isActive = true
-    }
-    func drawCellWithoutImgCommentToComment(_ cell: CommentCell, _ indexPath: IndexPath) {
-        cell.addSubview(cell.downRightArrow)
-        cell.downRightArrow.centerYAnchor.constraint(equalTo: cell.centerYAnchor).isActive = true
-        cell.downRightArrow.leftAnchor.constraint(equalTo: cell.leftAnchor).isActive = true
-        cell.addSubview(cell.commentBodyLabel)
-        cell.commentBodyLabel.topAnchor.constraint(equalTo: cell.faceImgView.bottomAnchor, constant: 10).isActive = true
-        cell.commentBodyLabel.leftAnchor.constraint(equalTo: cell.downRightArrow.rightAnchor, constant: 10).isActive = true
-        cell.commentBodyLabel.widthAnchor.constraint(equalToConstant: cell.frame.width - 10).isActive = true
-        cell.commentBodyLabel.bottomAnchor.constraint(equalTo: cell.safeAreaLayoutGuide.bottomAnchor, constant: -5).isActive = true
-        
     }
     func downloadImgToCell(_ cell: CommentCell, _ indexPath: IndexPath) {
         cell.imgView.kf.indicatorType = .activity
@@ -269,20 +229,6 @@ extension ChatDetailController {
         } else {
             cell.imgView.image = DBUtil.shared.loadImgFromCache(thisComments[(indexPath.row % self.thisComments.count)].imgFileName)
         }
-    }
-    func drawVerticalDots(_ cell: CommentCell, _ indexPath: IndexPath) {
-        
-        if thisComments[(indexPath.row % self.thisComments.count)].vendor == UIDevice.current.identifierForVendor?.uuidString {
-            cell.verticalDotButton.setImage(#imageLiteral(resourceName: "more"), for: .normal)
-            cell.verticalDotButton.isEnabled = true
-        } else {
-            cell.verticalDotButton.setImage(#imageLiteral(resourceName: "output-onlinepngtools (5)"), for: .normal)
-            cell.verticalDotButton.isEnabled = false
-        }
-        cell.contentView.addSubview(cell.verticalDotButton)
-        cell.verticalDotButton.topAnchor.constraint(equalTo: cell.safeAreaLayoutGuide.topAnchor, constant: 5).isActive = true
-        cell.verticalDotButton.rightAnchor.constraint(equalTo: cell.safeAreaLayoutGuide.rightAnchor,constant: -5).isActive = true
-        
     }
     func drawTimeLabel(_ cell: CommentCell, _ indexPath: IndexPath) {
         cell.addSubview(cell.timeLabel)

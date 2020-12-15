@@ -127,7 +127,7 @@ class ChatDetailHeader: UICollectionReusableView {
     func configureUIWithImg() {
         downloadImg(imgFileName: chat!.imgFileName)
         addSubview(imgView)
-        imgView.leftAnchor.constraint(equalTo: leftAnchor, constant: 10).isActive = true
+        imgView.leftAnchor.constraint(equalTo: faceImgView.leftAnchor, constant: 10).isActive = true
         imgView.rightAnchor.constraint(equalTo: rightAnchor, constant: -10).isActive = true
         imgView.heightAnchor.constraint(equalToConstant: 300).isActive = true
         imgView.bottomAnchor.constraint(equalTo: commentCountLabel.topAnchor, constant: -10).isActive = true
@@ -139,13 +139,15 @@ class ChatDetailHeader: UICollectionReusableView {
         
         addSubview(chatBodyLabel)
         chatBodyLabel.topAnchor.constraint(equalTo: categoryLabel.bottomAnchor, constant: 10).isActive = true
-        chatBodyLabel.widthAnchor.constraint(equalTo: safeAreaLayoutGuide.widthAnchor).isActive = true
         chatBodyLabel.bottomAnchor.constraint(equalTo: imgView.topAnchor, constant: -10).isActive = true
+        chatBodyLabel.leftAnchor.constraint(equalTo: faceImgView.leftAnchor).isActive = true
+        chatBodyLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -10).isActive = true
     }
     func configureUIWithoutImg() {
         addSubview(chatBodyLabel)
         chatBodyLabel.topAnchor.constraint(equalTo: categoryLabel.bottomAnchor, constant: 10).isActive = true
-        chatBodyLabel.widthAnchor.constraint(equalTo: safeAreaLayoutGuide.widthAnchor).isActive = true
+        chatBodyLabel.leftAnchor.constraint(equalTo: faceImgView.leftAnchor).isActive = true
+        chatBodyLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -10).isActive = true
         chatBodyLabel.bottomAnchor.constraint(equalTo: commentCountLabel.topAnchor, constant: -10).isActive = true
     }
     func drawCategoryLabel() {
@@ -173,12 +175,12 @@ class ChatDetailHeader: UICollectionReusableView {
     func drawTime() {
         addSubview(timeLabel)
         timeLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 5).isActive = true
-        timeLabel.rightAnchor.constraint(equalTo: safeAreaLayoutGuide.rightAnchor, constant: -5).isActive = true
+        timeLabel.rightAnchor.constraint(equalTo: safeAreaLayoutGuide.rightAnchor, constant: -10).isActive = true
     }
     func drawVendor() {
         addSubview(faceImgView)
         faceImgView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 5).isActive = true
-        faceImgView.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor).isActive = true
+        faceImgView.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor, constant: 10).isActive = true
         addSubview(vendorLabel)
         vendorLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor).isActive = true
         vendorLabel.leftAnchor.constraint(equalTo: faceImgView.rightAnchor,constant: 10).isActive = true
@@ -191,7 +193,8 @@ class ChatDetailHeader: UICollectionReusableView {
     }
     func drawCommentCountLabel() {
         addSubview(commentCountLabel)
-        commentCountLabel.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
+        commentCountLabel.leftAnchor.constraint(equalTo: faceImgView.leftAnchor).isActive = true
+        commentCountLabel.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
         commentCountLabel.heightAnchor.constraint(equalToConstant: 30).isActive = true
         commentCountLabel.bottomAnchor.constraint(equalTo: borderLineImgView.topAnchor).isActive = true
     }

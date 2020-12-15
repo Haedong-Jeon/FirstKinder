@@ -44,7 +44,7 @@ class CommentCell: UICollectionViewCell {
         var label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.heightAnchor.constraint(equalToConstant: 30).isActive = true
-        label.widthAnchor.constraint(equalToConstant: 100).isActive = true
+        label.widthAnchor.constraint(equalToConstant: 200).isActive = true
         return label
     }()
     var commentBodyLabel: UILabel = {
@@ -61,12 +61,13 @@ class CommentCell: UICollectionViewCell {
         imgView.translatesAutoresizingMaskIntoConstraints = false
         return imgView
     }()
-    var downRightArrow: UIImageView = {
-        var imgView = UIImageView()
-        imgView.translatesAutoresizingMaskIntoConstraints = false
-        imgView.image = #imageLiteral(resourceName: "right-arrow")
-        imgView.sizeToFit()
-        return imgView
+    var upArrowForCommentToComment: UILabel = {
+        var label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 15)
+        label.textColor = .lightGray
+        label.text = "↑"
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
     }()
     var borderLineImgView: UIImageView = {
         var imgView = UIImageView()
