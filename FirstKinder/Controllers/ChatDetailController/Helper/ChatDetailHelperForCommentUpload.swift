@@ -154,6 +154,7 @@ extension ChatDetailController {
         self.imgView.removeFromSuperview()
         self.isCommentEditing = false
         self.targetCommentUid = ""
+        self.isCommentToComment = false
         let showSuccess = UIAlertController(title: "댓글", message: "댓글이 업로드 됐어요!", preferredStyle: .alert)
         let okButton = UIAlertAction(title: "확인", style: .default) { ACTION in
             self.view.isUserInteractionEnabled = true

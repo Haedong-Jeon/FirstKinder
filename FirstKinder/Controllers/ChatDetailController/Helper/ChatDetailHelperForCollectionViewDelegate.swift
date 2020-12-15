@@ -385,6 +385,5 @@ extension ChatDetailController: CommentDeleteDelegate {
         let commentCount = thisComments.count
         DB_CHATS.child(self.chat!.uid).updateChildValues(["commentCount": commentCount])
     }
-    
 }
 
