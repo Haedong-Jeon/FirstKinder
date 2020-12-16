@@ -69,6 +69,9 @@
 		E9DDDCA72581EB9A005B3BE8 /* ChatDetailHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DDDCA62581EB9A005B3BE8 /* ChatDetailHeader.swift */; };
 		E9DDDCAA2581F042005B3BE8 /* ChatDetailHelperForCollectionViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DDDCA92581F042005B3BE8 /* ChatDetailHelperForCollectionViewDelegate.swift */; };
 		E9DDDCAD2581FC60005B3BE8 /* ChatDetailSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DDDCAC2581FC5F005B3BE8 /* ChatDetailSelector.swift */; };
+		E9ECFDC72589866900228467 /* CommentToCommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9ECFDC62589866900228467 /* CommentToCommentCell.swift */; };
+		E9ECFDCA258986FF00228467 /* CommentCellWithImg.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9ECFDC9258986FF00228467 /* CommentCellWithImg.swift */; };
+		E9ECFDCD2589872400228467 /* CoToCoCellWithImg.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9ECFDCC2589872400228467 /* CoToCoCellWithImg.swift */; };
 		E9F14390257483A0002A284F /* HelperForLaunchBasicUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F1438F257483A0002A284F /* HelperForLaunchBasicUI.swift */; };
 		E9F14394257483E0002A284F /* TagKind.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F14393257483E0002A284F /* TagKind.swift */; };
 /* End PBXBuildFile section */
@@ -141,6 +144,9 @@
 		E9DDDCA62581EB9A005B3BE8 /* ChatDetailHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatDetailHeader.swift; sourceTree = "<group>"; };
 		E9DDDCA92581F042005B3BE8 /* ChatDetailHelperForCollectionViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatDetailHelperForCollectionViewDelegate.swift; sourceTree = "<group>"; };
 		E9DDDCAC2581FC5F005B3BE8 /* ChatDetailSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatDetailSelector.swift; sourceTree = "<group>"; };
+		E9ECFDC62589866900228467 /* CommentToCommentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentToCommentCell.swift; sourceTree = "<group>"; };
+		E9ECFDC9258986FF00228467 /* CommentCellWithImg.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentCellWithImg.swift; sourceTree = "<group>"; };
+		E9ECFDCC2589872400228467 /* CoToCoCellWithImg.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoToCoCellWithImg.swift; sourceTree = "<group>"; };
 		E9F1438F257483A0002A284F /* HelperForLaunchBasicUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelperForLaunchBasicUI.swift; sourceTree = "<group>"; };
 		E9F14393257483E0002A284F /* TagKind.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagKind.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -267,6 +273,9 @@
 				E93B13322581E69F00A22FF6 /* ChatDetailController.swift */,
 				E9DDDCA32581EB49005B3BE8 /* CommentCell.swift */,
 				E9DDDCA62581EB9A005B3BE8 /* ChatDetailHeader.swift */,
+				E9ECFDC62589866900228467 /* CommentToCommentCell.swift */,
+				E9ECFDC9258986FF00228467 /* CommentCellWithImg.swift */,
+				E9ECFDCC2589872400228467 /* CoToCoCellWithImg.swift */,
 			);
 			path = ChatDetailController;
 			sourceTree = "<group>";
@@ -655,6 +664,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E9ECFDCD2589872400228467 /* CoToCoCellWithImg.swift in Sources */,
 				E95B8A3B257F5944002EE9BC /* SelectorForChatWrite.swift in Sources */,
 				E93EDC112582EF72007BBF40 /* Comment.swift in Sources */,
 				E960ACEC257891D500985873 /* DetailHelperForMyKinder.swift in Sources */,
@@ -693,6 +703,7 @@
 				E9F14390257483A0002A284F /* HelperForLaunchBasicUI.swift in Sources */,
 				E95B8A84257F9704002EE9BC /* ChatCell.swift in Sources */,
 				E93EDBB825823BEB007BBF40 /* BlockedUserHelperForBasicUI.swift in Sources */,
+				E9ECFDC72589866900228467 /* CommentToCommentCell.swift in Sources */,
 				E93A528C25847218006E5F54 /* BigSizeImgSelector.swift in Sources */,
 				E9F14394257483E0002A284F /* TagKind.swift in Sources */,
 				E93B13372581E6EE00A22FF6 /* ChatDetailHelperForBasicUI.swift in Sources */,
@@ -709,6 +720,7 @@
 				E9D633A82575C60B00F6C3ED /* KinderCell.swift in Sources */,
 				E93A5295258595ED006E5F54 /* HelperForChatWriteRx.swift in Sources */,
 				E95B8A38257F511A002EE9BC /* HelperForTextDelegateForChatWrite.swift in Sources */,
+				E9ECFDCA258986FF00228467 /* CommentCellWithImg.swift in Sources */,
 				E95B8A8A257F9993002EE9BC /* HelperForChatCollectionView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

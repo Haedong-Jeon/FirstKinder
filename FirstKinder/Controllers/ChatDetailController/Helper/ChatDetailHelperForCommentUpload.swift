@@ -10,7 +10,7 @@ import Kingfisher
 
 extension ChatDetailController {
     
-    func getNewImg(_ cell: CommentCell) {
+    func getNewImg(_ cell: CommentCellWithImg) {
         STORAGE_COMMENT_IMGS.child(thisComments[editingIdx!.row].uid).downloadURL { (url, error) in
             if error != nil {
                 print("error in img edit \(error)")
@@ -43,7 +43,7 @@ extension ChatDetailController {
             }
         }
         uploadImg(thisComments[editingIdx!.row].uid, thisComments[editingIdx!.row].uid) {
-            guard let cell = self.collectionView.cellForItem(at: self.editingIdx!) as? CommentCell else { return }
+            guard let cell = self.collectionView.cellForItem(at: self.editingIdx!) as? CommentCellWithImg else { return }
             indicator.stopAnimating()
             self.imgView.image = nil
             self.redrawViewsWithoutImg()

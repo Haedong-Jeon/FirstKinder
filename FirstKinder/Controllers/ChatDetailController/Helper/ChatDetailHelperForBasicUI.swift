@@ -17,8 +17,20 @@ extension ChatDetailController {
         collectionView.backgroundColor = #colorLiteral(red: 0.9411764706, green: 0.9411764706, blue: 0.9411764706, alpha: 1)
         collectionView.delegate = self
         collectionView.dataSource = self
-        collectionView.register(CommentCell.self, forCellWithReuseIdentifier: commentCellReuseIdentifier)
+        
+        //헤더 등록
         collectionView.register(ChatDetailHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerReuseIdentifier )
+
+        //글만 있는 댓글 셀 등록
+        collectionView.register(CommentCell.self, forCellWithReuseIdentifier: commentCellReuseIdentifier)
+        //글만 있는 대댓글 셀 등록
+        collectionView.register(CommentToCommentCell.self, forCellWithReuseIdentifier: commentToCommentCellReuseIdentifier)
+        
+        //이미지가 있는 댓글 셀 등록
+        collectionView.register(CommentCellWithImg.self, forCellWithReuseIdentifier: commentCellWithImgReuseIdentifier)
+        //이미지가 있는 대댓글 셀 등록
+        collectionView.register(CoToCoCellWithImg.self, forCellWithReuseIdentifier: commentToCommentCellWithImgReuseIdentifier)
+
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
 

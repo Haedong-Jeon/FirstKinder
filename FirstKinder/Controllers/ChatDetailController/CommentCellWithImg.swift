@@ -7,12 +7,8 @@
 
 import UIKit
 
-protocol CommentDeleteDelegate: class {
-    func delete(indexPath: IndexPath)
-    func edit(indexPath: IndexPath)
-    func dotTap(indexPath: IndexPath)
-}
-class CommentCell: UICollectionViewCell {
+class CommentCellWithImg: UICollectionViewCell {
+    
     var deleteDelegate: CommentDeleteDelegate?
     var thisIdxPath: IndexPath?
     var verticalDotButton: UIButton = {
@@ -53,6 +49,25 @@ class CommentCell: UICollectionViewCell {
         label.lineBreakMode = .byCharWrapping
         label.numberOfLines = 0
         label.isUserInteractionEnabled = true
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    var imgView: UIImageView = {
+        var imgView = UIImageView()
+        imgView.translatesAutoresizingMaskIntoConstraints = false
+        imgView.widthAnchor.constraint(equalToConstant: 100).isActive = true
+        imgView.heightAnchor.constraint(equalToConstant: 100).isActive = true
+        imgView.layer.borderWidth = 1
+        imgView.layer.borderColor = UIColor.lightGray.cgColor
+        imgView.layer.cornerRadius = 10
+        imgView.clipsToBounds = true
+        return imgView
+    }()
+    var upArrowForCommentToComment: UILabel = {
+        var label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 15)
+        label.textColor = .lightGray
+        label.text = "↑"
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -112,10 +127,16 @@ class CommentCell: UICollectionViewCell {
         commentBodyLabel.topAnchor.constraint(equalTo: faceImgView.bottomAnchor, constant: 5).isActive = true
         commentBodyLabel.leftAnchor.constraint(equalTo: faceImgView.leftAnchor).isActive = true
         commentBodyLabel.rightAnchor.constraint(equalTo: verticalDotButton.leftAnchor, constant: -5).isActive = true
-        commentBodyLabel.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant:  -10).isActive = true
+        
+        //첨부된 이미지 표시
+        addSubview(imgView)
+        imgView.topAnchor.constraint(equalTo: commentBodyLabel.bottomAnchor, constant: 5).isActive = true
+        imgView.leftAnchor.constraint(equalTo: commentBodyLabel.leftAnchor).isActive = true
+        imgView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -10).isActive = true
         //경계선
         addSubview(borderLineImgView)
         borderLineImgView.widthAnchor.constraint(equalTo: safeAreaLayoutGuide.widthAnchor).isActive = true
         borderLineImgView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor).isActive = true
     }
 }
+

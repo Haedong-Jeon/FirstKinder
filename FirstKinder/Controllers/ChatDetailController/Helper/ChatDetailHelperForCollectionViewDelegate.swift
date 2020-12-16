@@ -69,51 +69,83 @@ extension ChatDetailController {
         self.present(askCommentToCommentAlert, animated: true, completion: nil)
     }
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: commentCellReuseIdentifier, for: indexPath) as? CommentCell else {
-            return UICollectionViewCell()
-        }
-        cell.imgView.removeFromSuperview()
-        cell.commentBodyLabel.removeFromSuperview()
-        drawVerticalDots(cell, indexPath)
-        drawTimeLabel(cell, indexPath)
-        drawBorderLine(cell, indexPath)
-        drawVendor(cell, indexPath)
-        cell.layoutIfNeeded()
-        
-        cell.commentBodyLabel.text = thisComments[(indexPath.row % self.thisComments.count)].commentBody
-        cell.backgroundColor = .white
-        
-        if thisComments[(indexPath.row % self.thisComments.count)].imgFileName != "NO IMG" {
-            drawCellWithImg(cell, indexPath)
-        } else {
-            drawCellWithoutImg(cell)
-        }
-        //일반 댓글과 대댓글 구별
-        if thisComments[(indexPath.row % self.thisComments.count)].isCommentToComment == nil {
-            cell.upArrowForCommentToComment.textColor = .white
-        }
-        cell.deleteDelegate = self
-        cell.thisIdxPath = indexPath
-        
-        let commentorVendor = thisComments[(indexPath.row % self.thisComments.count)].vendor
-        var commentorReportCount = 0
-        chats.forEach({
-            if $0.vendor == commentorVendor {
-                commentorReportCount += $0.reportCount
+        let targetComment = self.thisComments[indexPath.row % thisComments.count]
+        if targetComment.isCommentToComment == nil && targetComment.imgFileName == "NO IMG" {
+            //이미지가 없는 일반 댓글
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: commentCellReuseIdentifier, for: indexPath) as? CommentCell else {
+                return UICollectionViewCell()
             }
-        })
-        if commentorReportCount < 1 {
-            cell.faceImgView.image = #imageLiteral(resourceName: "happy")
-        } else if commentorReportCount < 3 {
-            cell.faceImgView.image = #imageLiteral(resourceName: "smile")
-        } else if commentorReportCount < 6 {
-            cell.faceImgView.image = #imageLiteral(resourceName: "neutral")
-        } else {
-            cell.faceImgView.image = #imageLiteral(resourceName: "sad")
+            cell.vendorLabel.text = getVendor(indexPath: indexPath)
+            cell.timeLabel.text = getTime(indexPath: indexPath)
+            cell.commentBodyLabel.text = thisComments[indexPath.row % thisComments.count].commentBody
+            if isThisUserComment(indexPath) {
+                cell.verticalDotButton.setImage(#imageLiteral(resourceName: "more"), for: .normal)
+            } else {
+                cell.verticalDotButton.setImage(#imageLiteral(resourceName: "output-onlinepngtools (5)"), for: .normal)
+            }
+            cell.addFunctionToVerticalDots()
+            cell.thisIdxPath = indexPath
+            cell.deleteDelegate = self
+            cell.faceImgView.image = setCommentFace(indexPath)
+            return cell
+        } else if targetComment.isCommentToComment == nil && targetComment.imgFileName != "NO IMG" {
+            //이미지가 있는 일반 댓글
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: commentCellWithImgReuseIdentifier, for: indexPath) as? CommentCellWithImg else {
+                return UICollectionViewCell()
+            }
+            cell.vendorLabel.text = getVendor(indexPath: indexPath)
+            cell.timeLabel.text = getTime(indexPath: indexPath)
+            cell.commentBodyLabel.text = thisComments[indexPath.row % thisComments.count].commentBody
+            getImg(cell, indexPath)
+            if isThisUserComment(indexPath) {
+                cell.verticalDotButton.setImage(#imageLiteral(resourceName: "more"), for: .normal)
+            } else {
+                cell.verticalDotButton.setImage(#imageLiteral(resourceName: "output-onlinepngtools (5)"), for: .normal)
+            }
+            cell.thisIdxPath = indexPath
+            cell.deleteDelegate = self
+            cell.addFunctionToVerticalDots()
+            cell.faceImgView.image = setCommentFace(indexPath)
+            return cell
+        } else if targetComment.isCommentToComment != nil && targetComment.imgFileName == "NO IMG" {
+            //이미지가 없는 대댓글
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: commentToCommentCellReuseIdentifier, for: indexPath) as? CommentToCommentCell else {
+                return UICollectionViewCell()
+            }
+            cell.vendorLabel.text = getVendor(indexPath: indexPath)
+            cell.timeLabel.text = getTime(indexPath: indexPath)
+            cell.commentBodyLabel.text = thisComments[indexPath.row % thisComments.count].commentBody
+            if isThisUserComment(indexPath) {
+                cell.verticalDotButton.setImage(#imageLiteral(resourceName: "more"), for: .normal)
+            } else {
+                cell.verticalDotButton.setImage(#imageLiteral(resourceName: "output-onlinepngtools (5)"), for: .normal)
+            }
+            cell.thisIdxPath = indexPath
+            cell.deleteDelegate = self
+            cell.addFunctionToVerticalDots()
+            cell.faceImgView.image = setCommentFace(indexPath)
+            return cell
+        } else if targetComment.isCommentToComment != nil && targetComment.imgFileName != "NO IMG" {
+            //이미지가 있는 대댓글
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: commentToCommentCellWithImgReuseIdentifier, for: indexPath) as? CoToCoCellWithImg else {
+                return UICollectionViewCell()
+            }
+            cell.vendorLabel.text = getVendor(indexPath: indexPath)
+            cell.timeLabel.text = getTime(indexPath: indexPath)
+            cell.commentBodyLabel.text = thisComments[indexPath.row % thisComments.count].commentBody
+            getImg(cell, indexPath)
+            if isThisUserComment(indexPath) {
+                cell.verticalDotButton.setImage(#imageLiteral(resourceName: "more"), for: .normal)
+            } else {
+                cell.verticalDotButton.setImage(#imageLiteral(resourceName: "output-onlinepngtools (5)"), for: .normal)
+            }
+            cell.thisIdxPath = indexPath
+            cell.deleteDelegate = self
+            cell.addFunctionToVerticalDots()
+            cell.faceImgView.image = setCommentFace(indexPath)
+            return cell
         }
-        cell.contentView.isUserInteractionEnabled = true
-        cell.addFunctionToVerticalDots()
-        return cell
+        return UICollectionViewCell()
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         return CGSize(width: view.frame.width, height: getEstimatedHeightByDummyHeader())
@@ -134,136 +166,121 @@ extension ChatDetailController {
         return estimateSize.height
     }
     func getEstimatedHeightFromDummyCell(_ indexPath: IndexPath) -> CGFloat{
+        let targetComment = self.thisComments[indexPath.row % thisComments.count]
         let width = view.frame.width - 10
         let estimatedHeight: CGFloat = 800.0
-        let dummyCell = CommentCell(frame: CGRect(x: 0, y: 0, width: width, height: estimatedHeight))
-        drawVendor(dummyCell, indexPath)
-        dummyCell.commentBodyLabel.text = thisComments[(indexPath.row % self.thisComments.count)].commentBody
-        if thisComments[(indexPath.row % self.thisComments.count)].imgFileName == "NO IMG" {
-            drawCellWithoutImg(dummyCell)
-        } else {
-            drawCellWithImg(dummyCell, indexPath)
+        if targetComment.isCommentToComment == nil && targetComment.imgFileName == "NO IMG" {
+            //이미지가 없는 일반 댓글
+            let dummyCell = CommentCell(frame: CGRect(x: 0, y: 0, width: width, height: estimatedHeight))
+            dummyCell.commentBodyLabel.text = thisComments[indexPath.row % thisComments.count].commentBody
+            dummyCell.layoutIfNeeded()
+            let estimateSize = dummyCell.systemLayoutSizeFitting(CGSize(width: width, height: estimatedHeight))
+            return estimateSize.height
+        } else if targetComment.isCommentToComment == nil && targetComment.imgFileName != "NO IMG" {
+            //이미지가 있는 일반 댓글
+            let dummyCell = CommentCellWithImg(frame: CGRect(x: 0, y: 0, width: width, height: estimatedHeight))
+            dummyCell.commentBodyLabel.text = thisComments[indexPath.row % thisComments.count].commentBody
+            dummyCell.layoutIfNeeded()
+            let estimateSize = dummyCell.systemLayoutSizeFitting(CGSize(width: width, height: estimatedHeight))
+            return estimateSize.height
+        } else if targetComment.isCommentToComment != nil && targetComment.imgFileName == "NO IMG" {
+            //이미지가 없는 대댓글
+            let dummyCell = CommentToCommentCell(frame: CGRect(x: 0, y: 0, width: width, height: estimatedHeight))
+            dummyCell.commentBodyLabel.text = thisComments[indexPath.row % thisComments.count].commentBody
+            dummyCell.layoutIfNeeded()
+            let estimateSize = dummyCell.systemLayoutSizeFitting(CGSize(width: width, height: estimatedHeight))
+            return estimateSize.height
+        } else if targetComment.isCommentToComment != nil && targetComment.imgFileName != "NO IMG" {
+            //이미지가 있는 대댓글
+            let dummyCell = CoToCoCellWithImg(frame: CGRect(x: 0, y: 0, width: width, height: estimatedHeight))
+            dummyCell.commentBodyLabel.text = thisComments[indexPath.row % thisComments.count].commentBody
+            dummyCell.layoutIfNeeded()
+            let estimateSize = dummyCell.systemLayoutSizeFitting(CGSize(width: width, height: estimatedHeight))
+            return estimateSize.height
         }
-        dummyCell.layoutIfNeeded()
-        let estimateSize = dummyCell.systemLayoutSizeFitting(CGSize(width: width, height: estimatedHeight))
-        return estimateSize.height
+        return 1
     }
-    func drawVendor(_ cell: CommentCell, _ indexPath: IndexPath) {
-        cell.addSubview(cell.faceImgView)
-        cell.faceImgView.topAnchor.constraint(equalTo: cell.safeAreaLayoutGuide.topAnchor, constant: 5).isActive = true
-        cell.faceImgView.leftAnchor.constraint(equalTo: cell.safeAreaLayoutGuide.leftAnchor, constant: 10).isActive = true
-        cell.addSubview(cell.vendorLabel)
-        cell.vendorLabel.topAnchor.constraint(equalTo: cell.safeAreaLayoutGuide.topAnchor).isActive = true
-        cell.vendorLabel.leftAnchor.constraint(equalTo: cell.faceImgView.rightAnchor, constant: 10).isActive = true
-        
-        
+    func getVendor(indexPath: IndexPath) -> String {
         let fullVendorString = thisComments[(indexPath.row % self.thisComments.count)].vendor
-        var splitedVendorString = fullVendorString.components(separatedBy: "-")
-        
-        cell.vendorLabel.text = splitedVendorString[0]
+        let splitedVendorString = fullVendorString.components(separatedBy: "-")
+        var vendor = splitedVendorString[0]
         if fullVendorString == chat?.vendor {
-            cell.vendorLabel.text = cell.vendorLabel.text! + " (글쓴이)"
-            let attributedStr = NSMutableAttributedString(string: cell.vendorLabel.text!)
-            let ns: NSString = cell.vendorLabel.text! as NSString
-            let range = ns.range(of: "(글쓴이)")
-            attributedStr.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.link , range: range)
-            cell.vendorLabel.attributedText = attributedStr
+            vendor = vendor + " (글쓴이)"
+            let attributedStr = NSMutableAttributedString(string: vendor)
+            let ns: NSString = vendor as NSString
+            let rangeForAuthor = ns.range(of: "(글쓴이)")
+            attributedStr.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.link , range: rangeForAuthor)
+            return vendor
         }
+        return vendor
     }
-    func drawVerticalDots(_ cell: CommentCell, _ indexPath: IndexPath) {
-        if thisComments[(indexPath.row % self.thisComments.count)].vendor == UIDevice.current.identifierForVendor?.uuidString {
-            cell.verticalDotButton.setImage(#imageLiteral(resourceName: "more"), for: .normal)
-            cell.verticalDotButton.isEnabled = true
-        } else {
-            cell.verticalDotButton.setImage(#imageLiteral(resourceName: "output-onlinepngtools (5)"), for: .normal)
-            cell.verticalDotButton.isEnabled = false
-        }
-        cell.contentView.addSubview(cell.verticalDotButton)
-        cell.verticalDotButton.topAnchor.constraint(equalTo: cell.safeAreaLayoutGuide.topAnchor, constant: 5).isActive = true
-        cell.verticalDotButton.rightAnchor.constraint(equalTo: cell.safeAreaLayoutGuide.rightAnchor,constant: -5).isActive = true
-    }
-    func drawCellWithImg(_ cell: CommentCell, _ indexPath: IndexPath) {
-        //파이어베이스 렉 때문에 잠시동안만 이미지 다운로드를 하지 않는다. 대신 대체 이미지 사용.
-        downloadImgToCell(cell, indexPath)
-        cell.addSubview(cell.imgView)
-        cell.imgView.bottomAnchor.constraint(equalTo: cell.safeAreaLayoutGuide.bottomAnchor, constant: -5).isActive = true
-        cell.imgView.widthAnchor.constraint(equalToConstant: 100).isActive = true
-        cell.imgView.heightAnchor.constraint(equalToConstant: 100).isActive = true
-        cell.imgView.layer.borderWidth = 1
-        cell.imgView.layer.borderColor = UIColor.lightGray.cgColor
-        cell.imgView.layer.cornerRadius = 10
-        cell.imgView.clipsToBounds = true
-        cell.imgView.leftAnchor.constraint(equalTo: cell.faceImgView.leftAnchor).isActive = true
-        cell.imgView.isUserInteractionEnabled = true
-        cell.imgView.addMakeBigFunction()
+    func getTime(indexPath: IndexPath) -> String {
+
+        let now = Int(NSDate().timeIntervalSince1970)
         
-        cell.addSubview(cell.commentBodyLabel)
-        cell.commentBodyLabel.topAnchor.constraint(equalTo: cell.faceImgView.bottomAnchor, constant: 10).isActive = true
-        cell.commentBodyLabel.leftAnchor.constraint(equalTo:cell.faceImgView.leftAnchor).isActive = true
-        cell.commentBodyLabel.bottomAnchor.constraint(equalTo: cell.imgView.topAnchor, constant: -10).isActive = true
-        cell.commentBodyLabel.rightAnchor.constraint(equalTo: cell.rightAnchor, constant:  -20).isActive = true
+        var elapsedTime = (now - thisComments[indexPath.row % thisComments.count].timeStamp) / 60
+        if elapsedTime <= 0 {
+            return "방금 전"
+        } else if elapsedTime < 60 {
+            return "\(elapsedTime)분 전"
+        } else if elapsedTime < 1440 {
+            elapsedTime = elapsedTime / 60
+            return "\(elapsedTime)시간 전"
+        } else if elapsedTime < 10080 {
+            elapsedTime = elapsedTime / (60 * 24)
+            return "\(elapsedTime)일 전"
+        } else if elapsedTime < 43200 {
+            elapsedTime = elapsedTime / (60 * 24 * 7)
+            return "\(elapsedTime)주 전"
+        } else {
+            elapsedTime = elapsedTime / (60 * 24 * 30)
+            return "\(elapsedTime)달 전"
+        }
     }
-    func drawCellWithoutImg(_ cell: CommentCell) {
-        cell.addSubview(cell.commentBodyLabel)
-        cell.commentBodyLabel.topAnchor.constraint(equalTo: cell.faceImgView.bottomAnchor, constant: 10).isActive = true
-        cell.commentBodyLabel.leftAnchor.constraint(equalTo: cell.faceImgView.leftAnchor).isActive = true
-        cell.commentBodyLabel.rightAnchor.constraint(equalTo: cell.rightAnchor, constant:  -20).isActive = true
-        cell.commentBodyLabel.bottomAnchor.constraint(equalTo: cell.safeAreaLayoutGuide.bottomAnchor, constant: -5).isActive = true
-    }
-    func downloadImgToCell(_ cell: CommentCell, _ indexPath: IndexPath) {
+    func getImg(_ cell: CommentCellWithImg, _ indexPath: IndexPath) {
         cell.imgView.kf.indicatorType = .activity
-        if thisComments.isEmpty { return }
-        if DBUtil.shared.loadImgFromCache(thisComments[(indexPath.row % self.thisComments.count)].imgFileName) == nil {
+        if DBUtil.shared.loadImgFromCache(thisComments[indexPath.row % thisComments.count].imgFileName) == nil {
             DispatchQueue.main.async {
                 cell.imgView.kf.indicator?.startAnimatingView()
             }
-            DBUtil.shared.loadCommentImgsFromStorage(thisComments[(indexPath.row % self.thisComments.count)].imgFileName) { url in
-                let cache = ImageCache.default
-                guard let imgData = try? Data(contentsOf: url) else { return }
-                guard let img = UIImage(data: imgData) else { return }
-                cache.store(img, forKey: self.thisComments[(indexPath.row % self.thisComments.count)].imgFileName)
+            DBUtil.shared.loadChatImgsFromStorage(thisComments[indexPath.row % thisComments.count].imgFileName) { url in
+                let resource = ImageResource(downloadURL: url, cacheKey: self.thisComments[indexPath.row % self.thisComments.count].imgFileName)
                 DispatchQueue.main.async {
-                    cell.imgView.image = img
+                    cell.imgView.kf.setImage(with: resource)
                     cell.imgView.kf.indicator?.stopAnimatingView()
                 }
             }
         } else {
-            cell.imgView.image = DBUtil.shared.loadImgFromCache(thisComments[(indexPath.row % self.thisComments.count)].imgFileName)
+            cell.imgView.image = DBUtil.shared.loadImgFromCache(thisComments[indexPath.row % thisComments.count].imgFileName)
         }
     }
-    func drawTimeLabel(_ cell: CommentCell, _ indexPath: IndexPath) {
-        cell.addSubview(cell.timeLabel)
-        cell.timeLabel.topAnchor.constraint(equalTo: cell.safeAreaLayoutGuide.topAnchor, constant: 5).isActive = true
-        cell.timeLabel.rightAnchor.constraint(equalTo: cell.verticalDotButton.leftAnchor, constant: -5).isActive = true
-        let now = Int(NSDate().timeIntervalSince1970)
-        var elapsedTime = (now - thisComments[(indexPath.row % self.thisComments.count)].timeStamp) / 60
-        if elapsedTime <= 0 {
-            cell.timeLabel.text = "방금 전"
-        } else if elapsedTime < 60 {
-            cell.timeLabel.text = "\(elapsedTime)분 전"
-        } else if elapsedTime < 1440 {
-            elapsedTime = elapsedTime / 60
-            cell.timeLabel.text = "\(elapsedTime)시간 전"
-        } else if elapsedTime < 10080 {
-            elapsedTime = elapsedTime / (60 * 24)
-            cell.timeLabel.text = "\(elapsedTime)일 전"
-        } else if elapsedTime < 43200 {
-            elapsedTime = elapsedTime / (60 * 24 * 7)
-            cell.timeLabel.text = "\(elapsedTime)주 전"
+    func isThisUserComment(_ indexPath: IndexPath) -> Bool {
+        var check = false
+        if thisComments[indexPath.row % thisComments.count].vendor ==  UIDevice.current.identifierForVendor?.uuidString {
+            check = true
+        }
+        return check
+    }
+    func setCommentFace(_ indexPath: IndexPath) -> UIImage {
+        let commentVendor = thisComments[indexPath.row % thisComments.count].vendor
+        var commentorReportCount = 0
+        chats.forEach({
+            if $0.vendor == commentVendor {
+                commentorReportCount += $0.reportCount
+            }
+        })
+        if commentorReportCount < 1 {
+            return #imageLiteral(resourceName: "happy")
+        } else if commentorReportCount < 3 {
+            return #imageLiteral(resourceName: "smile")
+        } else if commentorReportCount < 6 {
+            return #imageLiteral(resourceName: "neutral")
         } else {
-            elapsedTime = elapsedTime / (60 * 24 * 30)
-            cell.timeLabel.text = "\(elapsedTime)달 전"
+            return #imageLiteral(resourceName: "sad")
         }
-    }
-    func drawBorderLine(_ cell: CommentCell, _ indexPath: IndexPath) {
-        cell.addSubview(cell.borderLineImgView)
-        cell.borderLineImgView.widthAnchor.constraint(equalTo: cell.widthAnchor).isActive = true
-        cell.borderLineImgView.bottomAnchor.constraint(equalTo: cell.safeAreaLayoutGuide.bottomAnchor).isActive = true
-    }
-    @objc func handleDotTap() {
-        
     }
 }
+
 extension ChatDetailController: CommentDeleteDelegate {
     func dotTap(indexPath: IndexPath) {
         if thisComments[(indexPath.row % self.thisComments.count)].vendor == UIDevice.current.identifierForVendor?.uuidString {

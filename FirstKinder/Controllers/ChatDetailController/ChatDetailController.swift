@@ -12,6 +12,9 @@ import RxCocoa
 
 let commentCellReuseIdentifier = "reuse identifer for comment cell"
 let headerReuseIdentifier = "header reuse identifier"
+let commentToCommentCellReuseIdentifier = "reuse identifier for commentToComment Cell"
+let commentCellWithImgReuseIdentifier = "reuse identifier for comment cell with img"
+let commentToCommentCellWithImgReuseIdentifier = "resue identifier for commentToComment Cell with Img"
 
 class ChatDetailController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     var chat: Chat?
