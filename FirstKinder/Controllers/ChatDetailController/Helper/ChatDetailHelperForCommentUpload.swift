@@ -163,36 +163,43 @@ extension ChatDetailController {
         }
         showSuccess.addAction(okButton)
         self.present(showSuccess, animated: true, completion: nil)
+        
+        let userToken = chat?.FCMToken
+        let notifPayload: [String: Any] = ["to": userToken,"notification": ["title":"You got a new meassage.","body":"This message is sent for you","badge":1,"sound":"default"]]
+        self.sendPushNotification(payloadDict: notifPayload)
     }
     func commentCountUp() {
         let commentCount = self.thisComments.count
         DB_CHATS.child(self.chat!.uid).updateChildValues(["commentCount": commentCount])
     }
+    
 }
 
 
 extension ChatDetailController {
     func sendPushNotification(payloadDict: [String: Any]) {
-       let url = URL(string: "https://fcm.googleapis.com/fcm/send")!
-       var request = URLRequest(url: url)
-       request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-       // get your **server key** from your Firebase project console under **Cloud Messaging** tab
-       request.setValue("key=enter your server key", forHTTPHeaderField: "Authorization")
-       request.httpMethod = "POST"
-       request.httpBody = try? JSONSerialization.data(withJSONObject: payloadDict, options: [])
-       let task = URLSession.shared.dataTask(with: request) { data, response, error in
-          guard let data = data, error == nil else {
-            print(error ?? "")
-            return
-          }
-          if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {
-            print("statusCode should be 200, but is \(httpStatus.statusCode)")
-            print(response ?? "")
-          }
-          print("Notfication sent successfully.")
-          let responseString = String(data: data, encoding: .utf8)
-          print(responseString ?? "")
-       }
-       task.resume()
+        let serverKey = "AAAAKFFEGCg:APA91bEIgvEeJZLyBq2vPe3iW9R6ucdBzqpPHBPumb1GJG0HUAFP-5Lo5_l8jQ0BRhfZrGs7BeqJeMCKBHf6wH2paBccXT7Wb-GKKo6siWj8mHIb-TnVLtViUx8ACl92HGg_irQ-6NBd"
+
+        let url = URL(string: "https://fcm.googleapis.com/fcm/send")!
+        var request = URLRequest(url: url)
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        // get your **server key** from your Firebase project console under **Cloud Messaging** tab
+        request.setValue("key=\(serverKey)", forHTTPHeaderField: "Authorization")
+        request.httpMethod = "POST"
+        request.httpBody = try? JSONSerialization.data(withJSONObject: payloadDict, options: [])
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            guard let data = data, error == nil else {
+                print(error ?? "")
+                return
+            }
+            if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {
+                print("statusCode should be 200, but is \(httpStatus.statusCode)")
+                print(response ?? "")
+            }
+            print("Notfication sent successfully.")
+            let responseString = String(data: data, encoding: .utf8)
+            print(responseString ?? "")
+        }
+        task.resume()
     }
 }
