@@ -16,6 +16,7 @@ class CommentToCommentCell: CommentCell {
         label.isUserInteractionEnabled = true
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "┗"
+        label.textColor = .lightGray
         return label
     }()
     override init(frame: CGRect) {
