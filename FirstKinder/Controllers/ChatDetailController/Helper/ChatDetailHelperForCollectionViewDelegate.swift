@@ -97,6 +97,7 @@ extension ChatDetailController {
             cell.timeLabel.text = getTime(indexPath: indexPath)
             cell.commentBodyLabel.text = thisComments[indexPath.row % thisComments.count].commentBody
             getImg(cell, indexPath)
+            cell.imgView.makeBigWhenTouched()
             if isThisUserComment(indexPath) {
                 cell.verticalDotButton.setImage(#imageLiteral(resourceName: "more"), for: .normal)
             } else {
@@ -104,7 +105,7 @@ extension ChatDetailController {
             }
             cell.thisIdxPath = indexPath
             cell.deleteDelegate = self
-            cell.addFunctionToVerticalDots()
+            cell.imgView.addMakeBigFunction()
             cell.faceImgView.image = setCommentFace(indexPath)
             return cell
         } else if targetComment.isCommentToComment != nil && targetComment.imgFileName == "NO IMG" {
@@ -134,6 +135,7 @@ extension ChatDetailController {
             cell.timeLabel.text = getTime(indexPath: indexPath)
             cell.commentBodyLabel.text = thisComments[indexPath.row % thisComments.count].commentBody
             getImg(cell, indexPath)
+            cell.imgView.addMakeBigFunction()
             if isThisUserComment(indexPath) {
                 cell.verticalDotButton.setImage(#imageLiteral(resourceName: "more"), for: .normal)
             } else {

@@ -9,13 +9,14 @@ import UIKit
 
 extension UIImageView {
     @objc func makeBigWhenTouched() {
-        self.isUserInteractionEnabled = true
+        print("img taped!")
         let bigImgController = BigSizeImgViewController()
         bigImgController.img = self.image
         bigImgController.modalPresentationStyle = .fullScreen
         topMostController?.present(bigImgController, animated: true, completion: nil)
     }
     func addMakeBigFunction() {
+        self.isUserInteractionEnabled = true
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(makeBigWhenTouched))
         self.addGestureRecognizer(tapGesture)
     }
