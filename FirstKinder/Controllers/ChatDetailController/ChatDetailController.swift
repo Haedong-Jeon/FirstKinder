@@ -63,12 +63,14 @@ class ChatDetailController: UICollectionViewController, UICollectionViewDelegate
                                     .sorted(by: {$0.timeStamp < $1.timeStamp})
                 
             self.commentToCommentControl()
+            
             indicator.stopAnimating()
         }
         configureUI()
         setRx()
         setSubscriberForRx()
     }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         configureNavBar()
@@ -98,4 +100,20 @@ class ChatDetailController: UICollectionViewController, UICollectionViewDelegate
         thisComments = mergedComments
     }
 }
+
+/*
+ nowChats.removeAll()
+ for chat in chats {
+     var blocked = false
+     for blockedVendor in self.blockedUsers {
+         if chat.vendor == blockedVendor {
+             blocked = true
+             break
+         }
+     }
+     if !blocked {
+         nowChats.append(chat)
+     }
+ }
+ */
 

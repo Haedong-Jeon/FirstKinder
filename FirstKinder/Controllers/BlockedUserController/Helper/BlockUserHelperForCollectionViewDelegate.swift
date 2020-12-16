@@ -27,6 +27,9 @@ extension BlockedUserController {
         } else if self.blockReasonCategoriesList[indexPath.row] == "기타" {
             cell.blockReasonStickerLabel.backgroundColor = .systemBlue
             cell.blockReasonStickerLabel.text = "기타 사유"
+        } else if self.blockReasonCategoriesList[indexPath.row] == "불쾌한 댓글" {
+            cell.blockReasonStickerLabel.backgroundColor = .systemPink
+            cell.blockReasonStickerLabel.text = "불쾌한 댓글"
         }
         
         let userVendor = chats[indexPath.row].vendor

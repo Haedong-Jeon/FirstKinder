@@ -137,7 +137,32 @@ extension ChatDetailController {
         
         self.present(blockReasonCategoryAlert, animated: true, completion: nil)
     }
+    func blockThisCommentor(_ indexPath: IndexPath) {
+        var category = ""
+        let blockReasonCategoryAlert = UIAlertController(title: "사유", message: "차단 사유를 선택해주세요.", preferredStyle: .actionSheet)
+        let button1 = UIAlertAction(title: "불쾌한 댓글", style: .default) { ACTION in
+            category = "불쾌한 댓글"
+            self.addDetailReason(category: category, indexPath)
+        }
+        let button2 = UIAlertAction(title: "부적절한 광고", style: .default) { ACTION in
+            category = "부적절한 광고"
+            self.addDetailReason(category: category, indexPath)
+        }
+        let button3 = UIAlertAction(title: "기타", style: .default) { ACTION in
+            category = "기타"
+            self.addDetailReason(category: category, indexPath)
+        }
+        let button4 = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+        
+        blockReasonCategoryAlert.addAction(button1)
+        blockReasonCategoryAlert.addAction(button2)
+        blockReasonCategoryAlert.addAction(button3)
+        blockReasonCategoryAlert.addAction(button4)
+        
+        self.present(blockReasonCategoryAlert, animated: true, completion: nil)
+    }
     func addDetailReason(category: String) {
+        //게시글 차단
         var reason = "이유를 안 알려주셨어요."
         let addReasonAlert = UIAlertController(title: "차단 상세 사유", message: "상세한 사유를 알려주세요", preferredStyle: .alert)
         addReasonAlert.addTextField { textField in
@@ -145,6 +170,24 @@ extension ChatDetailController {
         }
         let okButton = UIAlertAction(title: "확인", style: .default) { ACTION in
             self.localSaveBlockedUser()
+            reason = addReasonAlert.textFields?[0].text ?? "이유를 안 알려주셨어요."
+            self.localSaveBlockedReason(reason: reason)
+            self.localSaveBlockReasonCategory(category: category)
+        }
+        let cancelButton = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+        addReasonAlert.addAction(okButton)
+        addReasonAlert.addAction(cancelButton)
+        self.present(addReasonAlert, animated: true, completion: nil)
+    }
+    func addDetailReason(category: String, _ indexPath: IndexPath) {
+        //댓글 차단
+        var reason = "이유를 안 알려주셨어요."
+        let addReasonAlert = UIAlertController(title: "차단 상세 사유", message: "상세한 사유를 알려주세요", preferredStyle: .alert)
+        addReasonAlert.addTextField { textField in
+            textField.placeholder = "이 사람 댓글이 보기 싫은 이유를 알려주세요."
+        }
+        let okButton = UIAlertAction(title: "확인", style: .default) { ACTION in
+            self.localSaveBlockedCommentor(indexPath)
             reason = addReasonAlert.textFields?[0].text ?? "이유를 안 알려주셨어요."
             self.localSaveBlockedReason(reason: reason)
             self.localSaveBlockReasonCategory(category: category)
@@ -177,6 +220,17 @@ extension ChatDetailController {
         blockedUserVendors.append(self.chat!.vendor)
         UserDefaults.standard.setValue(blockedUserVendors, forKey: "blockedUsers")
     }
+    func localSaveBlockedCommentor(_ indexPath: IndexPath) {
+        guard let blocks = UserDefaults.standard.array(forKey: "blockedUsers") as? [String] else {
+            blockedUserVendors.append(self.thisComments[indexPath.row].vendor)
+            UserDefaults.standard.setValue(blockedUserVendors, forKey: "blockedUsers")
+            return
+        }
+        blockedUserVendors = blocks
+        blockedUserVendors.append(self.thisComments[indexPath.row].vendor)
+        UserDefaults.standard.setValue(blockedUserVendors, forKey: "blockedUsers")
+        collectionView.reloadData()
+    }
     func localSaveBlockedReason(reason: String) {
         guard let reasons = UserDefaults.standard.array(forKey: "blockedReasons") as? [String] else {
             blockedUserReasons.append(reason)
@@ -187,6 +241,7 @@ extension ChatDetailController {
         blockedUserReasons.append(reason)
         UserDefaults.standard.setValue(blockedUserReasons, forKey: "blockedReasons")
     }
+
     func localSaveBlockReasonCategory(category: String) {
         guard let reasonCategories = UserDefaults.standard.array(forKey: "blockedReasonCategories") as? [String] else {
             blockedReasonCategories.append(category)

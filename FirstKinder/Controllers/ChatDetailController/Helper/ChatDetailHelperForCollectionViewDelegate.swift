@@ -68,6 +68,7 @@ extension ChatDetailController {
         
         self.present(askCommentToCommentAlert, animated: true, completion: nil)
     }
+    
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let targetComment = self.thisComments[indexPath.row % thisComments.count]
         if targetComment.isCommentToComment == nil && targetComment.imgFileName == "NO IMG" {
@@ -77,7 +78,11 @@ extension ChatDetailController {
             }
             cell.vendorLabel.text = getVendor(indexPath: indexPath)
             cell.timeLabel.text = getTime(indexPath: indexPath)
-            cell.commentBodyLabel.text = thisComments[indexPath.row % thisComments.count].commentBody
+            if isBlockedUserComment(indexPath) {
+                setBlockedCellComment(cell)
+            } else {
+                cell.commentBodyLabel.text = thisComments[indexPath.row % thisComments.count].commentBody
+            }
             if isThisUserComment(indexPath) {
                 cell.verticalDotButton.setImage(#imageLiteral(resourceName: "more"), for: .normal)
             } else {
@@ -87,6 +92,7 @@ extension ChatDetailController {
             cell.thisIdxPath = indexPath
             cell.deleteDelegate = self
             cell.faceImgView.image = setCommentFace(indexPath)
+            
             return cell
         } else if targetComment.isCommentToComment == nil && targetComment.imgFileName != "NO IMG" {
             //이미지가 있는 일반 댓글
@@ -95,8 +101,13 @@ extension ChatDetailController {
             }
             cell.vendorLabel.text = getVendor(indexPath: indexPath)
             cell.timeLabel.text = getTime(indexPath: indexPath)
-            cell.commentBodyLabel.text = thisComments[indexPath.row % thisComments.count].commentBody
             getImg(cell, indexPath)
+            if isBlockedUserComment(indexPath) {
+                setBlockedCellComment(cell)
+                cell.imgView.image = #imageLiteral(resourceName: "sad")
+            } else {
+                cell.commentBodyLabel.text = thisComments[indexPath.row % thisComments.count].commentBody
+            }
             cell.imgView.makeBigWhenTouched()
             if isThisUserComment(indexPath) {
                 cell.verticalDotButton.setImage(#imageLiteral(resourceName: "more"), for: .normal)
@@ -115,7 +126,11 @@ extension ChatDetailController {
             }
             cell.vendorLabel.text = getVendor(indexPath: indexPath)
             cell.timeLabel.text = getTime(indexPath: indexPath)
-            cell.commentBodyLabel.text = thisComments[indexPath.row % thisComments.count].commentBody
+            if isBlockedUserComment(indexPath) {
+                setBlockedCellComment(cell)
+            } else {
+                cell.commentBodyLabel.text = thisComments[indexPath.row % thisComments.count].commentBody
+            }
             if isThisUserComment(indexPath) {
                 cell.verticalDotButton.setImage(#imageLiteral(resourceName: "more"), for: .normal)
             } else {
@@ -133,8 +148,13 @@ extension ChatDetailController {
             }
             cell.vendorLabel.text = getVendor(indexPath: indexPath)
             cell.timeLabel.text = getTime(indexPath: indexPath)
-            cell.commentBodyLabel.text = thisComments[indexPath.row % thisComments.count].commentBody
             getImg(cell, indexPath)
+            if isBlockedUserComment(indexPath) {
+                setBlockedCellComment(cell)
+                cell.imgView.image = #imageLiteral(resourceName: "sad")
+            } else {
+                cell.commentBodyLabel.text = thisComments[indexPath.row % thisComments.count].commentBody
+            }
             cell.imgView.addMakeBigFunction()
             if isThisUserComment(indexPath) {
                 cell.verticalDotButton.setImage(#imageLiteral(resourceName: "more"), for: .normal)
@@ -281,6 +301,37 @@ extension ChatDetailController {
             return #imageLiteral(resourceName: "sad")
         }
     }
+    func isBlockedUserComment(_ indexPath: IndexPath) -> Bool {
+        guard let blockedUsers = UserDefaults.standard.array(forKey: "blockedUsers") as? [String] else {
+            return false
+        }
+        for vendor in blockedUsers {
+            if vendor == thisComments[indexPath.row].vendor {
+                return true
+            }
+        }
+        return false
+    }
+    func setBlockedCellComment(_ cell: CommentCell) {
+        cell.commentBodyLabel.text = "(system) 차단된 사용자의 댓글입니다."
+        let attributedStr = NSMutableAttributedString(string: cell.commentBodyLabel.text!)
+        let ns: NSString = cell.commentBodyLabel.text! as NSString
+        let rangeForSystem = ns.range(of: "(system)")
+        let rangeForComment = ns.range(of: "차단된 사용자의 댓글입니다.")
+        attributedStr.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.red , range: rangeForSystem)
+        attributedStr.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.gray , range: rangeForComment)
+        cell.commentBodyLabel.attributedText = attributedStr
+    }
+    func setBlockedCellComment(_ cell: CommentCellWithImg) {
+        cell.commentBodyLabel.text = "(system) 차단된 사용자의 댓글입니다."
+        let attributedStr = NSMutableAttributedString(string: cell.commentBodyLabel.text!)
+        let ns: NSString = cell.commentBodyLabel.text! as NSString
+        let rangeForSystem = ns.range(of: "(system)")
+        let rangeForComment = ns.range(of: "차단된 사용자의 댓글입니다.")
+        attributedStr.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.red , range: rangeForSystem)
+        attributedStr.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.gray , range: rangeForComment)
+        cell.commentBodyLabel.attributedText = attributedStr
+    }
 }
 
 extension ChatDetailController: CommentDeleteDelegate {
@@ -293,6 +344,20 @@ extension ChatDetailController: CommentDeleteDelegate {
             }
             let editButton = UIAlertAction(title: "수정", style: .default) { ACTTION in
                 self.edit(indexPath: indexPath)
+            }
+            let cancelButton = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+            askAlertController.addAction(deleteButton)
+            askAlertController.addAction(editButton)
+            askAlertController.addAction(cancelButton)
+            
+            self.present(askAlertController, animated: true, completion: nil)
+        } else {
+            let askAlertController = UIAlertController()
+            let deleteButton = UIAlertAction(title: "이 댓글 신고할래요", style: .default) { ACTTION in
+                
+            }
+            let editButton = UIAlertAction(title: "이 사람 차단할래요", style: .default) { ACTTION in
+                self.blockThisCommentor(indexPath)
             }
             let cancelButton = UIAlertAction(title: "취소", style: .cancel, handler: nil)
             askAlertController.addAction(deleteButton)
