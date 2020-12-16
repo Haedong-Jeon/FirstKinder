@@ -353,17 +353,25 @@ extension ChatDetailController: CommentDeleteDelegate {
             self.present(askAlertController, animated: true, completion: nil)
         } else {
             let askAlertController = UIAlertController()
-            let deleteButton = UIAlertAction(title: "이 댓글 신고할래요", style: .default) { ACTTION in
+            let reportButton = UIAlertAction(title: "이 댓글 신고할래요", style: .default) { ACTTION in
                 
             }
-            let editButton = UIAlertAction(title: "이 사람 차단할래요", style: .default) { ACTTION in
+            let blockButton = UIAlertAction(title: "이 사람 차단할래요", style: .default) { ACTTION in
                 self.blockThisCommentor(indexPath)
             }
             let cancelButton = UIAlertAction(title: "취소", style: .cancel, handler: nil)
-            askAlertController.addAction(deleteButton)
-            askAlertController.addAction(editButton)
+            askAlertController.addAction(reportButton)
+            askAlertController.addAction(blockButton)
             askAlertController.addAction(cancelButton)
             
+            guard let blockedUsers = UserDefaults.standard.array(forKey: "blockedUsers") as? [String] else {
+                return
+            }
+            for vendor in blockedUsers {
+                if thisComments[indexPath.row].vendor == vendor {
+                    blockButton.isEnabled = false
+                }
+            }
             self.present(askAlertController, animated: true, completion: nil)
         }
     }

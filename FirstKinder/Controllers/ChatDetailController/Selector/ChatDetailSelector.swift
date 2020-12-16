@@ -39,6 +39,14 @@ extension ChatDetailController {
             if isAlreadyReported() {
                 button1.isEnabled = false
             }
+            guard let blockedUsers = UserDefaults.standard.array(forKey: "blockedUsers") as? [String] else {
+                return
+            }
+            for vendor in blockedUsers {
+                if chat!.vendor == vendor {
+                    button2.isEnabled = false
+                }
+            }
             actionAlertController.addAction(button1)
             actionAlertController.addAction(button2)
             actionAlertController.addAction(button3)
