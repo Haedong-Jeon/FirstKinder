@@ -165,7 +165,7 @@ extension ChatDetailController {
         self.present(showSuccess, animated: true, completion: nil)
         
         let userToken = chat?.FCMToken
-        let notifPayload: [String: Any] = ["to": userToken,"notification": ["title":"You got a new meassage.","body":"This message is sent for you","badge":1,"sound":"default"]]
+        let notifPayload: [String: Any] = ["to": userToken,"notification": ["title":"퍼스트킨더","body":"내가 쓴 이야기에 댓글이 달렸어요❤︎","badge": 99,"sound":"default"]]
         self.sendPushNotification(payloadDict: notifPayload)
     }
     func commentCountUp() {
@@ -183,7 +183,6 @@ extension ChatDetailController {
         let url = URL(string: "https://fcm.googleapis.com/fcm/send")!
         var request = URLRequest(url: url)
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        // get your **server key** from your Firebase project console under **Cloud Messaging** tab
         request.setValue("key=\(serverKey)", forHTTPHeaderField: "Authorization")
         request.httpMethod = "POST"
         request.httpBody = try? JSONSerialization.data(withJSONObject: payloadDict, options: [])

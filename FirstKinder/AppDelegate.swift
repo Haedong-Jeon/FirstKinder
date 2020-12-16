@@ -30,17 +30,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             print("notification auth success!")
         }
         application.registerForRemoteNotifications()
+        application.applicationIconBadgeNumber = 0
         return true
     }
-
+    
     // MARK: UISceneSession Lifecycle
-
+    
     func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
         // Called when a new scene session is being created.
         // Use this method to select a configuration to create the new scene with.
         return UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
     }
-
+    
     func application(_ application: UIApplication, didDiscardSceneSessions sceneSessions: Set<UISceneSession>) {
         // Called when the user discards a scene session.
         // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
@@ -62,11 +63,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         completionHandler()
     }
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+    }
 }
 
-/*
- e0ciqxUIMU80vSwFduySYz:APA91bELmldFU0Q0EH45mrRCc8hnVvtLHCU5wPwNff7IKOqfFlnyhC2rnuWZtH92hZnIwWxC4Q1Jzr5oJE89v2LCIvmfhtq2fnxqRhXexaKHQMeOrCqmc4iel38OjCZUtZcF5L-9j6xi
- */
-/*
- e0ciqxUIMU80vSwFduySYz:APA91bELmldFU0Q0EH45mrRCc8hnVvtLHCU5wPwNff7IKOqfFlnyhC2rnuWZtH92hZnIwWxC4Q1Jzr5oJE89v2LCIvmfhtq2fnxqRhXexaKHQMeOrCqmc4iel38OjCZUtZcF5L-9j6xi
- */
