@@ -26,6 +26,7 @@ var blockedUserVendors = [String]()
 var blockedUserReasons = [String]()
 var blockedReasonCategories = [String]()
 var reportedChatList = [String]()
+var reportedCommentList = [String]()
 var commentReloader = false
 
 //실제

@@ -59,7 +59,7 @@ class ChatDetailController: UICollectionViewController, UICollectionViewDelegate
         DBUtil.shared.loadCommentTexts { loadedComments in
             comments = loadedComments
             self.thisComments = comments
-                                    .filter({$0.targetChatUid == self.chat?.uid && $0.isCommentToComment == nil})
+                .filter({$0.targetChatUid == self.chat?.uid && $0.isCommentToComment == nil && $0.reportCount < 6})
                                     .sorted(by: {$0.timeStamp < $1.timeStamp})
                 
             self.commentToCommentControl()

@@ -354,7 +354,7 @@ extension ChatDetailController: CommentDeleteDelegate {
         } else {
             let askAlertController = UIAlertController()
             let reportButton = UIAlertAction(title: "이 댓글 신고할래요", style: .default) { ACTTION in
-                
+                self.reportThisComment(indexPath)
             }
             let blockButton = UIAlertAction(title: "이 사람 차단할래요", style: .default) { ACTTION in
                 self.blockThisCommentor(indexPath)
@@ -371,6 +371,9 @@ extension ChatDetailController: CommentDeleteDelegate {
                 if thisComments[indexPath.row].vendor == vendor {
                     blockButton.isEnabled = false
                 }
+            }
+            if isAlreadyReportedComment(indexPath) {
+                reportButton.isEnabled = false
             }
             self.present(askAlertController, animated: true, completion: nil)
         }
@@ -424,5 +427,33 @@ extension ChatDetailController: CommentDeleteDelegate {
         let commentCount = thisComments.count
         DB_CHATS.child(self.chat!.uid).updateChildValues(["commentCount": commentCount])
     }
+    func reportThisComment(_ indexPath: IndexPath) {
+        let targetComment = thisComments[indexPath.row]
+        let reportCount = targetComment.reportCount + 1
+        DB_COMMENTS.child(targetComment.uid).updateChildValues(["reportCount": reportCount])
+        
+        guard let reportedComment = UserDefaults.standard.array(forKey: "reportedCommenttList") as? [String] else {
+            reportedCommentList.append(targetComment.uid)
+            UserDefaults.standard.setValue(reportedCommentList, forKey: "reportedCommenttList")
+            return
+        }
+        reportedCommentList = reportedComment
+        reportedCommentList.append(targetComment.uid)
+        UserDefaults.standard.setValue(reportedCommentList, forKey: "reportedCommenttList")
+    }
+    func isAlreadyReportedComment(_ indexPath: IndexPath) -> Bool {
+        let targetComment = thisComments[indexPath.row]
+        var isReported = false
+        guard let reportedComment = UserDefaults.standard.array(forKey: "reportedCommenttList") as? [String] else {
+            return false
+        }
+        reportedComment.forEach({
+            if $0 == targetComment.uid {
+                isReported = true
+            }
+        })
+        return isReported
+    }
 }
+
 

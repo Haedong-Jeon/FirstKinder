@@ -122,9 +122,9 @@ extension ChatDetailController {
         let timeStamp = Int(NSDate().timeIntervalSince1970)
         var value = [String: Any]()
         if !self.isCommentToComment {
-            value = ["uid": uid, "commentBody": commentTextView.text!, "imgFileName": imgFileName, "timeStamp": timeStamp, "vendor": deviceVendor, "targetChatUid": chat?.uid]
+            value = ["uid": uid, "commentBody": commentTextView.text!, "imgFileName": imgFileName, "timeStamp": timeStamp, "vendor": deviceVendor, "targetChatUid": chat?.uid, "reportCount": 0]
         } else {
-            value = ["uid": uid, "commentBody": commentTextView.text!, "imgFileName": imgFileName, "timeStamp": timeStamp, "vendor": deviceVendor, "targetChatUid": chat?.uid, "isCommentToComment": "true", "targetCommentUid": self.targetCommentUid]
+            value = ["uid": uid, "commentBody": commentTextView.text!, "imgFileName": imgFileName, "timeStamp": timeStamp, "vendor": deviceVendor, "targetChatUid": chat?.uid, "isCommentToComment": "true", "targetCommentUid": self.targetCommentUid, "reportCount": 0]
         }
         DB_COMMENTS.child(uid).updateChildValues(value) { (error, ref) in
             if error != nil {

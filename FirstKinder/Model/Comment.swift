@@ -16,6 +16,7 @@ struct Comment {
     var vendor: String
     var isCommentToComment: String?
     var targetCommentUid: String?
+    var reportCount: Int
 }
 var comments = [Comment]()
 

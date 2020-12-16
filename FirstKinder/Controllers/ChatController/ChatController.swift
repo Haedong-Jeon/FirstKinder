@@ -54,7 +54,7 @@ class ChatController: UICollectionViewController, UICollectionViewDelegateFlowLa
                 //2. 신고 당한 횟수가 5회 이하인 게시글만 표시한다.
                 chats = loadedChats
                     .sorted(by: {$0.timeStamp > $1.timeStamp})
-                    .filter({$0.reportCount < 5})
+                    .filter({$0.reportCount < 6})
                 
                 DispatchQueue.main.async {
                     self.chatReload()
