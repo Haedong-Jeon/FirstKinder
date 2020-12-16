@@ -30,7 +30,8 @@ class DBUtil {
                 guard let cateogry = data["category"] as? String else { return }
                 guard let commentCount = data["commentCount"] as? Int else { return }
                 guard let reportCount = data["reportCount"] as? Int else { return }
-                let chat = Chat(chatBody: chatBody, uid: chatUid, imgFileName: imgFileName, timeStamp: timeStamp, vendor: deviceVendor, category: cateogry, commentCount: commentCount, reportCount: reportCount)
+                guard let FCMToken = data["FCMToken"] as? String else { return }
+                let chat = Chat(chatBody: chatBody, uid: chatUid, imgFileName: imgFileName, timeStamp: timeStamp, vendor: deviceVendor, category: cateogry, commentCount: commentCount, reportCount: reportCount, FCMToken: FCMToken)
                 loadedChats.append(chat)
             }
             completion(loadedChats)

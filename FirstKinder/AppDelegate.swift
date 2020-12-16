@@ -51,6 +51,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 extension AppDelegate: MessagingDelegate {
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
         print("fcm token is \(fcmToken)")
+        FCMToken = fcmToken   
     }
 }
 
@@ -62,3 +63,10 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         completionHandler()
     }
 }
+
+/*
+ e0ciqxUIMU80vSwFduySYz:APA91bELmldFU0Q0EH45mrRCc8hnVvtLHCU5wPwNff7IKOqfFlnyhC2rnuWZtH92hZnIwWxC4Q1Jzr5oJE89v2LCIvmfhtq2fnxqRhXexaKHQMeOrCqmc4iel38OjCZUtZcF5L-9j6xi
+ */
+/*
+ e0ciqxUIMU80vSwFduySYz:APA91bELmldFU0Q0EH45mrRCc8hnVvtLHCU5wPwNff7IKOqfFlnyhC2rnuWZtH92hZnIwWxC4Q1Jzr5oJE89v2LCIvmfhtq2fnxqRhXexaKHQMeOrCqmc4iel38OjCZUtZcF5L-9j6xi
+ */
