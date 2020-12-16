@@ -70,19 +70,19 @@ class ChatController: UICollectionViewController, UICollectionViewDelegateFlowLa
             return
         }
         self.blockedUsers = blockedUsers
-        self.blockedUsers.forEach({print("blocked user: \($0)")})
+        
         
         guard let blockedReasons = UserDefaults.standard.array(forKey: "blockedReasons") as? [String] else {
             return
         }
         self.blockedReasons = blockedReasons
-        self.blockedReasons.forEach({print("blocked reason: \($0)")})
+        
         
         guard let reasonCategories = UserDefaults.standard.array(forKey: "blockedReasonCategories") as? [String] else {
             return
         }
         self.blockReasonCategories = reasonCategories
-        self.blockReasonCategories.forEach({print("blocked categories: \($0)")})
+        
         
         chatReload()
     }

@@ -12,6 +12,6 @@ extension UIButton {
         self.addTarget(self, action: #selector(detectTapInCell), for: .touchUpInside)
     }
     @objc func detectTapInCell() {
-        print("button in cell taped")
+        
     }
 }

@@ -14,6 +14,7 @@ target 'FirstKinder' do
   pod 'Firebase/Storage'
   pod 'Kingfisher'
   pod 'ANActivityIndicator'
+  pod 'Firebase/Messaging'
   # Pods for FirstKinder
 
 end

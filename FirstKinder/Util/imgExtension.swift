@@ -9,7 +9,7 @@ import UIKit
 
 extension UIImageView {
     @objc func makeBigWhenTouched() {
-        print("img taped!")
+        
         let bigImgController = BigSizeImgViewController()
         bigImgController.img = self.image
         bigImgController.modalPresentationStyle = .fullScreen

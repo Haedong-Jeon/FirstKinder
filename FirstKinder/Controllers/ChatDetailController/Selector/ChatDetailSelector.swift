@@ -103,7 +103,7 @@ extension ChatDetailController {
         })
         DB_CHATS.child(chat!.uid).removeValue()
         STORAGE_USER_UPLOAD_IMGS.child(chat!.uid).delete { error in
-            print("이미지 삭제 에러 -\(error)")
+            
         }
         deleteCommentUid.forEach({
             DB_COMMENTS.child($0).removeValue()

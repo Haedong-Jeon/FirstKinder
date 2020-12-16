@@ -411,13 +411,13 @@ extension ChatDetailController: CommentDeleteDelegate {
             if $0.targetCommentUid == self.thisComments[(indexPath.row % self.thisComments.count)].uid {
                 DB_COMMENTS.child($0.uid).removeValue()
                 STORAGE_COMMENT_IMGS.child($0.imgFileName).delete { error in
-                    print("이미지 삭제 에러 -\(error)")
+                    
                 }
             }
         })
         DB_COMMENTS.child(thisComments[(indexPath.row % self.thisComments.count)].uid).removeValue()
         STORAGE_COMMENT_IMGS.child(thisComments[(indexPath.row % self.thisComments.count)].imgFileName).delete { error in
-            print("이미지 삭제 에러 -\(error)")
+            
         }
         thisComments.remove(at: (indexPath.row % self.thisComments.count))
         commentCountDown()

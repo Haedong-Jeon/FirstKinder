@@ -43,7 +43,6 @@
 		E95B8A38257F511A002EE9BC /* HelperForTextDelegateForChatWrite.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95B8A37257F511A002EE9BC /* HelperForTextDelegateForChatWrite.swift */; };
 		E95B8A3B257F5944002EE9BC /* SelectorForChatWrite.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95B8A3A257F5944002EE9BC /* SelectorForChatWrite.swift */; };
 		E95B8A3E257F63D7002EE9BC /* HelperForWriteImageSelect.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95B8A3D257F63D7002EE9BC /* HelperForWriteImageSelect.swift */; };
-		E95B8A68257F8410002EE9BC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E95B8A67257F8410002EE9BC /* GoogleService-Info.plist */; };
 		E95B8A84257F9704002EE9BC /* ChatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95B8A83257F9703002EE9BC /* ChatCell.swift */; };
 		E95B8A87257F98E6002EE9BC /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95B8A86257F98E6002EE9BC /* Chat.swift */; };
 		E95B8A8A257F9993002EE9BC /* HelperForChatCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95B8A89257F9993002EE9BC /* HelperForChatCollectionView.swift */; };
@@ -57,6 +56,7 @@
 		E960ACEC257891D500985873 /* DetailHelperForMyKinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E960ACEB257891D500985873 /* DetailHelperForMyKinder.swift */; };
 		E960ACEF2578965700985873 /* MyKinderHelpersForCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E960ACEE2578965700985873 /* MyKinderHelpersForCollectionView.swift */; };
 		E960ACF22578978E00985873 /* MyKindersForBasicUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E960ACF12578978E00985873 /* MyKindersForBasicUI.swift */; };
+		E994E7CA258A129900804683 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E994E7C9258A129900804683 /* GoogleService-Info.plist */; };
 		E9B448CF2581BCB10013DA2E /* RadioButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9B448CE2581BCB10013DA2E /* RadioButtonView.swift */; };
 		E9D633822574915F00F6C3ED /* ListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D633812574915F00F6C3ED /* ListController.swift */; };
 		E9D6339C2574DB6900F6C3ED /* CookieRun Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E9D633992574DB6500F6C3ED /* CookieRun Black.ttf */; };
@@ -118,7 +118,6 @@
 		E95B8A37257F511A002EE9BC /* HelperForTextDelegateForChatWrite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelperForTextDelegateForChatWrite.swift; sourceTree = "<group>"; };
 		E95B8A3A257F5944002EE9BC /* SelectorForChatWrite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectorForChatWrite.swift; sourceTree = "<group>"; };
 		E95B8A3D257F63D7002EE9BC /* HelperForWriteImageSelect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelperForWriteImageSelect.swift; sourceTree = "<group>"; };
-		E95B8A67257F8410002EE9BC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E95B8A83257F9703002EE9BC /* ChatCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatCell.swift; sourceTree = "<group>"; };
 		E95B8A86257F98E6002EE9BC /* Chat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
 		E95B8A89257F9993002EE9BC /* HelperForChatCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelperForChatCollectionView.swift; sourceTree = "<group>"; };
@@ -132,6 +131,7 @@
 		E960ACEB257891D500985873 /* DetailHelperForMyKinder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailHelperForMyKinder.swift; sourceTree = "<group>"; };
 		E960ACEE2578965700985873 /* MyKinderHelpersForCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyKinderHelpersForCollectionView.swift; sourceTree = "<group>"; };
 		E960ACF12578978E00985873 /* MyKindersForBasicUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyKindersForBasicUI.swift; sourceTree = "<group>"; };
+		E994E7C9258A129900804683 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E9B448CE2581BCB10013DA2E /* RadioButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioButtonView.swift; sourceTree = "<group>"; };
 		E9D633812574915F00F6C3ED /* ListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListController.swift; sourceTree = "<group>"; };
 		E9D633992574DB6500F6C3ED /* CookieRun Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "CookieRun Black.ttf"; sourceTree = "<group>"; };
@@ -212,9 +212,9 @@
 				E9088961257471D800223BAA /* SceneDelegate.swift */,
 				E9088965257471D800223BAA /* Main.storyboard */,
 				E9088968257471DD00223BAA /* Assets.xcassets */,
+				E994E7C9258A129900804683 /* GoogleService-Info.plist */,
 				E908896A257471DD00223BAA /* LaunchScreen.storyboard */,
 				E908896D257471DD00223BAA /* Info.plist */,
-				E95B8A67257F8410002EE9BC /* GoogleService-Info.plist */,
 				E9D633992574DB6500F6C3ED /* CookieRun Black.ttf */,
 				E9D6339A2574DB6500F6C3ED /* CookieRun Bold.ttf */,
 				E9D6339B2574DB6500F6C3ED /* CookieRun Regular.ttf */,
@@ -605,7 +605,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E9D6339E2574DB6D00F6C3ED /* CookieRun Bold.ttf in Resources */,
-				E95B8A68257F8410002EE9BC /* GoogleService-Info.plist in Resources */,
+				E994E7CA258A129900804683 /* GoogleService-Info.plist in Resources */,
 				E90A2F3C257F03BA0066C9B5 /* heart.gif in Resources */,
 				E9D6339C2574DB6900F6C3ED /* CookieRun Black.ttf in Resources */,
 				E908896C257471DD00223BAA /* LaunchScreen.storyboard in Resources */,
@@ -870,6 +870,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = FirstKinder/FirstKinder.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 983YQA8Y6W;
 				INFOPLIST_FILE = FirstKinder/Info.plist;
@@ -877,7 +878,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.754;
+				MARKETING_VERSION = 1.8;
 				PRODUCT_BUNDLE_IDENTIFIER = haedong.FirstKinder;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = YES;
@@ -893,6 +894,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = FirstKinder/FirstKinder.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 983YQA8Y6W;
 				INFOPLIST_FILE = FirstKinder/Info.plist;
@@ -900,7 +902,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.754;
+				MARKETING_VERSION = 1.8;
 				PRODUCT_BUNDLE_IDENTIFIER = haedong.FirstKinder;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = YES;

@@ -75,7 +75,6 @@ class ParsingUtil: NSObject, XMLParserDelegate {
             .subscribe(onNext: {
                 if $0.isOn != "폐지" {
                     kinders.append($0)
-                    print($0.title)
                 }
             },onCompleted: {
                 if self.loadedCityCount < cities.count - 1 {
@@ -122,7 +121,7 @@ class ParsingUtil: NSObject, XMLParserDelegate {
         }
     }
     func parser(_ parser: XMLParser, parseErrorOccurred parseError: Error) {
-        print("ERROR in parsing xml - \(parseError)")
+        
     }
     func makeKinderObservable(_ tag: String) -> Observable<Kinder> {
         return Observable.create { observer in

@@ -69,7 +69,7 @@ extension ChatWriteController {
                     DB_CHATS.child(editingChat!.uid).updateChildValues(["imgFileName": "NO IMG"])
                     STORAGE_USER_UPLOAD_IMGS.child(editingChat!.imgFileName).delete { (error) in
                         if error != nil {
-                            print("error in editing chat image \(error)")
+                            
                         }
                         self.navigationController?.popToRootViewController(animated: true)
                     }

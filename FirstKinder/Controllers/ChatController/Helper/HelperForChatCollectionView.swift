@@ -219,7 +219,7 @@ extension ChatController {
         if !scrollChecker { return }
         let contentOffsetY = scrollView.contentOffset.y
         if contentOffsetY >= (scrollView.contentSize.height - scrollView.bounds.height) - 20 {
-            print("스크롤이 바닥에 도달! offset - \(contentOffsetY)")
+            
             scrollChecker = false
         }
     }

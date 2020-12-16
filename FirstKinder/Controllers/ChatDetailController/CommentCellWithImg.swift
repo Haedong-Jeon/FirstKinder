@@ -98,7 +98,7 @@ class CommentCellWithImg: UICollectionViewCell {
     }
     @objc func handleDotTap() {
         guard let selectedIndexPath = self.thisIdxPath else { return }
-        print("dot taped! - \(thisIdxPath!.row)")
+        
         deleteDelegate?.dotTap(indexPath: selectedIndexPath)
     }
     func configureUI() {

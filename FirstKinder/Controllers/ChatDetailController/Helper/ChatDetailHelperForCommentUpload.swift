@@ -13,7 +13,7 @@ extension ChatDetailController {
     func getNewImg(_ cell: CommentCellWithImg) {
         STORAGE_COMMENT_IMGS.child(thisComments[editingIdx!.row].uid).downloadURL { (url, error) in
             if error != nil {
-                print("error in img edit \(error)")
+                
             }
             DispatchQueue.global(qos: .background).async {
                 let cache = ImageCache.default
@@ -39,7 +39,7 @@ extension ChatDetailController {
     func editImg(_ indicator: UIActivityIndicatorView) {
         STORAGE_COMMENT_IMGS.child(thisComments[editingIdx!.row].imgFileName).delete { (error) in
             if error != nil {
-                print("error in img delete while editing \(error)")
+                
             }
         }
         uploadImg(thisComments[editingIdx!.row].uid, thisComments[editingIdx!.row].uid) {
