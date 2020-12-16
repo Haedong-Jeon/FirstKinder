@@ -104,7 +104,7 @@ extension ChatDetailController {
             getImg(cell, indexPath)
             if isBlockedUserComment(indexPath) {
                 setBlockedCellComment(cell)
-                cell.imgView.image = #imageLiteral(resourceName: "sad")
+                cell.imgView.image = #imageLiteral(resourceName: "block")
             } else {
                 cell.commentBodyLabel.text = thisComments[indexPath.row % thisComments.count].commentBody
             }
@@ -151,7 +151,7 @@ extension ChatDetailController {
             getImg(cell, indexPath)
             if isBlockedUserComment(indexPath) {
                 setBlockedCellComment(cell)
-                cell.imgView.image = #imageLiteral(resourceName: "sad")
+                cell.imgView.image = #imageLiteral(resourceName: "block")
             } else {
                 cell.commentBodyLabel.text = thisComments[indexPath.row % thisComments.count].commentBody
             }
