@@ -9,6 +9,7 @@ import UIKit
 
 class MainController: UITabBarController, UITabBarControllerDelegate {
     override func viewDidLoad() {
+        DBUtil.shared.initializeUserAlarm()
         configureUI()
         setTabs()
     }

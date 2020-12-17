@@ -148,7 +148,7 @@ class LaunchController: UIViewController, XMLParserDelegate {
     func goNextPage() {
         let EULAAgree = UserDefaults.standard.bool(forKey: "EULA")
         if EULAAgree {
-            DBUtil.shared.initializeUserAlarm()
+            
             let transition = CATransition()
             transition.duration = 0.3
             transition.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
