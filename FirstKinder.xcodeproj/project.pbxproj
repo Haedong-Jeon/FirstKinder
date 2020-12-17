@@ -37,6 +37,7 @@
 		E93EDC112582EF72007BBF40 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93EDC102582EF72007BBF40 /* Comment.swift */; };
 		E945E9822586285E009CFEE4 /* ButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E945E9812586285E009CFEE4 /* ButtonExtension.swift */; };
 		E94E91DA2586F27500139859 /* ParsingUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = E94E91D92586F27500139859 /* ParsingUtil.swift */; };
+		E951D4D2258ADDDC00B1780F /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = E951D4D1258ADDDC00B1780F /* User.swift */; };
 		E95B8A1C257F26A6002EE9BC /* HelperForChat.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95B8A1B257F26A6002EE9BC /* HelperForChat.swift */; };
 		E95B8A24257F2A3D002EE9BC /* ChatWriteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95B8A23257F2A3D002EE9BC /* ChatWriteController.swift */; };
 		E95B8A28257F2A59002EE9BC /* HelperForWriteBasicUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95B8A27257F2A59002EE9BC /* HelperForWriteBasicUI.swift */; };
@@ -111,6 +112,7 @@
 		E93EDC102582EF72007BBF40 /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		E945E9812586285E009CFEE4 /* ButtonExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonExtension.swift; sourceTree = "<group>"; };
 		E94E91D92586F27500139859 /* ParsingUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParsingUtil.swift; sourceTree = "<group>"; };
+		E951D4D1258ADDDC00B1780F /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		E95B8A06257F1FEC002EE9BC /* FirstKinder.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FirstKinder.entitlements; sourceTree = "<group>"; };
 		E95B8A1B257F26A6002EE9BC /* HelperForChat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelperForChat.swift; sourceTree = "<group>"; };
 		E95B8A23257F2A3D002EE9BC /* ChatWriteController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatWriteController.swift; sourceTree = "<group>"; };
@@ -541,6 +543,7 @@
 				E9F14393257483E0002A284F /* TagKind.swift */,
 				E95B8A86257F98E6002EE9BC /* Chat.swift */,
 				E93EDC102582EF72007BBF40 /* Comment.swift */,
+				E951D4D1258ADDDC00B1780F /* User.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -689,6 +692,7 @@
 				E960ACE02578846800985873 /* MyKindersController.swift in Sources */,
 				E95B8A1C257F26A6002EE9BC /* HelperForChat.swift in Sources */,
 				E945E9822586285E009CFEE4 /* ButtonExtension.swift in Sources */,
+				E951D4D2258ADDDC00B1780F /* User.swift in Sources */,
 				E960ACE725788DDB00985873 /* NearKinderController.swift in Sources */,
 				E93B13332581E69F00A22FF6 /* ChatDetailController.swift in Sources */,
 				E960ACEF2578965700985873 /* MyKinderHelpersForCollectionView.swift in Sources */,
@@ -878,10 +882,10 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.8;
+				MARKETING_VERSION = 2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = haedong.FirstKinder;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SUPPORTS_MACCATALYST = YES;
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -902,10 +906,10 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.8;
+				MARKETING_VERSION = 2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = haedong.FirstKinder;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SUPPORTS_MACCATALYST = YES;
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

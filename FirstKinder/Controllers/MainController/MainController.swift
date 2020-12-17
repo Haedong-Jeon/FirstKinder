@@ -11,7 +11,6 @@ class MainController: UITabBarController, UITabBarControllerDelegate {
     override func viewDidLoad() {
         configureUI()
         setTabs()
-        
     }
     override func viewDidAppear(_ animated: Bool) {
         navigationController?.interactivePopGestureRecognizer?.isEnabled = false

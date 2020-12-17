@@ -15,7 +15,6 @@ class DBUtil {
     static let shared = DBUtil()
     
     func loadChatTexts(completion: @escaping([Chat]) -> Void) {
-        
         DB_CHATS.observe(.value) { snapShot in
             var loadedChats = [Chat]()
             for child in snapShot.children {
@@ -32,14 +31,13 @@ class DBUtil {
                 guard let reportCount = data["reportCount"] as? Int else { return }
                 guard let FCMToken = data["FCMToken"] as? String else { return }
                 let chat = Chat(chatBody: chatBody, uid: chatUid, imgFileName: imgFileName, timeStamp: timeStamp, vendor: deviceVendor, category: cateogry, commentCount: commentCount, reportCount: reportCount, FCMToken: FCMToken)
+                print(chat.chatBody)
                 loadedChats.append(chat)
             }
             completion(loadedChats)
         }
-        
     }
     func loadCommentTexts(completion: @escaping([Comment]) -> Void) {
-        
         DB_COMMENTS.observe(.value) { snapShot in
             var loadedComments = [Comment]()
             for child in snapShot.children {
@@ -190,7 +188,40 @@ class DBUtil {
             return Disposables.create()
         }
     }
-    
+    func initializeUserAlarm() {
+        let value: [String: Any] = ["FCMToken": FCMToken, "alarm": 0]
+        DB_USERS.child(FCMToken).updateChildValues(value)
+    }
+    func getUserData(completion: @escaping(User) -> Void) {
+        var user: User?
+        DB_USERS.child(FCMToken).observe(.value) { snapShot in
+            for child in snapShot.children {
+                guard let snap = child as? DataSnapshot else { return }
+                guard let data = snap.value as? [String: Any] else { return }
+                
+                guard let FCMToken = data["FCMToken"] as? String else { return }
+                guard let alarm = data["alarm"] as? Int else { return }
+                
+                user = User(FCMToken: FCMToken, alarm: alarm)
+            }
+        }
+        completion(user!)
+    }
+    func updateUserAlarm(target FCMToken: String, count alarm: Int, completion:@escaping() -> Void) {
+        DB_USERS.child(FCMToken).updateChildValues(["alarm": alarm]) { _, _ in
+            completion()
+        }
+    }
+    func getUserData(target FCMToken: String, completion: @escaping(User) -> Void) {
+        DB_USERS.child(FCMToken).observe(.value) { snapShot in
+            guard let data = snapShot.value as? [String: Any] else { return }
+            guard let FCMToken = data["FCMToken"] as? String else { return }
+            guard let alarm = data["alarm"] as? Int else { return }
+            
+            let user = User(FCMToken: FCMToken, alarm: alarm)
+            completion(user)
+        }
+    }
 }
 
 class NoImgError: Error {

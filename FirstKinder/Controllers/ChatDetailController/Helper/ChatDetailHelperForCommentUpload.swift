@@ -164,9 +164,23 @@ extension ChatDetailController {
         showSuccess.addAction(okButton)
         self.present(showSuccess, animated: true, completion: nil)
         
+        if UIDevice.current.identifierForVendor?.uuidString == chat?.vendor {
+            return
+        }
+        
         let userToken = chat?.FCMToken
-        let notifPayload: [String: Any] = ["to": userToken,"notification": ["title":"퍼스트킨더","body":"내가 쓴 이야기에 댓글이 달렸어요❤︎","badge": 99,"sound":"default"]]
-        self.sendPushNotification(payloadDict: notifPayload)
+        var targetUser: User?
+        var alarmNotUpdated = true
+        DBUtil.shared.getUserData(target: userToken!) { user in
+            targetUser = user
+            if alarmNotUpdated {
+                DBUtil.shared.updateUserAlarm(target: userToken!, count: targetUser!.alarm + 1) {
+                    let notifPayload: [String: Any] = ["to": userToken,"notification": ["title":"퍼스트킨더","body":"내가 쓴 이야기에 댓글이 달렸어요❤︎","badge": targetUser!.alarm, "sound":"default"]]
+                    self.sendPushNotification(payloadDict: notifPayload)
+                }
+                alarmNotUpdated = false
+            }
+        }
     }
     func commentCountUp() {
         let commentCount = self.thisComments.count
@@ -174,8 +188,6 @@ extension ChatDetailController {
     }
     
 }
-
-
 extension ChatDetailController {
     func sendPushNotification(payloadDict: [String: Any]) {
         let serverKey = "AAAAKFFEGCg:APA91bEIgvEeJZLyBq2vPe3iW9R6ucdBzqpPHBPumb1GJG0HUAFP-5Lo5_l8jQ0BRhfZrGs7BeqJeMCKBHf6wH2paBccXT7Wb-GKKo6siWj8mHIb-TnVLtViUx8ACl92HGg_irQ-6NBd"

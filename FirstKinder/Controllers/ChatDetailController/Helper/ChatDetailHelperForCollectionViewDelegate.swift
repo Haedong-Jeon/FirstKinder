@@ -72,7 +72,7 @@ extension ChatDetailController {
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let targetComment = self.thisComments[indexPath.row % thisComments.count]
         if targetComment.isCommentToComment == nil && targetComment.imgFileName == "NO IMG" {
-            //이미지가 없는 일반 댓글
+            //MARK: - 이미지가 없는 일반 댓글 셀 설정
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: commentCellReuseIdentifier, for: indexPath) as? CommentCell else {
                 return UICollectionViewCell()
             }
@@ -95,7 +95,7 @@ extension ChatDetailController {
             
             return cell
         } else if targetComment.isCommentToComment == nil && targetComment.imgFileName != "NO IMG" {
-            //이미지가 있는 일반 댓글
+            //MARK: - 이미지가 있는 일반 댓글 셀 설정
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: commentCellWithImgReuseIdentifier, for: indexPath) as? CommentCellWithImg else {
                 return UICollectionViewCell()
             }
@@ -117,10 +117,11 @@ extension ChatDetailController {
             cell.thisIdxPath = indexPath
             cell.deleteDelegate = self
             cell.imgView.addMakeBigFunction()
+            cell.addFunctionToVerticalDots()
             cell.faceImgView.image = setCommentFace(indexPath)
             return cell
         } else if targetComment.isCommentToComment != nil && targetComment.imgFileName == "NO IMG" {
-            //이미지가 없는 대댓글
+            //MARK: - 이미지가 없는 대댓글 셀 설정
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: commentToCommentCellReuseIdentifier, for: indexPath) as? CommentToCommentCell else {
                 return UICollectionViewCell()
             }
@@ -142,7 +143,7 @@ extension ChatDetailController {
             cell.faceImgView.image = setCommentFace(indexPath)
             return cell
         } else if targetComment.isCommentToComment != nil && targetComment.imgFileName != "NO IMG" {
-            //이미지가 있는 대댓글
+            //MARK: - 이미지가 있는 대댓글 셀 설정
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: commentToCommentCellWithImgReuseIdentifier, for: indexPath) as? CoToCoCellWithImg else {
                 return UICollectionViewCell()
             }
@@ -172,6 +173,7 @@ extension ChatDetailController {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         return CGSize(width: view.frame.width, height: getEstimatedHeightByDummyHeader())
     }
+    //MARK: - 헤더 사이즈 계산
     func getEstimatedHeightByDummyHeader() -> CGFloat {
         let width = view.frame.width - 10
         let estimatedHeight: CGFloat = 10000000
@@ -187,6 +189,7 @@ extension ChatDetailController {
         let estimateSize = dummyHeader.systemLayoutSizeFitting(CGSize(width: width, height: estimatedHeight))
         return estimateSize.height
     }
+    //MARK: - 셀 사이즈 계산
     func getEstimatedHeightFromDummyCell(_ indexPath: IndexPath) -> CGFloat{
         let targetComment = self.thisComments[indexPath.row % thisComments.count]
         let width = view.frame.width - 10
@@ -274,6 +277,7 @@ extension ChatDetailController {
             }
         } else {
             cell.imgView.image = DBUtil.shared.loadImgFromCache(thisComments[indexPath.row % thisComments.count].imgFileName)
+            
         }
     }
     func isThisUserComment(_ indexPath: IndexPath) -> Bool {
