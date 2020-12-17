@@ -105,10 +105,10 @@ class LaunchController: UIViewController, XMLParserDelegate {
                 }
             },onCompleted: {
                 if self.userUploadImgLoadComplete && self.commentImgLoadComplete {
-                    self.goToMain()
+                    self.goNextPage()
                 } else {
                     DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-                        self.goToMain()
+                        self.goNextPage()
                     }
                 }
             }).disposed(by: disposeBag)
@@ -145,17 +145,31 @@ class LaunchController: UIViewController, XMLParserDelegate {
             }
         }
     }
-    func goToMain() {
-        DBUtil.shared.initializeUserAlarm()
-        let transition = CATransition()
-        transition.duration = 0.3
-        transition.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
-        transition.type = .fade
-        DispatchQueue.main.async {
-            self.indicator.stopAnimating()
-            
-            self.navigationController?.view.layer.add(transition, forKey: nil)
-            self.navigationController?.pushViewController(MainController(), animated: false)
+    func goNextPage() {
+        let EULAAgree = UserDefaults.standard.bool(forKey: "EULA")
+        if EULAAgree {
+            DBUtil.shared.initializeUserAlarm()
+            let transition = CATransition()
+            transition.duration = 0.3
+            transition.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
+            transition.type = .fade
+            DispatchQueue.main.async {
+                self.indicator.stopAnimating()
+                
+                self.navigationController?.view.layer.add(transition, forKey: nil)
+                self.navigationController?.pushViewController(MainController(), animated: false)
+            }
+        } else {
+            let transition = CATransition()
+            transition.duration = 0.3
+            transition.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
+            transition.type = .fade
+            DispatchQueue.main.async {
+                self.indicator.stopAnimating()
+                
+                self.navigationController?.view.layer.add(transition, forKey: nil)
+                self.navigationController?.pushViewController(EULAController(), animated: false)
+            }
         }
     }
 }

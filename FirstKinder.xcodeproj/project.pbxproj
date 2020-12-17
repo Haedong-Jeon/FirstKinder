@@ -38,6 +38,9 @@
 		E945E9822586285E009CFEE4 /* ButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E945E9812586285E009CFEE4 /* ButtonExtension.swift */; };
 		E94E91DA2586F27500139859 /* ParsingUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = E94E91D92586F27500139859 /* ParsingUtil.swift */; };
 		E951D4D2258ADDDC00B1780F /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = E951D4D1258ADDDC00B1780F /* User.swift */; };
+		E951D4D6258B0CEE00B1780F /* EULAController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E951D4D5258B0CEE00B1780F /* EULAController.swift */; };
+		E951D4DB258B0D1200B1780F /* EULASelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = E951D4DA258B0D1200B1780F /* EULASelector.swift */; };
+		E951D4E0258B0D4800B1780F /* EULAHelperForBasicUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E951D4DF258B0D4800B1780F /* EULAHelperForBasicUI.swift */; };
 		E95B8A1C257F26A6002EE9BC /* HelperForChat.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95B8A1B257F26A6002EE9BC /* HelperForChat.swift */; };
 		E95B8A24257F2A3D002EE9BC /* ChatWriteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95B8A23257F2A3D002EE9BC /* ChatWriteController.swift */; };
 		E95B8A28257F2A59002EE9BC /* HelperForWriteBasicUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95B8A27257F2A59002EE9BC /* HelperForWriteBasicUI.swift */; };
@@ -113,6 +116,9 @@
 		E945E9812586285E009CFEE4 /* ButtonExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonExtension.swift; sourceTree = "<group>"; };
 		E94E91D92586F27500139859 /* ParsingUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParsingUtil.swift; sourceTree = "<group>"; };
 		E951D4D1258ADDDC00B1780F /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		E951D4D5258B0CEE00B1780F /* EULAController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EULAController.swift; sourceTree = "<group>"; };
+		E951D4DA258B0D1200B1780F /* EULASelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EULASelector.swift; sourceTree = "<group>"; };
+		E951D4DF258B0D4800B1780F /* EULAHelperForBasicUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EULAHelperForBasicUI.swift; sourceTree = "<group>"; };
 		E95B8A06257F1FEC002EE9BC /* FirstKinder.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FirstKinder.entitlements; sourceTree = "<group>"; };
 		E95B8A1B257F26A6002EE9BC /* HelperForChat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelperForChat.swift; sourceTree = "<group>"; };
 		E95B8A23257F2A3D002EE9BC /* ChatWriteController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatWriteController.swift; sourceTree = "<group>"; };
@@ -339,6 +345,32 @@
 			path = Selector;
 			sourceTree = "<group>";
 		};
+		E951D4D4258B0CE300B1780F /* EULAController */ = {
+			isa = PBXGroup;
+			children = (
+				E951D4DE258B0D3E00B1780F /* Helper */,
+				E951D4D9258B0D0900B1780F /* Selector */,
+				E951D4D5258B0CEE00B1780F /* EULAController.swift */,
+			);
+			path = EULAController;
+			sourceTree = "<group>";
+		};
+		E951D4D9258B0D0900B1780F /* Selector */ = {
+			isa = PBXGroup;
+			children = (
+				E951D4DA258B0D1200B1780F /* EULASelector.swift */,
+			);
+			path = Selector;
+			sourceTree = "<group>";
+		};
+		E951D4DE258B0D3E00B1780F /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				E951D4DF258B0D4800B1780F /* EULAHelperForBasicUI.swift */,
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
 		E95B8A1A257F2695002EE9BC /* Helper */ = {
 			isa = PBXGroup;
 			children = (
@@ -502,6 +534,7 @@
 		E9F143882574833C002A284F /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				E951D4D4258B0CE300B1780F /* EULAController */,
 				E93A52872584712B006E5F54 /* Selector */,
 				E93A528625847123006E5F54 /* Helper */,
 				E93A5281258470A7006E5F54 /* BigSizeImgController */,
@@ -684,6 +717,7 @@
 				E95B8A3E257F63D7002EE9BC /* HelperForWriteImageSelect.swift in Sources */,
 				E960ACBE25774A8700985873 /* Constant.swift in Sources */,
 				E9D633A42575C4AB00F6C3ED /* ListHelperForCollectionView.swift in Sources */,
+				E951D4E0258B0D4800B1780F /* EULAHelperForBasicUI.swift in Sources */,
 				E93A528F25848137006E5F54 /* imgExtension.swift in Sources */,
 				E9B448CF2581BCB10013DA2E /* RadioButtonView.swift in Sources */,
 				E9D633AC2575DC6300F6C3ED /* KinderDetailController.swift in Sources */,
@@ -717,11 +751,13 @@
 				E93EDBB425823B81007BBF40 /* BlockedUserController.swift in Sources */,
 				E9088964257471D800223BAA /* LaunchController.swift in Sources */,
 				E9088960257471D800223BAA /* AppDelegate.swift in Sources */,
+				E951D4D6258B0CEE00B1780F /* EULAController.swift in Sources */,
 				E93B75D12576075A00D52A24 /* DetailHelperForMap.swift in Sources */,
 				E95B8A8E257F9A32002EE9BC /* DBUtil.swift in Sources */,
 				E9088962257471D800223BAA /* SceneDelegate.swift in Sources */,
 				E95B8A24257F2A3D002EE9BC /* ChatWriteController.swift in Sources */,
 				E9D633A82575C60B00F6C3ED /* KinderCell.swift in Sources */,
+				E951D4DB258B0D1200B1780F /* EULASelector.swift in Sources */,
 				E93A5295258595ED006E5F54 /* HelperForChatWriteRx.swift in Sources */,
 				E95B8A38257F511A002EE9BC /* HelperForTextDelegateForChatWrite.swift in Sources */,
 				E9ECFDCA258986FF00228467 /* CommentCellWithImg.swift in Sources */,
