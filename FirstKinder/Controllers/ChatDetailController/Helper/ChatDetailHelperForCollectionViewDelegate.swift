@@ -108,7 +108,6 @@ extension ChatDetailController {
             } else {
                 cell.commentBodyLabel.text = thisComments[indexPath.row % thisComments.count].commentBody
             }
-            cell.imgView.makeBigWhenTouched()
             if isThisUserComment(indexPath) {
                 cell.verticalDotButton.setImage(#imageLiteral(resourceName: "more"), for: .normal)
             } else {
@@ -368,13 +367,8 @@ extension ChatDetailController: CommentDeleteDelegate {
             askAlertController.addAction(blockButton)
             askAlertController.addAction(cancelButton)
             
-            guard let blockedUsers = UserDefaults.standard.array(forKey: "blockedUsers") as? [String] else {
-                return
-            }
-            for vendor in blockedUsers {
-                if thisComments[indexPath.row].vendor == vendor {
-                    blockButton.isEnabled = false
-                }
+            if isAlreadyBlockedUser(indexPath) {
+                blockButton.isEnabled = false
             }
             if isAlreadyReportedComment(indexPath) {
                 reportButton.isEnabled = false
@@ -457,6 +451,17 @@ extension ChatDetailController: CommentDeleteDelegate {
             }
         })
         return isReported
+    }
+    func isAlreadyBlockedUser(_ indexPath: IndexPath) -> Bool {
+        guard let blockedUsers = UserDefaults.standard.array(forKey: "blockedUsers") as? [String] else {
+            return false
+        }
+        for vendor in blockedUsers {
+            if thisComments[indexPath.row].vendor == vendor {
+                return true
+            }
+        }
+        return false
     }
 }
 

@@ -83,7 +83,6 @@ class CommentCell: UICollectionViewCell {
     }
     @objc func handleDotTap() {
         guard let selectedIndexPath = self.thisIdxPath else { return }
-        
         deleteDelegate?.dotTap(indexPath: selectedIndexPath)
     }
     func configureUI() {
