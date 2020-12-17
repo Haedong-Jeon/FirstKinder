@@ -11,7 +11,6 @@ extension UIImageView {
     @objc func makeBigWhenTouched() {
         let bigImgController = BigSizeImgViewController()
         bigImgController.img = self.image
-        bigImgController.modalPresentationStyle = .fullScreen
         topMostController?.present(bigImgController, animated: true, completion: nil)
     }
     func addMakeBigFunction() {

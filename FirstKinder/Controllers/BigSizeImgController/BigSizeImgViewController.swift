@@ -15,16 +15,6 @@ class BigSizeImgViewController: UIViewController {
         imgView.backgroundColor = .black
         return imgView
     }()
-    var closeButton: UIButton = {
-        var button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.widthAnchor.constraint(equalToConstant: 60).isActive = true
-        button.heightAnchor.constraint(equalToConstant: 60).isActive = true
-        button.layer.cornerRadius = 30
-        button.addTarget(self, action: #selector(handleCloseButtonTap), for: .touchUpInside)
-        button.setTitle("x", for: .normal)
-        return button
-    }()
     var img: UIImage?
     
     override func viewDidLoad() {
@@ -35,5 +25,8 @@ class BigSizeImgViewController: UIViewController {
         if img != nil {
             imgView.image = img
         }
+    }
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
     }
 }

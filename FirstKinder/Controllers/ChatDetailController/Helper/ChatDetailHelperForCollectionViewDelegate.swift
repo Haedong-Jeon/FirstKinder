@@ -14,15 +14,14 @@ extension ChatDetailController {
             return UICollectionReusableView()
         }
         header.chat = self.chat
-        header.imgView.isUserInteractionEnabled = true
         header.backgroundColor = .white
         header.setUp()
-        header.imgView.addMakeBigFunction()
         header.commentCountLabel.text = "댓글 \(thisComments.count)"
         if self.chat?.imgFileName == "NO IMG" {
             header.configureUIWithoutImg()
         } else {
             header.configureUIWithImg()
+            header.imgView.addMakeBigFunction()
         }
         let thisUserVendor = chat!.vendor
         var thisUserReportCount = 0
@@ -68,7 +67,6 @@ extension ChatDetailController {
         
         self.present(askCommentToCommentAlert, animated: true, completion: nil)
     }
-    
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let targetComment = self.thisComments[indexPath.row % thisComments.count]
         if targetComment.isCommentToComment == nil && targetComment.imgFileName == "NO IMG" {
@@ -102,6 +100,7 @@ extension ChatDetailController {
             cell.vendorLabel.text = getVendor(indexPath: indexPath)
             cell.timeLabel.text = getTime(indexPath: indexPath)
             getImg(cell, indexPath)
+            cell.imgView.addMakeBigFunction()
             if isBlockedUserComment(indexPath) {
                 setBlockedCellComment(cell)
                 cell.imgView.image = #imageLiteral(resourceName: "block")
@@ -115,7 +114,6 @@ extension ChatDetailController {
             }
             cell.thisIdxPath = indexPath
             cell.deleteDelegate = self
-            cell.imgView.addMakeBigFunction()
             cell.addFunctionToVerticalDots()
             cell.faceImgView.image = setCommentFace(indexPath)
             return cell
@@ -149,13 +147,13 @@ extension ChatDetailController {
             cell.vendorLabel.text = getVendor(indexPath: indexPath)
             cell.timeLabel.text = getTime(indexPath: indexPath)
             getImg(cell, indexPath)
+            cell.imgView.addMakeBigFunction()
             if isBlockedUserComment(indexPath) {
                 setBlockedCellComment(cell)
                 cell.imgView.image = #imageLiteral(resourceName: "block")
             } else {
                 cell.commentBodyLabel.text = thisComments[indexPath.row % thisComments.count].commentBody
             }
-            cell.imgView.addMakeBigFunction()
             if isThisUserComment(indexPath) {
                 cell.verticalDotButton.setImage(#imageLiteral(resourceName: "more"), for: .normal)
             } else {

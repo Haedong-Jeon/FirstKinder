@@ -22,7 +22,7 @@ class ChatDetailController: UICollectionViewController, UICollectionViewDelegate
     var targetCommentUid = ""
     var isCommentEditing = false
     var isEditTargetCommentHasIMg = false
-    var tapedCommentImg: UIImage?
+    
     var editingIdx: IndexPath?
     var thisComments: [Comment] = [] {
         didSet {
@@ -69,7 +69,6 @@ class ChatDetailController: UICollectionViewController, UICollectionViewDelegate
         setRx()
         setSubscriberForRx()
     }
-    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         configureNavBar()
