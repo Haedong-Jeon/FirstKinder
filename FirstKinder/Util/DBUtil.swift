@@ -121,7 +121,7 @@ class DBUtil {
                 if error != nil {
                     
                 }
-                
+                totalLoadTargetCount += list.items.count
                 if list.items.isEmpty {
                     loadedImg.onError(NoImgError.instance)
                 }
@@ -138,8 +138,10 @@ class DBUtil {
                                 guard let img = UIImage(data: imgData) else { return }
                                 cache.store(img, forKey: item.name)
                                 
+                                nowLoadedTargetCount += 1
                                 loadedImg.onNext(img)
-                                print(item.name)
+                                print("현재 로딩된 수: \(nowLoadedTargetCount)")
+                                
                                 loadCount += 1
                                 if loadCount == list.items.count {
                                     loadedImg.onCompleted()
@@ -159,7 +161,7 @@ class DBUtil {
                 if error != nil {
                     
                 }
-                
+                totalLoadTargetCount += list.items.count
                 if list.items.count == 0 {
                     if list.items.isEmpty {
                         loadedImg.onError(NoImgError.instance)
@@ -177,8 +179,10 @@ class DBUtil {
                             guard let img = UIImage(data: imgData) else { return }
                             cache.store(img, forKey: item.name)
                             
+                            nowLoadedTargetCount += 1
+                            print("현재 로딩된 수: \(nowLoadedTargetCount)")
                             loadedImg.onNext(img)
-                            print(item.name)
+                            
                             loadedImgCount += 1
                             if loadedImgCount == list.items.count {
                                 loadedImg.onCompleted()

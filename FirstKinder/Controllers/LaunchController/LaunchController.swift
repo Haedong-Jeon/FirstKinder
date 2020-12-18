@@ -17,13 +17,14 @@ class LaunchController: UIViewController, XMLParserDelegate {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.init(name: "CookieRun", size: 65)
         label.textAlignment = .center
+        label.textColor = .white
         return label
     }()
     var titleImgView: UIImageView = {
         var imgView = UIImageView()
         imgView.translatesAutoresizingMaskIntoConstraints = false
-        imgView.widthAnchor.constraint(equalToConstant: 300).isActive = true
-        imgView.heightAnchor.constraint(equalToConstant: 300).isActive = true
+        imgView.widthAnchor.constraint(equalToConstant: 200).isActive = true
+        imgView.heightAnchor.constraint(equalToConstant: 200).isActive = true
         return imgView
     }()
     var heartImgView: UIImageView = {
@@ -56,6 +57,7 @@ class LaunchController: UIViewController, XMLParserDelegate {
         label.textAlignment = .center
         return label
     }()
+    var progressBar = UIProgressView()
     var disposeBag = DisposeBag()
     let indicator = ANActivityIndicatorView.init(frame: CGRect(x: 0, y: 0, width: 30, height: 30), animationType: .ballSpinFadeLoader, color: .white, padding: .none)
     
@@ -82,7 +84,9 @@ class LaunchController: UIViewController, XMLParserDelegate {
         
     }
     func loadUploadUserImgs() {
-        DBUtil.shared.loadAllUserUploadImgs().subscribe(onError: { error in
+        DBUtil.shared.loadAllUserUploadImgs().subscribe(onNext: { _ in
+            self.fillUpProgressBar()
+        },onError: { error in
             if error is NoImgError {
                 self.userUploadImgLoadComplete = true
             }
@@ -91,7 +95,9 @@ class LaunchController: UIViewController, XMLParserDelegate {
         }).disposed(by: self.disposeBag)
     }
     func loadCommentsImgs() {
-        DBUtil.shared.loadAllCommentImgs().subscribe(onError: { error in
+        DBUtil.shared.loadAllCommentImgs().subscribe(onNext: { _ in
+            self.fillUpProgressBar()
+        },onError: { error in
             if error is NoImgError {
                 self.commentImgLoadComplete = true
             }
@@ -103,7 +109,7 @@ class LaunchController: UIViewController, XMLParserDelegate {
         createKinderDataObservable()
             .subscribe(onNext: { resultNum in
                 DispatchQueue.main.async {
-                    self.guidanceMsgLabel.text = cityNames[resultNum % cityNames.count] + "...의 데이터를 불러오는 중...!!"
+                    self.guidanceMsgLabel.text = cityNames[resultNum % cityNames.count] + "...의 데이터를 불러오는 중..."
                 }
             },onCompleted: {
                 if self.userUploadImgLoadComplete && self.commentImgLoadComplete {
@@ -126,6 +132,7 @@ class LaunchController: UIViewController, XMLParserDelegate {
             }
             for i in 0 ... cities.count - 1 {
                 loadResult = ParsingUtil.shared.getData(cityCode: cities[i])
+                self.fillUpProgressBar()
             }
             if count == cities.count {
                 checker.onCompleted()
@@ -172,6 +179,11 @@ class LaunchController: UIViewController, XMLParserDelegate {
                 self.navigationController?.view.layer.add(transition, forKey: nil)
                 self.navigationController?.pushViewController(EULAController(), animated: false)
             }
+        }
+    }
+    func fillUpProgressBar() {
+        DispatchQueue.main.async {
+            self.progressBar.progress = Float(nowLoadedTargetCount) / Float(totalLoadTargetCount)
         }
     }
 }

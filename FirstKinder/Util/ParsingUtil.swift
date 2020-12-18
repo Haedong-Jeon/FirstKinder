@@ -80,6 +80,8 @@ class ParsingUtil: NSObject, XMLParserDelegate {
             },onCompleted: {
                 if self.loadedCityCount < cities.count - 1 {
                     self.loadedCityCount += 1
+                    nowLoadedTargetCount += 1
+                    print("현재 로딩된 수: \(nowLoadedTargetCount)")
                 }
             }).disposed(by: self.disposeBag)
     }
