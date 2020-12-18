@@ -45,7 +45,6 @@ extension ChatDetailController {
             actionAlertController.addAction(button1)
             actionAlertController.addAction(button2)
             actionAlertController.addAction(button3)
-            
             self.present(actionAlertController, animated: true, completion: nil)
         }
     }

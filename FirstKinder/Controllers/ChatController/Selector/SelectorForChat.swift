@@ -32,7 +32,7 @@ extension ChatController {
             
             self.navigationController?.view.layer.add(transition, forKey: nil)
             self.navigationController?.pushViewController(blockedUserController, animated: false)
-
+            
         }
         var button2 = UIAlertAction()
         if !self.isShowingMyChats {
@@ -60,3 +60,4 @@ extension ChatController {
         self.present(actionSheetAlert, animated: true, completion: nil)
     }
 }
+

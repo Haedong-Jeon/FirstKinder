@@ -70,14 +70,16 @@ class LaunchController: UIViewController, XMLParserDelegate {
         //게시글에 첨부된 이미지와 댓글에 첨부된 이미지를 비동기적으로 불러온다.
         //어느쪽이든 먼저 완료되면 어린이집 데이터를 받아온다.
         
+        
+        DispatchQueue.main.async {
+            self.guidanceMsgLabel.text = "이미지 로드 중..."
+        }
+        self.loadUploadUserImgs()
+        self.loadCommentsImgs()
         DispatchQueue.global(qos: .background).async {
-            DispatchQueue.main.async {
-                self.guidanceMsgLabel.text = "이미지 로드 중..."
-            }
-            self.loadUploadUserImgs()
-            self.loadCommentsImgs()
             self.loadKinders()
         }
+        
     }
     func loadUploadUserImgs() {
         DBUtil.shared.loadAllUserUploadImgs().subscribe(onError: { error in

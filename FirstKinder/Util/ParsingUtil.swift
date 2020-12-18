@@ -74,6 +74,7 @@ class ParsingUtil: NSObject, XMLParserDelegate {
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: {
                 if $0.isOn != "폐지" {
+                    print($0.title)
                     kinders.append($0)
                 }
             },onCompleted: {

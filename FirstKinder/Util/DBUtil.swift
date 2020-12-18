@@ -139,6 +139,7 @@ class DBUtil {
                                 cache.store(img, forKey: item.name)
                                 
                                 loadedImg.onNext(img)
+                                print(item.name)
                                 loadCount += 1
                                 if loadCount == list.items.count {
                                     loadedImg.onCompleted()
@@ -177,6 +178,7 @@ class DBUtil {
                             cache.store(img, forKey: item.name)
                             
                             loadedImg.onNext(img)
+                            print(item.name)
                             loadedImgCount += 1
                             if loadedImgCount == list.items.count {
                                 loadedImg.onCompleted()
