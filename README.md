@@ -10,4 +10,6 @@
 RxSwift, 구글 파이어베이스 서버, DispatchQueue를 이용한 비동기 프로그래밍, xml파싱
 
 ## 런치 스크린    
-<img src ="https://user-images.githubusercontent.com/53557016/102679198-45dd8000-41f1-11eb-83d9-fe00173ce2bb.gif" height=600 width=300/>
+<img src ="https://user-images.githubusercontent.com/53557016/102679198-45dd8000-41f1-11eb-83d9-fe00173ce2bb.gif" height=600 width=300/>    
+런치 스크린에선 어린이집 데이터와 사용자 업로드 이미지들을 불러옵니다. 이미지를 불러오는데엔 시간이 꽤 걸리기 때문에, 필요할 때 그때그때 불러오기보단 __런치스크린에서 어느정도 미리__ 불러오는게 좋습니다.
+
