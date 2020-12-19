@@ -52,4 +52,5 @@ func makeKinderObservable(_ tag: String) -> Observable<Kinder> {
 item 태그를 만나면 onNext로 넘겨주고, response 태그를 만나면 다음 지역으로 넘어갑니다.    
 로딩이 완료되면 메인 페이지로 넘어갑니다.    
       
-## 😋메인
+## 😋메인    
+<img src = "https://user-images.githubusercontent.com/53557016/102679862-4b899480-41f6-11eb-92e7-1b4b92689708.gif" height=600 width=300/>
