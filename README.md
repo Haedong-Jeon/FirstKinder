@@ -79,4 +79,4 @@ func setTabs() {
       tabBar.isTranslucent = false
 }
 ```
-메인 컨트롤러들은 각 탭을 관리하는 탭 컨트롤러 입니다.
+메인 컨트롤러는 각 탭을 관리하는 탭 컨트롤러 입니다.
