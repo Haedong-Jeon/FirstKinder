@@ -53,4 +53,30 @@ item 태그를 만나면 onNext로 넘겨주고, response 태그를 만나면 �
 로딩이 완료되면 메인 페이지로 넘어갑니다.    
       
 ## 😋메인    
-<img src = "https://user-images.githubusercontent.com/53557016/102679862-4b899480-41f6-11eb-92e7-1b4b92689708.gif" height=600 width=300/>
+<img src = "https://user-images.githubusercontent.com/53557016/102679862-4b899480-41f6-11eb-92e7-1b4b92689708.gif" height=600 width=300/>    
+      
+```swift
+func setTabs() {
+      let kinderListController = ListController(collectionViewLayout: UICollectionViewFlowLayout())
+      kinderListController.tabBarItem.image = #imageLiteral(resourceName: "to-do-list (1)")
+      kinderListController.tabBarItem.title = "어린이집 목록"
+        
+      let nearKinderController = NearKinderController()
+      nearKinderController.tabBarItem.image = #imageLiteral(resourceName: "maps-and-flags (1)")
+      nearKinderController.tabBarItem.title = "근처 어린이집"
+        
+      let parentsChatController = ChatController(collectionViewLayout: UICollectionViewFlowLayout())
+      parentsChatController.tabBarItem.image = #imageLiteral(resourceName: "chat-bubbles-with-ellipsis (1)")
+      parentsChatController.tabBarItem.title = "이야기"
+        
+      let myKindersController = MyKindersController(collectionViewLayout: UICollectionViewFlowLayout())
+      myKindersController.tabBarItem.image = #imageLiteral(resourceName: "like (2)")
+      myKindersController.tabBarItem.title = "관심 어린이집"
+        
+      let controllers = [kinderListController, nearKinderController, parentsChatController, myKindersController]
+      viewControllers = controllers.map({UINavigationController(rootViewController: $0)})//탭안의 뷰컨트롤러들에게 네비 바 붙이기.
+      tabBar.tintColor = #colorLiteral(red: 0.1884440184, green: 0.1871832013, blue: 0.2520470917, alpha: 1)
+      tabBar.isTranslucent = false
+}
+```
+메인 컨트롤러들은 각 탭을 관리하는 탭 컨트롤러 입니다.
