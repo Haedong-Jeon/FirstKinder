@@ -47,7 +47,7 @@ func makeKinderObservable(_ tag: String) -> Observable<Kinder> {
 ```
         
 어린이집 정보를 받습니다. 보육 정보 공개 API를 이용했습니다. xml형태로 제공됩니다. xml 데이터는 지역별 묶음으로 제공됩니다.       
-그러니까 <item>태그는 어린이집 하나를 구별하고, <response>태그는 하나의 지역을 구별합니다.        
+그러니까 item태그는 어린이집 하나를 구별하고, response태그는 하나의 지역을 구별합니다.        
            
 item 태그를 만나면 onNext로 넘겨주고, response 태그를 만나면 다음 지역으로 넘어갑니다.    
 로딩이 완료되면 메인 페이지로 넘어갑니다.    
