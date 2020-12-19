@@ -81,5 +81,5 @@ func setTabs() {
 ```
 메인 컨트롤러는 각 탭을 관리하는 탭 컨트롤러 입니다.
 
-## 📑어린이집 리스트 
-<img src = "https://user-images.githubusercontent.com/53557016/102680099-bcca4700-41f8-11eb-933b-4a007f39d5e9.gif" height=600 width="300"/>
+## 📑어린이집 리스트     
+<img src = "https://user-images.githubusercontent.com/53557016/102680434-762a1c00-41fb-11eb-9158-c685632d7a41.gif" height=600 width=300/> <img src = "https://user-images.githubusercontent.com/53557016/102680099-bcca4700-41f8-11eb-933b-4a007f39d5e9.gif" height=600 width=300/>
