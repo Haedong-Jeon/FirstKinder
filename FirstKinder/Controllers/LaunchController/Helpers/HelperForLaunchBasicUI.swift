@@ -66,6 +66,6 @@ extension LaunchController {
     func drawGuidance() {
         view.addSubview(guidanceMsgLabel)
         guidanceMsgLabel.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
-        guidanceMsgLabel.topAnchor.constraint(equalTo: progressBar.bottomAnchor).isActive = true
+        guidanceMsgLabel.topAnchor.constraint(equalTo: progressBar.bottomAnchor, constant: 20).isActive = true
     }
 }

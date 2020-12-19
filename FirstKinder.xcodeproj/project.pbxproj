@@ -918,7 +918,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.021;
+				MARKETING_VERSION = 2.0215;
 				PRODUCT_BUNDLE_IDENTIFIER = haedong.FirstKinder;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = NO;
@@ -942,7 +942,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.021;
+				MARKETING_VERSION = 2.0215;
 				PRODUCT_BUNDLE_IDENTIFIER = haedong.FirstKinder;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = NO;

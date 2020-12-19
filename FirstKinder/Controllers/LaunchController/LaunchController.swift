@@ -48,6 +48,7 @@ class LaunchController: UIViewController, XMLParserDelegate {
         label.numberOfLines = 0
         label.textColor = .white
         label.textAlignment = .justified
+        label.font = UIFont.systemFont(ofSize: 10)
         return label
     }()
     var dataSourceLabel: UILabel = {
