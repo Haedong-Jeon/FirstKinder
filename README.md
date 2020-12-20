@@ -1,4 +1,8 @@
 # 퍼스트 킨더 First Kinder
+<img src="https://user-images.githubusercontent.com/53557016/102726584-51e94f00-4363-11eb-9a08-cd05f2abc632.png" height = 550 width = 300/><img src="https://user-images.githubusercontent.com/53557016/102726586-557cd600-4363-11eb-84ac-c1f74bc048c7.png" height = 550 width = 300/>
+<img src="https://user-images.githubusercontent.com/53557016/102726587-56ae0300-4363-11eb-9000-e2d5c5559ec2.png" height = 550 width = 300/>
+<img src="https://user-images.githubusercontent.com/53557016/102726589-57469980-4363-11eb-9aa4-e06e6f2bd87b.png" height=550 width = 300/>
+<img src="https://user-images.githubusercontent.com/53557016/102726590-57df3000-4363-11eb-931f-4be87f0a6b9b.png" height = 550 width = 300/>
 출시 여부: 출시 ✅         
 광고 게재 여부: ❌ - 비영리 앱     
 앱스토어 주소: https://apps.apple.com/kr/app/%ED%8D%BC%EC%8A%A4%ED%8A%B8-%ED%82%A8%EB%8D%94/id1542758485    
