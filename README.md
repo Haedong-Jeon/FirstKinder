@@ -132,3 +132,5 @@ func commentToCommentControl() {
       thisComments = mergedComments
 }
 ```
+각 댓글은 자신이 일반 댓글인지, 대댓글인지, 대댓글이라면 그 대상 댓글은 뭔지 정보를 포함하고 있습니다.      
+일반 댓글 배열, 대댓글 배열, 합쳐진 댓글 배열 셋을 따로 준비 했습니다.
