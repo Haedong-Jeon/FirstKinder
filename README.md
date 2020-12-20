@@ -1,12 +1,12 @@
 # 퍼스트 킨더 First Kinder
-<img src="https://user-images.githubusercontent.com/53557016/102726584-51e94f00-4363-11eb-9a08-cd05f2abc632.png" height = 500 width = 250/> <img src="https://user-images.githubusercontent.com/53557016/102726586-557cd600-4363-11eb-84ac-c1f74bc048c7.png" height = 500 width = 250/> <img src="https://user-images.githubusercontent.com/53557016/102726590-57df3000-4363-11eb-931f-4be87f0a6b9b.png" height = 500 width = 250/>              
-<img src="https://user-images.githubusercontent.com/53557016/102726587-56ae0300-4363-11eb-9000-e2d5c5559ec2.png" height = 500 width = 250/>
-<img src="https://user-images.githubusercontent.com/53557016/102726589-57469980-4363-11eb-9aa4-e06e6f2bd87b.png" height=500 width = 250/>           
-            
 출시 여부: 출시 ✅         
 광고 게재 여부: ❌ - 비영리 앱     
-앱스토어 주소: https://apps.apple.com/kr/app/%ED%8D%BC%EC%8A%A4%ED%8A%B8-%ED%82%A8%EB%8D%94/id1542758485    
-      
+앱스토어 주소: https://apps.apple.com/kr/app/%ED%8D%BC%EC%8A%A4%ED%8A%B8-%ED%82%A8%EB%8D%94/id1542758485                    
+
+<img src="https://user-images.githubusercontent.com/53557016/102726584-51e94f00-4363-11eb-9a08-cd05f2abc632.png" height = 500 width = 250/> <img src="https://user-images.githubusercontent.com/53557016/102726586-557cd600-4363-11eb-84ac-c1f74bc048c7.png" height = 500 width = 250/> <img src="https://user-images.githubusercontent.com/53557016/102726590-57df3000-4363-11eb-931f-4be87f0a6b9b.png" height = 500 width = 250/>              
+<img src="https://user-images.githubusercontent.com/53557016/102726587-56ae0300-4363-11eb-9000-e2d5c5559ec2.png" height = 500 width = 250/>
+<img src="https://user-images.githubusercontent.com/53557016/102726589-57469980-4363-11eb-9aa4-e06e6f2bd87b.png" height=500 width = 250/>              
+                  
 초보 부모님이 어린이집을 선택할 때 도움을 주고자 제작된 앱입니다.      
 * 서울의 어린이집 정보를 모아 사용자에게 제공합니다.     
 * 다른 사람들과 정보를 공유할 수 있습니다. 차단과 신고 기능이 있습니다. 댓글이 달리면 푸시 알림이 갑니다.
