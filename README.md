@@ -108,3 +108,27 @@ func getEstimatedHeightFromDummyCell(_ indexPath: IndexPath) -> CGFloat{
 사용자가 작성한 게시글의 길이, 이미지 유무에 따라 셀이 크기가 동적으로 변하도록 했습니다. DummyCell 기법을 사용했습니다.       
 아주 큰 사이즈의 더미 셀에 데이터를 넣어본 후, 필요 없는 공간은 삭제하고 실제로 얼마나 공간이 필요한지 가늠해보는 방식입니다.
 ### 대댓글 구현
+```swift
+func commentToCommentControl() {
+      if self.thisComments.isEmpty { return }
+        
+      self.commentToComments = comments
+                                    .filter({$0.isCommentToComment != nil})
+                                    .sorted(by: {$0.timeStamp < $1.timeStamp})
+
+      if self.commentToComments.isEmpty { return }
+      var mergedComments = [Comment]()
+      for i in 0 ... thisComments.count - 1 {
+            var tempCmts = [Comment]()
+            mergedComments.append(thisComments[i])
+            commentToComments.forEach({
+                  if mergedComments.last!.uid == $0.targetCommentUid {
+                        tempCmts.append($0)
+                  }
+            })
+            mergedComments += tempCmts
+            tempCmts.removeAll()
+      }
+      thisComments = mergedComments
+}
+```
