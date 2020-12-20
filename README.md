@@ -86,7 +86,7 @@ func setTabs() {
 <img src = "https://user-images.githubusercontent.com/53557016/102680434-762a1c00-41fb-11eb-9158-c685632d7a41.gif" height=600 width=300/> <img src = "https://user-images.githubusercontent.com/53557016/102680099-bcca4700-41f8-11eb-933b-4a007f39d5e9.gif" height=600 width=300/>
 
 ## 💬 이야기
-<img src = "https://user-images.githubusercontent.com/53557016/102704294-eba9f100-42bc-11eb-8eaf-971d493bc353.png" height = 600 width = 300/> <img src = "https://user-images.githubusercontent.com/53557016/102704298-f06ea500-42bc-11eb-8239-b7099e235e5f.png" height=600 width=300/> <img src = "https://user-images.githubusercontent.com/53557016/102704460-fa91a300-42be-11eb-8946-66148c47e08e.png" height = 600 width = 300>
+<img src = "https://user-images.githubusercontent.com/53557016/102704294-eba9f100-42bc-11eb-8eaf-971d493bc353.png" height = 600 width = 300/><img src = "https://user-images.githubusercontent.com/53557016/102704298-f06ea500-42bc-11eb-8239-b7099e235e5f.png" height=600 width=300/><img src = "https://user-images.githubusercontent.com/53557016/102704460-fa91a300-42be-11eb-8946-66148c47e08e.png" height = 600 width = 300>
 
 ### 동적 셀 사이즈
 ```swift
