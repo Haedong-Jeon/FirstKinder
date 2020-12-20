@@ -86,3 +86,22 @@ func setTabs() {
 
 ## 💬 이야기
 <img src = "https://user-images.githubusercontent.com/53557016/102704294-eba9f100-42bc-11eb-8eaf-971d493bc353.png" height = 600 width = 300/> <img src = "https://user-images.githubusercontent.com/53557016/102704298-f06ea500-42bc-11eb-8239-b7099e235e5f.png" height=600 width=300/>
+```swift
+func getEstimatedHeightFromDummyCell(_ indexPath: IndexPath) -> CGFloat{
+      let width = view.frame.width - 10
+      let estimatedHeight: CGFloat = 800.0
+      let dummyCell = ChatCell(frame: CGRect(x: 0, y: 0, width: width, height: estimatedHeight))
+      (...생략...)
+      dummyCell.chatBodyLabel.text = nowChats[indexPath.row].chatBody
+      if nowChats[indexPath.row].imgFileName == "NO IMG" {
+            drawCellWithoutImg(dummyCell)
+      } else {
+            drawCellWithImg(dummyCell, indexPath)
+      }
+      dummyCell.layoutIfNeeded()
+      let estimateSize = dummyCell.systemLayoutSizeFitting(CGSize(width: width, height: estimatedHeight))
+      return estimateSize.height
+}
+```
+사용자가 작성한 게시글의 길이, 이미지 유무에 따라 셀이 크기가 동적으로 변하도록 했습니다. DummyCell 기법을 사용했습니다.       
+아주 큰 사이즈의 더미 셀에 데이터를 넣어본 후, 필요 없는 공간은 삭제하고 실제로 얼마나 공간이 필요한지 가늠해보는 방식입니다.
