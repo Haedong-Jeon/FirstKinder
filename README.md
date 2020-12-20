@@ -3,7 +3,7 @@
       
 초보 부모님이 어린이집을 선택할 때 도움을 주고자 제작된 앱입니다.      
 * 서울의 어린이집 정보를 모아 사용자에게 제공합니다.     
-* 다른 사람들과 정보를 공유할 수 있습니다.       
+* 다른 사람들과 정보를 공유할 수 있습니다. 차단과 신고 기능이 있습니다. 댓글이 달리면 푸시 알림이 갑니다.
 * GPS 기반, 현재 위치 주변에 어떤 어린이집이 있는지 보여줍니다.    
     
 ## 사용된 기술
@@ -83,3 +83,6 @@ func setTabs() {
 
 ## 📑어린이집 목록        
 <img src = "https://user-images.githubusercontent.com/53557016/102680434-762a1c00-41fb-11eb-9158-c685632d7a41.gif" height=600 width=300/> <img src = "https://user-images.githubusercontent.com/53557016/102680099-bcca4700-41f8-11eb-933b-4a007f39d5e9.gif" height=600 width=300/>
+
+## 💬 이야기
+<img src = "https://user-images.githubusercontent.com/53557016/102704294-eba9f100-42bc-11eb-8eaf-971d493bc353.png" height = 600 width = 300/> <img src = "https://user-images.githubusercontent.com/53557016/102704298-f06ea500-42bc-11eb-8239-b7099e235e5f.png" height=600 width=300/>
