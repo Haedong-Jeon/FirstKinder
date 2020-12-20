@@ -1,4 +1,5 @@
 # 퍼스트 킨더 First Kinder
+출시 여부: 출시 ✅
 앱스토어 주소: https://apps.apple.com/kr/app/%ED%8D%BC%EC%8A%A4%ED%8A%B8-%ED%82%A8%EB%8D%94/id1542758485    
       
 초보 부모님이 어린이집을 선택할 때 도움을 주고자 제작된 앱입니다.      
