@@ -3,9 +3,9 @@
 광고 게재 여부: ❌ - 비영리 앱     
 앱스토어 주소: https://apps.apple.com/kr/app/%ED%8D%BC%EC%8A%A4%ED%8A%B8-%ED%82%A8%EB%8D%94/id1542758485                    
 
-<img src="https://user-images.githubusercontent.com/53557016/102726584-51e94f00-4363-11eb-9a08-cd05f2abc632.png" height = 500 width = 250/> <img src="https://user-images.githubusercontent.com/53557016/102726586-557cd600-4363-11eb-84ac-c1f74bc048c7.png" height = 500 width = 250/> <img src="https://user-images.githubusercontent.com/53557016/102726590-57df3000-4363-11eb-931f-4be87f0a6b9b.png" height = 500 width = 250/>              
-<img src="https://user-images.githubusercontent.com/53557016/102726587-56ae0300-4363-11eb-9000-e2d5c5559ec2.png" height = 500 width = 250/>
-<img src="https://user-images.githubusercontent.com/53557016/102726589-57469980-4363-11eb-9aa4-e06e6f2bd87b.png" height=500 width = 250/>              
+<img src="https://user-images.githubusercontent.com/53557016/102731915-903f3800-437c-11eb-87d0-f3c22dbdcd32.png" height = 500 width = 250/> <img src="https://user-images.githubusercontent.com/53557016/102731922-93d2bf00-437c-11eb-870b-ecb7ba2e0bca.png" height = 500 width = 250/> <img src="https://user-images.githubusercontent.com/53557016/102731923-9503ec00-437c-11eb-821a-e4f0922792e3.png" height = 500 width = 250/>              
+<img src="https://user-images.githubusercontent.com/53557016/102731926-959c8280-437c-11eb-8053-033dee36a99a.png" height = 500 width = 250/>
+<img src="https://user-images.githubusercontent.com/53557016/102731927-96351900-437c-11eb-82a8-be6477a7807d.png" height=500 width = 250/>              
                   
 초보 부모님이 어린이집을 선택할 때 도움을 주고자 제작된 앱입니다.      
 * 서울의 어린이집 정보를 모아 사용자에게 제공합니다.     
